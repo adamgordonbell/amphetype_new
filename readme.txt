@@ -1,6 +1,8 @@
 My Fork of Amphetype - A great typing program.
 It contains a bunch of small improvements that I needed to use it.
 
+This is my personal fork of https://code.google.com/p/amphetype/ 
+
 These include:
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
