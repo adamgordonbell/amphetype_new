@@ -16,11 +16,17 @@ fancy2normal = [
     #transformations to dots
     (u"…",u"..."),(u". . .",u"..."),
 
-    #trimming of dots; put after transformations
+    #trimming of dots; put after dot transformations
     (u" ... ",u"..."),        
     
     #dashes
     (u"—",u"-"),
+   
+    #trimming of dashes; put after dash transformations
+    (u" - '",u"-'"),
+    (u"' - ",u"'-"),
+    (u' - "',u'-"'),
+    (u'" - ',u'"-'),
     
     #quotes
     (u"“",u'"'),
