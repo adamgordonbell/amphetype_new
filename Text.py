@@ -8,6 +8,9 @@ from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
 
+#some undesired fancy characters to replace
+fancy2normal = [(u"“",u'"'),(u"”",u'"'),(u"’",u"'"),(u"…",u"...")]
+
 class SentenceSplitter(object):
 
     def __init__(self, text):
@@ -74,6 +77,9 @@ class LessonMiner(QObject):
         p = []
         ps = []
         for l in f:
+            #replaces some undesired fancy characters
+            for fancy, normal in fancy2normal:
+                l = l.replace(fancy, normal)
             l = l.strip()
             if l != '':
                 p.append(l)
