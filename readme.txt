@@ -1,4 +1,10 @@
+Fork
+=====
 
+This is my personal fork of https://code.google.com/p/amphetype/ 
+
+Original
+=====
 
 Proper install is coming. I apologize for the current
 mess. It was developed on a Windows machine with few
