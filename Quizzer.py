@@ -45,6 +45,8 @@ class Typer(QTextEdit):
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
             self.emit(SIGNAL("cancel"))
+        elif e.key() == Qt.Key_Backspace and int(e.modifiers()) == 1073741824: #Altgr backspace
+            e = QKeyEvent(QEvent.KeyPress, e.key(), Qt.KeyboardModifiers(0),e.text(),e.isAutoRepeat(),e.count())
         return QTextEdit.keyPressEvent(self, e)
 
     def setPalettes(self):
