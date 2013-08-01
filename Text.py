@@ -12,7 +12,21 @@ from itertools import *
 from PyQt4.QtCore import *
 
 #some undesired fancy characters to replace
-fancy2normal = [(u"“",u'"'),(u"”",u'"'),(u"’",u"'"),(u"…",u"...")]
+fancy2normal = [
+    #transformations to dots
+    (u"…",u"..."),(u". . .",u"..."),
+
+    #trimming of dots; put after transformations
+    (u" ... ",u"..."),        
+    
+    #dashes
+    (u"—",u"-"),
+    
+    #quotes
+    (u"“",u'"'),
+    (u"”",u'"'),
+    (u"’",u"'")
+]
 
 abbreviations = set(map(unicode, [
 'jr', 'mr', 'mrs', 'ms', 'dr', 'prof', 'sr', "sen","rep","sens", "reps",'gov', "attys", "atty", 'supt',
