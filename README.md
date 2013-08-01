@@ -1,15 +1,15 @@
 My Fork of Amphetype - A great typing program.
 It contains a bunch of small improvements that I needed to use it.
 
-This is my personal fork of https://code.google.com/p/amphetype/ 
+This is my personal fork of https://code.google.com/p/amphetype/
 
 These include:
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
  * improved lesson splitter
  * permissive mode
- * etc 
- 
+ * etc
+
 Sample text included:
  * Selections from project gutenberg
  * All the typing tests from TyperRacer.com
@@ -19,7 +19,6 @@ Sample text included:
 To run, type:
 
 python Amphetype.py
-
 
 Depends on:
 
@@ -31,6 +30,3 @@ OPTIONAL: py-editdist from http://www.mindrot.org/projects/py-editdist/
  that are "similar" to your target words in the lesson generator.)
  If you don't have the module it will just select random words
  instead
-
-
-
