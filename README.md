@@ -1,7 +1,9 @@
 Fork
 ========
 
-This is my personal fork of https://code.google.com/p/amphetype/ 
+This is my personal fork of https://code.google.com/p/amphetype/
+
+GPLv3 (see gpl.txt).
 
 Disclaimer
 ========
