@@ -170,9 +170,9 @@ materials, the corner of my pillow, the top of my blankets, a piece of a
 shawl, the edge of my bed, and a copy of an evening paper, all of which
 things I would contrive, with the infinite patience of birds building
 their nests, to cement into one whole; rooms where, in a keen frost, I
-would feel the satisfaction of being shut in from the outer world (like
+would feel the satisfaction of being shut in from the outer world ( like
 the sea-swallow which builds at the end of a dark tunnel and is kept warm
-by the surrounding earth), and where, the fire keeping in all night, I
+by the surrounding earth ), and where, the fire keeping in all night, I
 would sleep wrapped up, as it were, in a great cloak of snug and savoury
 air, shot with the glow of the logs which would break out again in flame:
 in a sort of alcove without walls, a cave of warmth dug out of the heart
@@ -315,19 +315,19 @@ been asking all morning if the weather were going to improve--with her
 keen, jerky little step regulated by the various effects wrought upon her
 soul by the intoxication of the storm, the force of hygiene, the stupidity
 of my education and of symmetry in gardens, rather than by any anxiety
-(for that was quite unknown to her) to save her plum-coloured skirt from
+( for that was quite unknown to her  ) to save her plum-coloured skirt from
 the spots of mud under which it would gradually disappear to a depth which
 always provided her maid with a fresh problem and filled her with fresh
 despair.
 
 When these walks of my grandmother's took place after dinner there was one
-thing which never failed to bring her back to the house: that was if (at
+thing which never failed to bring her back to the house: that was if ( at
 one of those points when the revolutions of her course brought her,
 moth-like, in sight of the lamp in the little parlour where the liqueurs
-were set out on the card-table) my great-aunt called out to her:
+were set out on the card-table ) my great-aunt called out to her:
 "Bathilde! Come in and stop your husband from drinking brandy!" For,
-simply to tease her (she had brought so foreign a type of mind into my
-father's family that everyone made a joke of it), my great-aunt used to
+simply to tease her ( she had brought so foreign a type of mind into my
+father's family that everyone made a joke of it  ), my great-aunt used to
 make my grandfather, who was forbidden liqueurs, take just a few drops. My
 poor grandmother would come in and beg and implore her husband not to
 taste the brandy; and he would become annoyed and swallow his few drops
@@ -396,9 +396,9 @@ which Mamma stayed so short a time in my room were sweet indeed compared
 to those on which we had guests to dinner, and therefore she did not come
 at all. Our 'guests' were practically limited to M. Swann, who, apart from
 a few passing strangers, was almost the only person who ever came to the
-house at Combray, sometimes to a neighbourly dinner (but less frequently
+house at Combray, sometimes to a neighbourly dinner ( but less frequently
 since his unfortunate marriage, as my family did not care to receive his
-wife) and sometimes after dinner, uninvited. On those evenings when, as we
+wife ) and sometimes after dinner, uninvited. On those evenings when, as we
 sat in front of the house beneath the big chestnut-tree and round the iron
 table, we heard, from the far end of the garden, not the large and noisy
 rattle which heralded and deafened as he approached with its ferruginous,
@@ -513,7 +513,7 @@ preciseness, not only when he gave us kitchen recipes, going into the most
 minute details, but even when my grandmother's sisters were talking to him
 about art. When challenged by them to give an opinion, or to express his
 admiration for some picture, he would remain almost impolitely silent, and
-would then make amends by furnishing (if he could) some fact or other
+would then make amends by furnishing ( if he could ) some fact or other
 about the gallery in which the picture was hung, or the date at which it
 had been painted. But as a rule he would content himself with trying to
 amuse us by telling us the story of his latest adventure--and he would
@@ -541,8 +541,8 @@ out of the corner of her eye, over her glasses, at the other visitors.
 But if anyone had suggested to my aunt that this Swann, who, in his
 capacity as the son of old M. Swann, was 'fully qualified' to be received
 by any of the 'upper middle class,' the most respected barristers and
-solicitors of Paris (though he was perhaps a trifle inclined to let this
-hereditary privilege go into abeyance), had another almost secret
+solicitors of Paris ( though he was perhaps a trifle inclined to let this
+hereditary privilege go into abeyance  ), had another almost secret
 existence of a wholly different kind: that when he left our house in
 Paris, saying that he must go home to bed, he would no sooner have turned
 the corner than he would stop, retrace his steps, and be off to some
@@ -625,14 +625,14 @@ early Swann in whom I can distinguish the charming mistakes of my
 childhood, and who, incidentally, is less like his successor than he is
 like the other people I knew at that time, as though one's life were a
 series of galleries in which all the portraits of any one period had a
-marked family likeness, the same (so to speak) tonality--this early Swann
+marked family likeness, the same ( so to speak ) tonality--this early Swann
 abounding in leisure, fragrant with the scent of the great chestnut-tree,
 of baskets of raspberries and of a sprig of tarragon.
 
 And yet one day, when my grandmother had gone to ask some favour of a lady
-whom she had known at the Sacre Coeur (and with whom, because of our caste
+whom she had known at the Sacre Coeur ( and with whom, because of our caste
 theory, she had not cared to keep up any degree of intimacy in spite of
-several common interests), the Marquise de Villeparisis, of the famous
+several common interests ), the Marquise de Villeparisis, of the famous
 house of Bouillon, this lady had said to her:
 
 "I think you know M. Swann very well; he is a great friend of my nephews,
@@ -672,7 +672,7 @@ unknown to them, in which he ordinarily moved.
 
 But on one occasion my grandfather read in a newspaper that M. Swann was
 one of the most faithful attendants at the Sunday luncheons given by the
-Duc de X----, whose father and uncle had been among our most prominent
+Duc de X whose father and uncle had been among our most prominent
 statesmen in the reign of Louis Philippe. Now my grandfather was curious
 to learn all the little details which might help him to take a mental
 share in the private lives of men like Mole, the Due Pasquier, or the Duc
@@ -1016,7 +1016,7 @@ In this particular instance, the article of her code which made it highly
 improbable that--barring an outbreak of fire--Francoise would go down and
 disturb Mamma when M. Swann was there for so unimportant a person as
 myself was one embodying the respect she shewed not only for the family
-(as for the dead, for the clergy, or for royalty), but also for the
+( as for the dead, for the clergy, or for royalty  ), but also for the
 stranger within our gates; a respect which I should perhaps have found
 touching in a book, but which never failed to irritate me on her lips,
 because of the solemn and gentle tones in which she would utter it, and
@@ -1042,7 +1042,7 @@ A moment later she returned to say that they were still at the ice stage
 and that it was impossible for the butler to deliver the note at once, in
 front of everybody; but that when the finger-bowls were put round he would
 find a way of slipping it into Mamma's hand. At once my anxiety subsided;
-it was now no longer (as it had been a moment ago) until to-morrow that I
+it was now no longer ( as it had been a moment ago ) until to-morrow that I
 had lost my mother, for my little line was going--to annoy her, no doubt,
 and doubly so because this contrivance would make me ridiculous in Swann's
 eyes--but was going all the same to admit me, invisibly and by stealth,
@@ -1106,8 +1106,8 @@ into a ball-room by a man whom she does not love. Too often, the kind
 friend comes down again alone.
 
 My mother did not appear, but with no attempt to safeguard my self-respect
-(which depended upon her keeping up the fiction that she had asked me to
-let her know the result of my search for something or other) made
+( which depended upon her keeping up the fiction that she had asked me to
+let her know the result of my search for something or other  ) made
 Francoise tell me, in so many words "There is no answer"--words I have so
 often, since then, heard the hall-porters in 'mansions' and the flunkeys
 in gambling-clubs and the like, repeat to some poor girl, who replies in
@@ -1166,12 +1166,12 @@ the Rue de Trevise.
 I was well aware that I had placed myself in a position than which none
 could be counted upon to involve me in graver consequences at my parents'
 hands; consequences far graver, indeed, than a stranger would have
-imagined, and such as (he would have thought) could follow only some
+imagined, and such as ( he would have thought  ) could follow only some
 really shameful fault. But in the system of education which they had given
 me faults were not classified in the same order as in that of other
 children, and I had been taught to place at the head of the list
-(doubtless because there was no other class of faults from which I needed
-to be more carefully protected) those in which I can now distinguish the
+( doubtless because there was no other class of faults from which I needed
+to be more carefully protected ) those in which I can now distinguish the
 common feature that one succumbs to them by yielding to a nervous impulse.
 But such words as these last had never been uttered in my hearing; no one
 had yet accounted for my temptations in a way which might have led me to
@@ -1297,8 +1297,8 @@ all, he would at the last moment prevent me from taking some particular
 walk, one so regular and so consecrated to my use that to deprive me of it
 was a clear breach of faith; or again, as he had done this evening, long
 before the appointed hour he would snap out: "Run along up to bed now; no
-excuses!" But then again, simply because he was devoid of principles (in
-my grandmother's sense), so he could not, properly speaking, be called
+excuses!" But then again, simply because he was devoid of principles ( in
+my grandmother's sense ), so he could not, properly speaking, be called
 inexorable. He looked at me for a moment with an air of annoyance and
 surprise, and then when Mamma had told him, not without some
 embarrassment, what had happened, said to her: "Go along with him, then;
@@ -1359,9 +1359,9 @@ another kind, I doubt if he would have shewn so much courage, for as soon
 as he had grasped the fact that I was unhappy he had said to my mother:
 "Go and comfort him." Mamma stayed all night in my room, and it seemed
 that she did not wish to mar by recrimination those hours, so different
-from anything that I had had a right to expect; for when Francoise (who
+from anything that I had had a right to expect; for when Francoise ( who
 guessed that something extraordinary must have happened when she saw Mamma
-sitting by my side, holding my hand and letting me cry unchecked) said to
+sitting by my side, holding my hand and letting me cry unchecked ) said to
 her: "But, Madame, what is little Master crying for?" she replied: "Why,
 Francoise, he doesn't know himself: it is his nerves. Make up the big bed
 for me quickly and then go off to your own." And thus for the first time
@@ -1422,9 +1422,9 @@ than those of fresh air and country breezes upon his body. But when my
 father had seemed almost to regard her as insane on learning the names of
 the books she proposed to give me, she had journeyed back by herself to
 Jouy-le-Vicomte to the bookseller's, so that there should be no fear of my
-not having my present in time (it was a burning hot day, and she had come
+not having my present in time ( it was a burning hot day, and she had come
 home so unwell that the doctor had warned my mother not to allow her again
-to tire herself in that way), and had there fallen back upon the four
+to tire herself in that way  ), and had there fallen back upon the four
 pastoral novels of George Sand.
 
 "My dear," she had said to Mamma, "I could not allow myself to give the
@@ -1468,8 +1468,8 @@ interpreting the art of making presents were not always happy. The idea
 which I formed of Venice, from a drawing by Titian which is supposed to
 have the lagoon in the background, was certainly far less accurate than
 what I have since derived from ordinary photographs. We could no longer
-keep count in the family (when my great-aunt tried to frame an indictment
-of my grandmother) of all the armchairs she had presented to married
+keep count in the family ( when my great-aunt tried to frame an indictment
+of my grandmother  ) of all the armchairs she had presented to married
 couples, young and old, which on a first attempt to sit down upon them had
 at once collapsed beneath the weight of their recipient. But my
 grandmother would have thought it sordid to concern herself too closely
@@ -1510,7 +1510,7 @@ added by the fact that when it was Mamma who was reading to me aloud she
 left all the love-scenes out. And so all the odd changes which take place
 in the relations between the miller's wife and the boy, changes which only
 the birth and growth of love can explain, seemed to me plunged and steeped
-in a mystery, the key to which (as I could readily believe) lay in that
+in a mystery, the key to which ( as I could readily believe  ) lay in that
 strange and pleasant-sounding name of Champi, which draped the boy who
 bore it, I knew not why, in its own bright colour, purpurate and charming.
 If my mother was not a faithful reader, she was, none the less, admirable
@@ -1581,8 +1581,8 @@ pyramid; and, at the summit, my bedroom, with the little passage through
 whose glazed door Mamma would enter; in a word, seen always at the same
 evening hour, isolated from all its possible surroundings, detached and
 solitary against its shadowy background, the bare minimum of scenery
-necessary (like the setting one sees printed at the head of an old play,
-for its performance in the provinces) to the drama of my undressing, as
+necessary ( like the setting one sees printed at the head of an old play,
+for its performance in the provinces ) to the drama of my undressing, as
 though all Combray had consisted of but two floors joined by a slender
 staircase, and as though there had been no time there but seven o'clock at
 night. I must own that I could have assured any questioner that Combray
@@ -1602,7 +1602,7 @@ time the favours of the first.
 I feel that there is much to be said for the Celtic belief that the souls
 of those whom we have lost are held captive in some inferior being, in an
 animal, in a plant, in some inanimate object, and so effectively lost to
-us until the day (which to many never comes) when we happen to pass by the
+us until the day ( which to many never comes ) when we happen to pass by the
 tree or to obtain possession of the object which forms their prison. Then
 they start and tremble, they call us by our name, and as soon as we have
 recognised their voice the spell is broken. We have delivered them: they
@@ -1611,8 +1611,8 @@ have overcome death and return to share our life.
 And so it is with our own past. It is a labour in vain to attempt to
 recapture it: all the efforts of our intellect must prove futile. The past
 is hidden somewhere outside the realm, beyond the reach of intellect, in
-some material object (in the sensation which that material object will
-give us) which we do not suspect. And as for that object, it depends on
+some material object ( in the sensation which that material object will
+give us  ) which we do not suspect. And as for that object, it depends on
 chance whether we come upon it or not before we ourselves must die.
 
 Many years had elapsed during which nothing of Combray, save what was
@@ -1701,8 +1701,8 @@ worries of to-day and of my hopes for to-morrow, which let themselves be
 pondered over without effort or distress of mind.
 
 And suddenly the memory returns. The taste was that of the little crumb of
-madeleine which on Sunday mornings at Combray (because on those mornings I
-did not go out before church-time), when I went to say good day to her in
+madeleine which on Sunday mornings at Combray ( because on those mornings I
+did not go out before church-time  ), when I went to say good day to her in
 her bedroom, my aunt Leonie used to give me, dipping it first in her own
 cup of real or of lime-flower tea. The sight of the little madeleine had
 recalled nothing to my mind before I tasted it; perhaps because I had so
@@ -1724,13 +1724,13 @@ and bear unfaltering, in the tiny and almost impalpable drop of their
 essence, the vast structure of recollection.
 
 And once I had recognized the taste of the crumb of madeleine soaked in
-her decoction of lime-flowers which my aunt used to give me (although I
+her decoction of lime-flowers which my aunt used to give me ( although I
 did not yet know and must long postpone the discovery of why this memory
-made me so happy) immediately the old grey house upon the street, where
+made me so happy ) immediately the old grey house upon the street, where
 her room was, rose up like the scenery of a theatre to attach itself to
 the little pavilion, opening on to the garden, which had been built out
-behind it for my parents (the isolated panel which until that moment had
-been all that I could see); and with the house the town, from morning to
+behind it for my parents ( the isolated panel which until that moment had
+been all that I could see  ); and with the house the town, from morning to
 night and in all weathers, the Square where I was sent before luncheon,
 the streets along which I used to run errands, the country roads we took
 when it was fine. And just as the Japanese amuse themselves by filling a
@@ -1780,22 +1780,22 @@ contact with the unseen world more marvellously supernatural than it would
 be to make Golo's acquaintance and to chat with Genevieve de Brabant.
 
 My grandfather's cousin--by courtesy my great-aunt--with whom we used to
-stay, was the mother of that aunt Leonie who, since her husband's (my
-uncle Octave's) death, had gradually declined to leave, first Combray,
+stay, was the mother of that aunt Leonie who, since her husband's ( my
+uncle Octave's ) death, had gradually declined to leave, first Combray,
 then her house in Combray, then her bedroom, and finally her bed; and who
 now never 'came down,' but lay perpetually in an indefinite condition of
 grief, physical exhaustion, illness, obsessions, and religious
 observances. Her own room looked out over the Rue Saint-Jacques, which
-ran a long way further to end in the Grand-Pre (as distinct from the
+ran a long way further to end in the Grand-Pre ( as distinct from the
 Petit-Pre, a green space in the centre of the town where three streets
-met) and which, monotonous and grey, with the three high steps of stone
+met  ) and which, monotonous and grey, with the three high steps of stone
 before almost every one of its doors, seemed like a deep furrow cut by
 some sculptor of gothic images in the very block of stone out of which he
 had fashioned a Calvary or a Crib. My aunt's life was now practically
 confined to two adjoining rooms, in one of which she would rest in the
 afternoon while they, aired the other. They were rooms of that country
-order which (just as in certain climes whole tracts of air or ocean are
-illuminated or scented by myriads of protozoa which we cannot see)
+order which ( just as in certain climes whole tracts of air or ocean are
+illuminated or scented by myriads of protozoa which we cannot see  )
 fascinate our sense of smell with the countless odours springing from
 their own special virtues, wisdom, habits, a whole secret system of life,
 invisible, superabundant and profoundly moral, which their atmosphere
@@ -1937,8 +1937,8 @@ had begun to go to Combray there was no one I knew better than Francoise.
 We were her favourites, and in the first years at least, while she shewed
 the same consideration for us as for my aunt, she enjoyed us with a keener
 relish, because we had, in addition to our dignity as part of 'the family'
-(for she had for those invisible bonds by which community of blood unites
-the members of a family as much respect as any Greek tragedian), the fresh
+( for she had for those invisible bonds by which community of blood unites
+the members of a family as much respect as any Greek tragedian ), the fresh
 charm of not being her customary employers. And so with what joy would
 she welcome us, with what sorrow complain that the weather was still so
 bad for us, on the day of our arrival, just before Easter, when there was
@@ -1960,9 +1960,9 @@ you have Marguerite to yourself all day, you will be very sorry, but will
 make the best of it, won't you?"
 
 And Francoise answered, laughing: "Madame knows everything; Madame is
-worse than the X-rays" (she pronounced 'x' with an affectation of
+worse than the X-rays" ( she pronounced 'x' with an affectation of
 difficulty and with a smile in deprecation of her, an unlettered woman's,
-daring to employ a scientific term) "they brought here for Mme. Octave,
+daring to employ a scientific term ) "they brought here for Mme. Octave,
 which see what is in your heart"--and she went off, disturbed that anyone
 should be caring about her, perhaps anxious that we should not see her in
 tears: Mamma was the first person who had given her the pleasure of
@@ -2178,8 +2178,8 @@ While my aunt gossiped on in this way with Francoise I would have
 accompanied my parents to mass. How I loved it: how clearly I can see it
 still, our church at Combray! The old porch by which we went in, black,
 and full of holes as a cullender, was worn out of shape and deeply
-furrowed at the sides (as also was the holy water stoup to which it led
-us) just as if the gentle grazing touch of the cloaks of peasant-women
+furrowed at the sides ( as also was the holy water stoup to which it led
+us ) just as if the gentle grazing touch of the cloaks of peasant-women
 going into the church, and of their fingers dipping into the water, had
 managed by agelong repetition to acquire a destructive force, to impress
 itself on the stone, to carve ruts in it like those made by cart-wheels
@@ -2200,10 +2200,10 @@ fine weather in church. One of them was filled from top to bottom by a
 solitary figure, like the king on a playing-card, who lived up there
 beneath his canopy of stone, between earth and heaven; and in the blue
 light of its slanting shadow, on weekdays sometimes, at noon, when there
-was no service (at one of those rare moments when the airy, empty church,
+was no service ( at one of those rare moments when the airy, empty church,
 more human somehow and more luxurious with the sun shewing off all its
 rich furnishings, seemed to have almost a habitable air, like the
-hall--all sculptured stone and painted glass--of some mediaeval mansion),
+hall--all sculptured stone and painted glass--of some mediaeval mansion  ),
 you might see Mme. Sazerat kneel for an instant, laying down on the chair
 beside her own a neatly corded parcel of little cakes which she had just
 bought at the baker's and was taking home for her luncheon. In another, a
@@ -2240,10 +2240,10 @@ outside by making burst into blossom, as in some springtime in old history
 among the heirs of Saint Louis, this dazzling and gilded carpet of
 forget-me-nots in glass.
 
-Two tapestries of high warp represented the coronation of Esther (in which
+Two tapestries of high warp represented the coronation of Esther ( in which
 tradition would have it that the weaver had given to Ahasuerus the
 features of one of the kings of France and to Esther those of a lady of
-Guermantes whose lover he had been); their colours had melted into one
+Guermantes whose lover he had been ); their colours had melted into one
 another, so as to add expression, relief, light to the pictures. A touch
 of red over the lips of Esther had strayed beyond their outline; the
 yellow on her dress was spread with such unctuous plumpness as to have
@@ -2254,9 +2254,9 @@ top, separated in a paler scheme, above the dark trunks, the yellowing
 upper branches, tanned and half-obliterated by the sharp though sidelong
 rays of an invisible sun. All these things and, still more than these, the
 treasures which had come to the church from personages who to me were
-almost legendary figures (such as the golden cross wrought, it was said,
+almost legendary figures ( such as the golden cross wrought, it was said,
 by Saint Eloi and presented by Dagobert, and the tomb of the sons of Louis
-the Germanic in porphyry and enamelled copper), because of which I used to
+the Germanic in porphyry and enamelled copper  ), because of which I used to
 go forward into the church when we were making our way to our chairs as
 into a fairy-haunted valley, where the rustic sees with amazement on a
 rock, a tree, a marsh, the tangible proofs of the little people's
@@ -2356,8 +2356,8 @@ uninhabitable and discharging some infinitely disturbing element, had
 struck them and driven them forth. Then after patterning everywhere the
 violet velvet of the evening air, abruptly soothed, they would return and
 be absorbed in the tower, deadly no longer but benignant, some perching
-here and there (not seeming to move, but snapping, perhaps, and swallowing
-some passing insect) on the points of turrets, as a seagull perches, with
+here and there ( not seeming to move, but snapping, perhaps, and swallowing
+some passing insect  ) on the points of turrets, as a seagull perches, with
 an angler's immobility, on the crest of a wave. Without quite knowing why,
 my grandmother found in the steeple of Saint-Hilaire that absence of
 vulgarity, pretension, and meanness which made her love--and deem rich in
@@ -2431,7 +2431,7 @@ the dreary streets of Combray. I shall never forget, in a quaint Norman
 town not far from Balbec, two charming eighteenth-century houses, dear to
 me and venerable for many reasons, between which, when one looks up at
 them from a fine garden which descends in terraces to the river, the
-gothic spire of a church (itself hidden by the houses) soars into the sky
+gothic spire of a church ( itself hidden by the houses ) soars into the sky
 with the effect of crowning and completing their fronts, but in a material
 so different, so precious, so beringed, so rosy, so polished, that it is
 at once seen to be no more a part of them than would be a part of two
@@ -2483,16 +2483,16 @@ when, just now, I asked him for a direction, I will seek my way again, I
 will turn a corner... but... the goal is in my heart...
 
 On our way home from mass we would often meet M. Legrandin, who, detained
-in Paris by his professional duties as an engineer, could only (except in
-the regular holiday seasons) visit his home at Combray between Saturday
+in Paris by his professional duties as an engineer, could only ( except in
+the regular holiday seasons  ) visit his home at Combray between Saturday
 evenings and Monday mornings. He was one of that class of men who, apart
 from a scientific career in which they may well have proved brilliantly
 successful, have acquired an entirely different kind of culture, literary
 or artistic, of which they make no use in the specialised work of their
 profession, but by which their conversation profits. More 'literary' than
-many 'men of letters' (we were not aware at this period that M. Legrandin
+many 'men of letters' ( we were not aware at this period that M. Legrandin
 had a distinct reputation as a writer, and so were greatly astonished to
-find that a well-known composer had set some verses of his to music),
+find that a well-known composer had set some verses of his to music  ),
 endowed with a greater ease in execution than many painters, they imagine
 that the life they are obliged to lead is not that for which they are
 really fitted, and they bring to their regular occupations either a
@@ -2564,11 +2564,11 @@ other visitor's name from her list, because they all committed the fatal
 error, in her eyes, of falling into one or other of the two categories of
 people she most detested. One group, the worse of the two, and the one of
 which she rid herself first, consisted of those who advised her not to
-take so much care of herself, and preached (even if only negatively and
+take so much care of herself, and preached ( even if only negatively and
 with no outward signs beyond an occasional disapproving silence or
-doubting smile) the subversive doctrine that a sharp walk in the sun and a
-good red beefsteak would do her more good (her, who had had two dreadful
-sips of Vichy water on her stomach for fourteen hours!) than all her
+doubting smile ) the subversive doctrine that a sharp walk in the sun and a
+good red beefsteak would do her more good ( her, who had had two dreadful
+sips of Vichy water on her stomach for fourteen hours! ) than all her
 medicine bottles and her bed. The other category was composed of people
 who appeared to believe that she was more seriously ill than she thought,
 in fact that she was as seriously ill as she said. And so none of those
@@ -2584,7 +2584,7 @@ would never open to them again. And if Francoise was amused by the look of
 consternation on my aunt's face whenever she saw, from her bed, any of
 these people in the Rue du Saint-Esprit, who looked as if they were coming
 to see her, or heard her own door-bell ring, she would laugh far more
-heartily, as at a clever trick, at my aunt's devices (which never failed)
+heartily, as at a clever trick, at my aunt's devices ( which never failed  )
 for having them sent away, and at their look of discomfiture when they had
 to turn back without having seen her; and would be filled with secret
 admiration for her mistress, whom she felt to be superior to all these
@@ -2703,8 +2703,8 @@ goddess driving a car, or standing upon a globe, or wearing a star on her
 brow; pictures which were popular under the Second Empire because there
 was thought to be something about them that suggested Pompeii, which were
 then generally despised, and which now people are beginning to collect
-again for one single and consistent reason (despite any others which they
-may advance), namely, that they suggest the Second Empire. And there I
+again for one single and consistent reason ( despite any others which they
+may advance  ), namely, that they suggest the Second Empire. And there I
 would stay with my uncle until his man came, with a message from the
 coachman, to ask him at what time he would like the carriage. My uncle
 would then be lost in meditation, while his astonished servant stood
@@ -2736,8 +2736,8 @@ differ more profoundly from the sparkling white plume of the Diamants de
 la Couronne than the sleek, mysterious satin of the Domino Noir; and
 since my parents had told me that, for my first visit to the theatre, I
 should have to choose between these two pieces, I would study exhaustively
-and in turn the title of one and the title of the other (for those were
-all that I knew of either), attempting to snatch from each a foretaste of
+and in turn the title of one and the title of the other ( for those were
+all that I knew of either  ), attempting to snatch from each a foretaste of
 the pleasure which it offered me, and to compare this pleasure with that
 latent in the other title, until in the end I had shewn myself such vivid,
 such compelling pictures of, on the one hand, a play of dazzling
@@ -2784,9 +2784,9 @@ another class, not clearly distinguished from actresses in my mind. He
 used to entertain them at his house. And if we went to see him on certain
 days only, that was because on the other days ladies might come whom his
 family could not very well have met. So we at least thought; as for my
-uncle, his fatal readiness to pay pretty widows (who had perhaps never
-been married) and countesses (whose high-sounding titles were probably no
-more than noms de guerre) the compliment of presenting them to my
+uncle, his fatal readiness to pay pretty widows ( who had perhaps never
+been married ) and countesses ( whose high-sounding titles were probably no
+more than noms de guerre ) the compliment of presenting them to my
 grandmother or even of presenting to them some of our family jewels, had
 already embroiled him more than once with my grandfather. Often, if the
 name of some actress were mentioned in conversation, I would hear my
@@ -2814,7 +2814,7 @@ man-servant who let me in appeared embarrassed, and said that my uncle was
 extremely busy and probably could not see me; he went in, however, to
 announce my arrival, and the same voice I had heard before said: "Oh, yes!
 Do let him come in; just for a moment; it will be so amusing. Is that his
-photograph there, on your desk? And his mother (your niece, isn't she?)
+photograph there, on your desk? And his mother ( your niece, isn't she?  )
 beside it? The image of her, isn't he? I should so like to see the little
 chap, just for a second."
 
@@ -2890,15 +2890,15 @@ foreign language. "Why, yes," she began again suddenly. "Of course I have
 met this young man's father with you. Isn't he your nephew? How on earth
 could I have forgotten? He was so nice, so charming to me," she went on,
 modestly and with feeling. But when I thought to myself what must actually
-have been the rude greeting (which, she made out, had been so charming),
+have been the rude greeting ( which, she made out, had been so charming  ),
 I, who knew my father's coldness and reserve, was shocked, as though at
 some indelicacy on his part, at the contrast between the excessive
 recognition bestowed on it and his never adequate geniality. It has since
 struck me as one of the most touching aspects of the part played in life
 by these idle, painstaking women that they devote all their generosity,
-all their talent, their transferable dreams of sentimental beauty (for,
+all their talent, their transferable dreams of sentimental beauty ( for,
 like all artists, they never seek to realise the value of those dreams, or
-to enclose them in the four-square frame of everyday life), and their
+to enclose them in the four-square frame of everyday life  ), and their
 gold, which counts for little, to the fashioning of a fine and precious
 setting for the rubbed and scratched and ill-polished lives of men. And
 just as this one filled the smoking-room, where my uncle was entertaining
@@ -2948,7 +2948,7 @@ you promised to lend them to me; I will take great care of them."
 My uncle, who hated lending people books, said nothing, and ushered me out
 into the hall. Madly in love with the lady in pink, I covered my old
 uncle's tobacco-stained cheeks with passionate kisses, and while he,
-awkwardly enough, gave me to understand (without actually saying) that he
+awkwardly enough, gave me to understand ( without actually saying  ) that he
 would rather I did not tell my parents about this visit, I assured him,
 with tears in my eyes, that his kindness had made so strong an impression
 upon me that some day I would most certainly find a way of expressing my
@@ -2985,7 +2985,7 @@ in doing so I was obeying my parents' orders; he never forgave them; and
 though he did not die until many years later, not one of us ever set eyes
 on him again.
 
-And so I no longer used to go into the little sitting-room (now kept shut)
+And so I no longer used to go into the little sitting-room ( now kept shut )
 of my uncle Adolphe; instead, after hanging about on the outskirts of the
 back-kitchen until Francoise appeared on its threshold and announced: "I
 am going to let the kitchen-maid serve the coffee and take up the hot
@@ -3041,7 +3041,7 @@ thoughts.
 
 Despite all the admiration that M. Swann might profess for these figures
 of Giotto, it was a long time before I could find any pleasure in seeing
-in our schoolroom (where the copies he had brought me were hung) that
+in our schoolroom ( where the copies he had brought me were hung ) that
 Charity devoid of charity, that Envy who looked like nothing so much as a
 plate in some medical book, illustrating the compression of the glottis or
 uvula by a tumour in the tongue, or by the introduction of the operator's
@@ -3051,8 +3051,8 @@ slightly withered ladies of Combray whom I used to see at mass, many of
 whom had long been enrolled in the reserve forces of Injustice. But in
 later years I understood that the arresting strangeness, the special
 beauty of these frescoes lay in the great part played in each of them by
-its symbols, while the fact that these were depicted, not as symbols (for
-the thought symbolised was nowhere expressed), but as real things,
+its symbols, while the fact that these were depicted, not as symbols ( for
+the thought symbolised was nowhere expressed ), but as real things,
 actually felt or materially handled, added something more precise and more
 literal to their meaning, something more concrete and more striking to the
 lesson they imparted. And even in the case of the poor kitchen-maid, was
@@ -3068,7 +3068,7 @@ which we are accustomed to give the name of Death?
 There must have been a strong element of reality in those Virtues and
 Vices of Padua, since they appeared to me to be as much alive as the
 pregnant servant-girl, while she herself appeared scarcely less
-allegorical than they. And, quite possibly, this lack (or seeming lack) of
+allegorical than they. And, quite possibly, this lack ( or seeming lack  ) of
 participation by a person's soul in the significant marks of its own
 special virtue has, apart from its aesthetic meaning, a reality which, if
 not strictly psychological, may at least be called physiognomical. Later
@@ -3082,8 +3082,8 @@ face of true goodness.
 
 Then while the kitchen-maid--who, all unawares, made the superior
 qualities of Francoise shine with added lustre, just as Error, by force of
-contrast, enhances the triumph of Truth--took in coffee which (according
-to Mamma) was nothing more than hot water, and then carried up to our
+contrast, enhances the triumph of Truth--took in coffee which ( according
+to Mamma ) was nothing more than hot water, and then carried up to our
 rooms hot water which was barely tepid, I would be lying stretched out on
 my bed, a book in my hand, in my room which trembled with the effort to
 defend its frail, transparent coolness against the afternoon sun, behind
@@ -3092,9 +3092,9 @@ sunlight had contrived to slip in on its golden wings, remaining
 motionless, between glass and woodwork, in a corner, like a butterfly
 poised upon a flower. It was hardly light enough for me to read, and my
 feeling of the day's brightness and splendour was derived solely from the
-blows struck down below, in the Rue de la Cure, by Camus (whom Francoise
+blows struck down below, in the Rue de la Cure, by Camus ( whom Francoise
 had assured that my aunt was not 'resting' and that he might therefore
-make a noise), upon some old packing-cases from which nothing would really
+make a noise ), upon some old packing-cases from which nothing would really
 be sent flying but the dust, though the din of them, in the resonant
 atmosphere that accompanies hot weather, seemed to scatter broadcast a
 rain of blood-red stars; and from the flies who performed for my benefit,
@@ -3112,7 +3112,7 @@ the shadow is to the sunbeam, that is to say, equally luminous, and
 presented to my imagination the entire panorama of summer, which my
 senses, if I had been out walking, could have tasted and enjoyed in
 fragments only; and so was quite in harmony with my state of repose, which
-(thanks to the adventures related in my books, which had just excited it)
+( thanks to the adventures related in my books, which had just excited it  )
 bore, like a hand reposing motionless in a stream of running water, the
 shock and animation of a torrent of activity and life.
 
@@ -3285,8 +3285,8 @@ was careful to eliminate every commonplace incident of my actual life,
 replacing them by a career of strange adventures and ambitions in a land
 watered by living streams, you still recall those adventures and ambitions
 to my mind when I think of you, and you embody and preserve them by virtue
-of having little by little drawn round and enclosed them (while I went on
-with my book and the heat of the day declined) in the gradual
+of having little by little drawn round and enclosed them ( while I went on
+with my book and the heat of the day declined  ) in the gradual
 crystallisation, slowly altering in form and dappled with a pattern of
 chestnut-leaves, of your silent, sonorous, fragrant, limpid hours.
 
@@ -3414,8 +3414,8 @@ existence by giving it a name.
 
 Unfortunately I was not able to set at rest, by further talks with Bloch,
 in which I might have insisted upon an explanation, the doubts he had
-engendered in me when he told me that fine lines of poetry (from which I,
-if you please, expected nothing less than the revelation of truth itself)
+engendered in me when he told me that fine lines of poetry ( from which I,
+if you please, expected nothing less than the revelation of truth itself )
 were all the finer if they meant absolutely nothing. For, as it happened,
 Bloch was not invited to the house again. At first, he had been well
 received there. It is true that my grandfather made out that, whenever I
@@ -3495,7 +3495,7 @@ influenced in the smallest degree either by atmospheric disturbances or by
 the arbitrary divisions of what is known as Time. I would willingly
 reintroduce to society the opium pipe of China or the Malayan kriss, but I
 am wholly and entirely without instruction in those infinitely more
-pernicious (besides being quite bleakly bourgeois) implements, the
+pernicious ( besides being quite bleakly bourgeois ) implements, the
 umbrella and the watch."
 
 In spite of all this he would still have been received at Combray. He was,
@@ -3528,9 +3528,9 @@ meaningless' beauty of La fille de Minos et de Pasiphae tired me more
 and made me more unwell than I should have been after further talks with
 him, unwholesome as those talks might seem to my mother's mind. And he
 would still have been received at Combray but for one thing. That same
-night, after dinner, having informed me (a piece of news which had a great
+night, after dinner, having informed me ( a piece of news which had a great
 influence on my later life, making it happier at one time and then more
-unhappy) that no woman ever thought of anything but love, and that there
+unhappy  ) that no woman ever thought of anything but love, and that there
 was not one of them whose resistance a man could not overcome, he had gone
 on to assure me that he had heard it said on unimpeachable authority that
 my great-aunt herself had led a 'gay' life in her younger days, and had
@@ -3650,10 +3650,10 @@ irony, but which was in principle what I had often said to my grandmother
 about Francoise, and when, another time, I had discovered that he thought
 not unworthy of reflection in one of those mirrors of absolute Truth which
 were his writings, a remark similar to one which I had had occasion to
-make on our friend M. Legrandin (and, moreover, my remarks on Francoise
+make on our friend M. Legrandin ( and, moreover, my remarks on Francoise
 and M. Legrandin were among those which I would most resolutely have
 sacrificed for Bergotte's sake, in the belief that he would find them
-quite without interest); then it was suddenly revealed to me that my own
+quite without interest ); then it was suddenly revealed to me that my own
 humble existence and the Realms of Truth were less widely separated than I
 had supposed, that at certain points they were actually in contact; and in
 my new-found confidence and joy I wept upon his printed page, as in the
@@ -3727,8 +3727,8 @@ this attitude which Swann invariably adopted when face to face with
 generalities. He appeared unwilling to risk even having an opinion, and to
 be at his ease only when he could furnish, with meticulous accuracy, some
 precise but unimportant detail. But in so doing he did not take into
-account that even here he was giving an opinion, holding a brief (as they
-say) for something, that the accuracy of his details had an importance of
+account that even here he was giving an opinion, holding a brief ( as they
+say  ) for something, that the accuracy of his details had an importance of
 its own. I thought again of the dinner that night, when I had been so
 unhappy because Mamma would not be coming up to my room, and when he had
 dismissed the balls given by the Princesse de Leon as being of no
@@ -3819,16 +3819,16 @@ profile which would be indispensable, I dare say, in an outside-broker.
 While I was reading in the garden, a thing my great-aunt would never have
 understood my doing save on a Sunday, that being the day on which it was
 unlawful to indulge in any serious occupation, and on which she herself
-would lay aside her sewing (on a week-day she would have said, "How you
+would lay aside her sewing ( on a week-day she would have said, "How you
 can go on amusing yourself with a book; it isn't Sunday, you know!"
 putting into the word 'amusing' an implication of childishness and waste
-of time), my aunt Leonie would be gossiping with Francoise until it was
+of time  ), my aunt Leonie would be gossiping with Francoise until it was
 time for Eulalie to arrive. She would tell her that she had just seen Mme.
 Goupil go by "without an umbrella, in the silk dress she had made for her
 the other day at Chateaudun. If she has far to go before vespers, she may
 get it properly soaked."
 
-"Very likely" (which meant also "very likely not") was the answer, for
+"Very likely" ( which meant also "very likely not" ) was the answer, for
 Francoise did not wish definitely to exclude the possibility of a happier
 alternative.
 
@@ -3869,7 +3869,7 @@ universal. It was the rain.
 I heard the bell at the garden gate: go along and see who can be outside
 in this weather."
 
-Francoise went and returned. "It's Mme. Amedee" (my grandmother). "She
+Francoise went and returned. "It's Mme. Amedee" ( my grandmother ). "She
 said she was going for a walk. It's raining hard, all the same."
 
 "I'm not at all surprised," said my aunt, looking up towards the sky.
@@ -3908,11 +3908,11 @@ Had the truth been known, the Cure's visits gave my aunt no such ecstatic
 pleasure as Francoise supposed, and the air of jubilation with which she
 felt bound to illuminate her face whenever she had to announce his
 arrival, did not altogether correspond to what was felt by her invalid.
-The Cure (an excellent man, with whom I am sorry now that I did not
+The Cure ( an excellent man, with whom I am sorry now that I did not
 converse more often, for, even if he cared nothing for the arts, he knew a
-great many etymologies), being in the habit of shewing distinguished
-visitors over his church (he had even planned to compile a history of the
-Parish of Com-bray), used to weary her with his endless explanations,
+great many etymologies ), being in the habit of shewing distinguished
+visitors over his church ( he had even planned to compile a history of the
+Parish of Com-bray ), used to weary her with his endless explanations,
 which, incidentally, never varied in the least degree. But when his visit
 synchronized exactly with Eulalie's it became frankly distasteful to my
 aunt. She would have preferred to make the most of Eulalie, and not to
@@ -3945,7 +3945,7 @@ the floor for me because, if you please, those are the tombstones of the
 Abbots of Combray and the Lords of Guermantes, the old Counts, you know,
 of Brabant, direct ancestors of the present Duc de Guermantes, and of his
 Duchesse also, since she was a lady of the Guermantes family, and married
-her cousin." (My grandmother, whose steady refusal to take any interest in
+her cousin." ( My grandmother, whose steady refusal to take any interest in
 'persons' had ended in her confusing all their names and titles, whenever
 anyone mentioned the Duchesse de Guermantes used to make out that she must
 be related to Mme. de Villeparisis. The whole family would then burst out
@@ -3953,15 +3953,15 @@ laughing; and she would attempt to justify herself by harking back to some
 invitation to a christening or funeral: "I feel sure that there was a
 Guermantes in it somewhere." And for once I would side with the others,
 and against her, refusing to admit that there could be any connection
-between her school-friend and the descendant of Genevieve de Brabant.)
+between her school-friend and the descendant of Genevieve de Brabant.  )
 
 "Look at Roussainville," the Cure went on. "It is nothing more nowadays
 than a parish of farmers, though in olden times the place must have had a
-considerable importance from its trade in felt hats and clocks. (I am not
+considerable importance from its trade in felt hats and clocks. ( I am not
 certain, by the way, of the etymology of Roussainville. I should dearly
 like to think that the name was originally Rouville, from Radulfi villa,
 analogous, don't you see, to Chateauroux, Castrum Radulfi, but we will
-talk about that some other time.) Very well; the church there has superb
+talk about that some other time. ) Very well; the church there has superb
 windows, almost all quite modern, including that most imposing 'Entry of
 Louis-Philippe into Combray' which would be more in keeping, surely, at
 Combray itself, and which is every bit as good, I understand, as the
@@ -4006,8 +4006,8 @@ that, whenever he saw a man in a town whose face he did not remember, he
 would massacre the whole place, to the last inhabitant. Gilbert, wishing
 to be avenged on Charles, caused the church at Combray to be burned down,
 the original church, that was, which Theodebert, when he and his court
-left the country residence he had near here, at Thiberzy (which is, of
-course, Theodeberiacus), to go out and fight the Burgundians, had
+left the country residence he had near here, at Thiberzy ( which is, of
+course, Theodeberiacus ), to go out and fight the Burgundians, had
 promised to build over the tomb of Saint Hilaire if the Saint brought him;
 victory. Nothing remains of it now but the crypt, into which Theodore has
 probably taken you, for Gilbert burned all the rest. Finally, he defeated
@@ -4084,8 +4084,8 @@ to be praised throughout Combray, Jouy-le-Vicomte, and other cities of
 men, on account of my aunt's many farms, her frequent and prolonged visits
 from the Cure, and the astonishing number of bottles of Vichy water which
 she consumed. Francoise was avaricious only for my aunt; had she had
-control over my aunt's fortune (which would have more than satisfied her
-highest ambition) she would have guarded it from the assaults of strangers
+control over my aunt's fortune ( which would have more than satisfied her
+highest ambition ) she would have guarded it from the assaults of strangers
 with a maternal ferocity. She would, however, have seen no great harm in
 what my aunt, whom she knew to be incurably generous, allowed herself to
 give away, had she given only to those who were already rich. Perhaps she
@@ -4104,7 +4104,7 @@ better than myself," people whom she despised even more if they did not
 address her always as "Mme. Francoise," just to shew that they considered
 themselves to be 'not as good.' And when she saw that, despite all her
 warnings, my aunt continued to do exactly as she pleased, and to fling
-money away with both hands (or so, at least, Francoise believed) on
+money away with both hands ( or so, at least, Francoise believed ) on
 undeserving objects, she began to find that the presents she herself
 received from my aunt were very tiny compared to the imaginary riches
 squandered upon Eulalie, There was not, in the neighbourhood of Combray, a
@@ -4233,23 +4233,23 @@ change. After luncheon the sun, conscious that it was Saturday, would
 blaze an hour longer in the zenith, and when some one, thinking that we
 were late in starting for our walk, said, "What, only two o'clock!"
 feeling the heavy throb go by him of the twin strokes from the steeple of
-Saint-Hilaire (which as a rule passed no one at that hour upon the
+Saint-Hilaire ( which as a rule passed no one at that hour upon the
 highways, deserted for the midday meal or for the nap which follows it, or
 on the banks of the bright and ever-flowing stream, which even the angler
 had abandoned, and so slipped unaccompanied into the vacant sky, where
-only a few loitering clouds remained to greet them) the whole family would
+only a few loitering clouds remained to greet them ) the whole family would
 respond in chorus: "Why, you're forgetting; we had luncheon an hour
 earlier; you know very well it's Saturday."
 
-The surprise of a 'barbarian' (for so we termed everyone who was not
-acquainted with Saturday's special customs) who had called at eleven
+The surprise of a 'barbarian' ( for so we termed everyone who was not
+acquainted with Saturday's special customs ) who had called at eleven
 o'clock to speak to my father, and had found us at table, was an event
 which used to cause Francoise as much merriment as, perhaps, anything that
 had ever happened in her life. And if she found it amusing that the
 nonplussed visitor should not have known, beforehand, that we had our
 luncheon an hour earlier on Saturday, it was still more irresistibly funny
-that my father himself (fully as she sympathised, from the bottom of her
-heart, with the rigid chauvinism which prompted him) should never have
+that my father himself ( fully as she sympathised, from the bottom of her
+heart, with the rigid chauvinism which prompted him  ) should never have
 dreamed that the barbarian could fail to be aware of so simple a matter,
 and so had replied, with no further enlightenment of the other's surprise
 at seeing us already in the dining-room: "You see, it's Saturday." On
@@ -4387,8 +4387,8 @@ lime-trees seemed a consolation which I could obtain only at the price of
 great suffering and exhaustion, and not worthy of the effort. From gates
 far apart the watchdogs, awakened by our steps in the silence, would set
 up an antiphonal barking, as I still hear them bark, at times, in the
-evenings, and it is in their custody (when the public gardens of Combray
-were constructed on its site) that the Boulevard de la Gare must have
+evenings, and it is in their custody ( when the public gardens of Combray
+were constructed on its site ) that the Boulevard de la Gare must have
 taken refuge, for wherever I may be, as soon as they begin their alternate
 challenge and acceptance, I can see it again with all its lime-trees, and
 its pavement glistening beneath the moon.
@@ -4418,8 +4418,8 @@ some even greater variation, that she did not pass through those abnormal
 hours in which one thirsts for something different from what one has, when
 those people who, through lack of energy or imagination, are unable to
 generate any motive power in themselves, cry out, as the clock strikes or
-the postman knocks, in their eagerness for news (even if it be bad news),
-for some emotion (even that of grief); when the heartstrings, which
+the postman knocks, in their eagerness for news ( even if it be bad news ),
+for some emotion ( even that of grief  ); when the heartstrings, which
 prosperity has silenced, like a harp laid by, yearn to be plucked and
 sounded again by some hand, even a brutal hand, even if it shall break
 them; when the will, which has with such difficulty brought itself to
@@ -4435,7 +4435,7 @@ employ. And I have no doubt that then--just as a desire to have her
 potatoes served with bechamel sauce, for a change, would be formed,
 ultimately, from the pleasure she found in the daily reappearance of those
 mashed potatoes of which she was never 'tired'--she would extract from the
-accumulation of those monotonous days (on which she so much depended) a
+accumulation of those monotonous days ( on which she so much depended  ) a
 keen expectation of some domestic cataclysm, instantaneous in its
 happening, but violent enough to compel her to put into effect, once for
 all, one of those changes which she knew would be beneficial to her
@@ -4457,12 +4457,12 @@ lost, no room for weakening hesitations, to go off and spend the summer at
 her charming farm of Mirougrain, where there was a waterfall. Inasmuch as
 nothing of this sort had ever occurred, though indeed she must often have
 pondered the success of such a manoeuvre as she lay alone absorbed in her
-interminable games of patience (and though it must have plunged her in
+interminable games of patience ( and though it must have plunged her in
 despair from the first moment of its realisation, from the first of those
 little unforeseen facts, the first word of calamitous news, whose accents
 can never afterwards be expunged from the memory, everything that bears
 upon it the imprint of actual, physical death, so terribly different from
-the logical abstraction of its possibility) she would fall back from time
+the logical abstraction of its possibility ) she would fall back from time
 to time, to add an interest to her life, upon imagining other, minor
 catastrophes, which she would follow up with passion. She would beguile
 herself with a sudden suspicion that Francoise had been robbing her, that
@@ -4643,8 +4643,8 @@ disguise which covered their firm and edible flesh, allowed me to discern
 in this radiance of earliest dawn, these hinted rainbows, these blue
 evening shades, that precious quality which I should recognise again when,
 all night long after a dinner at which I had partaken of them, they played
-(lyrical and coarse in their jesting as the fairies in Shakespeare's
-Dream) at transforming my humble chamber into a bower of aromatic
+( lyrical and coarse in their jesting as the fairies in Shakespeare's
+Dream  ) at transforming my humble chamber into a bower of aromatic
 perfume.
 
 Poor Giotto's Charity, as Swann had named her, charged by Francoise with
@@ -4685,8 +4685,8 @@ I crept out of the kitchen and upstairs, trembling all over; I could have
 prayed, then, for the instant dismissal of Francoise. But who would have
 baked me such hot rolls, boiled me such fragrant coffee, and even--roasted
 me such chickens? And, as it happened, everyone else had already had to
-make the same cowardly reckoning. For my aunt Leonie knew (though I was
-still in ignorance of this) that Francoise, who, for her own daughter or
+make the same cowardly reckoning. For my aunt Leonie knew ( though I was
+still in ignorance of this ) that Francoise, who, for her own daughter or
 for her nephews, would have given her life without a murmur, shewed a
 singular implacability in her dealings with the rest of the world. In
 spite of which my aunt still retained her, for, while conscious of her
@@ -4757,7 +4757,7 @@ meat for her offspring after her own decease, calls in the science of
 anatomy to amplify the resources of her instinctive cruelty, and, having
 made a collection of weevils and spiders, proceeds with marvellous
 knowledge and skill to pierce the nerve-centre on which their power of
-locomotion (but none of their other vital functions) depends, so that the
+locomotion ( but none of their other vital functions ) depends, so that the
 paralysed insect, beside which her egg is laid, will furnish the larva,
 when it is hatched, with a tamed and inoffensive quarry, incapable either
 of flight or of resistance, but perfectly fresh for the larder: in the
@@ -4774,11 +4774,11 @@ the Sundays following our meeting with him on the Pont-Vieux, after which
 my father had been forced to confess himself mistaken, as mass drew to an
 end, and, with the sunshine and the noise of the outer world, something
 else invaded the church, an atmosphere so far from sacred that Mme.
-Goupil, Mme. Percepied (all those, in fact, who a moment ago, when I
+Goupil, Mme. Percepied ( all those, in fact, who a moment ago, when I
 arrived a little late, had been sitting motionless, their eyes fixed on
 their prayer-books; who, I might even have thought, had not seen me come
 in, had not their feet moved slightly to push away the little
-kneeling-desk which was preventing me from getting to my chair) began in
+kneeling-desk which was preventing me from getting to my chair ) began in
 loud voices to discuss with us all manner of utterly mundane topics, as
 though we were already outside in the Square, we saw, standing on the
 sun-baked steps of the porch, dominating the many-coloured tumult of the
@@ -4907,9 +4907,9 @@ piece of information, a reply in which there was so little that could
 astonish me, in the natural and conversational tone which would have
 befitted it, he recited it with a separate stress upon each word, leaning
 forward, bowing his head, with at once the vehemence which a man gives, so
-as to be believed, to a highly improbable statement (as though the fact
+as to be believed, to a highly improbable statement ( as though the fact
 that he did not know the Guermantes could be due only to some strange
-accident of fortune) and with the emphasis of a man who, finding himself
+accident of fortune  ) and with the emphasis of a man who, finding himself
 unable to keep silence about what is to him a painful situation, chooses
 to proclaim it aloud, so as to convince his hearers that the confession he
 is making is one that causes him no embarrassment, but is easy, agreeable,
@@ -4928,7 +4928,7 @@ seem ill-bred, uncivilised, an old bear. But that's not the sort of
 reputation that can frighten me; it's too true! In my heart of hearts I
 care for nothing in the world now but a few churches, books--two or three,
 pictures--rather more, perhaps, and the light of the moon when the fresh
-breeze of youth (such as yours) wafts to my nostrils the scent of gardens
+breeze of youth ( such as yours  ) wafts to my nostrils the scent of gardens
 whose flowers my old eyes are not sharp enough, now, to distinguish."
 
 I did not understand very clearly why, in order to refrain from going to
@@ -4942,7 +4942,7 @@ their company, of incurring their displeasure that he would never dare to
 let them see that he numbered, as well, among his friends middle-class
 people, the families of solicitors and stockbrokers, preferring, if the
 truth must be known, that it should be revealed in his absence, when he
-was out of earshot, that judgment should go against him (if so it must) by
+was out of earshot, that judgment should go against him ( if so it must  ) by
 default: in a word, he was a snob. Of course he would never have admitted
 all or any of this in the poetical language which my family and I so much
 admired. And if I asked him, "Do you know the Guermantes family?"
@@ -4968,7 +4968,7 @@ impression which the revelations of his alter ego must have caused,
 since he could do no more now than endeavour to mitigate them.
 
 This was not to say that M. Legrandin was anything but sincere when he
-inveighed against snobs. He could not (from his own knowledge, at least)
+inveighed against snobs. He could not ( from his own knowledge, at least )
 be aware that he was one also, since it is only with the passions of
 others that we are ever really familiar, and what we come to find out
 about our own can be no more than what other people have shewn us. Upon
@@ -5023,8 +5023,8 @@ Normandy merges into Brittany, have I been able to find such copious
 examples of what you might call a vegetable kingdom in the clouds. Down
 there, close to Balbec, among all those places which are still so
 uncivilised, there is a little bay, charmingly quiet, where the sunsets of
-the Auge Valley, those red-and-gold sunsets (which, all the same, I am
-very far from despising) seem commonplace and insignificant; for in that
+the Auge Valley, those red-and-gold sunsets ( which, all the same, I am
+very far from despising  ) seem commonplace and insignificant; for in that
 moist and gentle atmosphere these heavenly flower-beds will break into
 blossom, in a few moments, in the evenings, incomparably lovely, and often
 lasting for hours before they fade. Others shed their leaves at once, and
@@ -5222,9 +5222,9 @@ so to speak, far apart and unaware of each other's existence, in the
 sealed vessels--between which there could be no communication--of separate
 afternoons.
 
-When we had decided to go the 'Meseglise way' we would start (without
+When we had decided to go the 'Meseglise way' we would start ( without
 undue haste, and even if the sky were clouded over, since the walk was not
-very long, and did not take us too far from home), as though we were not
+very long, and did not take us too far from home ), as though we were not
 going anywhere in particular, by the front-door of my aunt's house, which
 opened on to the Rue du Saint-Esprit. We would be greeted by the gunsmith,
 we would drop our letters into the box, we would tell Theodore, from
@@ -5293,7 +5293,7 @@ and used to go with him to visit cathedrals--made the exploration of
 Tansonville, now for the first time permitted me, a matter of
 indifference to myself, seemed however to invest the property, in my
 grandfather's and father's eyes, with a fresh and transient charm, and
-(like an entirely cloudless sky when one is going mountaineering) to make
+( like an entirely cloudless sky when one is going mountaineering  ) to make
 the day extraordinarily propitious for a walk in this direction; I should
 have liked to see their reckoning proved false, to see, by a miracle,
 Mlle. Swann appear, with her father, so close to us that we should not
@@ -5344,7 +5344,7 @@ smooth silk of their blushing pink bodices, which would be undone and
 scattered by the first breath of wind.
 
 But it was in vain that I lingered before the hawthorns, to breathe in, to
-marshal! before my mind (which knew not what to make of it), to lose in
+marshal! before my mind ( which knew not what to make of it  ), to lose in
 order to rediscover their invisible and unchanging odour, to absorb myself
 in the rhythm which disposed their flowers here and there with the
 light-heartedness of youth, and at intervals as unexpected as certain
@@ -5412,9 +5412,9 @@ been selected by the dressmaker. And, indeed, I had felt at once, as I had
 felt before the white blossom, but now still more marvelling, that it was
 in no artificial manner, by no device of human construction, that the
 festal intention of these flowers was revealed, but that it was Nature
-herself who had spontaneously expressed it (with the simplicity of a woman
+herself who had spontaneously expressed it ( with the simplicity of a woman
 from a village shop, labouring at the decoration of a street altar for
-some procession) by burying the bush in these little rosettes, almost too
+some procession  ) by burying the bush in these little rosettes, almost too
 ravishing in colour, this rustic 'pompadour.' High up on the branches,
 like so many of those tiny rose-trees, their pots concealed in jackets of
 paper lace, whose slender stems rise in a forest from the altar on the
@@ -5457,9 +5457,9 @@ I gazed at her, at first with that gaze which is not merely a messenger
 from the eyes, but in whose window all the senses assemble and lean out,
 petrified and anxious, that gaze which would fain reach, touch, capture,
 bear off in triumph the body at which it is aimed, and the soul with the
-body; then (so frightened was I lest at any moment my grandfather and
+body; then ( so frightened was I lest at any moment my grandfather and
 father, catching sight of the girl, might tear me away from her, by making
-me run on in front of them) with another, an unconsciously appealing look,
+me run on in front of them ) with another, an unconsciously appealing look,
 whose object was to force her to pay attention to me, to see, to know me.
 She cast a glance forwards and sideways, so as to take stock of my
 grandfather and father, and doubtless the impression she formed of them
@@ -5500,10 +5500,10 @@ their familiarity--so exquisitely painful to myself--with her, and with
 all that unknown world of her existence, into which I should never
 penetrate.
 
-For a moment (while we moved away, and my grandfather murmured: "Poor
+For a moment ( while we moved away, and my grandfather murmured: "Poor
 Swann, what a life they are leading him; fancy sending him away so that
 she can be left alone with her Charlus--for that was Charlus: I recognised
-him at once! And the child, too; at her age, to be mixed up in all that!")
+him at once! And the child, too; at her age, to be mixed up in all that!"  )
 the impression left on me by the despotic tone in which Gilberte's mother
 had spoken to her, without her replying, by exhibiting her to me as being
 obliged to yield obedience to some one else, as not being indeed superior
@@ -5538,8 +5538,8 @@ that she might be stimulated to rise from her bed and to go out of doors.
 For in earlier days she had been very fond of Tansonville, and, moreover,
 Swann's visits had been the last that she had continued to receive, at a
 time when she had already closed her doors to all the world. And just as,
-when he called, in these later days, to inquire for her (and she was still
-the only person in our household whom he would ask to see), she would send
+when he called, in these later days, to inquire for her ( and she was still
+the only person in our household whom he would ask to see  ), she would send
 down to say that she was tired at the moment and resting, but that she
 would be happy to see him another time, so, this evening, she said to my
 grandfather, "Yes, some day when the weather is fine I shall go for a
@@ -5578,10 +5578,10 @@ grow sick with longing to hear them utter it; I dared not pronounce it
 myself, but I would draw them into a discussion of matters which led
 naturally to Gilberte and her family, in which she was involved, in
 speaking of which I would feel myself not too remotely banished from her
-company; and I would suddenly force my father (by pretending, for
+company; and I would suddenly force my father ( by pretending, for
 instance, to believe that my grandfather's business had been in our family
 before his day, or that the hedge with the pink hawthorn which my aunt
-Leonie wished to visit was on common ground) to correct my statements, to
+Leonie wished to visit was on common ground  ) to correct my statements, to
 say, as though in opposition to me and of his own accord: "No, no, the
 business belonged to Swann's father, that hedge is part of Swann's
 park." And then I would be obliged to pause for breath; so stifling was
@@ -5608,9 +5608,9 @@ be ready to face the photographer, had had a new hat carefully set upon my
 head, and had been buttoned into a velvet jacket; a little later my
 mother, after searching everywhere for me, found me standing in tears on
 that steep little hillside close to Tansonville, bidding a long farewell
-to my hawthorns, clasping their sharp branches to my bosom, and (like a
+to my hawthorns, clasping their sharp branches to my bosom, and ( like a
 princess in a tragedy, oppressed by the weight of all her senseless
-jewellery) with no gratitude towards the officious hand which had, in
+jewellery  ) with no gratitude towards the officious hand which had, in
 curling those ringlets, been at pains to collect all my hair upon my
 forehead; trampling underfoot the curl-papers which I had torn from my
 head, and my new hat with them. My mother was not at all moved by my
@@ -5643,7 +5643,7 @@ seemed then to draw us together, to unite us; I would imagine that the
 same breath had passed by her also, that there was some message from her
 in what it was whispering to me, without my being able to understand it,
 and I would catch and kiss it as it passed. On my left was a village
-called Champieu (Campus Pagani, according to the Cure). On my right I
+called Champieu ( Campus Pagani, according to the Cure ). On my right I
 could see across the cornfields the two crocketed, rustic spires of
 Saint-Andre-des-Champs, themselves as tapering, scaly, plated,
 honeycombed, yellowed, and roughened as two ears of wheat.
@@ -5755,7 +5755,7 @@ Combray most hostile to him and his daughter would have employed; he saw
 himself and her in 'low,' in the very 'lowest water,' inextricably
 stranded; and his manners had of late been tinged with that humility, that
 respect for persons who ranked above him and to whom he must now look up
-(however far beneath him they might hitherto have been), that tendency to
+( however far beneath him they might hitherto have been  ), that tendency to
 search for some means of rising again to their level, which is an almost
 mechanical result of any human misfortune.
 
@@ -5788,9 +5788,9 @@ And then, so strong an element of hypocrisy is there in even the most
 sincere of men, who cast off, while they are talking to anyone, the
 opinion they actually hold of him and will express when he is no longer
 there, my family joined with M. Vinteuil in deploring Swann's marriage,
-invoking principles and conventions which (all the more because they
+invoking principles and conventions which ( all the more because they
 invoked them in common with him, as though we were all thorough good
-fellows of the same sort) they appeared to suggest were in no way
+fellows of the same sort ) they appeared to suggest were in no way
 infringed at Montjouvain. M. Vinteuil did not send his daughter to visit
 Swann, an omission which Swann was the first to regret. For constantly,
 after meeting M. Vinteuil, he would remember that he had been meaning for
@@ -5843,7 +5843,7 @@ Francoise in her kitchen would break into speech about Saint Louis as
 though she herself had known him, generally in order to depreciate, by
 contrast with him, my grandparents, whom she considered less 'righteous.'
 One could see that the ideas which the mediaeval artist and the mediaeval
-peasant (who had survived to cook for us in the nineteenth century) had of
+peasant ( who had survived to cook for us in the nineteenth century  ) had of
 classical and of early Christian history, ideas whose inaccuracy was
 atoned for by their honest simplicity, were derived not from books, but
 from a tradition at once ancient and direct, unbroken, oral, degraded,
@@ -5901,10 +5901,10 @@ all night, upon the sea. But what mattered rain or storm? In summer, bad
 weather is no more than a passing fit of superficial ill-temper expressed
 by the permanent, underlying fine weather; a very different thing from the
 fluid and unstable 'fine weather' of winter, its very opposite, in fact;
-for has it not (firmly established in the soil, on which it has taken
+for has it not ( firmly established in the soil, on which it has taken
 solid form in dense masses of foliage over which the rain may pour in
 torrents without weakening the resistance offered by their real and
-lasting happiness) hoisted, to keep them flying throughout the season, in
+lasting happiness  ) hoisted, to keep them flying throughout the season, in
 the village streets, on the walls of the houses and in their gardens, its
 silken banners, violet and white. Sitting in the little parlour, where I
 would pass the time until dinner with a book, I might hear the water
@@ -6093,9 +6093,9 @@ whom I never saw save dappled with the shadows of their leaves, was to me
 herself a plant of local growth, only taller than the rest, and one whose
 structure would enable me to approach more closely than in them to the
 intimate savour of the land from which she had sprung. I could believe
-this all the more readily (and also that the caresses by which she would
+this all the more readily ( and also that the caresses by which she would
 bring that savour to my senses were themselves of a particular kind,
-yielding a pleasure which I could never derive from any but herself) since
+yielding a pleasure which I could never derive from any but herself  ) since
 I was still, and must for long remain, in that period of life when one has
 not yet separated the fact of this sensual pleasure from the various women
 in whose company one has tasted it, when one has not reduced it to a
@@ -6168,9 +6168,9 @@ roof of the hut, I had lain down in the shade and gone to sleep among the
 bushes on the steep slope that rose up behind the house, just where I had
 waited for my parents, years before, one day when they had gone to call on
 M. Vinteuil. It was almost dark when I awoke, and I wished to rise and go
-away, but I saw Mile. Vinteuil (or thought, at least, that I recognised
+away, but I saw Mile. Vinteuil ( or thought, at least, that I recognised
 her, for I had not seen her often at Combray, and then only when she was
-still a child, whereas she was now growing into a young woman), who
+still a child, whereas she was now growing into a young woman  ), who
 probably had just come in, standing in front of me, and only a few feet
 away from me, in that room in which her father had entertained mine, and
 which she had now made into a little sitting-room for herself. The window
@@ -6298,9 +6298,9 @@ if he could see you now, with the window open, the ugly old monkey?"
 
 To which Mlle. Vinteuil replied, "Oh, please!"--a gentle reproach which
 testified to the genuine goodness of her nature, not that it was prompted
-by any resentment at hearing her father spoken of in this fashion (for
+by any resentment at hearing her father spoken of in this fashion ( for
 that was evidently a feeling which she had trained herself, by a long
-course of sophistries, to keep in close subjection at such moments), but
+course of sophistries, to keep in close subjection at such moments ), but
 rather because it was the bridle which, so as to avoid all appearance of
 egotism, she herself used to curb the gratification which her friend was
 attempting to procure for her. It may well have been, too, that the
@@ -6427,11 +6427,11 @@ angle, dotted with grass-plots over which two or three wasps would spend
 the day botanising, a street as quaint as its name, from which its odd
 characteristics and its personality were, I felt, derived; a street for
 which one might search in vain through the Combray of to-day, for the
-public school now rises upon its site. But in my dreams of Combray (like
+public school now rises upon its site. But in my dreams of Combray ( like
 those architects, pupils of Viollet-le-Duc, who, fancying that they can
 detect, beneath a Renaissance rood-loft and an eighteenth-century altar,
 traces of a Norman choir, restore the whole church to the state in which
-it probably was in the twelfth century) I leave not a stone of the modern
+it probably was in the twelfth century ) I leave not a stone of the modern
 edifice standing, I pierce through it and 'restore' the Rue des Perchamps.
 And for such reconstruction memory furnishes me with more detailed
 guidance than is generally at the disposal of restorers; the pictures
@@ -6465,10 +6465,10 @@ The great charm of the 'Guermantes' way was that we had beside us, almost
 all the time, the course of the Vivonne. We crossed it first, ten minutes
 after leaving the house, by a foot-bridge called the Pont-Vieux. And
 every year, when we arrived at Combray, on Easter morning, after the
-sermon, if the weather was fine, I would run there to see (amid all the
+sermon, if the weather was fine, I would run there to see ( amid all the
 disorder that prevails on the morning of a great festival, the gorgeous
 preparations for which make the everyday household utensils that they have
-not contrived to banish seem more sordid than ever) the river flowing
+not contrived to banish seem more sordid than ever ) the river flowing
 past, sky-blue already between banks still black and bare, its only
 companions a clump of daffodils, come out before their time, a few
 primroses, the first in flower, while here and there burned the blue flame
@@ -6778,7 +6778,7 @@ as living in another century, as being of another substance than the rest
 of the human race. Never had I taken into account that she might have a
 red face, a mauve scarf like Mme. Sazerat; and the oval curve of her
 cheeks reminded me so strongly of people whom I had seen at home that the
-suspicion brushed against my mind (though it was immediately banished)
+suspicion brushed against my mind ( though it was immediately banished )
 that this lady in her creative principle, in the molecules of her physical
 composition, was perhaps not substantially the Duchesse de Guermantes, but
 that her body, in ignorance of the name that people had given it, belonged
@@ -6802,10 +6802,10 @@ lantern.
 
 Meanwhile I was endeavouring to apply to this image, which the prominent
 nose, the piercing eyes pinned down and fixed in my field of vision
-(perhaps because it was they that had first struck it, that had made the
+( perhaps because it was they that had first struck it, that had made the
 first impression on its surface, before I had had time to wonder whether
 the woman who thus appeared before me might possibly be Mme. de
-Guermantes), to this fresh and unchanging image the idea: "It is Mme. de
+Guermantes ), to this fresh and unchanging image the idea: "It is Mme. de
 Guermantes"; but I succeeded only in making the idea pass between me and
 the image, as though they were two discs moving in separate planes, with a
 space between. But this Mme. de Guermantes of whom I had so often dreamed,
@@ -6844,9 +6844,9 @@ brought my mind to bear upon that face--and especially, perhaps, in my
 determination, that form of the instinct of self-preservation with which
 we guard everything that is best in ourselves, not to admit that I had
 been in any way deceived--I found only beauty there; setting her once
-again (since they were one and the same person, this lady who sat before
+again ( since they were one and the same person, this lady who sat before
 me and that Duchesse de Guermantes whom, until then, I had been used to
-conjure into an imagined shape) apart from and above that common run of
+conjure into an imagined shape ) apart from and above that common run of
 humanity with which the sight, pure and simple, of her in the flesh had
 made me for a moment confound her, I grew indignant when I heard people
 saying, in the congregation round me: "She is better looking than Mme.
@@ -6949,9 +6949,9 @@ visible and tangible covering, beneath which I should find it still alive,
 like the fish which, on days when I had been allowed to go out fishing, I
 used to carry back in my basket, buried in a couch of grass which kept
 them cool and fresh. Once in the house again I would begin to think of
-something else, and so my mind would become littered (as my room was with
+something else, and so my mind would become littered ( as my room was with
 the flowers that I had gathered on my walks, or the odds and ends that
-people had given me) with a stone from the surface of which the sunlight
+people had given me  ) with a stone from the surface of which the sunlight
 was reflected, a roof, the sound of a bell, the smell of fallen leaves, a
 confused mass of different images, under which must have perished long ago
 the reality of which I used to have some foreboding, but which I never had
@@ -7167,11 +7167,11 @@ itself to the passion of love, and may even become its inseparable
 companion, I should have wished for any strange mother to come in and say
 good night to me, though she were far more beautiful and more intelligent
 than my own. No: just as the one thing necessary to send me to sleep
-contented (in that untroubled peace which no mistress, in later years, has
+contented ( in that untroubled peace which no mistress, in later years, has
 ever been able to give me, since one has doubts of them at the moment when
 one believes in them, and never can possess their hearts as I used to
 receive, in her kiss, the heart of my mother, complete, without scruple or
-reservation, unburdened by any liability save to myself) was that it
+reservation, unburdened by any liability save to myself  ) was that it
 should be my mother who came, that she should incline towards me that face
 on which there was, beneath her eye, something that was, it appears, a
 blemish, and which I loved as much as all the rest--so what I want to see
@@ -7271,10 +7271,10 @@ church, they had been obliged to expel, one after another, all those of
 the 'faithful' who were of the female sex.
 
 Apart from the doctor's young wife, they were reduced almost exclusively
-that season (for all that Mme. Verdurin herself was a thoroughly 'good'
+that season ( for all that Mme. Verdurin herself was a thoroughly 'good'
 woman, and came of a respectable middle-class family, excessively rich and
 wholly undistinguished, with which she had gradually and of her own accord
-severed all connection) to a young woman almost of a 'certain class,' a
+severed all connection ) to a young woman almost of a 'certain class,' a
 Mme. de Crecy, whom Mme. Verdurin called by her Christian name, Odette,
 and pronounced a 'love,' and to the pianist's aunt, who looked as though
 she had, at one period, 'answered the bell': ladies quite ignorant of the
@@ -7480,9 +7480,9 @@ indiscretion, a permanent trait in his character and an unvarying quest. I
 used often to recall to myself when, many years later, I began to take an
 interest in his character because of the similarities which, in wholly
 different respects, it offered to my own, how, when he used to write to my
-grandfather (though not at the time we are now considering, for it was
+grandfather ( though not at the time we are now considering, for it was
 about the date of my own birth that Swann's great 'affair' began, and made
-a long interruption in his amatory practices) the latter, recognising his
+a long interruption in his amatory practices ) the latter, recognising his
 friend's handwriting on the envelope, would exclaim: "Here is Swann asking
 for something; on guard!" And, either from distrust or from the
 unconscious spirit of devilry which urges us to offer a thing only to
@@ -7615,8 +7615,8 @@ her cheeks, a single and almost plane surface, were covered by the masses
 of hair which women wore at that period, drawn forward in a fringe, raised
 in crimped waves and falling in stray locks over her ears; while as for
 her figure, and she was admirably built, it was impossible to make out its
-continuity (on account of the fashion then prevailing, and in spite of her
-being one of the best-dressed women in Paris) for the corset, jetting
+continuity ( on account of the fashion then prevailing, and in spite of her
+being one of the best-dressed women in Paris ) for the corset, jetting
 forwards in an arch, as though over an imaginary stomach, and ending in a
 sharp point, beneath which bulged out the balloon of her double skirts,
 gave a woman, that year, the appearance of being composed of different
@@ -7680,10 +7680,10 @@ had gone."
 No doubt, in thus remembering their conversations, in thinking about her
 thus when he was alone, he did no more than call her image into being
 among those of countless other women in his romantic dreams; but if,
-thanks to some accidental circumstance (or even perhaps without that
+thanks to some accidental circumstance ( or even perhaps without that
 assistance, for the circumstance which presents itself at the moment when
 a mental state, hitherto latent, makes itself felt, may well have had no
-influence whatsoever upon that state), the image of Odette de Crecy came
+influence whatsoever upon that state ), the image of Odette de Crecy came
 to absorb the whole of his dreams, if from those dreams the memory of her
 could no longer be eliminated, then her bodily imperfections would no
 longer be of the least importance, nor would the conformity of her body,
@@ -7829,7 +7829,7 @@ their friends, he instinctively shewed an assiduity, and made overtures
 with which, by their account, any of their 'bores' would have dispensed.
 He chilled, though for a moment only, on meeting Dr. Cottard; for seeing
 him close one eye with an ambiguous smile, before they had yet spoken to
-one another (a grimace which Cottard styled "letting 'em all come"), Swann
+one another ( a grimace which Cottard styled "letting 'em all come"  ), Swann
 supposed that the Doctor recognised him from having met him already
 somewhere, probably in some house of 'ill-fame,' though these he himself
 very rarely visited, never having made a habit of indulging in the
@@ -7843,8 +7843,8 @@ Doctor's expression in the sense which he had at first suspected. The
 painter at once invited Swann to visit his studio with Odette, and Swann
 found him very pleasant. "Perhaps you will be more highly favoured than I
 have been," Mme. Verdurin broke in, with mock resentment of the favour,
-"perhaps you will be allowed to see Cottard's portrait" (for which she had
-given the painter a commission). "Take care, Master Biche," she reminded
+"perhaps you will be allowed to see Cottard's portrait" ( for which she had
+given the painter a commission ). "Take care, Master Biche," she reminded
 the painter, whom it was a time-honoured pleasantry to address as
 'Master,' "to catch that nice look in his eyes, that witty little twinkle.
 You know, what I want to have most of all is his smile; that's what I've
@@ -7862,9 +7862,9 @@ in his speech as a quality of his soul, as it were a survival from the age
 of innocence which he had never wholly outgrown. All the cop-sonants which
 he did not manage to pronounce seemed like harsh utterances of which his
 gentle lips were incapable. By asking to be made known to M. Saniette,
-Swann made M. Verdurin reverse the usual form of introduction (saying, in
+Swann made M. Verdurin reverse the usual form of introduction ( saying, in
 fact, with emphasis on the distinction: "M. Swann, pray let me present to
-you our friend Saniette") but he aroused in Saniette himself a warmth of
+you our friend Saniette" ) but he aroused in Saniette himself a warmth of
 gratitude, which, however, the Verdurins never disclosed to Swann, since
 Saniette rather annoyed them, and they did not feel bound to provide him
 with friends. On the other hand the Verdurins were extremely touched by
@@ -7957,7 +7957,7 @@ cage-bird whose biscuit has been steeped in mulled wine, would sit aloft
 and sob with fellow-feeling.
 
 Meanwhile M. Verdurin, after first asking Swann's permission to light his
-pipe ("No ceremony here, you understand; we're all pals!"), went and
+pipe ( "No ceremony here, you understand; we're all pals!" ), went and
 begged the young musician to sit down at the piano.
 
 "Leave him alone; don't bother him; he hasn't come here to be tormented,"
@@ -8146,7 +8146,7 @@ satisfactions, that he had come to believe, though without ever formally
 stating his belief even to himself, that he would remain all his life in
 that condition, which death alone could alter. More than this, since his
 mind no longer entertained any lofty ideals, he had ceased to believe in
-(although he could not have expressly denied) their reality. He had grown
+( although he could not have expressly denied  ) their reality. He had grown
 also into the habit of taking refuge in trivial considerations, which
 allowed him to set on one side matters of fundamental importance. Just as
 he had never stopped to ask himself whether he would not have done better
@@ -8203,9 +8203,9 @@ drawing-room, a woman whom he had seen and admired, once, in the street,
 and had despaired of ever seeing her again. Finally the phrase withdrew
 and vanished, pointing, directing, diligent among the wandering currents
 of its fragrance, leaving upon Swann's features a reflection of its smile.
-But now, at last, he could ask the name of his fair unknown (and was told
+But now, at last, he could ask the name of his fair unknown ( and was told
 that it was the andante movement of Vinteuil's sonata for the piano and
-violin), he held it safe, could have it again to himself, at home, as
+violin ), he held it safe, could have it again to himself, at home, as
 often as he would, could study its language and acquire its secret.
 
 And so, when the pianist had finished, Swann crossed the room and thanked
@@ -8232,14 +8232,14 @@ this Vinteuil; what else he had done, and at what period in his life he
 had composed the sonata;--what meaning the little phrase could have had
 for him, that was what Swann wanted most to know.
 
-But none of these people who professed to admire this musician (when Swann
+But none of these people who professed to admire this musician ( when Swann
 had said that the sonata was really charming Mme. Verdurin had exclaimed,
 "I quite believe it! Charming, indeed! But you don't dare to confess that
 you don't know Vinteuil's sonata; you have no right not to know it!"--and
 the painter had gone on with, "Ah, yes, it's a very fine bit of work,
 isn't it? Not, of course, if you want something 'obvious,' something
 'popular,' but, I mean to say, it makes a very great impression on us
-artists."), none of them seemed ever to have asked himself these
+artists."  ), none of them seemed ever to have asked himself these
 questions, for none of them was able to reply.
 
 Even to one or two particular remarks made by Swann on his favourite
@@ -8267,16 +8267,16 @@ piano a medley of notes which bore no relation to the musical forms to
 which they themselves were accustomed, and that the painter simply flung
 the colours haphazard upon his canvas. When, on one of these, they were
 able to distinguish a human form, they always found it coarsened and
-vulgarised (that is to say lacking all the elegance of the school of
+vulgarised ( that is to say lacking all the elegance of the school of
 painting through whose spectacles they themselves were in the habit of
-seeing the people--real, living people, who passed them in the streets)
+seeing the people--real, living people, who passed them in the streets )
 and devoid of truth, as though M. Biche had not known how the human
 shoulder was constructed, or that a woman's hair was not, ordinarily,
 purple.
 
 And yet, when the 'faithful' were scattered out of earshot, the Doctor
-felt that the opportunity was too good to be missed, and so (while Mme.
-Verdurin was adding a final word of commendation of Vinteuil's sonata)
+felt that the opportunity was too good to be missed, and so ( while Mme.
+Verdurin was adding a final word of commendation of Vinteuil's sonata  )
 like a would-be swimmer who jumps into the water, so as to learn, but
 chooses a moment when there are not too many people looking on: "Yes,
 indeed; he's what they call a musician di primo cartello!" he exclaimed,
@@ -8361,8 +8361,8 @@ want that."
 moment."
 
 Greatly to Mme. Verdurin's surprise, he never failed them. He would go to
-meet them, no matter where, at restaurants outside Paris (not that they
-went there much at first, for the season had not yet begun), and more
+meet them, no matter where, at restaurants outside Paris ( not that they
+went there much at first, for the season had not yet begun ), and more
 frequently at the play, in which Mme. Verdurin delighted. One evening,
 when they were dining at home, he heard her complain that she had not one
 of those permits which would save her the trouble of waiting at doors and
@@ -8402,8 +8402,8 @@ newspapers say, 'it is a case of,' he assures the poor lunatic that he
 will be admitted at once, and points the way to the reception ward of the
 police infirmary.
 
-"I know him slightly; we have some friends in common" (Swann dared not add
-that one of these friends was the Prince of Wales). "Anyhow, he is very
+"I know him slightly; we have some friends in common" ( Swann dared not add
+that one of these friends was the Prince of Wales  ). "Anyhow, he is very
 free with his invitations, and, I assure you, his luncheon-parties are not
 the least bit amusing; they're very simple affairs, too, you know; never
 more than eight at table," he went on, trying desperately to cut out
@@ -8468,8 +8468,8 @@ that my cab came late. There is always some excuse."
 
 "How charming of you."
 
-But Swann said to himself that, if he could make Odette feel (by
-consenting to meet her only after dinner) that there were other pleasures
+But Swann said to himself that, if he could make Odette feel ( by
+consenting to meet her only after dinner ) that there were other pleasures
 which he preferred to that of her company, then the desire that she felt
 for his would be all the longer in reaching the point of satiety. Besides,
 as he infinitely preferred to Odette's style of beauty that of a little
@@ -8506,8 +8506,8 @@ anywhere in the world, existed, when he composed it, and would express to
 all those who should hear it played in centuries to come--than as a
 pledge, a token of his love, which made even the Verdurins and their
 little pianist think of Odette and, at the same time, of himself--which
-bound her to him by a lasting tie; and at that point he had (whimsically
-entreated by Odette) abandoned the idea of getting some 'professional' to
+bound her to him by a lasting tie; and at that point he had ( whimsically
+entreated by Odette  ) abandoned the idea of getting some 'professional' to
 play over to him the whole sonata, of which he still knew no more than
 this one passage. "Why do you want the rest?" she had asked him. "Our
 little bit; that's all we need." He went farther; agonised by the
@@ -8526,8 +8526,8 @@ little phrase had been rendered by the pianist, Swann would discover that
 it was almost time for Odette to go home. He used to take her back as far
 as the door of her little house in the Rue La Perouse, behind the Arc de
 Triomphe. And it was perhaps on this account, and so as not to demand the
-monopoly of her favours, that he sacrificed the pleasure (not so essential
-to his well-being) of seeing her earlier in the evening, of arriving with
+monopoly of her favours, that he sacrificed the pleasure ( not so essential
+to his well-being  ) of seeing her earlier in the evening, of arriving with
 her at the Verdurins', to the exercise of this other privilege, for which
 she was grateful, of their leaving together; a privilege which he valued
 all the more because, thanks to it, he had the feeling that no one else
@@ -8547,24 +8547,24 @@ something very precious, in a secret drawer of his desk.
 He would escort her to her gate, but no farther. Twice only had he gone
 inside to take part in the ceremony--of such vital importance in her life
 --of 'afternoon tea.' The loneliness and emptiness of those short streets
-(consisting, almost entirely, of low-roofed houses, self-contained but not
+( consisting, almost entirely, of low-roofed houses, self-contained but not
 detached, their monotony interrupted here and there by the dark intrusion
 of some sinister little shop, at once an historical document and a sordid
-survival from the days when the district was still one of ill repute), the
+survival from the days when the district was still one of ill repute ), the
 snow which had lain on the garden-beds or clung to the branches of the
 trees, the careless disarray of the season, the assertion, in this
 man-made city, of a state of nature, had all combined to add an element of
 mystery to the warmth, the flowers, the luxury which he had found inside.
 
-Passing by (on his left-hand side, and on what, although raised some way
-above the street, was the ground floor of the house) Odette's bedroom,
+Passing by ( on his left-hand side, and on what, although raised some way
+above the street, was the ground floor of the house  ) Odette's bedroom,
 which looked out to the back over another little street running parallel
 with her own, he had climbed a staircase that went straight up between
 dark painted walls, from which hung Oriental draperies, strings of Turkish
 beads, and a huge Japanese lantern, suspended by a silken cord from the
-ceiling (which last, however, so that her visitors should not have to
+ceiling ( which last, however, so that her visitors should not have to
 complain of the want of any of the latest comforts of Western
-civilisation, was lighted by a gas-jet inside), to the two drawing-rooms,
+civilisation, was lighted by a gas-jet inside  ), to the two drawing-rooms,
 large and small. These were entered through a narrow lobby, the wall of
 which, chequered with the lozenges of a wooden trellis such as you see on
 garden walls, only gilded, was lined from end to end by a long rectangular
@@ -8589,7 +8589,7 @@ his head and beneath his feet great cushions of Japanese silk, which she
 pummelled and buffeted as though determined to lavish on him all her
 riches, and regardless of their value. But when her footman began to come
 into the room, bringing, one after another, the innumerable lamps which
-(contained, mostly, in porcelain vases) burned singly or in pairs upon the
+( contained, mostly, in porcelain vases  ) burned singly or in pairs upon the
 different pieces of furniture as upon so many altars, rekindling in the
 twilight, already almost nocturnal, of this winter afternoon, the glow of
 a sunset more lasting, more roseate, more human--filling, perhaps, with
@@ -8607,8 +8607,8 @@ beaupots, which she made a point of always tidying herself, in case the
 plants should be knocked over--and went across to them now to make sure
 that he had not broken off any of the flowers. She found something
 'quaint' in the shape of each of her Chinese ornaments, and also in her
-orchids, the cattleyas especially (these being, with chrysanthemums, her
-favourite flowers), because they had the supreme merit of not looking in
+orchids, the cattleyas especially ( these being, with chrysanthemums, her
+favourite flowers  ), because they had the supreme merit of not looking in
 the least like other flowers, but of being made, apparently, out of scraps
 of silk or satin. "It looks just as though it had been cut out of the
 lining of my cloak," she said to Swann, pointing to an orchid, with a
@@ -8730,7 +8730,7 @@ of his taste in art. He failed to observe that this quality would not
 naturally avail to bring Odette into the category of women whom he found
 desirable, simply because his desires had always run counter to his
 aesthetic taste. The words 'Florentine painting' were invaluable to Swann.
-They enabled him (gave him, as it were, a legal title) to introduce the
+They enabled him ( gave him, as it were, a legal title ) to introduce the
 image of Odette into a world of dreams and fancies which, until then, she
 had been debarred from entering, and where she assumed a new and nobler
 form. And whereas the mere sight of her in the flesh, by perpetually
@@ -8786,9 +8786,9 @@ be frightened, and that she would reply, and he hoped that, when the fear
 of losing him clutched at her heart, it would force from her words such as
 he had never yet heard her utter: and he was right--by repeating this
 device he had won from her the most affectionate letters that she had, so
-far, written him, one of them (which she had sent to him at midday by a
+far, written him, one of them ( which she had sent to him at midday by a
 special messenger from the Maison Doree--it was the day of the
-Paris-Murcie Fete given for the victims of the recent floods in Murcia)
+Paris-Murcie Fete given for the victims of the recent floods in Murcia )
 beginning "My dear, my hand trembles so that I can scarcely write----";
 and these letters he had kept in the same drawer as the withered
 chrysanthemum. Or else, if she had not had time to write, when he arrived
@@ -8827,7 +8827,7 @@ that he did not intend to come, had already left. Seeing the room bare of
 her, Swann felt his heart wrung by sudden anguish; he shook with the sense
 that he was being deprived of a pleasure whose intensity he began then for
 the first time to estimate, having always, hitherto, had that certainty of
-finding it whenever he would, which (as in the case of all our pleasures)
+finding it whenever he would, which ( as in the case of all our pleasures  )
 reduced, if it did not altogether blind him to its dimensions.
 
 "Did you notice the face he pulled when he saw that she wasn't here?" M.
@@ -8893,7 +8893,7 @@ a great deal less charming if she were."
 
 On the landing Swann had run into the Verdurins' butler, who had been
 somewhere else a moment earlier, when he arrived, and who had been asked
-by Odette to tell Swann (but that was at least an hour ago) that she would
+by Odette to tell Swann ( but that was at least an hour ago  ) that she would
 probably stop to drink a cup of chocolate at Prevost's on her way home.
 Swann set off at once for Prevost's, but every few yards his carriage was
 held up by others, or by people crossing the street, loathsome obstacles
@@ -8924,10 +8924,10 @@ personality was thus conjoined with his own, life had seemed, somehow,
 more interesting.
 
 It was in vain that he assured himself that this possible meeting at
-Prevost's (the tension of waiting for which so ravished, stripped so bare
+Prevost's ( the tension of waiting for which so ravished, stripped so bare
 the intervening moments that he could find nothing, not one idea, not one
 memory in his mind beneath which his troubled spirit might take shelter
-and repose) would probably, after all, should it take place, be much the
+and repose ) would probably, after all, should it take place, be much the
 same as all their meetings, of no great importance. As on every other
 evening, once he was in Odette's company, once he had begun to cast
 furtive glances at her changing countenance, and instantly to withdraw his
@@ -8943,7 +8943,7 @@ woman, whom he might approach, yet never dared embrace.
 
 She was not at Prevost's; he must search for her, then, in every
 restaurant upon the boulevards. To save time, while he went in one
-direction, he sent in the other his coachman Remi (Rizzo's Doge Loredan)
+direction, he sent in the other his coachman Remi ( Rizzo's Doge Loredan )
 for whom he presently--after a fruitless search--found himself waiting at
 the spot where the carriage was to meet him. It did not appear, and Swann
 tantalised himself with alternate pictures of the approaching moment, as
@@ -8967,7 +8967,7 @@ grasp again. But it was also by the force of inertia; there was in his
 soul that want of adaptability which can be seen in the bodies of certain
 people who, when the moment comes to avoid a collision, to snatch their
 clothes out of reach of a flame, or to perform any other such necessary
-movement, take their time (as the saying is), begin by remaining for a
+movement, take their time ( as the saying is ), begin by remaining for a
 moment in their original position, as though seeking to find in it a
 starting-point, a source of strength and motion. And probably, if the
 coachman had interrupted him with, "I have found the lady," he would have
@@ -9038,9 +9038,9 @@ overlooked her, and that she was now looking for her carriage.
 She had so little expected to see him that she started back in alarm. As
 for him, he had ransacked the streets of Paris, not that he supposed it
 possible that he should find her, but because he would have suffered even
-more cruelly by abandoning the attempt. But now the joy (which, his reason
+more cruelly by abandoning the attempt. But now the joy ( which, his reason
 had never ceased to assure him, was not, that evening at least, to be
-realised) was suddenly apparent, and more real than ever before; for he
+realised ) was suddenly apparent, and more real than ever before; for he
 himself had contributed nothing to it by anticipating probabilities,--it
 remained integral and external to himself; there was no need for him to
 draw on his own resources to endow it with truth--'twas from itself that
@@ -9123,8 +9123,8 @@ But he was so shy in approaching her that, after this evening which had
 begun by his arranging her cattleyas and had ended in her complete
 surrender, whether from fear of chilling her, or from reluctance to
 appear, even retrospectively, to have lied, or perhaps because he lacked
-the audacity to formulate a more urgent requirement than this (which could
-always be repeated, since it had not annoyed her on the first occasion),
+the audacity to formulate a more urgent requirement than this ( which could
+always be repeated, since it had not annoyed her on the first occasion ),
 he resorted to the same pretext on the following days. If she had any
 cattleyas pinned to her bodice, he would say: "It is most unfortunate; the
 cattleyas don't need tucking in this evening; they've not been disturbed
@@ -9135,12 +9135,12 @@ to arrange." So that for some time there was no change from the procedure
 which he had followed on that first evening, when he had started by
 touching her throat, with his fingers first and then with his lips, but
 their caresses began invariably with this modest exploration. And long
-afterwards, when the arrangement (or, rather, the ritual pretence of an
-arrangement) of her cattleyas had quite fallen into desuetude, the
+afterwards, when the arrangement ( or, rather, the ritual pretence of an
+arrangement  ) of her cattleyas had quite fallen into desuetude, the
 metaphor "Do a cattleya," transmuted into a simple verb which they would
 employ without a thought of its original meaning when they wished to refer
-to the act of physical possession (in which, paradoxically, the possessor
-possesses nothing), survived to commemorate in their vocabulary the long
+to the act of physical possession ( in which, paradoxically, the possessor
+possesses nothing  ), survived to commemorate in their vocabulary the long
 forgotten custom from which it sprang. And yet possibly this particular
 manner of saying "to make love" had not the precise significance of its
 synonyms. However disillusioned we may be about women, however we may
@@ -9150,8 +9150,8 @@ described in advance, it still becomes a fresh and stimulating pleasure if
 the women concerned be--or be thought to be--so difficult as to oblige us
 to base our attack upon some unrehearsed incident in our relations with
 them, as was originally for Swann the arrangement of the cattleyas. He
-trembled as he hoped, that evening, (but Odette, he told himself, if she
-were deceived by his stratagem, could not guess his intention) that it was
+trembled as he hoped, that evening, ( but Odette, he told himself, if she
+were deceived by his stratagem, could not guess his intention  ) that it was
 the possession of this woman that would emerge for him from their large
 and richly coloured petals; and the pleasure which he already felt, and
 which Odette tolerated, he thought, perhaps only because she was not yet
@@ -9165,9 +9165,9 @@ The ice once broken, every evening, when he had taken her home, he must
 follow her into the house; and often she would come out again in her
 dressing-gown, and escort him to his carriage, and would kiss him before
 the eyes of his coachman, saying: "What on earth does it matter what
-people see?" And on evenings when he did not go to the Verdurins' (which
+people see?" And on evenings when he did not go to the Verdurins' ( which
 happened occasionally, now that he had opportunities of meeting Odette
-elsewhere), when--more and more rarely--he went into society, she would
+elsewhere  ), when--more and more rarely--he went into society, she would
 beg him to come to her on his way home, however late he might be. The
 season was spring, the nights clear and frosty. He would come away from an
 evening party, jump into his victoria, spread a rug over his knees, tell
@@ -9224,13 +9224,13 @@ the horizon of his mind and since then had shed upon the world that
 mysterious light in which he saw it bathed. If he arrived after the hour
 at which Odette sent her servants to bed, before ringing the bell at the
 gate of her little garden, he would go round first into the other street,
-over which, at the ground-level, among the windows (all exactly alike, but
-darkened) of the adjoining houses, shone the solitary lighted window of
+over which, at the ground-level, among the windows ( all exactly alike, but
+darkened ) of the adjoining houses, shone the solitary lighted window of
 her room. He would rap upon the pane, and she would hear the signal, and
 answer, before running to meet him at the gate. He would find, lying open
 on the piano, some of her favourite music, the Valse des Roses, the
-Pauvre Fou of Tagliafico (which, according to the instructions embodied
-in her will, was to be played at her funeral); but he would ask her,
+Pauvre Fou of Tagliafico ( which, according to the instructions embodied
+in her will, was to be played at her funeral ); but he would ask her,
 instead, to give him the little phrase from Vinteuil's sonata. It was true
 that Odette played vilely, but often the fairest impression that remains
 in our minds of a favourite air is one which has arisen out of a jumble of
@@ -9342,8 +9342,8 @@ never asked himself what she might be doing, or what her life had been.
 Only he smiled sometimes at the thought of how, some years earlier, when
 he still did not know her, some one had spoken to him of a woman who, if
 he remembered rightly, must certainly have been Odette, as of a 'tart,' a
-'kept' woman, one of those women to whom he still attributed (having lived
-but little in their company) the entire set of characteristics,
+'kept' woman, one of those women to whom he still attributed ( having lived
+but little in their company  ) the entire set of characteristics,
 fundamentally perverse, with which they had been, for many years, endowed
 by the imagination of certain novelists. He would say to himself that one
 has, as often as not, only to take the exact counterpart of the reputation
@@ -9456,9 +9456,9 @@ which concealed such terrors for Odette inspired her, probably, with no
 very great longing to enter it, since it was too far removed from the
 world which she already knew for her to be able to form any clear
 conception of it. At the same time, while in certain respects she had
-retained a genuine simplicity (she had, for instance, kept up a friendship
+retained a genuine simplicity ( she had, for instance, kept up a friendship
 with a little dressmaker, now retired from business, up whose steep and
-dark and fetid staircase she clambered almost every day), she still
+dark and fetid staircase she clambered almost every day  ), she still
 thirsted to be in the fashion, though her idea of it was not altogether
 that held by fashionable people. For the latter, fashion is a thing that
 emanates from a comparatively small number of leaders, who project it to a
@@ -9472,9 +9472,9 @@ example, without needing to draw upon his knowledge of the world, if he
 read in a newspaper the names of the people who had been guests at a
 dinner, could tell at once how fashionable the dinner had been, just as a
 man of letters, merely by reading a phrase, can estimate exactly the
-literary merit of its author. But Odette was one of those persons (an
+literary merit of its author. But Odette was one of those persons ( an
 extremely numerous class, whatever the fashionable world may think, and to
-be found in every section of society) who do not share this knowledge, but
+be found in every section of society ) who do not share this knowledge, but
 imagine fashion to be something of quite another kind, which assumes
 different aspects according to the circle to which they themselves belong,
 but has the special characteristic--common alike to the fashion of which
@@ -9640,8 +9640,8 @@ being more mysterious than the intrinsic charm of more beautiful things
 and places, which appealed to him by their beauty, but without recalling
 her. Besides, having allowed the intellectual beliefs of his youth to
 grow faint, until his scepticism, as a finished 'man of the world,' had
-gradually penetrated them unawares, he held (or at least he had held for
-so long that he had fallen into the habit of saying) that the objects
+gradually penetrated them unawares, he held ( or at least he had held for
+so long that he had fallen into the habit of saying  ) that the objects
 which we admire have no absolute value in themselves, that the whole thing
 is a matter of dates and castes, and consists in a series of fashions, the
 most vulgar of which are worth just as much as those which are regarded as
@@ -9650,8 +9650,8 @@ attached to receiving cards tot a private view was not in itself any more
 ridiculous than the pleasure which he himself had at one time felt in
 going to luncheon with the Prince of Wales, so he did not think that the
 admiration which she professed for Monte-Carlo or for the Righi was any
-more unreasonable than his own liking for Holland (which she imagined as
-ugly) and for Versailles (which bored her to tears). And so he denied
+more unreasonable than his own liking for Holland ( which she imagined as
+ugly ) and for Versailles ( which bored her to tears ). And so he denied
 himself the pleasure of visiting those places, consoling himself with the
 reflection that it was for her sake that he wished to feel, to like
 nothing that was not equally felt and liked by her.
@@ -9670,8 +9670,8 @@ imagining that his tastes would lead him to frequent their society for the
 rest of his life. Never daring to whisper to himself, lest he should doubt
 the truth of the suggestion, that he would always be in love with Odette,
 at least when he tried to suppose that he would always go to the
-Verdurins' (a proposition which, a priori, raised fewer fundamental
-objections on the part of his intelligence), he saw himself for the future
+Verdurins' ( a proposition which, a priori, raised fewer fundamental
+objections on the part of his intelligence ), he saw himself for the future
 continuing to meet Odette every evening; that did not, perhaps, come quite
 to the same thing as his being permanently in love with her, but for the
 moment while he was in love with her, to feel that he would not, one day,
@@ -9768,37 +9768,37 @@ with Swann. But the real, the fundamental reason was quite different.
 What had happened was that they had at once discovered in him a locked
 door, a reserved, impenetrable chamber in which he still professed
 silently to himself that the Princesse de Sagan was not grotesque, and
-that Cottard's jokes were not amusing; in a word (and for all that he
+that Cottard's jokes were not amusing; in a word ( and for all that he
 never once abandoned his friendly attitude towards them all, or revolted
-from their dogmas), they had discovered an impossibility of imposing those
+from their dogmas  ), they had discovered an impossibility of imposing those
 dogmas upon him, of entirely converting him to their faith, the like of
 which they had never come across in anyone before. They would have
-forgiven his going to the houses of 'bores' (to whom, as it happened, in
+forgiven his going to the houses of 'bores' ( to whom, as it happened, in
 his heart of hearts he infinitely preferred the Verdurins and all their
-little 'nucleus') had he consented to set a good example by openly
+little 'nucleus' ) had he consented to set a good example by openly
 renouncing those 'bores' in the presence of the 'faithful.' But that was
 an abjuration which, as they well knew, they were powerless to extort.
 
 What a difference was there in a 'newcomer' whom Odette had asked them to
 invite, although she herself had met him only a few times, and on whom
-they were building great hopes--the Comte de Forcheville! (It turned out
+they were building great hopes--the Comte de Forcheville! ( It turned out
 that he was nothing more nor less than the brother-in-law of Saniette, a
 discovery which filled all the 'faithful' with amazement: the manners of
 the old palaeographer were so humble that they had always supposed him to
 be of a class inferior, socially, to their own, and had never expected to
-learn that he came of a rich and relatively aristocratic family.) Of
+learn that he came of a rich and relatively aristocratic family. ) Of
 course, Forcheville was enormously the 'swell,' which Swann was not or had
 quite ceased to be; of course, he would never dream of placing, as Swann
 now placed, the Verdurin circle above any other. But he lacked that
 natural refinement which prevented Swann from associating himself with the
-criticisms (too obviously false to be worth his notice) that Mme. Verdurin
+criticisms ( too obviously false to be worth his notice  ) that Mme. Verdurin
 levelled at people whom he knew. As for the vulgar and affected tirades in
 which the painter sometimes indulged, the bag-man's pleasantries which
 Cottard used to hazard,--whereas Swann, who liked both men sincerely,
 could easily find excuses for these without having either the courage or
 the hypocrisy to applaud them, Forcheville, on the other hand, was on an
 intellectual level which permitted him to be stupified, amazed by the
-invective (without in the least understanding what it all was about), and
+invective ( without in the least understanding what it all was about ), and
 to be frankly delighted by the wit. And the very first dinner at the
 Verdurins' at which Forcheville was present threw a glaring light upon all
 the differences between them, made his qualities start into prominence and
@@ -9924,7 +9924,7 @@ excused for taking so little interest in Blanche of Castile, as he had
 something that he wished to ask the painter. He, it appeared, had been
 that afternoon to an exhibition of the work of another artist, also a
 friend of Mme. Verdurin, who had recently died, and Swann wished to find
-out from him (for he valued his discrimination) whether there had really
+out from him ( for he valued his discrimination  ) whether there had really
 been anything more in this later work than the virtuosity which had struck
 people so forcibly in his earlier exhibitions.
 
@@ -9975,10 +9975,10 @@ bring into harmony, he concluded, "And it's so loyal!"
 Except at the moment when he had called it "bigger than the 'Night
 Watch,'" a blasphemy which had called forth an instant protest from Mme.
 Verdurin, who regarded the 'Night Watch' as the supreme masterpiece of the
-universe (conjointly with the 'Ninth' and the 'Samothrace'), and at the
+universe ( conjointly with the 'Ninth' and the 'Samothrace'  ), and at the
 word "excrement," which had made Forcheville throw a sweeping glance round
 the table to see whether it was 'all right,' before he allowed his lips to
-curve in a prudish and conciliatory smile, all the party (save Swann) had
+curve in a prudish and conciliatory smile, all the party ( save Swann  ) had
 kept their fascinated and adoring eyes fixed upon the painter.
 
 "I do so love him when he goes up in the air like that!" cried Mme.
@@ -10027,16 +10027,16 @@ dinner on Friday."
 
 "You will think me dreadfully provincial, sir," said Mme. Cottard to
 Swann, "but, do you know, I haven't been yet to this famous Francillon
-that everybody's talking about. The Doctor has been (I remember now, he
+that everybody's talking about. The Doctor has been ( I remember now, he
 told me what a very great pleasure it had been to him to spend the evening
-with you there) and I must confess, I don't see much sense in spending
+with you there ) and I must confess, I don't see much sense in spending
 money on seats for him to take me, when he's seen the play already. Of
 course an evening at the Theatre-Francais is never wasted, really; the
-acting's so good there always; but we have some very nice friends," (Mme.
+acting's so good there always; but we have some very nice friends," ( Mme.
 Cottard would hardly ever utter a proper name, but restricted herself to
 "some friends of ours" or "one of my friends," as being more
 'distinguished,' speaking in an affected tone and with all the importance
-of a person who need give names only when she chooses) "who often have a
+of a person who need give names only when she chooses  ) "who often have a
 box, and are kind enough to take us to all the new pieces that are worth
 going to, and so I'm certain to see this Francillon sooner or later, and
 then I shall know what to think. But I do feel such a fool about it, I
@@ -10132,8 +10132,8 @@ than a wax cast, a mask in plaster, the sculptor's design for a monument,
 a bust to be exhibited in the Palace of Industry, where the public would
 most certainly gather in front of it and marvel to see how the sculptor,
 in expressing the unchallengeable dignity of the Verdurins, as opposed to
-that of the La Tremoilles or Laumes, whose equals (if not, indeed, their
-betters) they were, and the equals and betters of all other 'bores' upon
+that of the La Tremoilles or Laumes, whose equals ( if not, indeed, their
+betters  ) they were, and the equals and betters of all other 'bores' upon
 the face of the earth, had managed to invest with a majesty that was
 almost Papal the whiteness and rigidity of his stone. But the marble at
 last grew animated and let it be understood that it didn't do to be at all
@@ -10159,15 +10159,15 @@ course, take such an absurd suggestion seriously. M. Verdurin, who was
 still casting furtive and intermittent glances at his wife, could see with
 regret, and could understand only too well that she was now inflamed with
 the passion of a Grand Inquisitor who cannot succeed in stamping out a
-heresy; and so, in the hope of bringing Swann round to a retractation (for
+heresy; and so, in the hope of bringing Swann round to a retractation ( for
 the courage of one's opinions is always a form of calculating cowardice in
-the eyes of the 'other side'), he broke in:
+the eyes of the 'other side' ), he broke in:
 
 "Tell us frankly, now, what you think of them yourself. We shan't repeat
 it to them, you may be sure."
 
 To which Swann answered: "Why, I'm not in the least afraid of the Duchess
-(if it is of the La Tremoilles that you're speaking). I can assure you
+( if it is of the La Tremoilles that you're speaking ). I can assure you
 that everyone likes going to see her. I don't go so far as to say that
 she's at all 'deep'--" he pronounced the word as if it meant something
 ridiculous, for his speech kept the traces of certain mental habits which
@@ -10287,9 +10287,9 @@ begun the movement of head and shoulders of a man who was 'shaking with
 laughter' than he would begin also to cough, as though, in laughing too
 violently, he had swallowed a mouthful of smoke from his pipe. And by
 keeping the pipe firmly in his mouth he could prolong indefinitely the
-dumb-show of suffocation and hilarity. So he and Mme. Verdurin (who, at
+dumb-show of suffocation and hilarity. So he and Mme. Verdurin ( who, at
 the other side of the room, where the painter was telling her a story, was
-shutting her eyes preparatory to flinging her face into her hands)
+shutting her eyes preparatory to flinging her face into her hands  )
 resembled two masks in a theatre, each representing Comedy, but in a
 different way.
 
@@ -10399,9 +10399,9 @@ purpose, to shew that they were not afraid of a title, she had made up her
 mind to imitate their arrogance, but had not quite grasped what
 grammatical form it ought to take. Moreover, the natural corruptness of
 her speech overcoming her implacable republicanism, she still said
-instinctively "the de La Tremoilles," or, rather (by an abbreviation
+instinctively "the de La Tremoilles," or, rather ( by an abbreviation
 sanctified by the usage of music-hall singers and the writers of the
-'captions' beneath caricatures, who elide the 'de'), "the d'La
+'captions' beneath caricatures, who elide the 'de' ), "the d'La
 Tremoilles," but she corrected herself at once to "Madame La
 Tremoille.--The Duchess, as Swann calls her," she added ironically, with
 a smile which proved that she was merely quoting, and would not, herself,
@@ -10524,18 +10524,18 @@ when he had given her five thousand francs, if he refrained from offering
 her a diamond necklace for which she longed, he would be allowing her
 admiration for his generosity to decline, that gratitude which had made
 him so happy, and would even be running the risk of her imagining that his
-love for her (as she saw its visible manifestations grow fewer) had itself
+love for her ( as she saw its visible manifestations grow fewer  ) had itself
 diminished. And then, suddenly, he asked himself whether that was not
-precisely what was implied by 'keeping' a woman (as if, in fact, that idea
+precisely what was implied by 'keeping' a woman ( as if, in fact, that idea
 of 'keeping' could be derived from elements not at all mysterious nor
 perverse, but belonging to the intimate routine of his daily life, such as
 that thousand-franc note, a familiar and domestic object, torn in places
 and mended with gummed paper, which his valet, after paying the household
 accounts and the rent, had locked up hi a drawer in the old writing-desk
-whence he had extracted it to send it, with four others, to Odette) and
+whence he had extracted it to send it, with four others, to Odette ) and
 whether it was not possible to apply to Odette, since he had known her
-(for he never imagined for a moment that she could ever have taken a penny
-from anyone else, before), that title, which he had believed so wholly
+( for he never imagined for a moment that she could ever have taken a penny
+from anyone else, before ), that title, which he had believed so wholly
 inapplicable to her, of 'kept' woman. He could not explore the idea
 further, for a sudden access of that mental lethargy which was, with him,
 congenital, intermittent and providential, happened, at that moment, to
@@ -10565,7 +10565,7 @@ senses were so thoroughly accustomed to the latter that he could not enter
 the former without a feeling of acute discomfort. He had the same
 regard--to a degree of identity which they would never have suspected--for
 the little families with small incomes who asked him to dances in their
-flats ("straight upstairs to the fifth floor, and the door on the left")
+flats ( "straight upstairs to the fifth floor, and the door on the left" )
 as for the Princesse de Parme, who gave the most splendid parties in
 Paris; but he had not the feeling of being actually 'at the ball' when he
 found himself herded with the fathers of families in the bedroom of the
@@ -10606,9 +10606,9 @@ After dinner, if he had an early appointment in the Bois or at
 Saint-Cloud, he would rise from table and leave the house so
 abruptly--especially if it threatened to rain, and so to scatter the
 'faithful' before their normal time--that on one occasion the Princesse
-des Laumes (at whose house dinner had been so late that Swann had left
+des Laumes ( at whose house dinner had been so late that Swann had left
 before the coffee came in, to join the Verdurins on the Island in the
-Bois) observed:
+Bois ) observed:
 
 "Really, if Swann were thirty years older, and had diabetes, there might
 be some excuse for his running away like that. He seems to look upon us
@@ -10738,7 +10738,7 @@ tricked, now it was he that saw them, confident and persistent in their
 error, tricked and trapped by none other than himself, whom they believed
 to be a mile away, but who was there, in person, there with a plan, there
 with the knowledge that he was going, in another minute, to tap upon the
-shutter. And, perhaps, what he felt (almost an agreeable feeling) at that
+shutter. And, perhaps, what he felt ( almost an agreeable feeling  ) at that
 moment was something more than relief at the solution of a doubt, at the
 soothing of a pain; was an intellectual pleasure. If, since he had fallen
 in love, things had recovered a little of the delicate attraction that
@@ -10747,9 +10747,9 @@ by a thought, a memory of Odette--now it was another of the faculties,
 prominent in the studious days of his youth, that Odette had quickened
 with new life, the passion for truth, but for a truth which, too, was
 interposed between himself and his mistress, receiving its light from her
-alone, a private and personal truth the sole object of which (an
+alone, a private and personal truth the sole object of which ( an
 infinitely precious object, and one almost impersonal in its absolute
-beauty) was Odette--Odette in her activities, her environment, her
+beauty ) was Odette--Odette in her activities, her environment, her
 projects, and her past. At every other period in his life, the little
 everyday words and actions of another person had always seemed wholly
 valueless to Swann; if gossip about such things were repeated to him, he
@@ -10846,15 +10846,15 @@ presented him with the complement, with the converse of that new smile
 with which she had greeted him that very evening,--with which, now,
 perversely, she was mocking Swann while she tendered her love to another
 --of that lowering of her head, but lowered now to fall on other lips, and
-(but bestowed upon a stranger) of all the marks of affection that she had
+( but bestowed upon a stranger ) of all the marks of affection that she had
 shewn to him. And all these voluptuous memories which he bore away from
 her house were, as one might say, but so many sketches, rough plans, like
 the schemes of decoration which a designer submits to one in outline,
 enabling Swann to form an idea of the various attitudes, aflame or faint
 with passion, which she was capable of adopting for others. With the
 result that he came to regret every pleasure that he tasted in her
-company, every new caress that he invented (and had been so imprudent as
-to point out to her how delightful it was), every fresh charm that he
+company, every new caress that he invented ( and had been so imprudent as
+to point out to her how delightful it was  ), every fresh charm that he
 found in her, for he knew that, a moment later, they would go to enrich
 the collection of instruments in his secret torture-chamber.
 
@@ -10942,8 +10942,8 @@ He did not, however, draw her attention to this inconsistency, for he
 thought that, if left to herself, Odette might perhaps produce some
 falsehood which would give him a faint indication of the truth; she spoke;
 he did not interrupt her, he gathered up, with an eager and sorrowful
-piety, the words that fell from her lips, feeling (and rightly feeling,
-since she was hiding the truth behind them as she spoke) that, like the
+piety, the words that fell from her lips, feeling ( and rightly feeling,
+since she was hiding the truth behind them as she spoke  ) that, like the
 veil of a sanctuary, they kept a vague imprint, traced a faint outline of
 that infinitely precious and, alas, undiscoverable truth;--what she had
 been doing, that afternoon, at three o'clock, when he had called,--a truth
@@ -10983,8 +10983,8 @@ which a damp climate always gave to his eczema; to anticipate in his
 budget the expenditure of a considerable sum on procuring, with regard to
 the daily occupations of Odette, information the lack of which would make
 him unhappy, just as he reserved a margin for the gratification of other
-tastes from which he knew that pleasure was to be expected (at least,
-before he had fallen in love) such as his taste for collecting things, or
+tastes from which he knew that pleasure was to be expected ( at least,
+before he had fallen in love ) such as his taste for collecting things, or
 for good cooking.
 
 When he proposed to take leave of Odette, and to return home, she begged
@@ -10992,7 +10992,7 @@ him to stay a little longer, and even detained him forcibly, seizing him
 by the arm as he was opening the door to go. But he gave no thought to
 that, for, among the crowd of gestures and speeches and other little
 incidents which go to make up a conversation, it is inevitable that we
-should pass (without noticing anything that arouses our interest) by those
+should pass ( without noticing anything that arouses our interest  ) by those
 that hide a truth for which our suspicions are blindly searching, whereas
 we stop to examine others beneath which nothing lies concealed. She kept
 on saying: "What a dreadful pity; you never by any chance come in the
@@ -11300,9 +11300,9 @@ life, and their 'little nucleus' the most degraded class of society. "It
 really is," he repeated, "beneath the lowest rung of the social ladder,
 the nethermost circle of Dante. Beyond a doubt, the august words of the
 Florentine refer to the Verdurins! When one comes to think of it, surely
-people 'in society' (and, though one may find fault with them now and
+people 'in society' ( and, though one may find fault with them now and
 then, still, after all they are a very different matter from that gang of
-blackmailers) shew a profound sagacity in refusing to know them, or even
+blackmailers ) shew a profound sagacity in refusing to know them, or even
 to dirty the tips of their fingers with them. What a sound intuition there
 is in that 'Noli me tangere' motto of the Faubourg Saint-Germain."
 
@@ -11313,7 +11313,7 @@ more exhilarated by the false intonation, the artificial sonority of his
 own voice, he continued to perorate aloud in the silence of the night:
 "People 'in society' have their failings, as no one knows better than I;
 but, after all, they are people to whom some things, at least, are
-impossible. So-and-so" (a fashionable woman whom he had known) "was far
+impossible. So-and-so" ( a fashionable woman whom he had known ) "was far
 from being perfect, but, after all, one did find in her a fundamental
 delicacy, a loyalty in her conduct which made her, whatever happened,
 incapable of a felony, which fixes a vast gulf between her and an old hag
@@ -11329,7 +11329,7 @@ Verdurins had actually possessed them, if they had not also favoured and
 protected his love, to excite Swann to that state of intoxication in which
 he waxed tender over their magnanimity, an intoxication which, even when
 disseminated through the medium of other persons, could have come to him
-from Odette alone;--so the immorality (had it really existed) which he now
+from Odette alone;--so the immorality ( had it really existed  ) which he now
 found in the Verdurins would have been powerless, if they had not invited
 Odette with Forcheville and without him, to unstop the vials of his wrath
 and to make him scarify their 'infamy.' Doubtless Swann's voice shewed a
@@ -11405,7 +11405,7 @@ everything; I must think of you also. A day may come when, seeing me
 irrevocably sundered from you, you will be entitled to reproach me with
 not having warned you at the decisive hour in which I felt that I was
 going to pass judgment on you, one of those stern judgments which love
-cannot long resist. You see, your Nuit de Cleopatre (what a title!) has
+cannot long resist. You see, your Nuit de Cleopatre ( what a title!  ) has
 no bearing on the point. What I must know is whether you are indeed one of
 those creatures in the lowest grade of mentality and even of charm, one of
 those contemptible creatures who are incapable of foregoing a pleasure.
@@ -11421,8 +11421,8 @@ attractive to my eyes when I realise that you are not a person, that you
 are beneath everything in the world and have not the intelligence to raise
 yourself one inch higher? Obviously, I should have preferred to ask you,
 as though it had been a matter of little or no importance, to give up your
-Nuit de Cleopatre (since you compel me to sully my lips with so abject a
-name), in the hope that you would go to it none the less. But, since I had
+Nuit de Cleopatre ( since you compel me to sully my lips with so abject a
+name ), in the hope that you would go to it none the less. But, since I had
 resolved to weigh you in the balance, to make so grave an issue depend
 upon your answer, I considered it more honourable to give you due
 warning."
@@ -11546,7 +11546,7 @@ Forestelle, who had a country house in that neighbourhood. This friend, to
 whom Swann suggested the plan without disclosing its ulterior purpose, was
 beside himself with joy; he did not conceal his astonishment at Swann's
 consenting at last, after fifteen years, to come down and visit his
-property, and since he did not (he told him) wish to stay there, promised
+property, and since he did not ( he told him ) wish to stay there, promised
 to spend some days, at least, in taking him for walks and excursions in
 the district. Swann imagined himself down there already with M. de
 Forestelle. Even before he saw Odette, even if he did not succeed in
@@ -11612,8 +11612,8 @@ to Odette, did more to attach him to her, than all her infidelities. For
 in this way Swann was kept in that state of painful agitation which had
 once before been effective in making his interest blossom into love, on
 the night when he had failed to find Odette at the Verdurins' and had
-hunted for her all evening. And he did not have (as I had, afterwards, at
-Combray in my childhood) happy days in which to forget the sufferings that
+hunted for her all evening. And he did not have ( as I had, afterwards, at
+Combray in my childhood  ) happy days in which to forget the sufferings that
 would return with the night. For his days, Swann must pass them without
 Odette; and as he told himself, now and then, to allow so pretty a woman
 to go out by herself in Paris was just as rash as to leave a case filled
@@ -11636,16 +11636,16 @@ own. On some days, instead of staying at home, he would go for luncheon to
 a restaurant not far off, to which he had been attracted, some time
 before, by the excellence of its cookery, but to which he now went only
 for one of those reasons, at once mystical and absurd, which people call
-'romantic'; because this restaurant (which, by the way, still exists) bore
+'romantic'; because this restaurant ( which, by the way, still exists  ) bore
 the same name as the street in which Odette lived: the Laperouse.
 Sometimes, when she had been away on a short visit somewhere, several days
 would elapse before she thought of letting him know that she had returned
-to Paris. And then she would say quite simply, without taking (as she
-would once have taken) the precaution of covering herself, at all costs,
+to Paris. And then she would say quite simply, without taking ( as she
+would once have taken  ) the precaution of covering herself, at all costs,
 with a little fragment borrowed from the truth, that she had just, at that
 very moment, arrived by the morning train. What she said was a falsehood;
-at least for Odette it was a falsehood, inconsistent, lacking (what it
-would have had, if true) the support of her memory of her actual arrival
+at least for Odette it was a falsehood, inconsistent, lacking ( what it
+would have had, if true  ) the support of her memory of her actual arrival
 at the station; she was even prevented from forming a mental picture of
 what she was saying, while she said it, by the contradictory picture, in
 her mind, of whatever quite different thing she had indeed been doing at
@@ -11665,7 +11665,7 @@ lovers; once this supposition had taken shape, he would spend weeks in
 tormenting himself; on one occasion he even approached a firm of 'inquiry
 agents' to find out the address and the occupation of the unknown rival
 who would give him no peace until he could be proved to have gone abroad,
-and who (he ultimately learned) was an uncle of Odette, and had been dead
+and who ( he ultimately learned  ) was an uncle of Odette, and had been dead
 for twenty years.
 
 Although she would not allow him, as a rule, to meet her at public
@@ -11679,18 +11679,18 @@ drove home in utter loneliness, and went to bed, as anxiously as I myself
 was to go to bed, some years later, on the evenings when he came to dine
 with us at Combray--seemed illimitable to him since he had not been able
 to see their end. And, once or twice, he derived from such evenings that
-kind of happiness which one would be inclined (did it not originate in so
-violent a reaction from an anxiety abruptly terminated) to call peaceful,
+kind of happiness which one would be inclined ( did it not originate in so
+violent a reaction from an anxiety abruptly terminated ) to call peaceful,
 since it consists in a pacifying of the mind: he had looked in for a
 moment at a revel in the painter's studio, and was getting ready to go
 home; he was leaving behind him Odette, transformed into a brilliant
 stranger, surrounded by men to whom her glances and her gaiety, which were
 not for him, seemed to hint at some voluptuous pleasure to be enjoyed
-there or elsewhere (possibly at the Bal des Incoherents, to which he
-trembled to think that she might be going on afterwards) which made Swann
+there or elsewhere ( possibly at the Bal des Incoherents, to which he
+trembled to think that she might be going on afterwards  ) which made Swann
 more jealous than the thought of their actual physical union, since it was
 more difficult to imagine; he was opening the door to go, when he heard
-himself called back in these words (which, by cutting off from the party
+himself called back in these words ( which, by cutting off from the party
 that possible ending which had so appalled him, made the party itself seem
 innocent in retrospect, made Odette's return home a thing no longer
 inconceivable and terrible, but tender and familiar, a thing that kept
@@ -11698,7 +11698,7 @@ close to his side, like a part of his own daily life, in his carriage; a
 thing that stripped Odette herself of the excess of brilliance and gaiety
 in her appearance, shewed that it was only a disguise which she had
 assumed for a moment, for his sake and not in view of any mysterious
-pleasures, a disguise of which she had already wearied)--in these words,
+pleasures, a disguise of which she had already wearied )--in these words,
 which Odette flung out after him as he was crossing the threshold: "Can't
 you wait a minute for me? I'm just going; we'll drive back together and
 you can drop me." It was true that on one occasion Forcheville had asked
@@ -11731,10 +11731,10 @@ terrible and disturbing ideas which he had formed of Odette melted away
 and vanished in the charming creature who stood there before his eyes. He
 had the sudden suspicion that this hour spent in Odette's house, in the
 lamp-light, was, perhaps, after all, not an artificial hour, invented for
-his special use (with the object of concealing that frightening and
+his special use ( with the object of concealing that frightening and
 delicious thing which was incessantly in his thoughts without his ever
 being able to form a satisfactory impression of it, an hour of Odette's
-real life, of her life when he was not there, looking on) with theatrical
+real life, of her life when he was not there, looking on ) with theatrical
 properties and pasteboard fruits, but was perhaps a genuine hour of
 Odette's life; that, if he himself had not been there, she would have
 pulled forward the same armchair for Forcheville, would have poured out
@@ -11844,8 +11844,8 @@ too certain that with the money which she had, or could easily procure,
 she would be able, all the same, to take a house at Bayreuth, since she
 wished to do so, she who was incapable of distinguishing between Bach and
 Clapisson. Let her take it, then; she would have to live in it more
-frugally, that was all. No means (as there would have been if he had
-replied by sending her several thousand-franc notes) of organising, each
+frugally, that was all. No means ( as there would have been if he had
+replied by sending her several thousand-franc notes  ) of organising, each
 evening, in her hired castle, those exquisite little suppers, after which
 she might perhaps be seized by the whim (which, it was possible, had
 never yet seized her) of falling into the arms of Forcheville. At any
