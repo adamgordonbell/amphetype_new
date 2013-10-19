@@ -11,25 +11,8 @@ from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
 
-abbreviations = set(map(unicode, [
-'jr', 'mr', 'mrs', 'ms', 'dr', 'prof', 'sr', "sen","rep","sens", "reps",'gov', "attys", "atty", 'supt',
-'det', 'rev', 'col','gen', 'lt', 'cmdr', 'adm', 'capt', 'sgt', 'cpl', 'maj',
-'dept', 'univ', 'assn', 'bros', 'inc', 'ltd', 'co', 'corp',
-'arc', 'al', 'ave', "blvd", "bld",'cl', 'ct', 'cres', 'dr', "expy", "exp", 'dist', 'mt', 'ft',
-"fwy", "fy",  "hway", "hwy",'la', "pde", "pd", 'pl', 'plz', 'rd', 'st', 'tce',
-'Ala' , 'Ariz', 'Ark', 'Cal', 'Calif', 'Col', 'Colo', 'Conn',
-'Del', 'Fed' , 'Fla', 'Ga', 'Ida', 'Id', 'Ill', 'Ind', 'Ia',
-'Kan', 'Kans', 'Ken', 'Ky' , 'La', 'Me', 'Md', 'Is', 'Mass',
-'Mich', 'Minn', 'Miss', 'Mo', 'Mont', 'Neb', 'Nebr' , 'Nev',
-'Mex', 'Okla', 'Ok', 'Ore', 'Penna', 'Penn', 'Pa'  , 'Dak',
-'Tenn', 'Tex', 'Ut', 'Vt', 'Va', 'Wash', 'Wis', 'Wisc', "Wy",
-'Wyo', 'USAFA', 'Alta' , 'Man', 'Ont', u'Qué', 'Sask', 'Yuk',
-'jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','sept',
-'vs', 'etc', 'no', 'esp', 'eg', 'ie', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-'avg', 'viz', 'm', 'mme']))
-
 class SentenceSplitter(object):
-    sen = re.compile(r"""(?:(?: |^)[^\w. ]*(?P<pre>\w+)[^ .]*\.+|[?!]+)['"]?(?= +(?:[^ a-z]|$))|$""")
+    sen = re.compile(r"""[\.,;?!]""")
 
     def __init__(self, text):
         self.string = text
@@ -39,15 +22,8 @@ class SentenceSplitter(object):
         return ifilter(None, imap(lambda x: self.pars(p, x), self.sen.finditer(self.string)))
 
     def pars(self, p, mat):
-        if mat.group('pre') and self.isAbbreviation(mat.group('pre')):
-            return None
         p.append(mat.end())
         return self.string[p[-2]:p[-1]].strip()
-
-    def isAbbreviation(self, s):
-        ls = s.lower()
-        return ls in abbreviations or s in abbreviations
-
 
 class LessonMiner(QObject):
     def __init__(self, fname):
