@@ -10,6 +10,7 @@ import time
 import re
 
 import globals
+import winsound
 from Data import Statistic, DB
 from Config import Settings
 
@@ -60,7 +61,7 @@ class Typer(QTextEdit):
                                  Qt.gray, Qt.black, Qt.lightGray)}
         self.setPalette(self.palettes['inactive'])
 
-    def setTarget(self,  text):
+    def setTarget(self,  text, guid):
         self.editflag = True
         self.target = text
         self.when = [0] * (len(self.target)+1)
@@ -73,6 +74,11 @@ class Typer(QTextEdit):
         self.setText(self.getWaitText())
         self.selectAll()
         self.editflag = False
+        self.is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (guid, ))[0]
+        if self.is_lesson:
+            self.mins = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
+        else:
+            self.mins = (Settings.get("min_wpm"), Settings.get("min_acc"))
 
     def getWaitText(self):
         if Settings.get('req_space'):
@@ -127,8 +133,12 @@ class Typer(QTextEdit):
 
         if v == lcd:
             self.setPalette(self.palettes['right'])
-        else:
-            self.setPalette(self.palettes['wrong'])
+        else:     
+             # Fail on 100%
+            if self.mins[1] == 100.0:
+                self.emit(SIGNAL("repeat"))   
+            else:
+                self.setPalette(self.palettes['wrong'])
 
     def getMistakes(self):
         inv = collections.defaultdict(lambda: 0)
@@ -160,6 +170,7 @@ class Quizzer(QWidget):
         self.connect(self.typer,  SIGNAL("cancel"), SIGNAL("wantText"))
         self.connect(Settings, SIGNAL("change_typer_font"), self.readjust)
         self.connect(Settings, SIGNAL("change_show_last"), self.result.setVisible)
+        self.connect(self.typer, SIGNAL("repeat"), self.repeatText)
 
         self.text = ('','', 0, None)
 
@@ -180,8 +191,14 @@ class Quizzer(QWidget):
     def setText(self, text):
         self.text = text
         self.label.setText(self.text[2].replace(u"\n", u"↵\n"))
-        self.typer.setTarget(self.text[2])
-        self.typer.setFocus()
+        self.typer.setTarget(self.text[2], self.text[1])
+        self.typer.setFocus()      
+
+    def repeatText(self):
+        Freq = 250 
+        Dur = 200
+        winsound.Beep(Freq,Dur)
+        self.setText(self.text)
 
     def done(self):
         now = time.time()
@@ -254,8 +271,7 @@ class Quizzer(QWidget):
         # Fail cut-offs, redo
         if 12.0/spc < mins[0] or accuracy < mins[1]/100.0:
             self.setText(self.text)
-        elif is_lesson and globals.pendingLessons:
-            print 'next lesson'
+        elif is_lesson and globals.pendingLessons:            
             self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
         # create a lesson
         elif not is_lesson and Settings.get('auto_review'):

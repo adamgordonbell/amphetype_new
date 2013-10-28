@@ -17,10 +17,10 @@ except:
 class AmphSettings(QSettings):
 
     defaults = {
-            "typer_font": str(QFont("Arial", 14).toString()),
+            "typer_font": str(QFont("Arial", 22).toString()),
             "history": 30.0,
-            "min_chars": 220,
-            "max_chars": 600,
+            "min_chars": 100,
+            "max_chars": 200,
             "lesson_stats": 0, # show text/lesson in perf -- not used anymore
             "perf_group_by": 0,
             "perf_items": 100,
@@ -40,12 +40,12 @@ class AmphSettings(QSettings):
             "def_group_by": 10,
 
             "use_lesson_stats": False,
-            "auto_review": False,
+            "auto_review": True,
 
             "min_wpm": 0.0,
-            "min_acc": 0.0,
+            "min_acc": 97.0,
             "min_lesson_wpm": 0.0,
-            "min_lesson_acc": 97.0,
+            "min_lesson_acc": 100.0,
 
             "quiz_right_fg": "#000000",
             "quiz_right_bg": "#ffffff",
@@ -62,7 +62,7 @@ class AmphSettings(QSettings):
             "ana_count": 1,
 
             "gen_copies": 3,
-            "gen_take": 2,
+            "gen_take": 1,
             "gen_mix": 'c',
             #"gen_stats": False,
             "str_clear": 's',
