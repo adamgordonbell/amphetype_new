@@ -10,7 +10,6 @@ import time
 import re
 
 import globals
-import winsound
 from Data import Statistic, DB
 from Config import Settings
 
@@ -26,6 +25,17 @@ if platform.system() == "Windows":
 else:
     timer = time.time
 
+
+try:
+    import winsound
+except ImportError:
+    import os
+    def playsound(frequency,duration):
+        #apt-get install beep
+        os.system('beep -f %s -l %s' % (frequency,duration))
+else:
+    def playsound(frequency,duration):
+        winsound.Beep(frequency,duration)
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -197,7 +207,7 @@ class Quizzer(QWidget):
     def repeatText(self):
         Freq = 250 
         Dur = 200
-        winsound.Beep(Freq,Dur)
+        playsound(Freq,Dur)
         self.setText(self.text)
 
     def done(self):
