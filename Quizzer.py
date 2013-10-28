@@ -9,6 +9,7 @@ import collections
 import time
 import re
 
+import globals
 from Data import Statistic, DB
 from Config import Settings
 
@@ -37,7 +38,7 @@ class Typer(QTextEdit):
         self.connect(Settings, SIGNAL("change_quiz_wrong_bg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
-        self.target = None
+        self.target = None    
 
     def sizeHint(self):
         return QSize(600, 10)
@@ -169,7 +170,7 @@ class Quizzer(QWidget):
         layout.addWidget(self.label, 1, Qt.AlignBottom)
         layout.addWidget(self.typer, 1)
         self.setLayout(layout)
-        self.readjust()
+        self.readjust()    
 
     def readjust(self):
         f = Settings.getFont("typer_font")
@@ -250,8 +251,13 @@ class Quizzer(QWidget):
         else:
             mins = (Settings.get("min_wpm"), Settings.get("min_acc"))
 
+        # Fail cut-offs, redo
         if 12.0/spc < mins[0] or accuracy < mins[1]/100.0:
             self.setText(self.text)
+        elif is_lesson and globals.pendingLessons:
+            print 'next lesson'
+            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        # create a lesson
         elif not is_lesson and Settings.get('auto_review'):
             ws = filter(lambda x: x[5] == 2, vals)
             if len(ws) == 0:
@@ -262,8 +268,11 @@ class Quizzer(QWidget):
             while ws[i][4] != 0:
                 i += 1
             i += (len(ws) - i) // 4
-
-            self.emit(SIGNAL("wantReview"), map(lambda x:x[6], ws[0:i]))
+            print ws
+            t = map(lambda x:x[6], ws[0:i])
+            # I would like to emit many reviews here
+            self.emit(SIGNAL("wantReview"), t)
+        # Success, new lesson
         else:
             self.emit(SIGNAL("wantText"))
 

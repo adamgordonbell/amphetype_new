@@ -6,6 +6,7 @@ import random
 import time
 import codecs
 from Data import DB
+import globals
 
 try:
     import editdist
@@ -132,10 +133,12 @@ class LessonGenerator(QWidget):
         self.connect(Settings, SIGNAL("change_gen_mix"), self.generatePreview)
         self.connect(self.strings, SIGNAL("updated"), self.generatePreview)
 
+    global pendingLessons
 
     def wantReview(self, words):
-        sentences = self.generateLesson(words)
-        self.emit(SIGNAL("newReview"), u' '.join(sentences))        
+        globals.pendingLessons = self.generateLesson(words)
+        print globals.pendingLessons
+        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
 
     def generatePreview(self):
         words = self.strings.getList()

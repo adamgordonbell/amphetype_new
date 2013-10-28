@@ -17,6 +17,7 @@ v = opts.parse_args()[0]
 if v.database is not None:
     Settings.set('db_name', v.database)
 
+import globals
 from Data import DB
 from Quizzer import Quizzer
 from StatWidgets import StringStats
@@ -37,16 +38,19 @@ class TyperWindow(QMainWindow):
         super(TyperWindow, self).__init__(*args)
 
         self.setWindowTitle("Amphetype")
+        globals.init()
+        tabs = QTabWidget()     
 
-        tabs = QTabWidget()
+        quiz = Quizzer()        
 
-        quiz = Quizzer()
         tabs.addTab(quiz, "Typer")
 
         tm = TextManager()
         self.connect(quiz, SIGNAL("wantText"), tm.nextText)
         self.connect(tm, SIGNAL("setText"), quiz.setText)
         self.connect(tm, SIGNAL("gotoText"), lambda: tabs.setCurrentIndex(0))
+        self.connect(quiz, SIGNAL("newReview"), tm.newReview)
+
         tabs.addTab(tm, "Sources")
 
         ph = PerformanceHistory()
@@ -60,7 +64,7 @@ class TyperWindow(QMainWindow):
         self.connect(st, SIGNAL("lessonStrings"), lambda x: tabs.setCurrentIndex(4))
         tabs.addTab(st, "Analysis")
 
-        lg = LessonGenerator()
+        lg = LessonGenerator()        
         self.connect(st, SIGNAL("lessonStrings"), lg.addStrings)
         self.connect(lg, SIGNAL("newLessons"), lambda: tabs.setCurrentIndex(1))
         self.connect(lg, SIGNAL("newLessons"), tm.addTexts)
