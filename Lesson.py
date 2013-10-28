@@ -134,8 +134,11 @@ class LessonGenerator(QWidget):
         self.connect(self.strings, SIGNAL("updated"), self.generatePreview)    
 
     def wantReview(self, words):
-        globals.pendingLessons = self.generateLesson(words)        
-        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        globals.pendingLessons = self.generateLesson(words)
+	if globals.pendingLessons:        
+	        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+	else:
+	        self.emit(SIGNAL("newReview"), "")        
 
     def generatePreview(self):
         words = self.strings.getList()
