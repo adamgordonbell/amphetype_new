@@ -134,17 +134,18 @@ class LessonGenerator(QWidget):
         self.connect(self.strings, SIGNAL("updated"), self.generatePreview)    
 
     def wantReview(self, words):
-        globals.pendingLessons = self.generateLesson(words)
-	if globals.pendingLessons:        
+        globals.pendingLessons = globals.pendingLessons + self.generateLesson(words)
+        if globals.pendingLessons:        
 	        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
-	else:
+        else:
 	        self.emit(SIGNAL("newReview"), "")        
 
     def generatePreview(self):
         words = self.strings.getList()
         sentences = self.generateLesson(words)
         self.sample.clear()
-        for x in Text.to_lessons(sentences):
+        #for x in Text.to_lessons(sentences):
+        for x in sentences:
             self.sample.append(x + "\n\n")
 
     def generateLesson(self, words):
@@ -160,6 +161,7 @@ class LessonGenerator(QWidget):
             if mix == 'm': # mingle
                 random.shuffle(sen)
             sentences.append(u' '.join(sen))
+        print sentences
         return sentences
 
     def acceptLessons(self, name=None):
