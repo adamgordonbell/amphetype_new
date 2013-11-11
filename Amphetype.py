@@ -50,6 +50,7 @@ class TyperWindow(QMainWindow):
         self.connect(tm, SIGNAL("setText"), quiz.setText)
         self.connect(tm, SIGNAL("gotoText"), lambda: tabs.setCurrentIndex(0))
         self.connect(quiz, SIGNAL("newReview"), tm.newReview)
+        self.connect(quiz, SIGNAL("lastText"), tm.lastText)
 
         tabs.addTab(tm, "Sources")
 

@@ -175,7 +175,7 @@ class Quizzer(QWidget):
         self.result.setVisible(Settings.get("show_last"))
         #self.label.setFrameStyle(QFrame.Raised | QFrame.StyledPanel)
         #self.typer.setBuddy(self.label)
-        #self.info = QLabel()
+        self.info = AmphButton("Back one", self.lastText)
         self.connect(self.typer,  SIGNAL("done"), self.done)
         self.connect(self.typer,  SIGNAL("cancel"), SIGNAL("wantText"))
         self.connect(Settings, SIGNAL("change_typer_font"), self.readjust)
@@ -185,8 +185,8 @@ class Quizzer(QWidget):
         self.text = ('','', 0, None)
 
         layout = QVBoxLayout()
-        #layout.addWidget(self.info)
-        #layout.addSpacing(20)
+        layout.addWidget(self.info)
+        layout.addSpacing(20)
         layout.addWidget(self.result, 0, Qt.AlignRight)
         layout.addWidget(self.label, 1, Qt.AlignBottom)
         layout.addWidget(self.typer, 1)
@@ -209,6 +209,9 @@ class Quizzer(QWidget):
         Dur = 200
         playsound(Freq,Dur)
         self.setText(self.text)
+
+    def lastText(self):
+        self.emit(SIGNAL("lastText"))
 
     def done(self):
         now = time.time()
@@ -294,7 +297,7 @@ class Quizzer(QWidget):
             while ws[i][4] != 0:
                 i += 1
             i += (len(ws) - i) // 4
-            print ws
+            #print ws
             t = map(lambda x:x[6], ws[0:i])
             # I would like to emit many reviews here
             self.emit(SIGNAL("wantReview"), t)

@@ -81,7 +81,8 @@ A typing program that not only measures your speed and progress, but also gives 
                         [ #AmphButton("Remove", self.removeSelected), "or",
                             AmphButton("Toggle disabled", self.disableSelected),
                             "on all selected texts that match <a href=\"http://en.wikipedia.org/wiki/Regular_expression\">regular expression</a>",
-                            SettingsEdit('text_regex')]
+                            SettingsEdit('text_regex')],
+                          [ AmphButton("Toggle All selected", self.disableAllSelected),"Disabled items won't be selected in order"]
                     ], 1),
                     [
                         ["Selection method for new lessons:",
@@ -175,11 +176,10 @@ A typing program that not only measures your speed and progress, but also gives 
             txt_id = h.hexdigest()
             dis = 1 if lesson == 2 else None
             try:
-                DB.execute("insert into text (id,text,source,disabled) values (?,?,?,?)",
-                           (txt_id, x, id, dis))
-                r.append(txt_id)
+                DB.execute("insert into text (id,text,source,disabled) values (?,?,?,?)",(txt_id, x, id, dis))
             except Exception, e:
                 pass # silently skip ...
+        r.append(txt_id)
         if update:
             self.update()
         if lesson:
@@ -216,12 +216,26 @@ A typing program that not only measures your speed and progress, but also gives 
         else:
             # Fetch in order
             lastid = (0,)
-            g = DB.fetchone("""select r.text_id
+            lastResultGuid = DB.fetchone("""select r.text_id
                 from result as r left join source as s on (r.source = s.rowid)
                 where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
-            if g is not None:
-                lastid = DB.fetchone("select rowid from text where id = ?", lastid, g)
+            if lastResultGuid is not None:
+                lastid = DB.fetchone("select rowid from text where id = ?", lastid, lastResultGuid)
             v = DB.fetchone("select id,source,text from text where rowid > ? and disabled is null order by rowid asc limit 1", None, lastid)
+
+        if v is None:
+            v = self.defaultText
+
+        self.emit(SIGNAL("setText"), v)
+
+    def lastText(self):
+        # Fetch in order
+        lastid = (0,)
+        lastResultGuid = DB.fetchone("""select r.text_id
+            from result as r left join source as s on (r.source = s.rowid)
+            where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
+        if lastResultGuid is not None:
+            v = DB.fetchone("select id,source,text from text where id = ?", None, lastResultGuid)
 
         if v is None:
             v = self.defaultText
@@ -266,6 +280,13 @@ A typing program that not only measures your speed and progress, but also gives 
         DB.executemany("""update text set disabled = ifelse(disabled,NULL,1)
                 where source = ? and regex_match(text) = 1""",
                        map(lambda x:(x, ), cats))
+        self.update()
+
+    def disableAllSelected(self):
+        cats, texts = self.getSelected()
+        DB.setRegex(Settings.get('text_regex'))
+        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1) where rowid = ?""", map(lambda x:(x, ), texts))
+        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1) where source = ?""", map(lambda x:(x, ), cats))
         self.update()
 
     def getSelected(self):
