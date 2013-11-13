@@ -6,7 +6,7 @@
     <ProjectGuid>{69b00132-cd34-4e18-88d7-e5f8bb717bf3}</ProjectGuid>
     <ProjectHome />
     <StartupFile>Amphetype.py</StartupFile>
-    <SearchPath />
+    <SearchPath>..\py-editdist</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
@@ -57,6 +57,9 @@
     <Folder Include="txt" />
     <Folder Include="txt\wordlists" />
     <Folder Include="Widgets" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

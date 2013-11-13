@@ -61,9 +61,9 @@ class StringListWidget(QTextEdit):
                 return
             if w == 'e': # encompassing
                 stream = map(lambda x: (sum([x.count(c) for c in control]), x), words)
-                #print "str:", list(stream)[0:10]
+                print "str:", list(stream)[0:10]
                 preres = list(islice(ifilter(lambda x: x[0]>0, stream), 4*n))
-                #print "pre:", preres
+                print "pre:", preres
                 preres.sort(key=lambda x: x[0], reverse=True)
                 words = map(lambda x: x[1], preres)
             else: # similar

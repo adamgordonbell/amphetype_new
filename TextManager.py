@@ -226,6 +226,13 @@ A typing program that not only measures your speed and progress, but also gives 
         if v is None:
             v = self.defaultText
 
+        if True:
+            text = v[2].title()
+            text = ' '.join(word + ',' for word in text.split())
+            text = '.'.join(word for word in text.split(',,'))
+            v = (v[0],v[1],text)
+
+                  
         self.emit(SIGNAL("setText"), v)
 
     def lastText(self):
