@@ -206,6 +206,7 @@ A typing program that not only measures your speed and progress, but also gives 
         text = text.replace('.',' period ');
         text = text.replace(',',' comma ');
         text = ' '.join(word + random.choice(chars) for word in text.split())
+        text = text.strip()
         return text
 
     def nextText(self):
