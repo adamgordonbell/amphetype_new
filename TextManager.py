@@ -5,11 +5,13 @@ from __future__ import with_statement, division
 import os.path as path
 import time
 import hashlib
+import random
 
 from Text import LessonMiner
 from Data import DB
 from QtUtil import *
 from Config import *
+
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -198,6 +200,14 @@ A typing program that not only measures your speed and progress, but also gives 
         self.emit(SIGNAL("refreshSources"))
         self.model.reset()
 
+    def AddSymbols(self, text):
+        chars = '                                 ,.,.,.,.,.,.:\'"?()-'
+        text = text.title()
+        text = text.replace('.',' period ');
+        text = text.replace(',',' comma ');
+        text = ' '.join(word + random.choice(chars) for word in text.split())
+        return text
+
     def nextText(self):
 
         type = Settings.get('select_method')
@@ -226,13 +236,14 @@ A typing program that not only measures your speed and progress, but also gives 
         if v is None:
             v = self.defaultText
 
-        if True:
-            text = v[2].title()
-            text = ' '.join(word + ',' for word in text.split())
-            text = '.'.join(word for word in text.split(',,'))
-            v = (v[0],v[1],text)
+        
 
-                  
+        if True:
+            text = self.AddSymbols(v[2])
+         
+        #replace double spaces     
+        text = text.replace('  ',' ')     
+        v = (v[0],v[1],text)          
         self.emit(SIGNAL("setText"), v)
 
     def lastText(self):
