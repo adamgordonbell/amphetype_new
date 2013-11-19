@@ -208,7 +208,7 @@ A typing program that not only measures your speed and progress, but also gives 
         chars = '.,!?                                    '
         stopChars = ',.?!-\'\n' #words containing these are left alone
         if not word in wordCache:
-            if not any((c in stopChars) for c in word):
+            if (not any((c in stopChars) for c in word)) and (len(word) > 1):
                 wordCache[word] = word[0].capitalize() + word[1:] + random.choice(chars)
             else:
                 wordCache[word] = word
