@@ -17,6 +17,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 
+wordCache = dict()
 
 class SourceModel(AmphModel):
     def signature(self):
@@ -200,12 +201,22 @@ A typing program that not only measures your speed and progress, but also gives 
         self.emit(SIGNAL("refreshSources"))
         self.model.reset()
 
+    # the cache makes each modified text determintistic, in that if you do the same text over and over, it will have the same random elements added.  
+    # this is useful for building up speed on selection of text
+    def modifiedWord(self, word):
+        global wordCache
+        chars = '.,!?                                    '
+        stopChars = ',.?!-\'\n' #words containing these are left alone
+        if not word in wordCache:
+            if not any((c in stopChars) for c in word):
+                wordCache[word] = word[0].capitalize() + word[1:] + random.choice(chars)
+            else:
+                wordCache[word] = word
+
+        return wordCache[word]
+
     def AddSymbols(self, text):
-        chars = '                                 ,.,.,.,.,.,.:\'"?()-'
-        text = text.title()
-        text = text.replace('.',' period ');
-        text = text.replace(',',' comma ');
-        text = ' '.join(word + random.choice(chars) for word in text.split())
+        text = ' '.join(self.modifiedWord(word) for word in text.split(' '))
         text = text.strip()
         return text
 
