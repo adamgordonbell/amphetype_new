@@ -5,7 +5,6 @@ from __future__ import with_statement, division
 import os.path as path
 import time
 import hashlib
-import random
 
 from Text import LessonMiner
 from Data import DB
@@ -16,8 +15,6 @@ from Config import *
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-
-wordCache = dict()
 
 class SourceModel(AmphModel):
     def signature(self):
@@ -201,24 +198,7 @@ A typing program that not only measures your speed and progress, but also gives 
         self.emit(SIGNAL("refreshSources"))
         self.model.reset()
 
-    # the cache makes each modified text determintistic, in that if you do the same text over and over, it will have the same random elements added.  
-    # this is useful for building up speed on selection of text
-    def modifiedWord(self, word):
-        global wordCache
-        chars = '.,!?                                    '
-        stopChars = ',.?!-\'\n' #words containing these are left alone
-        if not word in wordCache:
-            if (not any((c in stopChars) for c in word)) and (len(word) > 1):
-                wordCache[word] = word[0].capitalize() + word[1:] + random.choice(chars)
-            else:
-                wordCache[word] = word
-
-        return wordCache[word]
-
-    def AddSymbols(self, text):
-        text = ' '.join(self.modifiedWord(word) for word in text.split(' '))
-        text = text.strip()
-        return text
+   
 
     def nextText(self):
 
@@ -247,15 +227,6 @@ A typing program that not only measures your speed and progress, but also gives 
 
         if v is None:
             v = self.defaultText
-
-        
-
-        if True:
-            text = self.AddSymbols(v[2])
-         
-        #replace double spaces     
-        text = text.replace('  ',' ')     
-        v = (v[0],v[1],text)          
         self.emit(SIGNAL("setText"), v)
 
     def lastText(self):
