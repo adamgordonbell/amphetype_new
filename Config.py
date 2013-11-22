@@ -41,7 +41,7 @@ class AmphSettings(QSettings):
 
             "use_lesson_stats": False,
             "auto_review": True,
-
+            "repeat" :True,
             "min_wpm": 0.0,
             "min_acc": 97.0,
             "min_lesson_wpm": 0.0,

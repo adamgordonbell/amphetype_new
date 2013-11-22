@@ -11,12 +11,11 @@ import re
 
 import globals
 from Data import Statistic, DB
-from Config import Settings
+from Config import *
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from QtUtil import *
-
 
 if platform.system() == "Windows":
     # hack hack, hackity hack
@@ -175,7 +174,7 @@ class Quizzer(QWidget):
         self.result.setVisible(Settings.get("show_last"))
         #self.label.setFrameStyle(QFrame.Raised | QFrame.StyledPanel)
         #self.typer.setBuddy(self.label)
-        self.info = AmphButton("Back one", self.lastText)
+        self.info = SettingsCheckBox('repeat', 'repeat lesson') # AmphButton("Back one", self.lastText)
         self.connect(self.typer,  SIGNAL("done"), self.done)
         self.connect(self.typer,  SIGNAL("cancel"), SIGNAL("wantText"))
         self.connect(Settings, SIGNAL("change_typer_font"), self.readjust)
