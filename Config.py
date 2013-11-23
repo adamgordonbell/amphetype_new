@@ -41,7 +41,13 @@ class AmphSettings(QSettings):
 
             "use_lesson_stats": False,
             "auto_review": True,
+
             "repeat" :True,
+            "symbols" :False,
+            "title_case" : False,
+            "stop_symbols" : ',.?!-\'\n',
+            "include_symbols" : ',.?!-\'',
+
             "min_wpm": 0.0,
             "min_acc": 97.0,
             "min_lesson_wpm": 0.0,
@@ -186,6 +192,10 @@ class PreferenceWidget(QWidget):
             SettingsCheckBox('use_lesson_stats', "Save key/trigram/word statistics from generated lessons."),
             [SettingsCheckBox('req_space', "Make SPACE mandatory before each session"),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
+            None,
+            SettingsCheckBox('title_case', "Practice Capitals by Capitlizing the first letter of each word"),
+            [SettingsCheckBox('symbols', "Practice Symbols by appending to each word"),
+                "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'),")", None],
             None,
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],

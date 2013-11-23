@@ -199,10 +199,10 @@ class Quizzer(QWidget):
 
     def setText(self, text):
         self.text = text
-        if True:
-            tempText = globals.AddSymbols(text[2])
-            tempText = tempText.replace('  ',' ')
-            self.text = (text[0], text[1], tempText)
+
+        tempText = globals.AddSymbols(text[2])
+        tempText = tempText.replace('  ',' ')
+        self.text = (text[0], text[1], tempText)
 
         self.label.setText(self.text[2].replace(u"\n", u"↵\n"))
         self.typer.setTarget(self.text[2], self.text[1])

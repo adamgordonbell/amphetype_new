@@ -1,4 +1,5 @@
 import random
+from Config import *
 
 wordCache = dict()
 
@@ -10,11 +11,13 @@ def init():
 # this is useful for building up speed on selection of text
 def modifiedWord(word):
     global wordCache
-    chars = '.,!?                                    '
-    stopChars = ',.?!-\'\n' #words containing these are left alone
     if not word in wordCache:
-        if (not any((c in stopChars) for c in word)) and (len(word) > 1):
-            wordCache[word] = word[0].capitalize() + word[1:] + random.choice(chars)
+        if (not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('title_case')) and (Settings.get('symbols')):
+            wordCache[word] = word[0].capitalize() + word[1:] + random.choice(Settings.get('include_symbols'))
+        elif(not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('symbols')):
+            wordCache[word] = word + random.choice(Settings.get('include_symbols'))
+        elif(not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('title_case')):
+            wordCache[word] = word[0].capitalize() + word[1:]
         else:
             wordCache[word] = word
     return wordCache[word]
