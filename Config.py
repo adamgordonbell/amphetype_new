@@ -47,6 +47,7 @@ class AmphSettings(QSettings):
             "title_case" : False,
             "stop_symbols" : ',.?!-\'\n',
             "include_symbols" : ',.?!-\'',
+            "sentence_regex" :r"""[\.,;?!\)\(\-]""",
 
             "min_wpm": 0.0,
             "min_acc": 97.0,
@@ -197,6 +198,7 @@ class PreferenceWidget(QWidget):
             [SettingsCheckBox('symbols', "Practice Symbols by appending to each word"),
                 "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'),")", None],
             None,
+            ["Split lessons regex", SettingsEdit("sentence_regex"),None],
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),

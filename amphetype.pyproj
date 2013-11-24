@@ -33,29 +33,8 @@
     <Compile Include="Widgets\Database.py" />
     <Compile Include="Widgets\Plotters.py" />
     <Compile Include="Widgets\__init__.py" />
-    <Content Include="gpl.txt" />
-    <Content Include="readme.txt" />
-    <Content Include="txt\Austen, Jane - Pride and Prejudice.txt" />
-    <Content Include="txt\Conrard, Joseph - Heart of Darkness.txt" />
-    <Content Include="txt\Eliot, George - Brother Jacob.txt" />
-    <Content Include="txt\Fairy Tales of Hans Christian Andersen.txt" />
-    <Content Include="txt\Huxley, Aldous - Crome Yellow.txt" />
-    <Content Include="txt\Joyce, James - Dubliners.txt" />
-    <Content Include="txt\Kafka, Franz - Metamorphosis.txt" />
-    <Content Include="txt\Proust, Marcel - Swann's Way.txt" />
-    <Content Include="txt\Tarantino, Quentin - Pulp Fiction.txt" />
-    <Content Include="txt\Wells, H. G. - The Island of Doctor Moreau.txt" />
-    <Content Include="txt\Woolf, Virginia - The Voyage Out.txt" />
-    <Content Include="txt\wordlists\words-10.txt" />
-    <Content Include="txt\wordlists\words-20.txt" />
-    <Content Include="txt\wordlists\words-35.txt" />
-    <Content Include="txt\wordlists\words-40.txt" />
-    <Content Include="txt\wordlists\words-50.txt" />
-    <Content Include="about.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="txt" />
-    <Folder Include="txt\wordlists" />
     <Folder Include="Widgets" />
   </ItemGroup>
   <ItemGroup>

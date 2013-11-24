@@ -12,7 +12,7 @@ from itertools import *
 from PyQt4.QtCore import *
 
 class SentenceSplitter(object):
-    sen = re.compile(r"""[\.,;?!\)\(\-]""")
+    sen = re.compile(Settings.get('sentence_regex'))
 
     def __init__(self, text):
         self.string = text
