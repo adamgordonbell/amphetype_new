@@ -95,7 +95,9 @@ def to_lessons(sentences):
     max_chars = Settings.get('max_chars')
     sweet_size = 3*(min_chars + max_chars) // 4
 
+    regex = re.compile(Settings.get('sentence_strip'))
     for s in sentences:
+        s = regex.sub(s,'')
         ssplit = []
         while len(s) > sweet_size:
             idx = s.find(' ', sweet_size)
