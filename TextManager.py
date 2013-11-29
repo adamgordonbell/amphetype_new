@@ -233,6 +233,8 @@ A typing program that not only measures your speed and progress, but also gives 
             where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
         if lastResultGuid is not None:
             v = DB.fetchone("select id,source,text from text where id = ?", None, lastResultGuid)
+        else:
+            v = self.defaultText
 
         if v is None:
             v = self.defaultText
