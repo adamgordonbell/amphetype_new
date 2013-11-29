@@ -267,18 +267,12 @@ class Quizzer(QWidget):
                 return 1
             return 2
 
-        vals = []
-        for k, s in stats.iteritems():
-            v = visc[k].median()
-            vals.append( (s.median(), v*100.0, now, len(s), s.flawed(), type(k), k) )
+        vals = self.getVals(now, stats, type, visc)
 
         is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (self.text[1], ))[0]
 
         if Settings.get('use_lesson_stats') or not is_lesson:
-            DB.executemany_('''insert into statistic
-                (time,viscosity,w,count,mistakes,type,data) values (?,?,?,?,?,?,?)''', vals)
-            DB.executemany_('insert into mistake (w,target,mistake,count) values (?,?,?,?)',
-                    [(now, k[0], k[1], v) for k, v in mistakes.iteritems()])
+            self.insertStats(now, vals)
 
         if is_lesson:
             mins = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
@@ -292,20 +286,33 @@ class Quizzer(QWidget):
             self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
         # create a lesson
         elif not is_lesson and Settings.get('auto_review'):
-            ws = filter(lambda x: x[5] == 2, vals)
-            if len(ws) == 0:
-                self.emit(SIGNAL("wantText"))
-                return
+            self.createLessons(vals)
+        # Success, new lesson
+        else:
+            self.emit(SIGNAL("wantText"))
+
+    def getVals(self, now, stats, type, visc):
+        vals = []
+        for k, s in stats.iteritems():
+            v = visc[k].median()
+            vals.append( (s.median(), v*100.0, now, len(s), s.flawed(), type(k), k) )
+        return vals
+
+    def insertStats(self, now, vals):
+        DB.executemany_('''insert into statistic
+            (time,viscosity,w,count,mistakes,type,data) values (?,?,?,?,?,?,?)''', vals)
+        DB.executemany_('insert into mistake (w,target,mistake,count) values (?,?,?,?)',
+                [(now, k[0], k[1], v) for k, v in self.typer.getMistakes().iteritems()])
+
+    def createLessons(self, vals):
+        ws = filter(lambda x: x[5] == 2, vals)
+        if len(ws) == 0:
+            self.emit(SIGNAL("wantText"))
+        else:
             ws.sort(key=lambda x: (x[4],x[0]), reverse=True)
             i = 0
             while ws[i][4] != 0:
                 i += 1
             i += (len(ws) - i) // 4
-            #print ws
             t = map(lambda x:x[6], ws[0:i])
-            # I would like to emit many reviews here
             self.emit(SIGNAL("wantReview"), t)
-        # Success, new lesson
-        else:
-            self.emit(SIGNAL("wantText"))
-
