@@ -74,8 +74,14 @@ class Typer(QTextEdit):
         self.editflag = True
         self.target = text
         self.when = [0] * (len(self.target)+1)
+
+        # time for each character typed
         self.times = [0] * len(self.target)
+
+        # whether each character was a mistake
         self.mistake = [False] * len(self.target)
+
+        # mistake characters ( must be what was actually typed )
         self.mistakes = {} #collections.defaultdict(lambda: [])
         self.where = 0
         self.clear()
@@ -171,11 +177,14 @@ class Typer(QTextEdit):
     def getAccuracy(self):
         return 1.0 - len(filter(None,self.mistake)) / self.where
     
-    def getSpc(self):
+    def getRawSpeed(self):
         return self.getElapsed() / self.where
     
+    def getSpeed(self):
+        return 12 / self.getRawSpeed()
+
     def getViscosity(self):
-        return sum(map(lambda x: ((x-self.getSpc())/self.getSpc())**2,self.times)) / self.where
+        return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2,self.times)) / self.where
 
 class Quizzer(QWidget):
     def __init__(self, *args):
@@ -234,17 +243,18 @@ class Quizzer(QWidget):
         stats = collections.defaultdict(Statistic)
         visc = collections.defaultdict(Statistic)
         text = self.text[2]
-        mis = self.typer.mistake
-        times = self.typer.times
-        spc = self.typer.getSpc()
-        for c, t, m in zip(text,self.typer.times, mis):
+        perCharacterMistakes = self.typer.mistake
+        perCharacterTimes = self.typer.times
+        spc = self.typer.getRawSpeed()
+
+        for c, t, m in zip(text,self.typer.times, perCharacterMistakes):
             stats[c].append(t, m)
             visc[c].append(((t-spc)/spc)**2)
         
         def gen_tup(s, e):
-            perch = sum(times[s:e])/(e-s)
-            visc = sum(map(lambda x: ((x-perch)/perch)**2, times[s:e]))/(e-s)
-            return (text[s:e], perch, len(filter(None, mis[s:e])), visc)
+            perch = sum(perCharacterTimes[s:e])/(e-s)
+            visc = sum(map(lambda x: ((x-perch)/perch)**2, perCharacterTimes[s:e]))/(e-s)
+            return (text[s:e], perch, len(filter(None, perCharacterMistakes[s:e])), visc)
         
         for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, self.typer.where-2)]:
             stats[tri].append(t, m > 0)
@@ -258,20 +268,23 @@ class Quizzer(QWidget):
         return stats, visc
 
     def updateResultLabel(self):
-        spc = self.typer.getSpc()
+        spc = self.typer.getSpeed()
         accuracy = self.typer.getAccuracy()
         v2 = DB.fetchone("""select agg_median(wpm),agg_median(acc) from
             (select wpm,100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
         self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"
-            % ((12.0/spc, 100.0*accuracy) + v2))
+            % ((spc, 100.0*accuracy) + v2))
+
+    def insertResults(self, now):
+        return DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
+                           (now, self.text[0], self.text[1], 12.0/self.typer.getRawSpeed(), self.typer.getAccuracy(), self.typer.getViscosity()))
 
     def done(self):
         now = time.time()
         assert self.typer.where == len(self.text[2])
 
 
-        DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
-                   (now, self.text[0], self.text[1], 12.0/self.typer.getSpc(), self.typer.getAccuracy(), self.typer.getViscosity()))
+        self.insertResults(now)
 
         self.updateResultLabel()
 
@@ -330,7 +343,7 @@ class Quizzer(QWidget):
             self.emit(SIGNAL("wantReview"), t)
 
     def lessThanSpeed(self):
-        return 12.0/self.typer.getSpc() < self.getMinimums()[0]
+        return self.typer.getSpeed() < self.getMinimums()[0]
 
     def lessThanAccuracy(self):
         return self.typer.getAccuracy() < (self.getMinimums()[1])/100.0
