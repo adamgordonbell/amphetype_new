@@ -168,6 +168,15 @@ class Typer(QTextEdit):
             self.when[0] = self.when[1] - self.times[0]
         return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
 
+    def getAccuracy(self):
+        return 1.0 - len(filter(None,self.mistake)) / self.where
+    
+    def getSpc(self):
+        return self.getElapsed() / self.where
+    
+    def getViscosity(self):
+        return sum(map(lambda x: ((x-self.getSpc())/self.getSpc())**2,self.times)) / self.where
+
 class Quizzer(QWidget):
     def __init__(self, *args):
         super(Quizzer, self).__init__(*args)
@@ -221,13 +230,13 @@ class Quizzer(QWidget):
     def lastText(self):
         self.emit(SIGNAL("lastText"))
 
-    def getStatsAndViscosity(self, spc):
+    def getStatsAndViscosity(self):
         stats = collections.defaultdict(Statistic)
         visc = collections.defaultdict(Statistic)
         text = self.text[2]
         mis = self.typer.mistake
         times = self.typer.times
-        
+        spc = self.typer.getSpc()
         for c, t, m in zip(text,self.typer.times, mis):
             stats[c].append(t, m)
             visc[c].append(((t-spc)/spc)**2)
@@ -248,7 +257,9 @@ class Quizzer(QWidget):
             visc[w].append(v)
         return stats, visc
 
-    def updateResultLabel(self, accuracy, spc):
+    def updateResultLabel(self):
+        spc = self.typer.getSpc()
+        accuracy = self.typer.getAccuracy()
         v2 = DB.fetchone("""select agg_median(wpm),agg_median(acc) from
             (select wpm,100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
         self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"
@@ -258,18 +269,15 @@ class Quizzer(QWidget):
         now = time.time()
         assert self.typer.where == len(self.text[2])
 
-        accuracy = 1.0 - len(filter(None,self.typer.mistake)) / self.typer.where
-        spc = self.typer.getElapsed() / self.typer.where
-        viscosity = sum(map(lambda x: ((x-spc)/spc)**2,self.typer.times)) / self.typer.where
 
         DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
-                   (now, self.text[0], self.text[1], 12.0/spc, accuracy, viscosity))
+                   (now, self.text[0], self.text[1], 12.0/self.typer.getSpc(), self.typer.getAccuracy(), self.typer.getViscosity()))
 
-        self.updateResultLabel(accuracy, spc)
+        self.updateResultLabel()
 
         self.emit(SIGNAL("statsChanged"))
 
-        stats, visc = self.getStatsAndViscosity(spc)
+        stats, visc = self.getStatsAndViscosity()
 
         vals = self.getVals(now, stats, visc)
 
@@ -277,7 +285,7 @@ class Quizzer(QWidget):
             self.insertStats(now, vals)
 
         # if Fail cut-offs, redo
-        if self.lessThanSpeed(spc) or self.lessThanAccuracy(accuracy):
+        if self.lessThanSpeed() or self.lessThanAccuracy():
             self.setText(self.text)
         # if pending lessons left, then keep going
         elif self.isLesson() and globals.pendingLessons:            
@@ -321,11 +329,11 @@ class Quizzer(QWidget):
             t = map(lambda x:x[6], ws[0:i])
             self.emit(SIGNAL("wantReview"), t)
 
-    def lessThanSpeed(self, spc):
-        return 12.0/spc < self.getMinimums()[0]
+    def lessThanSpeed(self):
+        return 12.0/self.typer.getSpc() < self.getMinimums()[0]
 
-    def lessThanAccuracy(self, accuracy):
-        return accuracy < (self.getMinimums()[1])/100.0
+    def lessThanAccuracy(self):
+        return self.typer.getAccuracy() < (self.getMinimums()[1])/100.0
 
     def isLesson(self):
         is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (self.text[1], ))[0]
