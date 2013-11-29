@@ -217,6 +217,34 @@ class Quizzer(QWidget):
     def lastText(self):
         self.emit(SIGNAL("lastText"))
 
+    def getStatsAndViscosity(self, spc):
+        stats = collections.defaultdict(Statistic)
+        visc = collections.defaultdict(Statistic)
+        text = self.text[2]
+        mis = self.typer.mistake
+        times = self.typer.times
+        chars = self.typer.where
+        
+        for c, t, m in zip(text, times, mis):
+            stats[c].append(t, m)
+            visc[c].append(((t-spc)/spc)**2)
+        
+        def gen_tup(s, e):
+            perch = sum(times[s:e])/(e-s)
+            visc = sum(map(lambda x: ((x-perch)/perch)**2, times[s:e]))/(e-s)
+            return (text[s:e], perch, len(filter(None, mis[s:e])), visc)
+        
+        for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, chars-2)]:
+            stats[tri].append(t, m > 0)
+            visc[tri].append(v)
+        
+        regex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
+        
+        for w, t, m, v in [gen_tup(*x.span()) for x in regex.finditer(text) if x.end()-x.start() > 3]:
+            stats[w].append(t, m > 0)
+            visc[w].append(v)
+        return stats, visc
+
     def done(self):
         now = time.time()
         elapsed, chars, times, mis, mistakes = self.typer.getStats()
@@ -237,61 +265,33 @@ class Quizzer(QWidget):
 
         self.emit(SIGNAL("statsChanged"))
 
-        stats = collections.defaultdict(Statistic)
-        visc = collections.defaultdict(Statistic)
-        text = self.text[2]
+        stats, visc = self.getStatsAndViscosity(spc)
 
-        for c, t, m in zip(text, times, mis):
-            stats[c].append(t, m)
-            visc[c].append(((t-spc)/spc)**2)
+        vals = self.getVals(now, stats, visc)
 
-        def gen_tup(s, e):
-            perch = sum(times[s:e])/(e-s)
-            visc = sum(map(lambda x: ((x-perch)/perch)**2, times[s:e]))/(e-s)
-            return (text[s:e], perch, len(filter(None, mis[s:e])), visc)
+        if Settings.get('use_lesson_stats') or not self.isLesson():
+            self.insertStats(now, vals)
 
-        for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, chars-2)]:
-            stats[tri].append(t, m > 0)
-            visc[tri].append(v)
+        # if Fail cut-offs, redo
+        if self.lessThanSpeed(spc) or self.lessThanAccuracy(accuracy):
+            self.setText(self.text)
+        # if pending lessons left, then keep going
+        elif self.isLesson() and globals.pendingLessons:            
+            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        # create a lesson
+        elif not self.isLesson() and Settings.get('auto_review'):
+            self.createLessons(vals)
+        # Success, new lesson
+        else:
+            self.emit(SIGNAL("wantText"))
 
-        regex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
-
-        for w, t, m, v in [gen_tup(*x.span()) for x in regex.finditer(text) if x.end()-x.start() > 3]:
-            stats[w].append(t, m > 0)
-            visc[w].append(v)
-
+    def getVals(self, now, stats, visc):
         def type(k):
             if len(k) == 1:
                 return 0
             elif len(k) == 3:
                 return 1
             return 2
-
-        vals = self.getVals(now, stats, type, visc)
-
-        is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (self.text[1], ))[0]
-
-        if Settings.get('use_lesson_stats') or not is_lesson:
-            self.insertStats(now, vals)
-
-        if is_lesson:
-            mins = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
-        else:
-            mins = (Settings.get("min_wpm"), Settings.get("min_acc"))
-
-        # Fail cut-offs, redo
-        if 12.0/spc < mins[0] or accuracy < mins[1]/100.0:
-            self.setText(self.text)
-        elif is_lesson and globals.pendingLessons:            
-            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
-        # create a lesson
-        elif not is_lesson and Settings.get('auto_review'):
-            self.createLessons(vals)
-        # Success, new lesson
-        else:
-            self.emit(SIGNAL("wantText"))
-
-    def getVals(self, now, stats, type, visc):
         vals = []
         for k, s in stats.iteritems():
             v = visc[k].median()
@@ -316,3 +316,20 @@ class Quizzer(QWidget):
             i += (len(ws) - i) // 4
             t = map(lambda x:x[6], ws[0:i])
             self.emit(SIGNAL("wantReview"), t)
+
+    def lessThanSpeed(self, spc):
+        return 12.0/spc < self.getMinimums()[0]
+
+    def lessThanAccuracy(self, accuracy):
+        return accuracy < (self.getMinimums()[1])/100.0
+
+    def isLesson(self):
+        is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (self.text[1], ))[0]
+        return is_lesson
+
+    def getMinimums(self):
+        if self.isLesson():
+            minimums = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
+        else:
+            minimums = (Settings.get("min_wpm"), Settings.get("min_acc"))
+        return minimums
