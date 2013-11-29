@@ -155,14 +155,18 @@ class Typer(QTextEdit):
             inv[m] += 1
         return inv
 
+    def getElapsed(self):
+        return self.when[self.where]-self.when[0]
+
     def getStats(self):
         if self.when[0] == -1:
+            # my refactoring mean this may never get hit, I'm not sure what when and times are for, so i'm not sure if I'm breaking some edge case here??
             t = self.times[1:]
             t.sort(reverse=True)
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
             self.times[0] = v[0]
             self.when[0] = self.when[1] - self.times[0]
-        return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
+        return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
 
 class Quizzer(QWidget):
     def __init__(self, *args):
@@ -223,9 +227,8 @@ class Quizzer(QWidget):
         text = self.text[2]
         mis = self.typer.mistake
         times = self.typer.times
-        chars = self.typer.where
         
-        for c, t, m in zip(text, times, mis):
+        for c, t, m in zip(text,self.typer.times, mis):
             stats[c].append(t, m)
             visc[c].append(((t-spc)/spc)**2)
         
@@ -234,7 +237,7 @@ class Quizzer(QWidget):
             visc = sum(map(lambda x: ((x-perch)/perch)**2, times[s:e]))/(e-s)
             return (text[s:e], perch, len(filter(None, mis[s:e])), visc)
         
-        for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, chars-2)]:
+        for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, self.typer.where-2)]:
             stats[tri].append(t, m > 0)
             visc[tri].append(v)
         
@@ -253,13 +256,11 @@ class Quizzer(QWidget):
 
     def done(self):
         now = time.time()
-        elapsed, chars, times, mis, mistakes = self.typer.getStats()
+        assert self.typer.where == len(self.text[2])
 
-        assert chars == len(self.text[2])
-
-        accuracy = 1.0 - len(filter(None, mis)) / chars
-        spc = elapsed / chars
-        viscosity = sum(map(lambda x: ((x-spc)/spc)**2, times)) / chars
+        accuracy = 1.0 - len(filter(None,self.typer.mistake)) / self.typer.where
+        spc = self.typer.getElapsed() / self.typer.where
+        viscosity = sum(map(lambda x: ((x-spc)/spc)**2,self.typer.times)) / self.typer.where
 
         DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
                    (now, self.text[0], self.text[1], 12.0/spc, accuracy, viscosity))
