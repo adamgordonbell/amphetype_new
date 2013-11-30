@@ -260,11 +260,16 @@ class Quizzer(QWidget):
             stats[tri].append(t, m > 0)
             visc[tri].append(v)
         
-        regex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
-        
-        for w, t, m, v in [gen_tup(*x.span()) for x in regex.finditer(text) if x.end()-x.start() > 3]:
+        wordRegex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
+        for w, t, m, v in [gen_tup(*x.span()) for x in wordRegex.finditer(text) if x.end()-x.start() > 3]:
             stats[w].append(t, m > 0)
             visc[w].append(v)
+
+        pairRegex = re.compile(r"[^-\s]+\s+[^-\s]+")
+        for w, t, m, v in [gen_tup(*x.span()) for x in pairRegex.finditer(text) if x.end()-x.start() > 3]:
+            stats[w].append(t, m > 0)
+            visc[w].append(v)
+
         return stats, visc
 
     def updateResultLabel(self):
