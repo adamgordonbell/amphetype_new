@@ -265,8 +265,14 @@ class Quizzer(QWidget):
             stats[w].append(t, m > 0)
             visc[w].append(v)
 
-        pairRegex = re.compile(r"[^-\s]+\s+[^-\s]+")
-        for w, t, m, v in [gen_tup(*x.span()) for x in pairRegex.finditer(text) if x.end()-x.start() > 3]:
+        pairs = re.findall(r"(?=(\b[^\s]+\s+[^\s]+))", text)
+        pairRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+))")
+        for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
+            stats[w].append(t, m > 0)
+            visc[w].append(v)
+
+        tripleRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+\s+[^\s]+))")
+        for w, t, m, v in [gen_tup(*x.span(1)) for x in tripleRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
             stats[w].append(t, m > 0)
             visc[w].append(v)
 
@@ -288,18 +294,15 @@ class Quizzer(QWidget):
         now = time.time()
         assert self.typer.where == len(self.text[2])
 
-
         self.insertResults(now)
 
         self.updateResultLabel()
 
         self.emit(SIGNAL("statsChanged"))
 
-        stats, visc = self.getStatsAndViscosity()
-
-        vals = self.getVals(now, stats, visc)
-
         if Settings.get('use_lesson_stats') or not self.isLesson():
+            stats, visc = self.getStatsAndViscosity()
+            vals = self.getVals(now, stats, visc)
             self.insertStats(now, vals)
 
         # if Fail cut-offs, redo
