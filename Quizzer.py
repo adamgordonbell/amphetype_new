@@ -265,7 +265,6 @@ class Quizzer(QWidget):
             stats[w].append(t, m > 0)
             visc[w].append(v)
 
-        pairs = re.findall(r"(?=(\b[^\s]+\s+[^\s]+))", text)
         pairRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+))")
         for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
             stats[w].append(t, m > 0)
@@ -338,15 +337,19 @@ class Quizzer(QWidget):
                 [(now, k[0], k[1], v) for k, v in self.typer.getMistakes().iteritems()])
 
     def createLessons(self, vals):
+        # get words
         ws = filter(lambda x: x[5] == 2, vals)
         if len(ws) == 0:
             self.emit(SIGNAL("wantText"))
         else:
-            ws.sort(key=lambda x: (x[4],x[0]), reverse=True)
+            #sort mistakes to beginning
+            ws.sort(key=lambda x: (x[4],x[1]), reverse=True)
             i = 0
             while ws[i][4] != 0:
                 i += 1
-            i += (len(ws) - i) // 4
+            #addon some non mistakes
+            if i < (len(ws) -1 // 8):
+                i = (len(ws) - i) // 8
             t = map(lambda x:x[6], ws[0:i])
             self.emit(SIGNAL("wantReview"), t)
 
