@@ -153,7 +153,16 @@ class Typer(QTextEdit):
             if self.mins[1] == 100.0:
                 self.emit(SIGNAL("repeat"))   
             else:
-                self.setPalette(self.palettes['wrong'])
+                Freq = 250 
+                Dur = 200
+                playsound(Freq,Dur)
+                if True:
+                    self.setText(self.target[0:(len(v))])
+                    cursor = self.textCursor() 
+                    cursor.setPosition(len(v)) 
+                    self.setTextCursor(cursor) 
+                else:
+                    self.setPalette(self.palettes['wrong'])
 
     def getMistakes(self):
         inv = collections.defaultdict(lambda: 0)
