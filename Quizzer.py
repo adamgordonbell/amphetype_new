@@ -353,6 +353,7 @@ class Quizzer(QWidget):
             #addon some non mistakes
             if i < (len(words) -1 // 8):
                 i = (len(words) - 1) // 8
+                i = i + 1
             wordLessons = map(lambda x:x[6], words[0:i])
 
             phrases = filter(lambda x: x[5] ==3, vals)
