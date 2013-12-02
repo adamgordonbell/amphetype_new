@@ -265,10 +265,10 @@ class Quizzer(QWidget):
             stats[w].append(t, m > 0)
             visc[w].append(v)
 
-        pairRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+))")
-        for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
-            stats[w].append(t, m > 0)
-            visc[w].append(v)
+        #pairRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+))")
+        #for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
+        #    stats[w].append(t, m > 0)
+        #    visc[w].append(v)
 
         tripleRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+\s+[^\s]+))")
         for w, t, m, v in [gen_tup(*x.span(1)) for x in tripleRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
@@ -323,6 +323,8 @@ class Quizzer(QWidget):
                 return 0
             elif len(k) == 3:
                 return 1
+            elif len(k.split()) > 1:
+                return 3
             return 2
         vals = []
         for k, s in stats.iteritems():
@@ -337,21 +339,27 @@ class Quizzer(QWidget):
                 [(now, k[0], k[1], v) for k, v in self.typer.getMistakes().iteritems()])
 
     def createLessons(self, vals):
+        # need to add of type #3 to these lessons
         # get words
-        ws = filter(lambda x: x[5] == 2, vals)
-        if len(ws) == 0:
+        words = filter(lambda x: x[5] == 2, vals)
+        if len(words) == 0:
             self.emit(SIGNAL("wantText"))
         else:
             #sort mistakes to beginning
-            ws.sort(key=lambda x: (x[4],x[1]), reverse=True)
+            words.sort(key=lambda x: (x[4],x[1]), reverse=True)
             i = 0
-            while ws[i][4] != 0:
+            while words[i][4] != 0:
                 i += 1
             #addon some non mistakes
-            if i < (len(ws) -1 // 8):
-                i = (len(ws) - i) // 8
-            t = map(lambda x:x[6], ws[0:i])
-            self.emit(SIGNAL("wantReview"), t)
+            if i < (len(words) -1 // 8):
+                i = (len(words) - i) // 8
+            wordLessons = map(lambda x:x[6], words[0:i])
+
+            phrases = filter(lambda x: x[5] ==3, vals)
+            phrases.sort(key=lambda x: (x[1],x[4]), reverse=True)
+            i = len(wordLessons)
+            phraseLessons = map(lambda x:x[6], phrases[0:i])
+            self.emit(SIGNAL("wantReview"), wordLessons + phraseLessons)
 
     def lessThanSpeed(self):
         return self.typer.getSpeed() < self.getMinimums()[0]
