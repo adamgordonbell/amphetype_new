@@ -269,11 +269,11 @@ class Quizzer(QWidget):
         #for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
         #    stats[w].append(t, m > 0)
         #    visc[w].append(v)
-
-        tripleRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+\s+[^\s]+))")
-        for w, t, m, v in [gen_tup(*x.span(1)) for x in tripleRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
-            stats[w].append(t, m > 0)
-            visc[w].append(v)
+        if Settings.get('phrase_lessons'): 
+            tripleRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+\s+[^\s]+))")
+            for w, t, m, v in [gen_tup(*x.span(1)) for x in tripleRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
+                stats[w].append(t, m > 0)
+                visc[w].append(v)
 
         return stats, visc
 

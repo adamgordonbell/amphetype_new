@@ -49,6 +49,7 @@ class AmphSettings(QSettings):
             "include_symbols" : ',.?!-\'',
             "sentence_regex" :r"""[\.,;?!\)\(\-]""",
             "sentence_strip" : '>',
+            "phrase_lessons" : True,
 
             "min_wpm": 0.0,
             "min_acc": 97.0,
@@ -200,6 +201,7 @@ class PreferenceWidget(QWidget):
                 "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'),")", None],
             None,
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"),"Strip lessons regex", SettingsEdit('sentence_strip')," )",None],
+             SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),
