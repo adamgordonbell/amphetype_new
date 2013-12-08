@@ -50,6 +50,7 @@ class AmphSettings(QSettings):
             "sentence_regex" :r"""[\.,;?!\)\(\-]""",
             "sentence_strip" : '>',
             "phrase_lessons" : True,
+            "permissive_errors" : False,
 
             "min_wpm": 0.0,
             "min_acc": 97.0,
@@ -202,6 +203,7 @@ class PreferenceWidget(QWidget):
             None,
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"),"Strip lessons regex", SettingsEdit('sentence_strip')," )",None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
+             SettingsCheckBox('permissive_errors', "Permissive Errors : no backspace required"),
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),

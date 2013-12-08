@@ -156,7 +156,7 @@ class Typer(QTextEdit):
                 Freq = 250 
                 Dur = 200
                 playsound(Freq,Dur)
-                if True:
+                if Settings.get("permissive_errors"):
                     self.setText(self.target[0:(len(v))])
                     cursor = self.textCursor() 
                     cursor.setPosition(len(v)) 
