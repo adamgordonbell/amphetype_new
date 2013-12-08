@@ -12,14 +12,14 @@ from itertools import *
 from PyQt4.QtCore import *
 
 class SentenceSplitter(object):
-    sen = re.compile(Settings.get('sentence_regex'))
 
     def __init__(self, text):
         self.string = text
 
     def __iter__(self):
         p = [0]
-        return ifilter(None, imap(lambda x: self.pars(p, x), self.sen.finditer(self.string)))
+        sen = re.compile(Settings.get('sentence_regex'))
+        return ifilter(None, imap(lambda x: self.pars(p, x), sen.finditer(self.string)))
 
     def pars(self, p, mat):
         p.append(mat.end())
