@@ -203,7 +203,7 @@ class PreferenceWidget(QWidget):
             None,
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"),"Strip lessons regex", SettingsEdit('sentence_strip')," )",None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
-             SettingsCheckBox('permissive_errors', "Permissive Errors : no backspace required"),
+             SettingsCheckBox('permissive_errors', "Permissive Errors : no backspace required (restart required)"),
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),

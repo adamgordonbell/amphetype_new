@@ -41,7 +41,7 @@ class Typer(QTextEdit):
         super(Typer, self).__init__(*args)
 
         self.setPalettes()
-
+        self.permissive = Settings.get("permissive_errors")
         self.connect(self, SIGNAL("textChanged()"), self.checkText)
         #self.setLineWrapMode(QTextEdit.NoWrap)
         self.connect(Settings, SIGNAL("change_quiz_wrong_fg"), self.setPalettes)
@@ -117,6 +117,7 @@ class Typer(QTextEdit):
                 self.clear()
                 self.setPalette(self.palettes['right'])
             elif req:
+
                 self.setText(self.getWaitText())
                 self.selectAll()
             self.editflag = False
@@ -156,7 +157,7 @@ class Typer(QTextEdit):
                 Freq = 250 
                 Dur = 200
                 playsound(Freq,Dur)
-                if Settings.get("permissive_errors"):
+                if self.permissive:
                     self.setText(self.target[0:(len(v))])
                     cursor = self.textCursor() 
                     cursor.setPosition(len(v)) 
@@ -196,7 +197,7 @@ class Typer(QTextEdit):
         return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2,self.times)) / self.where
 
 class Quizzer(QWidget):
-    def __init__(self, *args):
+    def __init__(self , *args):
         super(Quizzer, self).__init__(*args)
 
         self.result = QLabel()
@@ -386,4 +387,4 @@ class Quizzer(QWidget):
             minimums = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
         else:
             minimums = (Settings.get("min_wpm"), Settings.get("min_acc"))
-        return minimums
+        return minimums 
