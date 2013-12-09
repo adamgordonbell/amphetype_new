@@ -30,6 +30,7 @@ try:
 except ImportError:
     import os
     def playsound(frequency,duration):
+        return
         #apt-get install beep
         os.system('beep -f %s -l %s' % (frequency,duration))
 else:
@@ -154,17 +155,17 @@ class Typer(QTextEdit):
             if self.mins[1] == 100.0:
                 self.emit(SIGNAL("repeat"))   
             else:
-                Freq = 250 
-                Dur = 200
-                playsound(Freq,Dur)
+                
                 if self.permissive:
                     self.setText(self.target[0:(len(v))])
                     cursor = self.textCursor() 
                     cursor.setPosition(len(v)) 
                     self.setTextCursor(cursor) 
+                    Freq = 300 
+                    Dur = 100
+                    playsound(Freq,Dur)
                 else:
                     self.setPalette(self.palettes['wrong'])
-
     def getMistakes(self):
         inv = collections.defaultdict(lambda: 0)
         for p, m in self.mistakes.iteritems():
