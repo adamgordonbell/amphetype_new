@@ -1,9 +1,5 @@
-# -*- coding: UTF-8 -*-
-
 from __future__ import with_statement, division
 
-
-#import psyco
 import platform
 import collections
 import time
@@ -23,7 +19,6 @@ if platform.system() == "Windows":
     timer()
 else:
     timer = time.time
-
 
 try:
     import winsound

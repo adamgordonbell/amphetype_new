@@ -1,4 +1,3 @@
-
 from __future__ import with_statement, division
 
 from itertools import *
@@ -16,7 +15,6 @@ except ImportError:
 import Text
 from Config import *
 from QtUtil import *
-
 
 class StringListWidget(QTextEdit):
     def __init__(self, *args):
@@ -181,4 +179,3 @@ class LessonGenerator(QWidget):
 
     def addStrings(self, *args):
         self.strings.addList(*args)
-

@@ -1,5 +1,3 @@
-# -*- coding: UTF-8 -*-
-
 from __future__ import division, with_statement
 
 #import psyco
@@ -87,7 +85,6 @@ class LessonMiner(QObject):
             ps.append(SentenceSplitter(u" ".join(p)))
         return ps
 
-
 def to_lessons(sentences):
     backlog = []
     backlen = 0
@@ -117,8 +114,6 @@ def to_lessons(sentences):
     if backlen > 0:
         yield u' '.join(backlog)
 
-
-
 class LessonGeneratorPlain(object):
     def __init__(self, words, per_lesson=12, repeats=4):
         while (0 < len(words) % per_lesson < per_lesson / 2):
@@ -136,15 +131,7 @@ class LessonGeneratorPlain(object):
     def __iter__(self):
         return iter(self.lessons)
 
-
-
-
-
 if __name__ == '__main__':
     import sys
     for x in LessonMiner(sys.argv[1]):
         print "--%s--" % x
-
-
-
-

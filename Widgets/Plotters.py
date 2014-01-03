@@ -1,4 +1,3 @@
-
 from Config import Settings
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -21,7 +20,6 @@ class HoverItem(QGraphicsRectItem):
     def hoverLeaveEvent(self, evt):
         self.setBrush(QBrush(Qt.NoBrush))
         self.update()
-
 
 class Plot(QGraphicsScene):
     def __init__(self, x, y, *args):
@@ -84,7 +82,6 @@ class Plot(QGraphicsScene):
         qr = QRectF(min_x-0.03*w, -start+spc/2, 1.03*w, start-ns)
         self.setSceneRect(qr)
 
-
 class Plotter(QGraphicsView):
     def __init__(self, *args):
         super(Plotter, self).__init__(*args)
@@ -100,7 +97,6 @@ class Plotter(QGraphicsView):
         QGraphicsView.setScene(self, scene)
         self.fitInView(scene.sceneRect())
 
-
 if __name__ == '__main__':
     import random
     import sys
@@ -115,4 +111,3 @@ if __name__ == '__main__':
     v.show()
     app.exec_()
     print "exis"
-

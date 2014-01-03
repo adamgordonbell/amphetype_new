@@ -1,7 +1,5 @@
-
 from __future__ import with_statement, division
 
-#import psyco
 import os.path as path
 import time
 import hashlib
@@ -12,10 +10,8 @@ from Data import DB
 from QtUtil import *
 from Config import *
 
-
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
 
 class SourceModel(AmphModel):
     def signature(self):
@@ -45,8 +41,6 @@ class SourceModel(AmphModel):
                 left join (select text_id,count(*) as count,agg_median(wpm) as m from result group by text_id) as r
                     on (t.id = r.text_id)
                 order by t.rowid""", (r[0],)))
-
-
 
 class TextManager(QWidget):
 
@@ -80,7 +74,7 @@ A typing program that not only measures your speed and progress, but also gives 
                             AmphButton("Toggle disabled", self.disableSelected),
                             "on all selected texts that match <a href=\"http://en.wikipedia.org/wiki/Regular_expression\">regular expression</a>",
                             SettingsEdit('text_regex')],
-                          [AmphButton("Toggle All selected", self.disableAllSelected),"Disabled items won't be selected in order"]], 1),
+                          [AmphButton("Toggle All selected", self.disableAllSelected), "Disabled items won't be selected in order"]], 1),
                     [["Selection method for new lessons:",
                             SettingsCombo('select_method', ['Random', 'In Order', 'Difficult', 'Easy']), None],
                         "(in order works by selecting the next text after the one you completed last, in the order they were added to the database, easy/difficult works by estimating your WPM for several random texts and choosing the fastest/slowest)\n",
@@ -124,7 +118,7 @@ A typing program that not only measures your speed and progress, but also gives 
                 else:
                     #print "|", t,
                     s += expect
-                    v +=1
+                    v += 1
             avg = s / (len(text) - 2)
             #print text
             #print " v=%d,s=%f" % (v, 12.0/avg), "ex:", expect
@@ -164,7 +158,7 @@ A typing program that not only measures your speed and progress, but also gives 
 
         r = []
         for x in texts:
-            x = re.sub(Settings.get('sentence_strip'),' ',x)
+            x = re.sub(Settings.get('sentence_strip'), ' ', x)
             h = hashlib.sha1()
             h.update(x.encode('utf-8'))
             txt_id = h.hexdigest()
@@ -311,6 +305,3 @@ A typing program that not only measures your speed and progress, but also gives 
         self.cur = v[0] if len(v) > 0 else self.defaultText
         self.emit(SIGNAL("setText"), self.cur)
         self.emit(SIGNAL("gotoText"))
-
-
-

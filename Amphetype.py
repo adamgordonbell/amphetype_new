@@ -1,9 +1,7 @@
-
 from __future__ import with_statement, division
 
 import os
 import sys
-
 
 # Get command-line --database argument before importing
 # modules which count on database support
@@ -31,7 +29,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 QApplication.setStyle('cleanlooks')
-
 
 class TyperWindow(QMainWindow):
     def __init__(self, *args):
@@ -111,5 +108,3 @@ app.exec_()
 
 print "exit"
 DB.commit()
-
-

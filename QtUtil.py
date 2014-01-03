@@ -1,17 +1,13 @@
-
 from __future__ import with_statement, division
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
-
 
 class WWLabel(QLabel):
     def __init__(self, *args):
         super(QLabel, self).__init__(*args)
         self.setWordWrap(True)
         self.setOpenExternalLinks(True)
-
 
 class AmphModel(QAbstractItemModel):
     def __init__(self, *args):
@@ -122,8 +118,6 @@ class AmphModel(QAbstractItemModel):
     def signature(self):
         return ([], [])
 
-
-
 class AmphTree(QTreeView):
     def __init__(self, model, *args):
         super(AmphTree, self).__init__(*args)
@@ -134,7 +128,6 @@ class AmphTree(QTreeView):
         #self.setExpandsOnDoubleClick(False)
         self.header().setClickable(True)
         self.connect(self.header(), SIGNAL("sectionClicked(int)"), self.sortByColumn)
-
 
 class AmphBoxLayout(QBoxLayout):
     def __init__(self, tree, dir=QBoxLayout.TopToBottom):
@@ -169,7 +162,6 @@ class AmphBoxLayout(QBoxLayout):
         else:
             next = QBoxLayout.TopToBottom
         return AmphBoxLayout(x, next)
-
 
 class AmphGridLayout(QGridLayout):
     def __init__(self, grid):
@@ -211,7 +203,6 @@ class AmphGridLayout(QGridLayout):
     def getInstance(self, x):
         return AmphGridLayout(x)
 
-
 class AmphButton(QPushButton):
     def __init__(self, text, callback, *args):
         super(AmphButton, self).__init__(text, *args)
@@ -223,5 +214,3 @@ class AmphEdit(QLineEdit):
         if validator is not None:
             self.setValidator(validator(self))
         self.connect(self, SIGNAL("editingFinished()"), callback)
-
-

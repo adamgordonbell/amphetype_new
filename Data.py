@@ -1,8 +1,4 @@
-
-
 from __future__ import division, with_statement
-
-
 
 from itertools import *
 import time
@@ -10,7 +6,6 @@ import bisect
 import sqlite3
 import re
 from Config import Settings
-
 
 def trimmed_average(total, series):
         s = 0.0
@@ -41,7 +36,6 @@ def trimmed_average(total, series):
 
         return s/n
 
-
 class Statistic(list):
     def __init__(self):
         super(Statistic, self).__init__()
@@ -68,10 +62,6 @@ class Statistic(list):
 
     def flawed(self):
         return self.flawed_
-
-
-
-
 
 class MedianAggregate(Statistic):
     def step(self, val):
@@ -102,7 +92,6 @@ class FirstAggregate(object):
 
     def finalize(self):
         return self.val
-
 
 class AmphDatabase(sqlite3.Connection):
     def __init__(self, *args):
@@ -193,8 +182,6 @@ create view text_source as
         self.execute('insert into source (name,discount) values (?,?)', (source, lesson))
         return self.getSource(source)
 
-
-
 dbname = Settings.get("db_name")
 
 # GLOBAL
@@ -209,10 +196,3 @@ def switchdb(nn):
     except Exception, e:
         from PyQt4.QtGui import QMessageBox as qmb
         qmb.information(None, "Database Error", "Failed to switch to the new database:\n" + str(e))
-
-
-
-
-#Item = ItemStatistics()
-
-

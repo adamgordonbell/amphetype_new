@@ -1,4 +1,3 @@
-
 from __future__ import with_statement, division
 
 import time
@@ -14,7 +13,6 @@ import Widgets.Plotters as Plotters
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-
 def dampen(x, n=10):
     ret = []
     s = sum(x[0:n])
@@ -23,7 +21,6 @@ def dampen(x, n=10):
         ret.append(s*q)
         s += x[i] - x[i-n]
     return ret
-
 
 class ResultModel(AmphModel):
     def signature(self):
@@ -62,7 +59,6 @@ class ResultModel(AmphModel):
             return "%.1fw" % d
         d /= 52.0
         return "%.1fy" % d
-
 
 class PerformanceHistory(QWidget):
     def __init__(self, *args):

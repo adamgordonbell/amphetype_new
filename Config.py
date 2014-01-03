@@ -105,10 +105,7 @@ class AmphSettings(QSettings):
         self.emit(SIGNAL("change"))
         self.emit(SIGNAL("change_" + k), v)
 
-
-
 Settings = AmphSettings()
-
 
 class SettingsColor(AmphButton):
     def __init__(self, key, text):
@@ -130,8 +127,6 @@ class SettingsColor(AmphButton):
         self.setText(Settings.get(self.key_))
         self.setIcon(QIcon(pix))
 
-
-
 class SettingsEdit(AmphEdit):
     def __init__(self, setting):
         val = Settings.get(setting)
@@ -150,7 +145,6 @@ class SettingsEdit(AmphEdit):
                             lambda: Settings.set(setting, typ(self.text())),
                             validator=validator)
         self.connect(Settings, SIGNAL("change_" + setting), lambda x: self.setText(self.fmt(x)))
-
 
 class SettingsCombo(QComboBox):
     def __init__(self, setting, lst, *args):
@@ -171,9 +165,6 @@ class SettingsCombo(QComboBox):
 
         self.connect(self, SIGNAL("activated(int)"),
                     lambda x: Settings.set(setting, self.idx2item[x]))
-
-        #self.connect(Settings, SIGNAL("change_" + setting),
-        #            lambda x: self.setCurrentIndex(self.item2idx[x]))
 
 class SettingsCheckBox(QCheckBox):
     def __init__(self, setting, *args):

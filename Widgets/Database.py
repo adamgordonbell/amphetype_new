@@ -1,5 +1,4 @@
 
-
 from __future__ import with_statement, division
 
 from QtUtil import *
@@ -11,7 +10,6 @@ from Data import DB
 import time
 import locale
 locale.setlocale(locale.LC_ALL, '')
-
 
 class IncrementalProgress(QProgressBar):
     def __init__(self, maxi, *args):
@@ -114,11 +112,8 @@ Analysis data: %d (%d keys, %d trigrams, %d words)
         DB.commit()
         self.progress_.hide()
 
-
 if __name__ == '__main__':
     app = QApplication([])
     dw = DatabaseWidget()
     dw.show()
     app.exec_()
-
-

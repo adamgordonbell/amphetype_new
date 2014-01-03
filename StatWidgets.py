@@ -1,4 +1,3 @@
-
 from __future__ import division, with_statement
 
 import time
@@ -10,8 +9,6 @@ from Config import *
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
-
 
 class WordModel(AmphModel):
     def signature(self):
@@ -28,9 +25,6 @@ class WordModel(AmphModel):
     def setData(self, words):
         self.words = map(list, words)
         self.reset()
-
-
-
 
 class StringStats(QWidget):
     def __init__(self, *args):
@@ -92,4 +86,3 @@ class StringStats(QWidget):
                 order by %s limit %d""" % (ord, limit)
 
         self.model.setData(DB.fetchall(sql, (hist, cat, count)))
-
