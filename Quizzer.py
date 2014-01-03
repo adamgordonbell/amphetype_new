@@ -53,7 +53,6 @@ class Typer(QTextEdit):
         self.times = None
         self.editfalg = None
         self.mistakes = None
-        self.palettes = None
         self.where = None
         self.mistake = None
         self.editflag = None

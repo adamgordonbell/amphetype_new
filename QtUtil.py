@@ -66,13 +66,16 @@ class AmphModel(QAbstractItemModel):
 
     def rowCount(self, index=QModelIndex()):
         tab = self.findList(index)
+        if tab == None:
+            return 0
         return len(tab)
+
     def columnCount(self, index=QModelIndex()):
         return self.cols
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid():
-            return QVariant()
+           return QVariant()
 
         if role != Qt.DisplayRole and role != Qt.UserRole:
             return QVariant()

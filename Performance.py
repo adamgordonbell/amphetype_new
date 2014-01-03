@@ -15,7 +15,7 @@ from PyQt4.QtGui import *
 
 def dampen(x, n=10):
     ret = []
-    s = sum(x[0:n])
+    s = sum(x[0: n])
     q = 1/n
     for i in range(n, len(x)):
         ret.append(s*q)
@@ -23,6 +23,11 @@ def dampen(x, n=10):
     return ret
 
 class ResultModel(AmphModel):
+    def __init__(self, *args):
+        super(ResultModel, self).__init__(*args)
+        self.data_ = None
+        self.source = None
+
     def signature(self):
         self.source = None
         self.data_ = []
@@ -105,10 +110,10 @@ class PerformanceHistory(QWidget):
 
     def updateGraph(self):
         pc = Settings.get('graph_what')
-        y = map(lambda x:x[pc], self.model.rows)
+        y = map(lambda x: x[pc], self.model.rows)
 
         if Settings.get("chrono_x"):
-            x = map(lambda x:x[1], self.model.rows)
+            x = map(lambda x: x[1], self.model.rows)
         else:
             x = range(len(y))
             x.reverse()
@@ -117,8 +122,8 @@ class PerformanceHistory(QWidget):
             y = dampen(y, Settings.get('dampen_average'))
             x = dampen(x, Settings.get('dampen_average'))
 
-        self.p = Plotters.Plot(x, y)
-        self.plot.setScene(self.p)
+        p = Plotters.Plot(x, y)
+        self.plot.setScene(p)
 
     def refreshSources(self):
         self.editflag = True
