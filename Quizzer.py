@@ -48,6 +48,16 @@ class Typer(QTextEdit):
         self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
         self.target = None
+        self.when = None
+        self.is_lesson = None
+        self.times = None
+        self.editfalg = None
+        self.mistakes = None
+        self.palettes = None
+        self.where = None
+        self.mistake = None
+        self.editflag = None
+        self.mins = None
 
     def sizeHint(self):
         return QSize(600, 10)
@@ -69,7 +79,7 @@ class Typer(QTextEdit):
                                  Qt.gray, Qt.black, Qt.lightGray)}
         self.setPalette(self.palettes['inactive'])
 
-    def setTarget(self,  text, guid):
+    def setTarget(self, text, guid):
         self.editflag = True
         self.target = text
         self.when = [0] * (len(self.target)+1)
@@ -196,7 +206,7 @@ class Typer(QTextEdit):
         return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2, self.times)) / self.where
 
 class Quizzer(QWidget):
-    def __init__(self , *args):
+    def __init__(self, *args):
         super(Quizzer, self).__init__(*args)
 
         self.result = QLabel()
@@ -206,8 +216,8 @@ class Quizzer(QWidget):
         #self.label.setFrameStyle(QFrame.Raised | QFrame.StyledPanel)
         #self.typer.setBuddy(self.label)
         self.info = SettingsCheckBox('repeat', 'repeat lesson') # AmphButton("Back one", self.lastText)
-        self.connect(self.typer,  SIGNAL("done"), self.done)
-        self.connect(self.typer,  SIGNAL("cancel"), SIGNAL("wantText"))
+        self.connect(self.typer, SIGNAL("done"), self.done)
+        self.connect(self.typer, SIGNAL("cancel"), SIGNAL("wantText"))
         self.connect(Settings, SIGNAL("change_typer_font"), self.readjust)
         self.connect(Settings, SIGNAL("change_show_last"), self.result.setVisible)
         self.connect(self.typer, SIGNAL("repeat"), self.repeatText)
@@ -338,7 +348,7 @@ class Quizzer(QWidget):
         vals = []
         for k, s in stats.iteritems():
             v = visc[k].median()
-            vals.append( (s.median(), v*100.0, now, len(s), s.flawed(), type(k), k) )
+            vals.append((s.median(), v*100.0, now, len(s), s.flawed(), type(k), k))
         return vals
 
     def insertStats(self, now, vals):
@@ -363,12 +373,12 @@ class Quizzer(QWidget):
             if i < (len(words) -1 // 8):
                 i = (len(words) - 1) // 8
                 i = i + 1
-            wordLessons = map(lambda x:x[6], words[0:i])
+            wordLessons = map(lambda x: x[6], words[0:i])
 
-            phrases = filter(lambda x: x[5] ==3, vals)
+            phrases = filter(lambda x: x[5] == 3, vals)
             phrases.sort(key=lambda x: (x[1], x[4]), reverse=True)
             i = len(wordLessons)
-            phraseLessons = map(lambda x:x[6], phrases[0:i])
+            phraseLessons = map(lambda x: x[6], phrases[0: i])
             self.emit(SIGNAL("wantReview"), wordLessons + phraseLessons)
 
     def lessThanSpeed(self):
