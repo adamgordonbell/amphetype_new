@@ -1,10 +1,17 @@
+My Fork of Amphetype - A great typing program.
+It contains a bunch of small improvements that I needed to use it.
 
-
-Proper install is coming. I apologize for the current
-mess. It was developed on a Windows machine with few
-tools and no internet during a train ride and suffered
-a few rewrites so the filenames aren't very descriptive
-anymore.
+These include:
+ * Phrase based lesson
+ * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
+ * improved lesson splitter
+ * permissive mode
+ * etc 
+ 
+Sample text included:
+ * Selections from project gutenberg
+ * All the typing tests from TyperRacer.com
+ * QWERTY right hand / Left Hand and alternating hand words
 
 
 To run, type:
