@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from __future__ import with_statement, division
 
 import platform
@@ -20,17 +22,18 @@ if platform.system() == "Windows":
 else:
     timer = time.time
 
+
 try:
     import winsound
 except ImportError:
     import os
-    def playsound(frequency,duration):
+    def playsound(frequency, duration):
         return
         #apt-get install beep
-        os.system('beep -f %s -l %s' % (frequency,duration))
+        os.system('beep -f %s -l %s' % (frequency, duration))
 else:
-    def playsound(frequency,duration):
-        winsound.Beep(frequency,duration)
+    def playsound(frequency, duration):
+        winsound.Beep(frequency, duration)
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -44,7 +47,7 @@ class Typer(QTextEdit):
         self.connect(Settings, SIGNAL("change_quiz_wrong_bg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
-        self.target = None    
+        self.target = None
 
     def sizeHint(self):
         return QSize(600, 10)
@@ -85,7 +88,7 @@ class Typer(QTextEdit):
         self.setText(self.getWaitText())
         self.selectAll()
         self.editflag = False
-        self.is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (guid, ))[0]
+        self.is_lesson = DB.fetchone("select discount from source where rowid=?", (None, ), (guid, ))[0]
         if self.is_lesson:
             self.mins = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
         else:
@@ -145,20 +148,20 @@ class Typer(QTextEdit):
 
         if v == lcd:
             self.setPalette(self.palettes['right'])
-        else:     
+        else:
              # Fail on 100%
             if self.mins[1] == 100.0:
-                self.emit(SIGNAL("repeat"))   
+                self.emit(SIGNAL("repeat"))
             else:
-                
+
                 if self.permissive:
                     self.setText(self.target[0:(len(v))])
-                    cursor = self.textCursor() 
-                    cursor.setPosition(len(v)) 
-                    self.setTextCursor(cursor) 
-                    Freq = 300 
+                    cursor = self.textCursor()
+                    cursor.setPosition(len(v))
+                    self.setTextCursor(cursor)
+                    Freq = 300
                     Dur = 100
-                    playsound(Freq,Dur)
+                    playsound(Freq, Dur)
                 else:
                     self.setPalette(self.palettes['wrong'])
     def getMistakes(self):
@@ -181,16 +184,16 @@ class Typer(QTextEdit):
         return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
 
     def getAccuracy(self):
-        return 1.0 - len(filter(None,self.mistake)) / self.where
-    
+        return 1.0 - len(filter(None, self.mistake)) / self.where
+
     def getRawSpeed(self):
         return self.getElapsed() / self.where
-    
+
     def getSpeed(self):
         return 12 / self.getRawSpeed()
 
     def getViscosity(self):
-        return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2,self.times)) / self.where
+        return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2, self.times)) / self.where
 
 class Quizzer(QWidget):
     def __init__(self , *args):
@@ -209,7 +212,7 @@ class Quizzer(QWidget):
         self.connect(Settings, SIGNAL("change_show_last"), self.result.setVisible)
         self.connect(self.typer, SIGNAL("repeat"), self.repeatText)
 
-        self.text = ('','', 0, None)
+        self.text = ('', '', 0, None)
 
         layout = QVBoxLayout()
         layout.addWidget(self.info)
@@ -218,7 +221,7 @@ class Quizzer(QWidget):
         layout.addWidget(self.label, 1, Qt.AlignBottom)
         layout.addWidget(self.typer, 1)
         self.setLayout(layout)
-        self.readjust()    
+        self.readjust()
 
     def readjust(self):
         f = Settings.getFont("typer_font")
@@ -229,17 +232,17 @@ class Quizzer(QWidget):
         self.text = text
 
         tempText = globals.AddSymbols(text[2])
-        tempText = tempText.replace('  ',' ')
+        tempText = tempText.replace('  ', ' ')
         self.text = (text[0], text[1], tempText)
 
         self.label.setText(self.text[2].replace(u"\n", u"↵\n"))
         self.typer.setTarget(self.text[2], self.text[1])
-        self.typer.setFocus()      
+        self.typer.setFocus()
 
     def repeatText(self):
-        Freq = 250 
+        Freq = 250
         Dur = 200
-        playsound(Freq,Dur)
+        playsound(Freq, Dur)
         self.setText(self.text)
 
     def lastText(self):
@@ -253,19 +256,19 @@ class Quizzer(QWidget):
         perCharacterTimes = self.typer.times
         spc = self.typer.getRawSpeed()
 
-        for c, t, m in zip(text,self.typer.times, perCharacterMistakes):
+        for c, t, m in zip(text, self.typer.times, perCharacterMistakes):
             stats[c].append(t, m)
             visc[c].append(((t-spc)/spc)**2)
-        
+
         def gen_tup(s, e):
             perch = sum(perCharacterTimes[s:e])/(e-s)
             visc = sum(map(lambda x: ((x-perch)/perch)**2, perCharacterTimes[s:e]))/(e-s)
             return (text[s:e], perch, len(filter(None, perCharacterMistakes[s:e])), visc)
-        
+
         for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, self.typer.where-2)]:
             stats[tri].append(t, m > 0)
             visc[tri].append(v)
-        
+
         wordRegex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
         for w, t, m, v in [gen_tup(*x.span()) for x in wordRegex.finditer(text) if x.end()-x.start() > 3]:
             stats[w].append(t, m > 0)
@@ -275,7 +278,7 @@ class Quizzer(QWidget):
         #for w, t, m, v in [gen_tup(*x.span(1)) for x in pairRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
         #    stats[w].append(t, m > 0)
         #    visc[w].append(v)
-        if Settings.get('phrase_lessons'): 
+        if Settings.get('phrase_lessons'):
             tripleRegex = re.compile(r"(?=(\b[^\s]+\s+[^\s]+\s+[^\s]+))")
             for w, t, m, v in [gen_tup(*x.span(1)) for x in tripleRegex.finditer(text) if x.end(1)-x.start(1) > 3]:
                 stats[w].append(t, m > 0)
@@ -286,13 +289,13 @@ class Quizzer(QWidget):
     def updateResultLabel(self):
         spc = self.typer.getSpeed()
         accuracy = self.typer.getAccuracy()
-        v2 = DB.fetchone("""select agg_median(wpm),agg_median(acc) from
-            (select wpm,100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
+        v2 = DB.fetchone("""select agg_median(wpm), agg_median(acc) from
+            (select wpm, 100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
         self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"
             % ((spc, 100.0*accuracy) + v2))
 
     def insertResults(self, now):
-        return DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
+        return DB.execute('insert into result (w, text_id, source, wpm, accuracy, viscosity) values (?, ?, ?, ?, ?, ?)',
                            (now, self.text[0], self.text[1], 12.0/self.typer.getRawSpeed(), self.typer.getAccuracy(), self.typer.getViscosity()))
 
     def done(self):
@@ -314,8 +317,8 @@ class Quizzer(QWidget):
         if self.lessThanSpeed() or self.lessThanAccuracy():
             self.setText(self.text)
         # if pending lessons left, then keep going
-        elif self.isLesson() and globals.pendingLessons:            
-            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        elif self.isLesson() and globals.pendingLessons:
+            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
         # create a lesson
         elif not self.isLesson() and Settings.get('auto_review'):
             self.createLessons(vals)
@@ -340,8 +343,8 @@ class Quizzer(QWidget):
 
     def insertStats(self, now, vals):
         DB.executemany_('''insert into statistic
-            (time,viscosity,w,count,mistakes,type,data) values (?,?,?,?,?,?,?)''', vals)
-        DB.executemany_('insert into mistake (w,target,mistake,count) values (?,?,?,?)',
+            (time, viscosity, w, count, mistakes, type, data) values (?, ?, ?, ?, ?, ?, ?)''', vals)
+        DB.executemany_('insert into mistake (w, target, mistake, count) values (?, ?, ?, ?)',
                 [(now, k[0], k[1], v) for k, v in self.typer.getMistakes().iteritems()])
 
     def createLessons(self, vals):
@@ -352,7 +355,7 @@ class Quizzer(QWidget):
             self.emit(SIGNAL("wantText"))
         else:
             #sort mistakes to beginning
-            words.sort(key=lambda x: (x[4],x[1]), reverse=True)
+            words.sort(key=lambda x: (x[4], x[1]), reverse=True)
             i = 0
             while words[i][4] != 0:
                 i += 1
@@ -363,7 +366,7 @@ class Quizzer(QWidget):
             wordLessons = map(lambda x:x[6], words[0:i])
 
             phrases = filter(lambda x: x[5] ==3, vals)
-            phrases.sort(key=lambda x: (x[1],x[4]), reverse=True)
+            phrases.sort(key=lambda x: (x[1], x[4]), reverse=True)
             i = len(wordLessons)
             phraseLessons = map(lambda x:x[6], phrases[0:i])
             self.emit(SIGNAL("wantReview"), wordLessons + phraseLessons)
@@ -375,7 +378,7 @@ class Quizzer(QWidget):
         return self.typer.getAccuracy() < (self.getMinimums()[1])/100.0
 
     def isLesson(self):
-        is_lesson = DB.fetchone("select discount from source where rowid=?", (None,), (self.text[1], ))[0]
+        is_lesson = DB.fetchone("select discount from source where rowid=?", (None, ), (self.text[1], ))[0]
         return is_lesson
 
     def getMinimums(self):
@@ -383,4 +386,4 @@ class Quizzer(QWidget):
             minimums = (Settings.get("min_lesson_wpm"), Settings.get("min_lesson_acc"))
         else:
             minimums = (Settings.get("min_wpm"), Settings.get("min_acc"))
-        return minimums 
+        return minimums

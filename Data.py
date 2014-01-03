@@ -111,7 +111,7 @@ class AmphDatabase(sqlite3.Connection):
         self.create_function("ifelse", 3, lambda x, y, z: y if x is not None else z)
 
         try:
-            self.fetchall("select * from result,source,statistic,text,mistake limit 1")
+            self.fetchall("select * from result, source, statistic, text, mistake limit 1")
         except:
             self.newDB()
 
@@ -152,7 +152,7 @@ create table result (w real, text_id text, source integer, wpm real, accuracy re
 create table statistic (w real, data text, type integer, time real, count integer, mistakes integer, viscosity real);
 create table mistake (w real, target text, mistake text, count integer);
 create view text_source as
-    select id,s.name,text,coalesce(t.disabled,s.disabled)
+    select id, s.name, text, coalesce(t.disabled, s.disabled)
         from text as t left join source as s on (t.source = s.rowid);
         """)
         self.commit()
@@ -179,19 +179,19 @@ create view text_source as
             self.execute('update source set disabled = NULL where rowid = ?', v[0])
             self.commit()
             return v[0][0]
-        self.execute('insert into source (name,discount) values (?,?)', (source, lesson))
+        self.execute('insert into source (name, discount) values (?, ?)', (source, lesson))
         return self.getSource(source)
 
 dbname = Settings.get("db_name")
 
 # GLOBAL
-DB = sqlite3.connect(dbname,5,0,"DEFERRED",False,AmphDatabase)
+DB = sqlite3.connect(dbname, 5, 0, "DEFERRED", False, AmphDatabase)
 
 def switchdb(nn):
     global DB
     DB.commit()
     try:
-        nDB = sqlite3.connect(nn,5,0,"DEFERRED",False,AmphDatabase)
+        nDB = sqlite3.connect(nn, 5, 0, "DEFERRED", False, AmphDatabase)
         DB = nDB
     except Exception, e:
         from PyQt4.QtGui import QMessageBox as qmb

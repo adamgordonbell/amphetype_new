@@ -107,14 +107,14 @@ class LessonGenerator(QWidget):
             ["In generating lessons, I will make", SettingsEdit("gen_copies"),
                 "copies the list below and divide them into sublists of size",
                 SettingsEdit("gen_take"), "(0 for all).", None],
-            ["I will then", SettingsCombo("gen_mix", [('c',"concatenate"), ('m',"commingle")]),
+            ["I will then", SettingsCombo("gen_mix", [('c', "concatenate"), ('m', "commingle")]),
                 "corresponding sublists into atomic building blocks which are fashioned into lessons according to your lesson size preferences.",  None],
             [
                 ([
                     (self.strings, 1),
                     [SettingsCombo('str_clear', [('s', "Supplement"), ('r', "Replace")]), "list with",
                         SettingsEdit("str_extra"),
-                        SettingsCombo('str_what', [('e','encompassing'), ('s','similar'), ('r','random')]),
+                        SettingsCombo('str_what', [('e', 'encompassing'), ('s', 'similar'), ('r', 'random')]),
                         "words from", AmphButton("a file", self.strings.addFromFile),
                         "or", AmphButton("analysis database", self.strings.addFromTyped), None]
                 ], 1),
@@ -129,16 +129,16 @@ class LessonGenerator(QWidget):
         self.connect(Settings, SIGNAL("change_gen_take"), self.generatePreview)
         self.connect(Settings, SIGNAL("change_gen_copies"), self.generatePreview)
         self.connect(Settings, SIGNAL("change_gen_mix"), self.generatePreview)
-        self.connect(self.strings, SIGNAL("updated"), self.generatePreview)    
+        self.connect(self.strings, SIGNAL("updated"), self.generatePreview)
 
     def wantReview(self, words):
         print globals.pendingLessons
         globals.pendingLessons = globals.pendingLessons + self.generateLesson(words)
         print globals.pendingLessons
-        if globals.pendingLessons:        
-	        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        if globals.pendingLessons:
+	        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
         else:
-	        self.emit(SIGNAL("newReview"), "")        
+	        self.emit(SIGNAL("newReview"), "")
 
     def generatePreview(self):
         words = self.strings.getList()

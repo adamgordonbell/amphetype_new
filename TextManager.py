@@ -22,11 +22,11 @@ class SourceModel(AmphModel):
     def populateData(self, idxs):
         if len(idxs) == 0:
             return map(list, DB.fetchall("""
-            select s.rowid,s.name,t.count,r.count,r.wpm,ifelse(nullif(t.dis,t.count),'No','Yes')
+            select s.rowid, s.name, t.count, r.count, r.wpm, ifelse(nullif(t.dis, t.count), 'No', 'Yes')
                     from source as s
-                    left join (select source,count(*) as count,count(disabled) as dis from text group by source) as t
+                    left join (select source, count(*) as count, count(disabled) as dis from text group by source) as t
                         on (s.rowid = t.source)
-                    left join (select source,count(*) as count,avg(wpm) as wpm from result group by source) as r
+                    left join (select source, count(*) as count, avg(wpm) as wpm from result group by source) as r
                         on (t.source = r.source)
                     where s.disabled is null
                     order by s.name"""))
@@ -36,11 +36,11 @@ class SourceModel(AmphModel):
 
         r = self.rows[idxs[0]]
 
-        return map(list, DB.fetchall("""select t.rowid,substr(t.text,0,40)||"...",length(t.text),r.count,r.m,ifelse(t.disabled,'Yes','No')
-                from (select rowid,* from text where source = ?) as t
-                left join (select text_id,count(*) as count,agg_median(wpm) as m from result group by text_id) as r
+        return map(list, DB.fetchall("""select t.rowid, substr(t.text, 0, 40)||"...", length(t.text), r.count, r.m, ifelse(t.disabled, 'Yes', 'No')
+                from (select rowid, * from text where source = ?) as t
+                left join (select text_id, count(*) as count, agg_median(wpm) as m from result group by text_id) as r
                     on (t.id = r.text_id)
-                order by t.rowid""", (r[0],)))
+                order by t.rowid""", (r[0], )))
 
 class TextManager(QWidget):
 
@@ -84,7 +84,7 @@ A typing program that not only measures your speed and progress, but also gives 
                             ["Accuracy:", SettingsEdit("min_acc"), (None, (0, 1))],
                             [("Repeat <i>lessons</i> that don't meet the following requirements:\n", (1, 3))],
                             ["WPM:", SettingsEdit("min_lesson_wpm")],
-                            ["Accuracy:", SettingsEdit("min_lesson_acc")],]),
+                            ["Accuracy:", SettingsEdit("min_lesson_acc")], ]),
                         None]], QBoxLayout.LeftToRight))
 
         self.connect(Settings, SIGNAL("change_select_method"), self.setSelect)
@@ -98,9 +98,9 @@ A typing program that not only measures your speed and progress, but also gives 
 
         hist = time.time() - 86400.0 * Settings.get('history')
         tri = dict(DB.execute("""
-                    select data,agg_median(time) as wpm from statistic
+                    select data, agg_median(time) as wpm from statistic
                     where w >= ? and type = 1
-                    group by data""", (hist,)).fetchall()) #[(t, (m, c)) for t, m, c in
+                    group by data""", (hist, )).fetchall()) #[(t, (m, c)) for t, m, c in
 
         g = tri.values()
         if len(g) == 0:
@@ -112,7 +112,7 @@ A typing program that not only measures your speed and progress, but also gives 
             v = 0
             s = 0.0
             for i in xrange(0, len(text) - 2):
-                t = text[i:i + 3]
+                t = text[i: i + 3]
                 if t in tri:
                     s += tri[t]
                 else:
@@ -121,7 +121,7 @@ A typing program that not only measures your speed and progress, but also gives 
                     v += 1
             avg = s / (len(text) - 2)
             #print text
-            #print " v=%d,s=%f" % (v, 12.0/avg), "ex:", expect
+            #print " v=%d, s=%f" % (v, 12.0/avg), "ex:", expect
             return 12.0 / avg
 
         self.diff_eval = _func
@@ -164,7 +164,7 @@ A typing program that not only measures your speed and progress, but also gives 
             txt_id = h.hexdigest()
             dis = 1 if lesson == 2 else None
             try:
-                DB.execute("insert into text (id,text,source,disabled) values (?,?,?,?)",(txt_id, x, id, dis))
+                DB.execute("insert into text (id, text, source, disabled) values (?, ?, ?, ?)", (txt_id, x, id, dis))
             except Exception, e:
                 pass # silently skip ...
         r.append(txt_id)
@@ -177,7 +177,7 @@ A typing program that not only measures your speed and progress, but also gives 
     def newReview(self, review):
         q = self.addTexts("<Reviews>", [review], lesson=2, update=False)
         if q:
-            v = DB.fetchone("select id,source,text from text where id = ?", self.defaultText, q)
+            v = DB.fetchone("select id, source, text from text where id = ?", self.defaultText, q)
             self.emit(SIGNAL("setText"), v)
         else:
             self.nextText()
@@ -186,7 +186,7 @@ A typing program that not only measures your speed and progress, but also gives 
         self.emit(SIGNAL("refreshSources"))
         self.model.reset()
 
-   
+
 
     def nextText(self):
         if  Settings.get('repeat'):
@@ -196,7 +196,7 @@ A typing program that not only measures your speed and progress, but also gives 
 
             if type != 1:
                 # Not in order
-                v = DB.execute("select id,source,text from text where disabled is null order by random() limit %d" % Settings.get('num_rand')).fetchall()
+                v = DB.execute("select id, source, text from text where disabled is null order by random() limit %d" % Settings.get('num_rand')).fetchall()
                 if len(v) == 0:
                     v = None
                 elif type == 2:
@@ -207,13 +207,13 @@ A typing program that not only measures your speed and progress, but also gives 
                     v = v[0] # random, just pick the first
             else:
                 # Fetch in order
-                lastid = (0,)
+                lastid = (0, )
                 lastResultGuid = DB.fetchone("""select r.text_id
                     from result as r left join source as s on (r.source = s.rowid)
                     where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
                 if lastResultGuid is not None:
                     lastid = DB.fetchone("select rowid from text where id = ?", lastid, lastResultGuid)
-                v = DB.fetchone("select id,source,text from text where rowid > ? and disabled is null order by rowid asc limit 1", None, lastid)
+                v = DB.fetchone("select id, source, text from text where rowid > ? and disabled is null order by rowid asc limit 1", None, lastid)
 
             if v is None:
                 v = self.defaultText
@@ -221,12 +221,12 @@ A typing program that not only measures your speed and progress, but also gives 
 
     def lastText(self):
         # Fetch in order
-        lastid = (0,)
+        lastid = (0, )
         lastResultGuid = DB.fetchone("""select r.text_id
             from result as r left join source as s on (r.source = s.rowid)
             where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
         if lastResultGuid is not None:
-            v = DB.fetchone("select id,source,text from text where id = ?", None, lastResultGuid)
+            v = DB.fetchone("select id, source, text from text where id = ?", None, lastResultGuid)
         else:
             v = self.defaultText
 
@@ -267,19 +267,19 @@ A typing program that not only measures your speed and progress, but also gives 
     def disableSelected(self):
         cats, texts = self.getSelected()
         DB.setRegex(Settings.get('text_regex'))
-        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1)
+        DB.executemany("""update text set disabled = ifelse(disabled, NULL, 1)
                 where rowid = ? and regex_match(text) = 1""",
-                       map(lambda x:(x,), texts))
-        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1)
+                       map(lambda x: (x, ), texts))
+        DB.executemany("""update text set disabled = ifelse(disabled, NULL, 1)
                 where source = ? and regex_match(text) = 1""",
-                       map(lambda x:(x,), cats))
+                       map(lambda x: (x, ), cats))
         self.update()
 
     def disableAllSelected(self):
         cats, texts = self.getSelected()
         DB.setRegex(Settings.get('text_regex'))
-        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1) where rowid = ?""", map(lambda x:(x,), texts))
-        DB.executemany("""update text set disabled = ifelse(disabled,NULL,1) where source = ?""", map(lambda x:(x,), cats))
+        DB.executemany("""update text set disabled = ifelse(disabled, NULL, 1) where rowid = ?""", map(lambda x: (x, ), texts))
+        DB.executemany("""update text set disabled = ifelse(disabled, NULL, 1) where source = ?""", map(lambda x: (x, ), cats))
         self.update()
 
     def getSelected(self):
@@ -300,7 +300,7 @@ A typing program that not only measures your speed and progress, but also gives 
             return
 
         q = self.model.data(idx, Qt.UserRole)
-        v = DB.fetchall('select id,source,text from text where rowid = ?', (q[0],))
+        v = DB.fetchall('select id, source, text from text where rowid = ?', (q[0], ))
 
         self.cur = v[0] if len(v) > 0 else self.defaultText
         self.emit(SIGNAL("setText"), self.cur)

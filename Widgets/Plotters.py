@@ -104,9 +104,9 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     v = Plotter()
-    p = Plot([1,2,3,4], [5.1,5.7,5.3,4.0])
+    p = Plot([1, 2, 3, 4], [5.1, 5.7, 5.3, 4.0])
     r = p.sceneRect()
-    print r.x(),r.y(),r.width(),r.height()
+    print r.x(), r.y(), r.width(), r.height()
     v.setScene(p)
     v.show()
     app.exec_()

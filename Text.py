@@ -94,7 +94,7 @@ def to_lessons(sentences):
 
     regex = re.compile(Settings.get('sentence_strip'))
     for s in sentences:
-        s = regex.sub(s,'')
+        s = regex.sub(s, '')
         ssplit = []
         while len(s) > sweet_size:
             idx = s.find(' ', sweet_size)

@@ -36,9 +36,9 @@ class TyperWindow(QMainWindow):
 
         self.setWindowTitle("Amphetype")
         globals.init()
-        tabs = QTabWidget()     
+        tabs = QTabWidget()
 
-        quiz = Quizzer()        
+        quiz = Quizzer()
 
         tabs.addTab(quiz, "Typer")
 
@@ -62,7 +62,7 @@ class TyperWindow(QMainWindow):
         self.connect(st, SIGNAL("lessonStrings"), lambda x: tabs.setCurrentIndex(4))
         tabs.addTab(st, "Analysis")
 
-        lg = LessonGenerator()        
+        lg = LessonGenerator()
         self.connect(st, SIGNAL("lessonStrings"), lg.addStrings)
         self.connect(lg, SIGNAL("newLessons"), lambda: tabs.setCurrentIndex(1))
         self.connect(lg, SIGNAL("newLessons"), tm.addTexts)

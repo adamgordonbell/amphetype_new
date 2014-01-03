@@ -61,14 +61,14 @@ class DatabaseWidget(QWidget):
 
     def update(self):
         self.progress_.show()
-        n_text = DB.fetchone('''select count(*) from text''', (0,))[0] ; self.progress_.inc(2)
-        n_res = DB.fetchone('''select count(*) from result''', (0,))[0] ; self.progress_.inc(2)
-        n_words = DB.fetchall('''select count(*),sum(count) from statistic
+        n_text = DB.fetchone('''select count(*) from text''', (0, ))[0] ; self.progress_.inc(2)
+        n_res = DB.fetchone('''select count(*) from result''', (0, ))[0] ; self.progress_.inc(2)
+        n_words = DB.fetchall('''select count(*), sum(count) from statistic
             group by type order by type''') ; self.progress_.inc(2)
         if len(n_words) != 3:
-            n_words = [(0,0),(0,0),(0,0)]
+            n_words = [(0, 0), (0, 0), (0, 0)]
         n_first = DB.fetchone('''select w from result order by w asc limit 1''',
-            (time.time(),))[0] ; self.progress_.hide()
+            (time.time(), ))[0] ; self.progress_.hide()
 
         self.stats_.setText(locale.format_string(
 '''Texts: %d
@@ -96,16 +96,16 @@ Analysis data: %d (%d keys, %d trigrams, %d words)
             w = now - day*lim
             g = grp * day
             q.extend( DB.fetchall('''
-                select avg(w),data,type,agg_mean(time,count),sum(count),sum(mistakes),agg_median(viscosity)
+                select avg(w), data, type, agg_mean(time, count), sum(count), sum(mistakes), agg_median(viscosity)
                 from statistic where w <= %f
-                group by data,type,cast(w/%f as int)''' % (w, g)) )
+                group by data, type, cast(w/%f as int)''' % (w, g)) )
             self.progress_.inc()
 
             DB.execute('''delete from statistic where w <= ?''', (w, ))
             self.progress_.inc()
 
-        DB.executemany('''insert into statistic (w,data,type,time,count,mistakes,viscosity)
-            VALUES (?,?,?,?,?,?,?)''', q)
+        DB.executemany('''insert into statistic (w, data, type, time, count, mistakes, viscosity)
+            VALUES (?, ?, ?, ?, ?, ?, ?)''', q)
         self.progress_.inc()
         DB.execute('vacuum')
         self.progress_.inc()

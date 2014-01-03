@@ -190,9 +190,9 @@ class PreferenceWidget(QWidget):
             None,
             SettingsCheckBox('title_case', "Practice Capitals by Capitlizing the first letter of each word"),
             [SettingsCheckBox('symbols', "Practice Symbols by appending to each word"),
-                "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'),")", None],
+                "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'), ")", None],
             None,
-            ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"),"Strip lessons regex", SettingsEdit('sentence_strip')," )",None],
+            ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"), "Strip lessons regex", SettingsEdit('sentence_strip'), " )", None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
              SettingsCheckBox('permissive_errors', "Permissive Errors : no backspace required (restart required)"),
             [AmphGridLayout([
@@ -201,7 +201,7 @@ class PreferenceWidget(QWidget):
                         SettingsColor('quiz_right_bg', "Background")],
                 ["Wrong Input", SettingsColor('quiz_wrong_fg', "Foreground"),
                         SettingsColor('quiz_wrong_bg', "Background")],
-                [1+1j,1+2j,2+1j,2+2j]
+                [1+1j, 1+2j, 2+1j, 2+2j]
             ]), None],
             None,
             ["Data is considered too old to be included in analysis after",

@@ -128,7 +128,7 @@ class PerformanceHistory(QWidget):
         self.cb_source.addItem("<ALL TEXTS>")
         self.cb_source.addItem("<ALL LESSONS>")
 
-        for id, v in DB.fetchall('select rowid,abbreviate(name,30) from source order by name'):
+        for id, v in DB.fetchall('select rowid, abbreviate(name, 30) from source order by name'):
             self.cb_source.addItem(v, QVariant(id))
         self.editflag = False
 
@@ -155,13 +155,13 @@ class PerformanceHistory(QWidget):
 
         g = Settings.get('perf_group_by')
         if g == 0: # no grouping
-            sql = '''select text_id,w,s.name,wpm,100.0*accuracy,viscosity
+            sql = '''select text_id, w, s.name, wpm, 100.0*accuracy, viscosity
                 from result as r left join source as s on (r.source = s.rowid)
                 %s %s
                 order by w desc limit %d'''
         elif g:
-            sql = '''select agg_first(text_id),avg(r.w) as w,count(r.rowid) || ' result(s)',agg_median(r.wpm),
-                        100.0*agg_median(r.accuracy),agg_median(r.viscosity)
+            sql = '''select agg_first(text_id), avg(r.w) as w, count(r.rowid) || ' result(s)', agg_median(r.wpm),
+                        100.0*agg_median(r.accuracy), agg_median(r.viscosity)
                 from result as r left join source as s on (r.source = s.rowid)
                 %s %s
                 order by w desc limit %d'''
@@ -190,7 +190,7 @@ class PerformanceHistory(QWidget):
     def doubleClicked(self, idx):
         r = self.model.rows[idx.row()]
 
-        v = DB.fetchone('select id,source,text from text where id = ?', None, (r[0], ))
+        v = DB.fetchone('select id, source, text from text where id = ?', None, (r[0], ))
         if v == None:
             return # silently ignore
 

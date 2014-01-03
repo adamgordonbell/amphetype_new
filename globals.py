@@ -7,7 +7,7 @@ def init():
     global pendingLessons
     pendingLessons = []
 
-# the cache makes each modified text determintistic, in that if you do the same text over and over, it will have the same random elements added.  
+# the cache makes each modified text determintistic, in that if you do the same text over and over, it will have the same random elements added.
 # this is useful for building up speed on selection of text
 def modifiedWord(word):
     global wordCache

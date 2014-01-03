@@ -74,13 +74,13 @@ class StringStats(QWidget):
         count = Settings.get('ana_count')
         hist = time.time() - Settings.get('history') * 86400.0
 
-        sql = """select data,12.0/time as wpm,
+        sql = """select data, 12.0/time as wpm,
             100.0-100.0*misses/cast(total as real) as accuracy,
-            viscosity,total,misses,
+            viscosity, total, misses,
             total*time*time*(1.0+misses/total) as damage
                 from
-                    (select data,agg_median(time) as time,agg_median(viscosity) as viscosity,
-                    sum(count) as total,sum(mistakes) as misses
+                    (select data, agg_median(time) as time, agg_median(viscosity) as viscosity,
+                    sum(count) as total, sum(mistakes) as misses
                     from statistic where w >= ? and type = ? group by data)
                 where total >= ?
                 order by %s limit %d""" % (ord, limit)

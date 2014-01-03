@@ -23,6 +23,7 @@
     <Compile Include="editdist_fake.py" />
     <Compile Include="globals.py" />
     <Compile Include="Lesson.py" />
+    <Compile Include="__init__.py" />
     <Compile Include="Performance.py" />
     <Compile Include="QtUtil.py" />
     <Compile Include="Quizzer.py" />
@@ -32,7 +33,6 @@
     <Compile Include="TextManager.py" />
     <Compile Include="Widgets\Database.py" />
     <Compile Include="Widgets\Plotters.py" />
-    <Compile Include="Widgets\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Widgets" />
