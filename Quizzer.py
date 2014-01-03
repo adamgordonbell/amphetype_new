@@ -240,7 +240,7 @@ class Quizzer(QWidget):
     def setText(self, text):
         self.text = text
 
-        tempText = globals.AddSymbols(text[2])
+        tempText = Globals.AddSymbols(text[2])
         tempText = tempText.replace('  ', ' ')
         self.text = (text[0], text[1], tempText)
 
