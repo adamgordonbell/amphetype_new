@@ -72,7 +72,7 @@ class AmphModel(QAbstractItemModel):
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid():
-           return QVariant()
+            return QVariant()
 
         if role != Qt.DisplayRole and role != Qt.UserRole:
             return QVariant()
