@@ -100,7 +100,6 @@ def to_lessons(sentences):
             if idx == -1:
                 break
             if idx != -1:
-                ssplid.append(s[:idx])
                 s = s[idx+1:]
         ssplit.append(s)
         for xs in ssplit:
