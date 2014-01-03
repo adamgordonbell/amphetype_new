@@ -4,13 +4,16 @@ import time
 
 from Data import DB
 from QtUtil import *
-from Text import LessonGeneratorPlain
 from Config import *
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 class WordModel(AmphModel):
+    def __init__(self, *args):
+        super(WordModel, self).__init__(*args)
+        self.words = None
+
     def signature(self):
         self.words = []
         return (["Item", "Speed", "Accuracy", "Viscosity", "Count", "Mistakes", "Impact"],
@@ -66,7 +69,7 @@ class StringStats(QWidget):
                 (self.stats, 1)
             ]))
 
-    def update(self, *arg):
+    def update(self):
 
         ord = Settings.get('ana_which')
         cat = Settings.get('ana_what')
