@@ -95,10 +95,10 @@ Analysis data: %d (%d keys, %d trigrams, %d words)
 
             w = now - day*lim
             g = grp * day
-            q.extend( DB.fetchall('''
+            q.extend(DB.fetchall('''
                 select avg(w), data, type, agg_mean(time, count), sum(count), sum(mistakes), agg_median(viscosity)
                 from statistic where w <= %f
-                group by data, type, cast(w/%f as int)''' % (w, g)) )
+                group by data, type, cast(w/%f as int)''' % (w, g)))
             self.progress_.inc()
 
             DB.execute('''delete from statistic where w <= ?''', (w, ))

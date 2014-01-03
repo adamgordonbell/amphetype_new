@@ -4,7 +4,6 @@ from __future__ import division, with_statement
 import re
 import codecs
 import random
-import textwrap
 from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
@@ -76,7 +75,7 @@ class LessonMiner(QObject):
         ps = []
         for l in f:
             l = l.strip()
-            if l <> '':
+            if l != '':
                 p.append(l)
             elif len(p) > 0:
                 ps.append(SentenceSplitter(u" ".join(p)))
@@ -116,7 +115,7 @@ def to_lessons(sentences):
 
 class LessonGeneratorPlain(object):
     def __init__(self, words, per_lesson=12, repeats=4):
-        while (0 < len(words) % per_lesson < per_lesson / 2):
+        while 0 < len(words) % per_lesson < per_lesson / 2:
             per_lesson += 1
 
         self.lessons = []

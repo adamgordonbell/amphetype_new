@@ -61,7 +61,7 @@ class Plot(QGraphicsScene):
         while h/spc < 5:
             spc /= 2
 
-        ns = int( min_y/spc ) * spc
+        ns = int(min_y/spc) * spc
         start = ns
 
         qp = QPen(QColor(Qt.lightGray))
