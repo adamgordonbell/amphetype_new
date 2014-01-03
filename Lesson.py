@@ -5,7 +5,7 @@ import random
 import time
 import codecs
 from Data import DB
-import globals
+import Globals
 
 try:
     import editdist
@@ -60,7 +60,7 @@ class StringListWidget(QTextEdit):
             if w == 'e': # encompassing
                 stream = map(lambda x: (sum([x.count(c) for c in control]), x), words)
                 print "str:", list(stream)[0:10]
-                preres = list(islice(ifilter(lambda x: x[0]>0, stream), 4*n))
+                preres = list(islice(ifilter(lambda x: x[0] > 0, stream), 4*n))
                 print "pre:", preres
                 preres.sort(key=lambda x: x[0], reverse=True)
                 words = map(lambda x: x[1], preres)
@@ -108,7 +108,7 @@ class LessonGenerator(QWidget):
                 "copies the list below and divide them into sublists of size",
                 SettingsEdit("gen_take"), "(0 for all).", None],
             ["I will then", SettingsCombo("gen_mix", [('c', "concatenate"), ('m', "commingle")]),
-                "corresponding sublists into atomic building blocks which are fashioned into lessons according to your lesson size preferences.",  None],
+                "corresponding sublists into atomic building blocks which are fashioned into lessons according to your lesson size preferences.", None],
             [
                 ([
                     (self.strings, 1),
@@ -136,9 +136,9 @@ class LessonGenerator(QWidget):
         globals.pendingLessons = globals.pendingLessons + self.generateLesson(words)
         print globals.pendingLessons
         if globals.pendingLessons:
-	        self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
+            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
         else:
-	        self.emit(SIGNAL("newReview"), "")
+            self.emit(SIGNAL("newReview"), "")
 
     def generatePreview(self):
         words = self.strings.getList()

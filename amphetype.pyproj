@@ -21,7 +21,7 @@
     <Compile Include="Config.py" />
     <Compile Include="Data.py" />
     <Compile Include="editdist_fake.py" />
-    <Compile Include="globals.py" />
+    <Compile Include="Globals.py" />
     <Compile Include="Lesson.py" />
     <Compile Include="Widgets\__init__.py" />
     <Compile Include="__init__.py" />

@@ -7,7 +7,7 @@ import collections
 import time
 import re
 
-import globals
+import Globals
 from Data import Statistic, DB
 from Config import *
 

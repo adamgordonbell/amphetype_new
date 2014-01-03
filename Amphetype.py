@@ -15,7 +15,7 @@ v = opts.parse_args()[0]
 if v.database is not None:
     Settings.set('db_name', v.database)
 
-import globals
+import Globals
 from Data import DB
 from Quizzer import Quizzer
 from StatWidgets import StringStats

@@ -108,6 +108,10 @@ class AmphDatabase(sqlite3.Connection):
         sqlite3.Connection.create_aggregate(self, "agg_mean", 2, MeanAggregate)
         sqlite3.Connection.create_aggregate(self, "agg_first", 1, FirstAggregate)
         sqlite3.Connection.create_function(self, "ifelse", 3, lambda x, y, z: y if x is not None else z)
+        self._count = None
+        self.timecnt_ = None
+        self.regex_ = None
+        self.lasttime_ = None
 
         try:
             self.fetchall("select * from result, source, statistic, text, mistake limit 1")

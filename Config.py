@@ -190,7 +190,7 @@ class PreferenceWidget(QWidget):
             None,
             SettingsCheckBox('title_case', "Practice Capitals by Capitlizing the first letter of each word"),
             [SettingsCheckBox('symbols', "Practice Symbols by appending to each word"),
-                "(Skip words containing these characters:" , SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'), ")", None],
+                "(Skip words containing these characters:", SettingsEdit('stop_symbols'), "Append from these symbols ", SettingsEdit('include_symbols'), ")", None],
             None,
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"), "Strip lessons regex", SettingsEdit('sentence_strip'), " )", None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
