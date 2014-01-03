@@ -89,6 +89,7 @@ A typing program that not only measures your speed and progress, but also gives 
 
         self.connect(Settings, SIGNAL("change_select_method"), self.setSelect)
         self.setSelect(Settings.get('select_method'))
+        self.cur = None
 
     def setSelect(self, v):
         if v == 0 or v == 1:
@@ -165,7 +166,7 @@ A typing program that not only measures your speed and progress, but also gives 
             dis = 1 if lesson == 2 else None
             try:
                 DB.execute("insert into text (id, text, source, disabled) values (?, ?, ?, ?)", (txt_id, x, id, dis))
-            except Exception, e:
+            except Exception:
                 pass # silently skip ...
         r.append(txt_id)
         if update:
@@ -221,7 +222,6 @@ A typing program that not only measures your speed and progress, but also gives 
 
     def lastText(self):
         # Fetch in order
-        lastid = (0, )
         lastResultGuid = DB.fetchone("""select r.text_id
             from result as r left join source as s on (r.source = s.rowid)
             where (s.discount is null) or (s.discount = 1) order by r.w desc limit 1""", None)
