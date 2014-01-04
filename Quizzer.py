@@ -6,6 +6,7 @@ import platform
 import collections
 import time
 import re
+import random
 
 import Globals
 from Data import Statistic, DB
@@ -34,6 +35,8 @@ except ImportError:
 else:
     def playsound(frequency, duration):
         winsound.Beep(frequency, duration)
+
+wordCache = dict()
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -240,7 +243,7 @@ class Quizzer(QWidget):
     def setText(self, text):
         self.text = text
 
-        tempText = Globals.AddSymbols(text[2])
+        tempText = self.AddSymbols(text[2])
         tempText = tempText.replace('  ', ' ')
         self.text = (text[0], text[1], tempText)
 
@@ -326,8 +329,8 @@ class Quizzer(QWidget):
         if self.lessThanSpeed() or self.lessThanAccuracy():
             self.setText(self.text)
         # if pending lessons left, then keep going
-        elif self.isLesson() and globals.pendingLessons:
-            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
+        elif self.isLesson() and Globals.pendingLessons:
+            self.emit(SIGNAL("newReview"), Globals.pendingLessons.pop())
         # create a lesson
         elif not self.isLesson() and Settings.get('auto_review'):
             self.createLessons(vals)
@@ -396,3 +399,23 @@ class Quizzer(QWidget):
         else:
             minimums = (Settings.get("min_wpm"), Settings.get("min_acc"))
         return minimums
+
+    def AddSymbols(self, text):
+        text = ' '.join(self.modifiedWord(word) for word in text.split(' '))
+        text = text.strip()
+        return text
+
+    # the cache makes each modified text determintistic, in that if you do the same text over and over, it will have the same random elements added.
+    # this is useful for building up speed on selection of text
+    def modifiedWord(self, word):
+        global wordCache
+        if not word in wordCache:
+            if (not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('title_case')) and (Settings.get('symbols')):
+                wordCache[word] = word[0].capitalize() + word[1:] + random.choice(Settings.get('include_symbols'))
+            elif(not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('symbols')):
+                wordCache[word] = word + random.choice(Settings.get('include_symbols'))
+            elif(not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('title_case')):
+                wordCache[word] = word[0].capitalize() + word[1:]
+            else:
+                wordCache[word] = word
+        return wordCache[word]

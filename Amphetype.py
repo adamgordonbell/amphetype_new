@@ -35,7 +35,6 @@ class TyperWindow(QMainWindow):
         super(TyperWindow, self).__init__(*args)
 
         self.setWindowTitle("Amphetype")
-        Globals.init()
         tabs = QTabWidget()
 
         quiz = Quizzer()
