@@ -155,7 +155,6 @@ A typing program that not only measures your speed and progress, but also gives 
 
     def addTexts(self, source, texts, lesson=None, update=True):
         id = DB.getSource(source, lesson)
-        # regex = re.compile(Settings.get('sentence_strip'))
 
         r = []
         for x in texts:

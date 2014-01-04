@@ -1,7 +1,6 @@
 from __future__ import division, with_statement
 
 from itertools import *
-import time
 import bisect
 import sqlite3
 import re
@@ -189,13 +188,3 @@ dbname = Settings.get("db_name")
 
 # GLOBAL
 DB = sqlite3.connect(dbname, 5, 0, "DEFERRED", False, AmphDatabase)
-
-def switchdb(nn):
-    global DB
-    DB.commit()
-    try:
-        nDB = sqlite3.connect(nn, 5, 0, "DEFERRED", False, AmphDatabase)
-        DB = nDB
-    except Exception, e:
-        from PyQt4.QtGui import QMessageBox as qmb
-        qmb.information(None, "Database Error", "Failed to switch to the new database:\n" + str(e))

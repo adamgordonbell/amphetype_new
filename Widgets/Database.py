@@ -30,8 +30,6 @@ class DatabaseWidget(QWidget):
     def __init__(self, *args):
         super(DatabaseWidget, self).__init__(*args)
 
-        self.connect(self, SIGNAL("change_db_name"), self.dbchange)
-
         self.stats_ = QLabel("\nPress Update to fetch database statistics\n")
         self.progress_ = IncrementalProgress(6+2)
 
@@ -56,9 +54,6 @@ class DatabaseWidget(QWidget):
                 None
             ]))
 
-    def importdb(self):
-        pass
-
     def update(self):
         self.progress_.show()
         n_text = DB.fetchone('''select count(*) from text''', (0, ))[0] ; self.progress_.inc(2)
@@ -78,10 +73,6 @@ Analysis data: %d (%d keys, %d trigrams, %d words)
   ("First result was %.2f days ago.\n" % ((time.time()-n_first)/86400.0)),
             tuple([n_text, n_res, sum(map(lambda x: x[0], n_words))] + map(lambda x: x[0], n_words) +
             [n_words[0][1], n_words[2][1]]), True))
-
-    def dbchange(self, nn):
-        #DB.switchdb(nn)
-        pass
 
     def cleanup(self):
         day = 24*60*60
@@ -111,9 +102,3 @@ Analysis data: %d (%d keys, %d trigrams, %d words)
         self.progress_.inc()
         DB.commit()
         self.progress_.hide()
-
-if __name__ == '__main__':
-    app = QApplication([])
-    dw = DatabaseWidget()
-    dw.show()
-    app.exec_()

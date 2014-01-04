@@ -3,29 +3,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import math
 
-class HoverItem(QGraphicsRectItem):
-    def __init__(self, func, x, y, width, height, *args):
-        super(HoverItem, self).__init__(x, y, width, height, *args)
-
-        self.func_ = func
-        self.setBrush(QBrush(Qt.NoBrush))
-        self.setPen(QPen(Qt.NoPen))
-        self.setAcceptsHoverEvents(True)
-
-    def hoverEnterEvent(self, evt):
-        self.setBrush(QBrush(QColor(255, 192, 0, 120)))
-        self.func_()
-        self.update()
-
-    def hoverLeaveEvent(self, evt):
-        self.setBrush(QBrush(Qt.NoBrush))
-        self.update()
-
 class Plot(QGraphicsScene):
     def __init__(self, x, y, *args):
         super(Plot, self).__init__(*args)
-
-        #self.connect(self, SIGNAL("sceneRectChanged(QRectF)"), self.setSceneRect)
 
         if len(x) < 2:
             return
@@ -97,17 +77,3 @@ class Plotter(QGraphicsView):
         QGraphicsView.setScene(self, scene)
         self.fitInView(scene.sceneRect())
 
-if __name__ == '__main__':
-    import random
-    import sys
-    import math
-
-    app = QApplication(sys.argv)
-    v = Plotter()
-    p = Plot([1, 2, 3, 4], [5.1, 5.7, 5.3, 4.0])
-    r = p.sceneRect()
-    print r.x(), r.y(), r.width(), r.height()
-    v.setScene(p)
-    v.show()
-    app.exec_()
-    print "exis"

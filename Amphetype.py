@@ -1,6 +1,5 @@
 from __future__ import with_statement, division
 
-import os
 import sys
 
 # Get command-line --database argument before importing
@@ -15,7 +14,6 @@ v = opts.parse_args()[0]
 if v.database is not None:
     Settings.set('db_name', v.database)
 
-import Globals
 from Data import DB
 from Quizzer import Quizzer
 from StatWidgets import StringStats
@@ -95,7 +93,6 @@ class AboutWidget(QTextBrowser):
         super(AboutWidget, self).__init__(*args)
         self.setHtml(html)
         self.setOpenExternalLinks(True)
-        #self.setMargin(40)
         self.setReadOnly(True)
 
 app = QApplication(sys.argv)

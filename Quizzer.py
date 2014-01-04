@@ -54,7 +54,7 @@ class Typer(QTextEdit):
         self.when = None
         self.is_lesson = None
         self.times = None
-        self.editfalg = None
+        self.editflag = None
         self.mistakes = None
         self.where = None
         self.mistake = None
