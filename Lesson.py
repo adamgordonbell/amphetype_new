@@ -91,7 +91,7 @@ class StringListWidget(QTextEdit):
             self.emit(SIGNAL("updated"))
         self.delayflag = 0
 
-class LessonGenerator(QWidget):
+class LessonGenerator(QScrollArea):
     def __init__(self, *args):
         super(LessonGenerator, self).__init__(*args)
 

@@ -32,7 +32,7 @@ class WordModel(AmphModel):
 
 
 
-class StringStats(QWidget):
+class StringStats(QScrollArea):
     def __init__(self, *args):
         super(StringStats, self).__init__(*args)
 

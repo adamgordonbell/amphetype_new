@@ -172,7 +172,7 @@ class SettingsCheckBox(QCheckBox):
         self.connect(self, SIGNAL("stateChanged(int)"),
                     lambda x: Settings.set(setting, True if x == Qt.Checked else False))
 
-class PreferenceWidget(QWidget):
+class PreferenceWidget(QScrollArea):
     def __init__(self):
         super(PreferenceWidget, self).__init__()
 

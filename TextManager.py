@@ -47,7 +47,7 @@ class SourceModel(AmphModel):
 
 
 
-class TextManager(QWidget):
+class TextManager(QScrollArea):
 
     defaultText = ("", 0, """Welcome to Amphetype!
 A typing program that not only measures your speed and progress, but also gives you detailed statistics about problem keys, words, common mistakes, and so on. This is just a default text since your database is empty. You might import a novel or text of your choosing and text excerpts will be generated for you automatically. There are also some facilities to generate lessons based on your past statistics! But for now, go to the "Sources" tab and try adding some texts from the "txt" directory.""")
