@@ -29,7 +29,7 @@ class WordModel(AmphModel):
         self.words = map(list, words)
         self.reset()
 
-class StringStats(QWidget):
+class StringStats(QScrollArea):
     def __init__(self, *args):
         super(StringStats, self).__init__(*args)
 
