@@ -53,6 +53,14 @@ class Typer(QTextEdit):
         return QTextEdit.keyPressEvent(self, e)
 
     def setPalettes(self):
+        inactive_palette = QPalette(Qt.black, Qt.lightGray, Qt.lightGray, Qt.darkGray,
+                                 Qt.gray, QColor(120,120,120), # QColor(20,20,20)
+                                    QColor(0,0,0)
+        )
+        # inactive_palette.setColor(QPalette.Highlight, QColor(15,25,20))
+        # inactive_palette.setColor(QPalette.HighlightedText, QColor(55,60,60))
+        inactive_palette.setColor(QPalette.Highlight, QColor(5,15,10))
+        inactive_palette.setColor(QPalette.HighlightedText, QColor(45,50,51))
         self.palettes = {
             'wrong': QPalette(Qt.black,
                 Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
@@ -60,8 +68,7 @@ class Typer(QTextEdit):
             'right': QPalette(Qt.black,
                 Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_right_fg"), Qt.yellow, Settings.getColor("quiz_right_bg"), Qt.yellow),
-            'inactive': QPalette(Qt.black, Qt.lightGray, Qt.lightGray, Qt.darkGray,
-                                 Qt.gray, Qt.lightGray, QColor(80,80,80))}
+            'inactive':inactive_palette }
         self.setPalette(self.palettes['inactive'])
 
     def setTarget(self,  text):

@@ -38,7 +38,7 @@ class TyperWindow(QMainWindow):
 
         self.setWindowTitle("Amphetype")
         self.setPalette(QPalette(QColor(130,130,135), #color of typing text
-                                 QColor(60,60,60),    #background color
+                                 QColor(50,50,50),    #background color
                                  Qt.lightGray,
                                  Qt.darkGray,
                                  Qt.gray,
