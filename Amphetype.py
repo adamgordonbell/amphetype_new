@@ -37,6 +37,15 @@ class TyperWindow(QMainWindow):
         super(TyperWindow, self).__init__(*args)
 
         self.setWindowTitle("Amphetype")
+        self.setPalette(QPalette(QColor(130,130,135), #color of typing text
+                                 QColor(60,60,60),    #background color
+                                 Qt.lightGray,
+                                 Qt.darkGray,
+                                 Qt.gray,
+                                 QColor(0,0,0), #color of label text
+                                 Qt.white,
+                                 Qt.darkGray,
+                                 Qt.black)) 
 
         tabs = QTabWidget()
 

@@ -61,7 +61,7 @@ class Typer(QTextEdit):
                 Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_right_fg"), Qt.yellow, Settings.getColor("quiz_right_bg"), Qt.yellow),
             'inactive': QPalette(Qt.black, Qt.lightGray, Qt.lightGray, Qt.darkGray,
-                                 Qt.gray, Qt.black, Qt.lightGray)}
+                                 Qt.gray, Qt.lightGray, QColor(80,80,80))}
         self.setPalette(self.palettes['inactive'])
 
     def setTarget(self,  text):
