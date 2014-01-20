@@ -25,7 +25,8 @@ fancy2normal = [
     #quote transformations
     (u"“",u'"'),
     (u"”",u'"'),
-    (u"’",u"'")
+    (u"’",u"'"),
+    (u"‘",u"'")
 ]
 
 class SentenceSplitter(object):
