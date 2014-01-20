@@ -28,7 +28,8 @@ fancy2normal = [
     #quote transformations
     (u"“",u'"'),
     (u"”",u'"'),
-    (u"’",u"'")
+    (u"’",u"'"),
+    (u"‘",u"'")
 ]
 
 abbreviations = set(map(unicode, [
