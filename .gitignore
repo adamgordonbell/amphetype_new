@@ -3,3 +3,4 @@ mytxt/*
 *~
 *.pyc
 *.db
+*.db-journal
