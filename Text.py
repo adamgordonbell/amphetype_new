@@ -95,11 +95,23 @@ class LessonMiner(QObject):
         p = []
         ps = []
         for l in f:
-            #replaces some undesired fancy characters
+            #designated replacement for some undesired fancy characters
             for fancy, normal in fancy2normal:
                 l = l.replace(fancy, normal)
-            l = l.strip()
-            if l != '':
+                
+            #replaces all non-ascii characters
+            try:
+                ascii_line = l.decode('ascii')
+            except UnicodeEncodeError:
+                ascii_line = ''
+                for c in l:
+                    if ord(c) < 128:
+                        ascii_line += c
+                    else:
+                        ascii_line += ""
+
+            l = ascii_line.strip()
+            if l <> '':
                 p.append(l)
             elif len(p) > 0:
                 ps.append(SentenceSplitter(u" ".join(p)))
