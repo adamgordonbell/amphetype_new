@@ -215,6 +215,7 @@ class Quizzer(QWidget):
         self.typer = Typer()
         self.label = WWLabel()
         self.result.setVisible(Settings.get("show_last"))
+        self.label.setStyleSheet("padding: 1px")
         #self.label.setFrameStyle(QFrame.Raised | QFrame.StyledPanel)
         #self.typer.setBuddy(self.label)
         self.info = SettingsCheckBox('repeat', 'repeat lesson') # AmphButton("Back one", self.lastText)
