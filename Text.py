@@ -12,7 +12,7 @@ from itertools import *
 from PyQt4.QtCore import *
 
 #some undesired fancy characters to replace
-fancy2normal = [
+input_substitutions = [
     #transformations to dots
     (u"…",u"..."),(u". . .",u"..."),
 
@@ -22,6 +22,9 @@ fancy2normal = [
     #dash transformations
     (u"—",u"-"),
    
+    #double spaces
+    (u"  ",u" "),
+
     #trimming of dashes; put after dash transformations
     (u" - '",u"-'"),(u"' - ",u"'-"),(u' - "',u'-"'),(u'" - ',u'"-'),
     
@@ -30,7 +33,11 @@ fancy2normal = [
     (u"”",u'"'),
     (u"’",u"'"),
     (u"’",u"'"),
-    (u"‘",u"'")
+    (u"‘",u"'"),
+
+    #random transformations
+    (u"ø",u"o")
+
 ]
 
 abbreviations = set(map(unicode, [
@@ -124,8 +131,8 @@ class LessonMiner(QObject):
         ps = []
         for l in f:
             #designated replacement for some undesired fancy characters
-            for fancy, normal in fancy2normal:
-                l = l.replace(fancy, normal)
+            for orig, sub in input_substitutions:
+                l = l.replace(orig, sub)
                 
             #replaces all non-ascii characters
             try:
