@@ -35,9 +35,9 @@ input_replacements = [
     (u"’",u"'"),
     (u"‘",u"'"),
 
-    #random transformations
-    (u"ø",u"o")
-
+    #special character transformations
+    (u"ø",u"o"),
+    (u"é",u"e") 
 ]
 
 abbreviations = set(map(unicode, [
