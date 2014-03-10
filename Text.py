@@ -12,7 +12,7 @@ from itertools import *
 from PyQt4.QtCore import *
 
 #some undesired fancy characters to replace
-input_substitutions = [
+input_replacements = [
     #transformations to dots
     (u"…",u"..."),(u". . .",u"..."),
 
@@ -131,8 +131,8 @@ class LessonMiner(QObject):
         ps = []
         for l in f:
             #designated replacement for some undesired fancy characters
-            for orig, sub in input_substitutions:
-                l = l.replace(orig, sub)
+            for orig, repl in input_replacements:
+                l = l.replace(orig, repl)
                 
             #replaces all non-ascii characters
             try:
