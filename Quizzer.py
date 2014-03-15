@@ -2,6 +2,7 @@
 
 from __future__ import with_statement, division
 
+ALLOW_MISTAKES = False
 
 #import psyco
 import platform
@@ -128,7 +129,7 @@ class Typer(QTextEdit):
             if y > 0:
                 self.times[y-1] = self.when[y] - self.when[y-1]
 
-        if lcd == self.target:
+        if lcd == self.target or ALLOW_MISTAKES and len(v) >= len(self.target):
             self.emit(SIGNAL("done"))
             return
 
@@ -197,6 +198,10 @@ class Quizzer(QWidget):
     def done(self):
         now = time.time()
         elapsed, chars, times, mis, mistakes = self.typer.getStats()
+
+        if ALLOW_MISTAKES:
+            self.emit(SIGNAL("wantText"))
+            return
 
         assert chars == len(self.text[2])
 
@@ -278,4 +283,3 @@ class Quizzer(QWidget):
             self.emit(SIGNAL("wantReview"), map(lambda x:x[6], ws[0:i]))
         else:
             self.emit(SIGNAL("wantText"))
-
