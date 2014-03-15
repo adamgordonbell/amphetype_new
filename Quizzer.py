@@ -2,6 +2,7 @@
 
 from __future__ import with_statement, division
 
+ALLOW_MISTAKES = False
 import platform
 import collections
 import time
@@ -169,7 +170,7 @@ class Typer(QTextEdit):
             if y > 0:
                 self.times[y-1] = self.when[y] - self.when[y-1]
 
-        if lcd == self.target:
+        if lcd == self.target or ALLOW_MISTAKES and len(v) >= len(self.target):
             if not any(self.mistake):
                 self.count = self.count + 1
                 self.max_count = max(self.max_count, self.count)
@@ -348,6 +349,10 @@ class Quizzer(QWidget):
     def done(self):
         now = time.time()
         assert self.typer.where == len(self.text[2])
+
+        if ALLOW_MISTAKES:
+            self.emit(SIGNAL("wantText"))
+            return
 
         self.insertResults(now)
 
