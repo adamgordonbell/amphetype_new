@@ -11,7 +11,7 @@ from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
 
-#some undesired fancy characters to replace
+#strings in the input to be replaced
 input_replacements = [
     #transformations to dots
     (u"…",u"..."),(u". . .",u"..."),
@@ -22,9 +22,6 @@ input_replacements = [
     #dash transformations
     (u"—",u"-"),
    
-    #double spaces
-    (u"  ",u" "),
-
     #trimming of dashes; put after dash transformations
     (u" - '",u"-'"),(u"' - ",u"'-"),(u' - "',u'-"'),(u'" - ',u'"-'),
     
@@ -130,10 +127,13 @@ class LessonMiner(QObject):
         p = []
         ps = []
         for l in f:
+            #substitutes any number of spaces, tabs, etc for one ascii space
+            l = re.sub("\s+"," ",l,flags=re.UNICODE)               
+
             #designated replacement for some undesired fancy characters
             for orig, repl in input_replacements:
                 l = l.replace(orig, repl)
-                
+
             #replaces all non-ascii characters
             try:
                 ascii_line = l.decode('ascii')
