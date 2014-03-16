@@ -11,8 +11,14 @@ from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
 
-#strings in the input to be replaced
+# strings in the input to be replaced, and their replacement
+# generally used for replacing non-typable unicode with typeable ascii
+# or for correcting badly formatted input
 input_replacements = [
+    # each element is a 2-tuple:
+    #    (unicode str of text to replace, unicode str of replacement text)
+    # e.g. (u"…",u"...")
+
     #transformations to dots
     (u"…",u"..."),(u". . .",u"..."),
 
@@ -127,14 +133,14 @@ class LessonMiner(QObject):
         p = []
         ps = []
         for l in f:
-            #substitutes any number of spaces, tabs, etc for one ascii space
+            #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
             l = re.sub("\s+"," ",l,flags=re.UNICODE)               
 
-            #designated replacement for some undesired fancy characters
+            #designated replacements for input text
             for orig, repl in input_replacements:
                 l = l.replace(orig, repl)
 
-            #replaces all non-ascii characters
+            #deletes all non-ascii characters
             try:
                 ascii_line = l.decode('ascii')
             except UnicodeEncodeError:
