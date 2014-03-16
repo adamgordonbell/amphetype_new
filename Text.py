@@ -11,26 +11,21 @@ from Config import Settings
 from itertools import *
 from PyQt4.QtCore import *
 
-# strings in the input to be replaced, and their replacement
+# strings in the original unicode input to be replaced, and their replacement
 # generally used for replacing non-typable unicode with typeable ascii
-# or for correcting badly formatted input
-input_replacements = [
+#   NB: if unidecode not available, this might be the only method of
+#       unicode -> ascii transliteration available to the user 
+unicode_replacements = [
     # each element is a 2-tuple:
     #    (unicode str of text to replace, unicode str of replacement text)
-    # e.g. (u"…",u"...")
+    # e.g. (u"…",u"...") 
 
     #transformations to dots
-    (u"…",u"..."),(u". . .",u"..."),
+    (u"…",u"..."),   
 
-    #trimming of dots; put after dot transformations
-    (u" ... ",u"..."),        
-    
     #dash transformations
     (u"—",u"-"),
-   
-    #trimming of dashes; put after dash transformations
-    (u" - '",u"-'"),(u"' - ",u"'-"),(u' - "',u'-"'),(u'" - ',u'"-'),
-    
+
     #quote transformations
     (u"“",u'"'),
     (u"”",u'"'),
@@ -42,6 +37,31 @@ input_replacements = [
     (u"ø",u"o"),
     (u"é",u"e") 
 ]
+
+# strings in the ascii-converted input to be replaced, and their replacement
+# generally used for correcting badly formatted input
+ascii_replacements = [
+    # each element is a 2-tuple:
+    #    (ascii str of text to replace, ascii str of replacement text)
+    # e.g. (" ... ","...") 
+
+    #transformations to dots
+    (". . .","..."),
+
+    #trimming of dots; put after dot transformations
+    (" ... ","..."),        
+    
+    #trimming of dashes; put after dash transformations
+    (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-') 
+]
+
+#imports unidecode, if available
+try:
+    import unidecode
+    unidecode_imported = True
+except ImportError:
+    unidecode_imported = False
+    print("Warning: unidecode (for unicode to ascii transliteration) not available.  Transliterations may be limited.")
 
 abbreviations = set(map(unicode, [
 'jr', 'mr', 'mrs', 'ms', 'dr', 'prof', 'sr', "sen","rep","sens", "reps",'gov', "attys", "atty", 'supt',
@@ -133,23 +153,31 @@ class LessonMiner(QObject):
         p = []
         ps = []
         for l in f:
-            #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
-            l = re.sub("\s+"," ",l,flags=re.UNICODE)               
-
-            #designated replacements for input text
-            for orig, repl in input_replacements:
+            #designated replacements for unicode text
+            for orig, repl in unicode_replacements:
                 l = l.replace(orig, repl)
 
-            #deletes all non-ascii characters
-            try:
-                ascii_line = l.decode('ascii')
-            except UnicodeEncodeError:
-                ascii_line = ''
-                for c in l:
-                    if ord(c) < 128:
-                        ascii_line += c
-                    else:
-                        ascii_line += ""
+            if unidecode_imported:
+                #tries to use unidecode if it exists
+                ascii_line = unidecode.unidecode(l)
+            else: 
+                #othewise just deletes all remaining non-ascii chars
+                try:
+                    ascii_line = l.decode('ascii')
+                except UnicodeEncodeError:
+                    ascii_line = ''
+                    for c in l:
+                        if ord(c) < 128:
+                            ascii_line += c
+                        else:
+                            ascii_line += ""
+
+            #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
+            ascii_line = re.sub("\s+"," ",ascii_line)               
+
+            #designated replacements for ascii text
+            for orig, repl in ascii_replacements:
+                ascii_line = ascii_line.replace(orig, repl) 
 
             l = ascii_line.strip()
             if l <> '':

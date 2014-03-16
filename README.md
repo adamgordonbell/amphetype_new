@@ -29,7 +29,15 @@ Depends on:
 
 python-qt4  (that is, PyQt 4.3+)
 
-OPTIONAL: py-editdist from http://www.mindrot.org/projects/py-editdist/
+OPTIONAL:
+
+unidecode from https://pypi.python.org/pypi/Unidecode/
+ - Will attempt to transliterate unicode -> ascii using this,
+ if available. The default methods are mostly manual 
+ (see: unicode_replacements in Text.py) and probably not as 
+ effective.
+
+py-editdist from http://www.mindrot.org/projects/py-editdist/
  - This latter dependancy is by no means critical and you will
  probably never get to use it. (For fetching words from a wordfile
  that are "similar" to your target words in the lesson generator.)
