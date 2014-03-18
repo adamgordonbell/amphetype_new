@@ -44,9 +44,9 @@ ascii_replacements = [
 
     #transformations to dots
     (". . .","..."),
-
+ 
     #trimming of dots; put after dot transformations
-    (" ... ","..."),        
+    ("... ","..."),(" ...","..."),
     
     #trimming of dashes; put after dash transformations
     (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-') 
