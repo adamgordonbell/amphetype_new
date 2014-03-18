@@ -152,6 +152,7 @@ class LessonMiner(QObject):
     def paras(self, f):
         p = []
         ps = []
+        previous_line_empty = True
         for l in f:
             #designated replacements for unicode text
             for orig, repl in unicode_replacements:
@@ -180,11 +181,18 @@ class LessonMiner(QObject):
                 ascii_line = ascii_line.replace(orig, repl) 
 
             l = ascii_line.strip()
-            if l <> '':
-                p.append(l)
-            elif len(p) > 0:
+            current_line_empty = not l
+           
+            #the current line is empty: insert empty line 
+            #or the current line and previous line both nonempty: need to insert empty line between them
+            if (current_line_empty or not previous_line_empty) and len(p) > 0:
                 ps.append(SentenceSplitter(u" ".join(p)))
                 p = []
+
+            if not current_line_empty:
+                p.append(l)
+                
+            previous_line_empty = current_line_empty
         if len(p) > 0:
             ps.append(SentenceSplitter(u" ".join(p)))
         return ps
