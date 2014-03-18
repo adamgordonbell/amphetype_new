@@ -47,9 +47,9 @@ ascii_replacements = [
 
     #transformations to dots
     (". . .","..."),
-
+ 
     #trimming of dots; put after dot transformations
-    (" ... ","..."),        
+    ("... ","..."),(" ...","..."),
     
     #trimming of dashes; put after dash transformations
     (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-') 
@@ -188,7 +188,6 @@ class LessonMiner(QObject):
         if len(p) > 0:
             ps.append(SentenceSplitter(u" ".join(p)))
         return ps
-
 
 def to_lessons(sentences):
     backlog = []
