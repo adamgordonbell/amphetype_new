@@ -1,8 +1,22 @@
 # -*- coding: UTF-8 -*-
 
+#Changelog
+#March 19 2014: Added template for changing color of letters in typer and label
+#               depending on errors and position (lalop) 
+
 from __future__ import with_statement, division
 
 ALLOW_MISTAKES = False
+
+LABEL_NORMAL_TEXT_COLOR = "#777777"
+LABEL_TEXT_POSITION_COLOR = "green"
+LABEL_TEXT_POSITION_WITH_MISTAKE_COLOR = "green"
+LABEL_MISTAKES_COLOR = "#a43434"
+
+TEXT_AREA_MISTAKES_COLOR = "#a43434"
+TEXT_AREA_REPLACE_SPACES = False
+
+SPACE_REPLACEMENT = "&#8729;"
 
 #import psyco
 import platform
@@ -24,7 +38,51 @@ if platform.system() == "Windows":
     timer()
 else:
     timer = time.time
+    
+def html_color_letters(strs,new_colors,default_color=None):
+    '''strs is list of typically 1 character strings from doing list(string) 
 
+new_colors is a dict : positions (int) -> colors as accepted by html
+
+Non-destructively returns strs with the positions of new_colors changed to the new colors in html'''
+    def colorize(i):
+        s = strs[i]
+        color_s = lambda c : s if c == None else u'<font color="{0}">{1}</font>'.format(c,s)
+        if i not in new_colors:
+            return color_s(default_color)
+        else:
+            return color_s(new_colors[i])
+
+    return map(colorize,range(len(strs)))
+
+def replace_at_locs(strs,replacements,locations):
+    '''strs is list of typically 1 character strings from doing list(string) 
+    
+replacements is a dict : str -> str, interpreted as source -> replacement
+    
+locations is a list of ints 
+
+Non-destructively: in each index of locations, if the string at that index is in replacements,
+replaces it.  Otherwise, leaves it.'''
+    def replace_at_locs_a(i):
+        s = strs[i]
+        if i not in locations or s not in replacements:
+            return s
+        else:
+            return replacements[s]
+
+    return map(replace_at_locs_a,range(len(strs)))
+    
+def disagreements(s,t,full_length=False):
+    '''List of all disagreement positions between strings/lists s and t
+
+    Only checks up to the shorter of the two'''
+    dlist = []
+    for i in range(min(len(s),len(t))):
+        if s[i] != t[i]:
+            dlist.append(i)
+
+    return dlist
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -32,16 +90,13 @@ class Typer(QTextEdit):
 
         self.setPalettes()
 
-        self.connect(self, SIGNAL("textChanged()"), self.checkText)
+        self.connect(self, SIGNAL("textChanged()"), lambda: self.emit(SIGNAL("textChanged")))
         #self.setLineWrapMode(QTextEdit.NoWrap)
         self.connect(Settings, SIGNAL("change_quiz_wrong_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_wrong_bg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
         self.target = None
-
-    def sizeHint(self):
-        return QSize(600, 10)
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
@@ -93,55 +148,6 @@ class Typer(QTextEdit):
         else:
             return "Press ESCAPE to restart with a new text at any time"
 
-    def checkText(self):
-        if self.target is None or self.editflag:
-            return
-
-        v = unicode(self.toPlainText())
-        if self.when[0] == 0:
-            space = len(v) > 0 and v[-1] == u" "
-            req = Settings.get('req_space')
-
-            self.editflag = True
-            if space:
-                self.when[0] = timer()
-                self.clear()
-                self.setPalette(self.palettes['right'])
-            elif req:
-                self.setText(self.getWaitText())
-                self.selectAll()
-            self.editflag = False
-
-            if req or space:
-                return
-            else:
-                self.when[0] = -1
-
-        y = 0
-        for y in xrange(min(len(v), len(self.target)), -1, -1):
-            if v[0:y] == self.target[0:y]:
-                break
-        lcd = v[0:y]
-        self.where = y
-
-        if self.when[y] == 0 and y == len(v):
-            self.when[y] = timer()
-            if y > 0:
-                self.times[y-1] = self.when[y] - self.when[y-1]
-
-        if lcd == self.target or ALLOW_MISTAKES and len(v) >= len(self.target):
-            self.emit(SIGNAL("done"))
-            return
-
-        if y < len(v) and y < len(self.target):
-            self.mistake[y] = True
-            self.mistakes[y] = self.target[y] + v[y]
-
-        if v == lcd:
-            self.setPalette(self.palettes['right'])
-        else:
-            self.setPalette(self.palettes['wrong'])
-
     def getMistakes(self):
         inv = collections.defaultdict(lambda: 0)
         for p, m in self.mistakes.iteritems():
@@ -169,6 +175,7 @@ class Quizzer(QWidget):
         #self.typer.setBuddy(self.label)
         #self.info = QLabel()
         self.connect(self.typer,  SIGNAL("done"), self.done)
+        self.connect(self.typer,  SIGNAL("textChanged"), self.checkText)
         self.connect(self.typer,  SIGNAL("cancel"), SIGNAL("wantText"))
         self.connect(Settings, SIGNAL("change_typer_font"), self.readjust)
         self.connect(Settings, SIGNAL("change_show_last"), self.result.setVisible)
@@ -184,13 +191,95 @@ class Quizzer(QWidget):
         self.setLayout(layout)
         self.readjust()
 
+    def updateLabel(self,position,errors):
+        text = replace_at_locs(list(self.text[2]),{" ":SPACE_REPLACEMENT,"\n":"&#8629;<BR>"},errors)
+        colors = dict([(position, LABEL_TEXT_POSITION_WITH_MISTAKE_COLOR if errors else LABEL_TEXT_POSITION_COLOR)] +
+                      [(i,LABEL_MISTAKES_COLOR) for i in errors])
+
+        self.label.setText("".join(html_color_letters(text,colors,LABEL_NORMAL_TEXT_COLOR)).replace(u"\n", u"↵<BR>")) 
+
+    def checkText(self):
+        if self.typer.target is None or self.typer.editflag:
+            return
+
+        v = unicode(self.typer.toPlainText())
+        if self.typer.when[0] == 0:
+            space = len(v) > 0 and v[-1] == u" "
+            req = Settings.get('req_space')
+
+            self.typer.editflag = True
+            if space:
+                self.typer.when[0] = timer()
+                self.typer.clear()
+                self.typer.setPalette(self.typer.palettes['right'])
+            elif req:
+                self.typer.setText(self.typer.getWaitText())
+                self.typer.selectAll()
+            self.typer.editflag = False
+
+            if req or space:
+                return
+            else:
+                self.typer.when[0] = -1
+
+        y = 0
+        for y in xrange(min(len(v), len(self.typer.target)), -1, -1):
+            if v[0:y] == self.typer.target[0:y]:
+                break
+        lcd = v[0:y]
+        self.typer.where = y
+
+        if self.typer.when[y] == 0 and y == len(v):
+            self.typer.when[y] = timer()
+            if y > 0:
+                self.typer.times[y-1] = self.typer.when[y] - self.typer.when[y-1]
+
+        if lcd == self.typer.target or ALLOW_MISTAKES and len(v) >= len(self.typer.target):
+            self.done()
+            return
+
+        if y < len(v) and y < len(self.typer.target):
+            self.typer.mistake[y] = True
+            self.typer.mistakes[y] = self.typer.target[y] + v[y]
+
+        if v == lcd:
+            self.typer.setPalette(self.typer.palettes['right'])
+        else:
+            self.typer.setPalette(self.typer.palettes['wrong'])
+            
+        #colors text in typer depending on errors
+        errors = disagreements(v,self.typer.target)
+        error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
+        self.typer.editflag = True
+        
+        v_replacements = {"\n":"&#8629;"}
+        if TEXT_AREA_REPLACE_SPACES:
+            #if want to make replacements change spaces in text area as well (risky!)
+            v_replacements[" "] = SPACE_REPLACEMENT
+
+        v_replaced_list = replace_at_locs(list(v),v_replacements,errors)
+
+        v_colored_list = html_color_letters(v_replaced_list,error_colors)
+        htmlized = "".join(v_colored_list).replace("\n","<BR>")
+
+        old_cursor = self.typer.textCursor()
+        old_position = old_cursor.position()
+        self.typer.setHtml(htmlized)
+        old_cursor.setPosition(old_position)
+        self.typer.setTextCursor(old_cursor)
+
+        self.typer.editflag = False
+        
+        #updates the label depending on errors
+        self.updateLabel(old_position,errors)
+
     def readjust(self):
         f = Settings.getFont("typer_font")
         self.label.setFont(f)
         self.typer.setFont(f)
 
     def setText(self, text):
-        self.text = text
+        self.text = text 
         self.label.setText(self.text[2].replace(u"\n", u"↵\n"))
         self.typer.setTarget(self.text[2])
         self.typer.setFocus()
