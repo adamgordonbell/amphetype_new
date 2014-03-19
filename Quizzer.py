@@ -55,18 +55,18 @@ Non-destructively returns strs with the positions of new_colors changed to the n
 
     return map(colorize,range(len(strs)))
 
-def replace_at_locs(strs,replacements,locations):
+def replace_at_locs(strs,replacements,locations = None):
     '''strs is list of typically 1 character strings from doing list(string) 
     
 replacements is a dict : str -> str, interpreted as source -> replacement
     
-locations is a list of ints 
+locations is a list of ints.  If location is None (not to be confused with []), assume allow all locations. 
 
 Non-destructively: in each index of locations, if the string at that index is in replacements,
 replaces it.  Otherwise, leaves it.'''
     def replace_at_locs_a(i):
         s = strs[i]
-        if i not in locations or s not in replacements:
+        if locations != None and i not in locations or s not in replacements:
             return s
         else:
             return replacements[s]
@@ -192,11 +192,12 @@ class Quizzer(QWidget):
         self.readjust()
 
     def updateLabel(self,position,errors):
-        text = replace_at_locs(list(self.text[2]),{" ":SPACE_REPLACEMENT,"\n":"&#8629;<BR>"},errors)
+        text_strs = replace_at_locs(list(self.text[2]),{" ":SPACE_REPLACEMENT,"\n":"&#8629;<BR>"},errors)
         colors = dict([(position, LABEL_TEXT_POSITION_WITH_MISTAKE_COLOR if errors else LABEL_TEXT_POSITION_COLOR)] +
                       [(i,LABEL_MISTAKES_COLOR) for i in errors])
+        htmlized = "".join(html_color_letters(text_strs,colors)).replace(u"\n", u"↵<BR>")
 
-        self.label.setText("".join(html_color_letters(text,colors,LABEL_NORMAL_TEXT_COLOR)).replace(u"\n", u"↵<BR>")) 
+        self.label.setText(htmlized) 
 
     def checkText(self):
         if self.typer.target is None or self.typer.editflag:
@@ -252,18 +253,19 @@ class Quizzer(QWidget):
         error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
         self.typer.editflag = True
         
-        v_replacements = {"\n":"&#8629;"}
+        v_err_replacements = {"\n":"&#8629;"}
         if TEXT_AREA_REPLACE_SPACES:
             #if want to make replacements change spaces in text area as well (risky!)
-            v_replacements[" "] = SPACE_REPLACEMENT
+            v_err_replacements[" "] = SPACE_REPLACEMENT
 
-        v_replaced_list = replace_at_locs(list(v),v_replacements,errors)
+        v_replaced_list = replace_at_locs(list(v),v_err_replacements,errors)
 
         v_colored_list = html_color_letters(v_replaced_list,error_colors)
         htmlized = "".join(v_colored_list).replace("\n","<BR>")
 
         old_cursor = self.typer.textCursor()
         old_position = old_cursor.position()
+        
         self.typer.setHtml(htmlized)
         old_cursor.setPosition(old_position)
         self.typer.setTextCursor(old_cursor)
@@ -275,6 +277,7 @@ class Quizzer(QWidget):
 
     def readjust(self):
         f = Settings.getFont("typer_font")
+        f.setKerning(False)
         self.label.setFont(f)
         self.typer.setFont(f)
 
