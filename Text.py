@@ -35,6 +35,8 @@ unicode_replacements = [
 
     #special character transformations
     (u"ø",u"o"),
+    (u"ö",u"o"),
+    (u"ü",u"u"),
     (u"é",u"e") 
 ]
 
