@@ -1,8 +1,13 @@
 # -*- coding: UTF-8 -*-
 
 #Changelog
-#March 19 2014: Added template for changing color of letters in typer and label
-#               depending on errors and position (lalop) 
+#March 19 2014: 
+#  * Added template for changing color of letters in typer and label
+#    depending on errors and position [lalop]
+#March 20 2014:
+#  * Fixed template for allowing one to finish despite mistakes. [lalop]
+#  * Interpolation between any missing times (hopefully solves gen_tup's
+#    division by zero) [lalop]
 
 from __future__ import with_statement, division
 
@@ -83,6 +88,31 @@ def disagreements(s,t,full_length=False):
             dlist.append(i)
 
     return dlist
+    
+def interpolate_zeroes(l):
+    '''l is a list of numbers with first and last value nonzero
+
+Nondestructively: replaces any sequences of zeroes in nums with
+averaged values interpolated from the nonzeroes immediately before
+and after it
+
+e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10]) = 
+
+[3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9, 7.666666666666667, 6.333333333333334, 5, 6.0, 7.0, 8.0, 9.0, 10]'''
+    nums = list(l)
+    for i in range(0,len(nums)):
+        if nums[i] == 0:
+            last_nonzero = i-1
+            #next_nonzero to store index of next nonzero
+            for next_nonzero in range(last_nonzero+1,len(nums)):
+                if nums[next_nonzero] != 0:
+                    break
+            nonzero_dist = next_nonzero - last_nonzero
+            average_change = 1.0*(nums[next_nonzero]-nums[last_nonzero])/nonzero_dist
+            for k in range(1,nonzero_dist):
+                nums[last_nonzero + k] = nums[last_nonzero] + average_change * k
+    return nums
+
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -161,6 +191,9 @@ class Typer(QTextEdit):
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
             self.times[0] = v[0]
             self.when[0] = self.when[1] - self.times[0]
+            self.when = interpolate_zeroes(self.when)
+            for i in range(1,len(self.times)):
+                self.times[i] = self.when[i] - self.when[i-1]
         return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
 
 class Quizzer(QWidget):
@@ -204,6 +237,10 @@ class Quizzer(QWidget):
             return
 
         v = unicode(self.typer.toPlainText())
+        
+        if ALLOW_MISTAKES and len(v) >= len(self.typer.target):
+            v = self.typer.target
+
         if self.typer.when[0] == 0:
             space = len(v) > 0 and v[-1] == u" "
             req = Settings.get('req_space')
@@ -232,44 +269,41 @@ class Quizzer(QWidget):
 
         if self.typer.when[y] == 0 and y == len(v):
             self.typer.when[y] = timer()
-            if y > 0:
-                self.typer.times[y-1] = self.typer.when[y] - self.typer.when[y-1]
 
-        if lcd == self.typer.target or ALLOW_MISTAKES and len(v) >= len(self.typer.target):
+        if lcd == self.typer.target:
             self.done()
             return
-
-        if y < len(v) and y < len(self.typer.target):
-            self.typer.mistake[y] = True
-            self.typer.mistakes[y] = self.typer.target[y] + v[y]
-
-        if v == lcd:
-            self.typer.setPalette(self.typer.palettes['right'])
-        else:
-            self.typer.setPalette(self.typer.palettes['wrong'])
-            
+       
+        old_cursor = self.typer.textCursor()
+        old_position = old_cursor.position()
+        old_str_position = old_position - 1  #the position that has (presumably) just been typed
+     
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target)
         error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
-        self.typer.editflag = True
         
+        if old_str_position in errors: 
+            self.typer.mistake[old_str_position] = True
+            self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
+
+        if errors:
+            self.typer.setPalette(self.typer.palettes['wrong'])
+        else:
+            self.typer.setPalette(self.typer.palettes['right'])
+  
         v_err_replacements = {"\n":"&#8629;"}
         if TEXT_AREA_REPLACE_SPACES:
             #if want to make replacements change spaces in text area as well (risky!)
             v_err_replacements[" "] = SPACE_REPLACEMENT
 
         v_replaced_list = replace_at_locs(list(v),v_err_replacements,errors)
-
         v_colored_list = html_color_letters(v_replaced_list,error_colors)
         htmlized = "".join(v_colored_list).replace("\n","<BR>")
 
-        old_cursor = self.typer.textCursor()
-        old_position = old_cursor.position()
-        
+        self.typer.editflag = True
         self.typer.setHtml(htmlized)
         old_cursor.setPosition(old_position)
         self.typer.setTextCursor(old_cursor)
-
         self.typer.editflag = False
         
         #updates the label depending on errors
@@ -278,6 +312,8 @@ class Quizzer(QWidget):
     def readjust(self):
         f = Settings.getFont("typer_font")
         f.setKerning(False)
+        #todo: get rid of "vertical kerning"
+        # not f.setFixedPitch(True)
         self.label.setFont(f)
         self.typer.setFont(f)
 
@@ -290,10 +326,6 @@ class Quizzer(QWidget):
     def done(self):
         now = time.time()
         elapsed, chars, times, mis, mistakes = self.typer.getStats()
-
-        if ALLOW_MISTAKES:
-            self.emit(SIGNAL("wantText"))
-            return
 
         assert chars == len(self.text[2])
 
