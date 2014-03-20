@@ -11,7 +11,7 @@
 
 from __future__ import with_statement, division
 
-ALLOW_MISTAKES = False
+ALLOW_MISTAKES = True
 
 LABEL_NORMAL_TEXT_COLOR = "#777777"
 LABEL_TEXT_POSITION_COLOR = "green"
@@ -113,6 +113,11 @@ e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10]) =
                 nums[last_nonzero + k] = nums[last_nonzero] + average_change * k
     return nums
 
+def new_error(position,errors):
+    '''Given list of error positions and current position, 
+returns whether or there's a new error at position'''
+    #considers adjacent errors to be part of the same error
+    return position in errors and position - 1 not in errors
 
 class Typer(QTextEdit):
     def __init__(self, *args):
@@ -280,9 +285,8 @@ class Quizzer(QWidget):
      
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target)
-        error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
         
-        if old_str_position in errors: 
+        if new_error(old_str_position,errors): 
             self.typer.mistake[old_str_position] = True
             self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
 
@@ -296,6 +300,7 @@ class Quizzer(QWidget):
             #if want to make replacements change spaces in text area as well (risky!)
             v_err_replacements[" "] = SPACE_REPLACEMENT
 
+        error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
         v_replaced_list = replace_at_locs(list(v),v_err_replacements,errors)
         v_colored_list = html_color_letters(v_replaced_list,error_colors)
         htmlized = "".join(v_colored_list).replace("\n","<BR>")
