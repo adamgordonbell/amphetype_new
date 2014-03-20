@@ -64,6 +64,7 @@ class Typer(QTextEdit):
         self.mistake = None
         self.editflag = None
         self.mins = None
+        self.count = 0
 
     def sizeHint(self):
         return QSize(600, 10)
@@ -155,12 +156,15 @@ class Typer(QTextEdit):
                 self.times[y-1] = self.when[y] - self.when[y-1]
 
         if lcd == self.target:
+            if not any(self.mistake):
+                self.count = self.count + 1
             self.emit(SIGNAL("done"))
             return
 
         if y < len(v) and y < len(self.target):
             self.mistake[y] = True
             self.mistakes[y] = self.target[y] + v[y]
+            self.count = 0
 
         if v == lcd:
             self.setPalette(self.palettes['right'])
@@ -232,7 +236,8 @@ class Quizzer(QWidget):
         self.text = ('', '', 0, None)
 
         layout = QVBoxLayout()
-        layout.addWidget(self.info)
+        if Settings.get('show_repeat'):
+            layout.addWidget(self.info)
         layout.addSpacing(20)
         layout.addWidget(self.result, 0, Qt.AlignRight)
         layout.addWidget(self.label, 1, Qt.AlignBottom)
@@ -260,6 +265,7 @@ class Quizzer(QWidget):
         Freq = 250
         Dur = 200
         playsound(Freq, Dur)
+        self.updateResultLabel()
         self.setText(self.text)
 
     def lastText(self):
@@ -308,8 +314,10 @@ class Quizzer(QWidget):
         accuracy = self.typer.getAccuracy()
         v2 = DB.fetchone("""select agg_median(wpm), agg_median(acc) from
             (select wpm, 100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
-        self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"
-            % ((spc, 100.0*accuracy) + v2))
+        if Settings.get('show_since_fail_counter'):
+            self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%) \n\nPerfect Count: %1d"  % ((spc, 100.0*accuracy) + v2 + ( self.typer.count,)))
+        else:
+            self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"  % ((spc, 100.0*accuracy) + v2 ))
 
     def insertResults(self, now):
         return DB.execute('insert into result (w, text_id, source, wpm, accuracy, viscosity) values (?, ?, ?, ?, ?, ?)',

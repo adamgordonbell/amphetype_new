@@ -51,7 +51,10 @@ class AmphSettings(QSettings):
             "sentence_strip" : '>',
             "phrase_lessons" : True,
             "permissive_errors" : False,
-             "invisible_mode" : False,
+            "invisible_mode" : False,
+            "show_repeat" : False,
+            "show_since_fail_counter" : False,
+
 
             "min_wpm": 0.0,
             "min_acc": 97.0,
@@ -196,7 +199,9 @@ class PreferenceWidget(QWidget):
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"), "Strip lessons regex", SettingsEdit('sentence_strip'), " )", None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
              SettingsCheckBox('permissive_errors', "Permissive Errors : no backspace required (restart required)"),
-               SettingsCheckBox('invisible_mode', "Invisible Typing Mode"),
+             SettingsCheckBox('invisible_mode', "Invisible Typing Mode"),
+             SettingsCheckBox('show_repeat', "Show Repeat Checkbox"),
+             SettingsCheckBox('show_since_fail_counter', "Count Perfect Reps"),
             [AmphGridLayout([
                 ["INPUT COLORS", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),
