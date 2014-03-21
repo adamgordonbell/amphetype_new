@@ -89,29 +89,38 @@ def disagreements(s,t,full_length=False):
 
     return dlist
     
-def interpolate_zeroes(l):
-    '''l is a list of numbers with first and last value nonzero
+def interpolate_zeroes(iterable):
+    '''l is a iterable of numbers with first value nonzero and either:
+1. Last value nonzero (if terminating)
+2. No upper bound on nonzeroes (if non-terminating)
 
 Nondestructively: replaces any sequences of zeroes in nums with
 averaged values interpolated from the nonzeroes immediately before
 and after it
 
-e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10]) = 
-
-[3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9, 7.666666666666667, 6.333333333333334, 5, 6.0, 7.0, 8.0, 9.0, 10]'''
-    nums = list(l)
-    for i in range(0,len(nums)):
-        if nums[i] == 0:
-            last_nonzero = i-1
-            #next_nonzero to store index of next nonzero
-            for next_nonzero in range(last_nonzero+1,len(nums)):
-                if nums[next_nonzero] != 0:
-                    break
-            nonzero_dist = next_nonzero - last_nonzero
-            average_change = 1.0*(nums[next_nonzero]-nums[last_nonzero])/nonzero_dist
-            for k in range(1,nonzero_dist):
-                nums[last_nonzero + k] = nums[last_nonzero] + average_change * k
-    return nums
+e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10,0,12,18,-5]) = 
+        iterator generating: 3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9,
+                             7.666666666666667, 6.333333333333334,
+                             5, 6.0, 7.0, 8.0, 9.0, 10, 11.0, 12, 18, -5'''
+    it = iter(iterable)
+    nonzero_dist = 0      #dist since last nonzero
+    last_nonzero = None   #what that last nonzero was
+    for e in it:
+        if e == 0:
+            nonzero_dist += 1
+            continue
+        elif nonzero_dist == 0:
+            #no previous zeroes to interpolate over, return value
+            yield e
+        else:
+            nonzero_dist += 1
+            average_change = 1.0*(e-last_nonzero)/nonzero_dist
+            for i in range(1,nonzero_dist):
+                #interpolates over previous zeroes
+                yield last_nonzero + i*average_change
+            yield e
+        nonzero_dist = 0
+        last_nonzero = e
 
 def new_error(position,errors):
     '''Given list of error positions and current position, 
@@ -196,7 +205,7 @@ class Typer(QTextEdit):
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
             self.times[0] = v[0]
             self.when[0] = self.when[1] - self.times[0]
-            self.when = interpolate_zeroes(self.when)
+            self.when = list(interpolate_zeroes(self.when))
             for i in range(1,len(self.times)):
                 self.times[i] = self.when[i] - self.when[i-1]
         return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
