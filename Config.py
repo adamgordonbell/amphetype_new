@@ -29,7 +29,7 @@ class AmphSettings(QSettings):
             "select_method": 0,
             "num_rand": 50,
             "graph_what": 3,
-            "req_space": True,
+            "req_space": False, 
             "show_last": True,
             "show_xaxis": False,
             "chrono_x": False,
@@ -47,9 +47,9 @@ class AmphSettings(QSettings):
             "min_lesson_wpm": 0.0,
             "min_lesson_acc": 97.0,
 
-            "quiz_right_fg": "#000000",
-            "quiz_right_bg": "#ffffff",
-            "quiz_wrong_fg": "#ffffff",
+            "quiz_right_fg": "#646464",
+            "quiz_right_bg": "#000000", 
+            "quiz_wrong_fg": "#646464",
             "quiz_wrong_bg": "#000000",
 
             "group_month": 365.0,
