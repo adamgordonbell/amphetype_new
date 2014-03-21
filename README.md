@@ -3,14 +3,29 @@ It contains a bunch of small improvements that I needed to use it.
 
 This is my personal fork of https://code.google.com/p/amphetype/
 
-GPLv3 (see gpl.txt).
+Differences include:
 
 These include:
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
  * improved lesson splitter
  * permissive mode
+ * Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
+ * Experimental: Individual letter coloring based on current positions and error 
+ * Experimental: Allows continuation even with typing errors 
+ * Dark Theme
  * etc
+
+Todo:
+
+1. Add settings for theme and colorings
+
+2. Refactor so that data analysis is separate from GUI classes
+
+
+License and Disclaimer
+
+GPLv3 (see gpl.txt).
 
 Sample text included:
  * Selections from project gutenberg
