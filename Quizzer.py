@@ -102,10 +102,9 @@ e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10,0,12,18,-5]) =
         iterator generating: 3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9,
                              7.666666666666667, 6.333333333333334,
                              5, 6.0, 7.0, 8.0, 9.0, 10, 11.0, 12, 18, -5'''
-    it = iter(iterable)
     nonzero_dist = 0      #dist since last nonzero
     last_nonzero = None   #what that last nonzero was
-    for e in it:
+    for e in iterable:
         if e == 0:
             nonzero_dist += 1
             continue
