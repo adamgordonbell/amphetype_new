@@ -28,6 +28,8 @@
 #       1. Most of the special text color/usage options (not working: the
 #          "base" color)
 #       2. The option for finishing despite mistakes
+#       3. Space and return character replacements
+#   * Added invisible mode, integrated with settings [lalop]
 
 
 from __future__ import with_statement, division
@@ -52,6 +54,7 @@ if platform.system() == "Windows":
     timer()
 else:
     timer = time.time
+    
     
 def html_color_letters(strs,new_colors,default_color=None):
     '''strs is list of typically 1 character strings from doing list(string) 
@@ -136,6 +139,45 @@ returns whether or there's a new error at position'''
     #considers adjacent errors to be part of the same error
     return position in errors and position - 1 not in errors
 
+def set_typer_html(typer,html):
+    '''Given a Typer, sets its html content to html.'''
+    #edits the html string into the text area, corrects cursor position
+    old_cursor = typer.textCursor()
+    old_position = old_cursor.position()
+
+    typer.editflag = True
+    typer.setHtml(html)
+    old_cursor.setPosition(old_position)
+    typer.setTextCursor(old_cursor)
+    typer.editflag = False
+
+def update_typer_html(typer,errors):
+    '''Organizational function.
+
+Given a Typer, updates its html based on settings (not including invisible mode)'''
+    #dict : str -> str ; original and displacement strs in error region (for easier display)
+    v = unicode(typer.toPlainText())
+    v_err_replacements = {}
+    if Settings.get('text_area_replace_spaces'):
+        #if want to make replacements change spaces in text area as well (risky!)
+        v_err_replacements[" "] = Settings.getHtml('text_area_space_replacement')
+        
+    if Settings.get('text_area_replace_return'):
+        #want to make replacements change returns in text area as well (a little less risky since there's usually fewer)
+        v_err_replacements["\n"] = Settings.getHtml('text_area_return_replacement')
+    
+
+    error_colors = {} #dict : int -> str, mapping errors to color
+    v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
+
+    if Settings.get("show_text_area_mistakes"):
+        error_colors = dict(map(lambda d : (d,Settings.get('text_area_mistakes_color')),errors))
+        v_replaced_list = replace_at_locs(v_replaced_list,v_err_replacements,errors)
+
+    v_colored_list = html_color_letters(v_replaced_list,error_colors)
+    htmlized = "".join(v_colored_list).replace("\n","<BR>")
+    set_typer_html(typer,htmlized)
+
 class Typer(QTextEdit):
     def __init__(self, *args):
         super(Typer, self).__init__(*args)
@@ -176,6 +218,9 @@ class Typer(QTextEdit):
             'right': QPalette(Qt.black,
                 Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_right_fg"), Qt.yellow, Settings.getColor("quiz_right_bg"), Qt.yellow),
+            'invisible': QPalette(Qt.black,
+                Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
+                Settings.getColor("quiz_invisible_color"), Qt.yellow, Settings.getColor("quiz_invisible_color"), Qt.yellow),
             'inactive':inactive_palette }
         self.setPalette(self.palettes['inactive'])
 
@@ -249,7 +294,7 @@ class Quizzer(QWidget):
     def updateLabel(self,position,errors):
         '''Populates the label with colors depending on current position and errors.'''
         #dict : str -> str ; original and displacement strs in error region (for easier display)
-        err_replacements = {"\n":"&#8629;<BR>"}
+        err_replacements = {"\n":"{0}<BR>".format(Settings.getHtml('label_return_symbol'))}
 
         colors = {}  #dict : int -> str, mapping errors to color
 
@@ -258,7 +303,7 @@ class Quizzer(QWidget):
             colors = dict([(i,Settings.get('label_mistakes_color')) for i in errors])
 
             if Settings.get('label_replace_spaces_in_mistakes'):
-                err_replacements[" "] = Settings.get('text_area_space_replacement')
+                err_replacements[" "] = Settings.getHtml('label_space_replacement')
 
         text_strs = list(self.text[2]) #list of strs, initially one char each, to operate on
         text_strs = replace_at_locs(text_strs,err_replacements,errors)
@@ -268,14 +313,15 @@ class Quizzer(QWidget):
             colors[position] = Settings.get('label_position_with_mistakes_color')
 
             if Settings.get('label_replace_spaces_in_position'):
-                text_strs = replace_at_locs(text_strs,{" ":Settings.get('text_area_space_replacement')},[position])
+                text_strs = replace_at_locs(text_strs,{" ":Settings.getHtml('label_space_replacement')},[position])
         elif Settings.get('show_label_position'): 
             colors[position] = Settings.get('label_position_color') 
 
             if Settings.get('label_replace_spaces_in_position'):
-                text_strs = replace_at_locs(text_strs,{" ":Settings.get('text_area_space_replacement')},[position])
+                text_strs = replace_at_locs(text_strs,{" ":Settings.getHtml('label_space_replacement')},[position])
 
-        htmlized = "".join(html_color_letters(text_strs,colors)).replace(u"\n", u"↵<BR>")
+        htmlized = "".join(html_color_letters(text_strs,colors))
+        htmlized = htmlized.replace(u"\n", u"{0}<BR>".format(Settings.getHtml('label_return_symbol')))
         self.label.setText(htmlized) 
 
     def checkText(self):
@@ -331,33 +377,15 @@ class Quizzer(QWidget):
             self.typer.mistake[old_str_position] = True
             self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
 
-        if errors:
-            self.typer.setPalette(self.typer.palettes['wrong'])
+        if Settings.get('quiz_invisible'):
+            self.typer.setPalette(self.typer.palettes['invisible'])
+            set_typer_html(self.typer,v.replace(u"\n", u"<BR>"))
         else:
-            self.typer.setPalette(self.typer.palettes['right'])
-  
-        #dict : str -> str ; original and displacement strs in error region (for easier display)
-        v_err_replacements = {"\n":"&#8629;"}
-        if Settings.get('text_area_replace_spaces'):
-            #if want to make replacements change spaces in text area as well (risky!)
-            v_err_replacements[" "] = Settings.get('text_area_space_replacement')
-
-        error_colors = {} #dict : int -> str, mapping errors to color
-        v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
-
-        if Settings.get("show_text_area_mistakes"):
-            error_colors = dict(map(lambda d : (d,Settings.get('text_area_mistakes_color')),errors))
-            v_replaced_list = replace_at_locs(v_replaced_list,v_err_replacements,errors)
-
-        v_colored_list = html_color_letters(v_replaced_list,error_colors)
-        htmlized = "".join(v_colored_list).replace("\n","<BR>")
-
-        #edits the html string into the text area, corrects cursor position
-        self.typer.editflag = True
-        self.typer.setHtml(htmlized)
-        old_cursor.setPosition(old_position)
-        self.typer.setTextCursor(old_cursor)
-        self.typer.editflag = False
+            if errors:
+                self.typer.setPalette(self.typer.palettes['wrong'])
+            else:
+                self.typer.setPalette(self.typer.palettes['right'])
+            update_typer_html(self.typer,errors)
         
         #updates the label depending on errors
         self.updateLabel(old_position,errors)
@@ -372,7 +400,7 @@ class Quizzer(QWidget):
 
     def setText(self, text):
         self.text = text 
-        self.label.setText(self.text[2].replace(u"\n", u"↵\n"))
+        self.label.setText(self.text[2].replace(u"\n", u"{0}\n".format(Settings.get('label_return_symbol')))) 
         self.typer.setTarget(self.text[2])
         self.typer.setFocus()
 

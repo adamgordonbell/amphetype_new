@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 
 # This file is part of Amphetype.
 
@@ -20,6 +21,7 @@
 #      1. Most of the special text color/usage options (not working: the
 #         "base" color)
 #      2. The option for finishing despite mistakes
+#      3. Space and return character replacements
 
 
 from __future__ import with_statement
@@ -37,15 +39,24 @@ try:
 except:
     _dbname = "typer.db"
 
+def unicode_to_html(s):
+    '''Takes a unicode string and encodes it as HTML'''
+    return s.encode('ascii', 'xmlcharrefreplace')
+
 class AmphSettings(QSettings):
 
     defaults = {
             "allow_mistakes":True,
+            'quiz_invisible':False,
+            'quiz_invisible_color':"#000000",
             "text_area_mistakes_color":"#a43434",
             "show_text_area_mistakes":True,
-            "text_area_space_replacement":"&#8729;", 
+            "text_area_space_replacement":u"∙", #in html, "&#8729;", 
             "text_area_replace_spaces":False,
-            "label_space_replacement":"&#8729;", 
+            'text_area_return_replacement':u"↵",
+            'text_area_replace_return':True,
+            "label_return_symbol":u"↵",
+            "label_space_replacement":u"∙", #in html, "&#8729;", 
             "label_replace_spaces_in_mistakes":True,
             "label_replace_spaces_in_position":False,
             'label_text_color':"#777777",
@@ -124,6 +135,9 @@ class AmphSettings(QSettings):
 
     def getColor(self, k):
         return QColor(self.get(k))
+    
+    def getHtml(self,k):
+        return unicode_to_html(self.get(k))
 
     def set(self, k, v):
         p = self.get(k)
@@ -161,9 +175,9 @@ class SettingsColor(AmphButton):
 
 
 class SettingsEdit(AmphEdit):
-    def __init__(self, setting):
+    def __init__(self, setting, data_type = None):
         val = Settings.get(setting)
-        typ = type(val)
+        typ = data_type if data_type else type(val)
         validator = None
         if isinstance(val, float):
             validator = QDoubleValidator
@@ -233,15 +247,19 @@ class PreferenceWidget(QWidget):
                         SettingsColor('quiz_right_bg', "Background")],
                 ["Wrong Input", SettingsColor('quiz_wrong_fg', "Foreground"),
                         SettingsColor('quiz_wrong_bg', "Background")],
-                ["SPECIAL INPUT", "Text Color"],
-                ["Mistakes", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
-                ["Space char in mistakes (HTML)",SettingsEdit('text_area_space_replacement'), SettingsCheckBox('text_area_replace_spaces', "Use")],
-                ["LABEL COLORS", "Text Color"],
+                ["INVISIBLE MODE", SettingsColor('quiz_invisible_color', "Foreground"),
+                        SettingsCheckBox('quiz_invisible', "Enabled")],
+                ["INPUT MISTAKES"],
+                ["Color", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
+                ["Space char",SettingsEdit('text_area_space_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_spaces', "Use")],
+                ["Return char",SettingsEdit('text_area_return_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_return', "Use")],
+                ["LABEL"],
                 ["Base", SettingsColor('label_text_color', "Foreground")],
                 ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show")],
                 ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show")],
                 ["Position (with errors)", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use")],
-                ["Space char in mistakes (HTML)",SettingsEdit('label_space_replacement'), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
+                ["Space char in mistakes",SettingsEdit('label_space_replacement',data_type=unicode), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
+                ["Return char",SettingsEdit('label_return_symbol',data_type=unicode)],
                 [1+1j,1+2j,2+1j,2+2j]
             ]), None],
             None,
