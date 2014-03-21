@@ -1,4 +1,19 @@
 
+# This file is part of Amphetype.
+
+# Amphetype is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Amphetype is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
+
 from __future__ import with_statement, division
 
 import os
@@ -77,11 +92,13 @@ class TyperWindow(QMainWindow):
         self.connect(lg, SIGNAL("newReview"), tm.newReview)
         tabs.addTab(lg, "Lesson Generator")
 
+        pw = PreferenceWidget()
+        pw_scroll = QScrollArea()
+        pw_scroll.setWidget(pw)
+        tabs.addTab(pw_scroll, "Preferences")
+
         dw = DatabaseWidget()
         tabs.addTab(dw, "Database")
-
-        pw = PreferenceWidget()
-        tabs.addTab(pw, "Preferences")
 
         ab = AboutWidget()
         tabs.addTab(ab, "About/Help")

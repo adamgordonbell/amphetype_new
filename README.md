@@ -15,9 +15,7 @@ Differences include:
 
 Todo:
 
-1. Add settings for theme and colorings
-
-2. Refactor so that data analysis is separate from GUI classes
+1. Refactor so that data analysis is separate from GUI classes
 
 
 License and Disclaimer

@@ -1,4 +1,27 @@
 
+# This file is part of Amphetype.
+
+# Amphetype is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Amphetype is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
+
+# Changelog
+# March 21 2014:
+#  * Integrated with settings [lalop]:
+#      1. Most of the special text color/usage options (not working: the
+#         "base" color)
+#      2. The option for finishing despite mistakes
+
+
 from __future__ import with_statement
 
 import cPickle
@@ -17,6 +40,21 @@ except:
 class AmphSettings(QSettings):
 
     defaults = {
+            "allow_mistakes":True,
+            "text_area_mistakes_color":"#a43434",
+            "show_text_area_mistakes":True,
+            "text_area_space_replacement":"&#8729;", 
+            "text_area_replace_spaces":False,
+            "label_space_replacement":"&#8729;", 
+            "label_replace_spaces_in_mistakes":True,
+            "label_replace_spaces_in_position":False,
+            'label_text_color':"#777777",
+            'label_mistakes_color':"#a43434",
+            'show_label_mistakes':True,
+            'label_position_color':"#008000",
+            'show_label_position':True, 
+            'label_position_with_mistakes_color':"#a0a000",
+            'show_label_position_with_mistakes':False,
             "typer_font": str(QFont("Arial", 14).toString()),
             "history": 30.0,
             "min_chars": 220,
@@ -172,7 +210,7 @@ class SettingsCheckBox(QCheckBox):
         self.connect(self, SIGNAL("stateChanged(int)"),
                     lambda x: Settings.set(setting, True if x == Qt.Checked else False))
 
-class PreferenceWidget(QScrollArea):
+class PreferenceWidget(QWidget):
     def __init__(self):
         super(PreferenceWidget, self).__init__()
 
@@ -187,12 +225,23 @@ class PreferenceWidget(QScrollArea):
             [SettingsCheckBox('req_space', "Make SPACE mandatory before each session"),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             None,
+            SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
+            None,
             [AmphGridLayout([
-                ["INPUT COLORS", "Text Color", "Background"],
+                ["INPUT PALETTE", "Text Color", "Background"],
                 ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),
                         SettingsColor('quiz_right_bg', "Background")],
                 ["Wrong Input", SettingsColor('quiz_wrong_fg', "Foreground"),
                         SettingsColor('quiz_wrong_bg', "Background")],
+                ["SPECIAL INPUT", "Text Color"],
+                ["Mistakes", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
+                ["Space char in mistakes (HTML)",SettingsEdit('text_area_space_replacement'), SettingsCheckBox('text_area_replace_spaces', "Use")],
+                ["LABEL COLORS", "Text Color"],
+                ["Base", SettingsColor('label_text_color', "Foreground")],
+                ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show")],
+                ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show")],
+                ["Position (with errors)", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use")],
+                ["Space char in mistakes (HTML)",SettingsEdit('label_space_replacement'), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
                 [1+1j,1+2j,2+1j,2+2j]
             ]), None],
             None,

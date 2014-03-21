@@ -1,27 +1,36 @@
 # -*- coding: UTF-8 -*-
 
-#Changelog
-#March 19 2014: 
-#  * Added template for changing color of letters in typer and label
-#    depending on errors and position [lalop]
-#March 20 2014:
-#  * Fixed template for allowing one to finish despite mistakes. [lalop]
-#  * Interpolation between any missing times (hopefully solves gen_tup's
-#    division by zero) [lalop]
+# This file is part of Amphetype.
+
+# Amphetype is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Amphetype is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
+
+# Changelog
+# March 19 2014: 
+#   * Added template for changing color of letters in typer and label
+#     depending on errors and position [lalop]
+# March 20 2014:
+#   * Fixed template for allowing one to finish despite mistakes. [lalop]
+#   * Interpolation between any missing times (hopefully solves gen_tup's
+#     division by zero) [lalop]
+# March 21 2014:
+#   * Integrated with settings [lalop]:
+#       1. Most of the special text color/usage options (not working: the
+#          "base" color)
+#       2. The option for finishing despite mistakes
+
 
 from __future__ import with_statement, division
-
-ALLOW_MISTAKES = True
-
-LABEL_NORMAL_TEXT_COLOR = "#777777"
-LABEL_TEXT_POSITION_COLOR = "green"
-LABEL_TEXT_POSITION_WITH_MISTAKE_COLOR = "green"
-LABEL_MISTAKES_COLOR = "#a43434"
-
-TEXT_AREA_MISTAKES_COLOR = "#a43434"
-TEXT_AREA_REPLACE_SPACES = False
-
-SPACE_REPLACEMENT = "&#8729;"
 
 #import psyco
 import platform
@@ -238,11 +247,35 @@ class Quizzer(QWidget):
         self.readjust()
 
     def updateLabel(self,position,errors):
-        text_strs = replace_at_locs(list(self.text[2]),{" ":SPACE_REPLACEMENT,"\n":"&#8629;<BR>"},errors)
-        colors = dict([(position, LABEL_TEXT_POSITION_WITH_MISTAKE_COLOR if errors else LABEL_TEXT_POSITION_COLOR)] +
-                      [(i,LABEL_MISTAKES_COLOR) for i in errors])
-        htmlized = "".join(html_color_letters(text_strs,colors)).replace(u"\n", u"↵<BR>")
+        '''Populates the label with colors depending on current position and errors.'''
+        #dict : str -> str ; original and displacement strs in error region (for easier display)
+        err_replacements = {"\n":"&#8629;<BR>"}
 
+        colors = {}  #dict : int -> str, mapping errors to color
+
+        if Settings.get('show_label_mistakes'):
+            #showing mistakes; need to populate color
+            colors = dict([(i,Settings.get('label_mistakes_color')) for i in errors])
+
+            if Settings.get('label_replace_spaces_in_mistakes'):
+                err_replacements[" "] = Settings.get('text_area_space_replacement')
+
+        text_strs = list(self.text[2]) #list of strs, initially one char each, to operate on
+        text_strs = replace_at_locs(text_strs,err_replacements,errors)
+
+        #designates colors and replacements of position
+        if errors and Settings.get('show_label_position_with_mistakes'):
+            colors[position] = Settings.get('label_position_with_mistakes_color')
+
+            if Settings.get('label_replace_spaces_in_position'):
+                text_strs = replace_at_locs(text_strs,{" ":Settings.get('text_area_space_replacement')},[position])
+        elif Settings.get('show_label_position'): 
+            colors[position] = Settings.get('label_position_color') 
+
+            if Settings.get('label_replace_spaces_in_position'):
+                text_strs = replace_at_locs(text_strs,{" ":Settings.get('text_area_space_replacement')},[position])
+
+        htmlized = "".join(html_color_letters(text_strs,colors)).replace(u"\n", u"↵<BR>")
         self.label.setText(htmlized) 
 
     def checkText(self):
@@ -251,7 +284,7 @@ class Quizzer(QWidget):
 
         v = unicode(self.typer.toPlainText())
         
-        if ALLOW_MISTAKES and len(v) >= len(self.typer.target):
+        if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
 
         if self.typer.when[0] == 0:
@@ -303,16 +336,23 @@ class Quizzer(QWidget):
         else:
             self.typer.setPalette(self.typer.palettes['right'])
   
+        #dict : str -> str ; original and displacement strs in error region (for easier display)
         v_err_replacements = {"\n":"&#8629;"}
-        if TEXT_AREA_REPLACE_SPACES:
+        if Settings.get('text_area_replace_spaces'):
             #if want to make replacements change spaces in text area as well (risky!)
-            v_err_replacements[" "] = SPACE_REPLACEMENT
+            v_err_replacements[" "] = Settings.get('text_area_space_replacement')
 
-        error_colors = dict(map(lambda d : (d,TEXT_AREA_MISTAKES_COLOR),errors))
-        v_replaced_list = replace_at_locs(list(v),v_err_replacements,errors)
+        error_colors = {} #dict : int -> str, mapping errors to color
+        v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
+
+        if Settings.get("show_text_area_mistakes"):
+            error_colors = dict(map(lambda d : (d,Settings.get('text_area_mistakes_color')),errors))
+            v_replaced_list = replace_at_locs(v_replaced_list,v_err_replacements,errors)
+
         v_colored_list = html_color_letters(v_replaced_list,error_colors)
         htmlized = "".join(v_colored_list).replace("\n","<BR>")
 
+        #edits the html string into the text area, corrects cursor position
         self.typer.editflag = True
         self.typer.setHtml(htmlized)
         old_cursor.setPosition(old_position)
