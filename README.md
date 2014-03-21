@@ -8,8 +8,10 @@ Differences include:
 These include:
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
+ * Experimental: Individual letter coloring, both in input and displayed text, based on current positions and errors
  * improved lesson splitter
  * permissive mode
+ * Invisible Mode: Makes input text invisible (goes well with #2)
  * Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
  * Experimental: Individual letter coloring based on current positions and error 
  * Experimental: Allows continuation even with typing errors 
@@ -21,9 +23,20 @@ Todo:
 1. Refactor so that data analysis is separate from GUI classes
 
 
-License and Disclaimer
+License and Disclaimers
 
-GPLv3 (see gpl.txt).
+Amphetype is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Amphetype is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
 
 Sample text included:
  * Selections from project gutenberg
