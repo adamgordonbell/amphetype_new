@@ -22,7 +22,12 @@
 #         "base" color)
 #      2. The option for finishing despite mistakes
 #      3. Space and return character replacements
-
+# March 22 2014:
+#  * Integrated with settings [lalop]:
+#       1. Typer border color
+#       2. Inactive palette highlight foreground & background
+#       3. Option not to use "wrong" palette
+#       4. Various GUI color settings
 
 from __future__ import with_statement
 
@@ -46,9 +51,16 @@ def unicode_to_html(s):
 class AmphSettings(QSettings):
 
     defaults = {
+            "main_background_color":"#000000",
+            'main_text_color':"#737375",          #old: "#777777",
+            "main_text_area_color":"#5d5b59",
+            "main_borders_color":"#151515",
+            "widgets_background_color":"#323232",
+            "widgets_text_color":"#000000",
             "allow_mistakes":True,
             'quiz_invisible':False,
             'quiz_invisible_color':"#000000",
+            "quiz_invisible_bd": "#282828", 
             "text_area_mistakes_color":"#a43434",
             "show_text_area_mistakes":True,
             "text_area_space_replacement":u"∙", #in html, "&#8729;", 
@@ -59,7 +71,6 @@ class AmphSettings(QSettings):
             "label_space_replacement":u"∙", #in html, "&#8729;", 
             "label_replace_spaces_in_mistakes":True,
             "label_replace_spaces_in_position":False,
-            'label_text_color':"#777777",
             'label_mistakes_color':"#a43434",
             'show_label_mistakes':True,
             'label_position_color':"#008000",
@@ -98,8 +109,17 @@ class AmphSettings(QSettings):
 
             "quiz_right_fg": "#646464",
             "quiz_right_bg": "#000000", 
+            "quiz_right_bd": "#282828", 
+            "quiz_inactive_fg": "#646464",
+            "quiz_inactive_bg": "#000000", 
+            "quiz_inactive_bd": "#282828", 
+            "quiz_inactive_hl":"#050f0a",
+            "quiz_inactive_hl_text":"#2d3233",
+            "quiz_use_wrong_palette":False,
             "quiz_wrong_fg": "#646464",
-            "quiz_wrong_bg": "#000000",
+            "quiz_wrong_bg": "#1a0000",
+            "quiz_wrong_bd": "#282828", 
+
 
             "group_month": 365.0,
             "group_week": 30.0,
@@ -241,25 +261,32 @@ class PreferenceWidget(QWidget):
             None,
             SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
             None,
-            [AmphGridLayout([
-                ["INPUT PALETTE", "Text Color", "Background"],
-                ["Correct Input", SettingsColor('quiz_right_fg', "Foreground"),
-                        SettingsColor('quiz_right_bg', "Background")],
-                ["Wrong Input", SettingsColor('quiz_wrong_fg', "Foreground"),
-                        SettingsColor('quiz_wrong_bg', "Background")],
-                ["INVISIBLE MODE", SettingsColor('quiz_invisible_color', "Foreground"),
-                        SettingsCheckBox('quiz_invisible', "Enabled")],
+            [AmphGridLayout([ 
+                ["INPUT PALETTE", "Text Color", "Border", "Background","Highlight","Highlight Text"],
+                ["Inactive", SettingsColor('quiz_inactive_fg', "Foreground"),SettingsColor('quiz_inactive_bd', "Foreground"), SettingsColor('quiz_inactive_bg', "Background"),SettingsColor('quiz_inactive_hl', "Highlight"),SettingsColor('quiz_inactive_hl_text', "Highlight Text")],
+                ["Correct",  SettingsColor('quiz_right_fg', "Foreground"),SettingsColor('quiz_right_bd', "Foreground"), SettingsColor('quiz_right_bg', "Background")],
+                ["Wrong",  SettingsColor('quiz_wrong_fg', "Foreground"),SettingsColor('quiz_wrong_bd', "Foreground"), SettingsColor('quiz_wrong_bg', "Background"),SettingsCheckBox('quiz_use_wrong_palette', "Use")],
+                ["INVISIBLE MODE", SettingsColor('quiz_invisible_color', "Foreground"), SettingsColor('quiz_invisible_bd', "Foreground"), SettingsCheckBox('quiz_invisible', "Enabled")],
                 ["INPUT MISTAKES"],
                 ["Color", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
                 ["Space char",SettingsEdit('text_area_space_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_spaces', "Use")],
                 ["Return char",SettingsEdit('text_area_return_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_return', "Use")],
-                ["LABEL"],
-                ["Base", SettingsColor('label_text_color', "Foreground")],
+                ["TEXT DISPLAY"],
                 ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show")],
                 ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show")],
-                ["Position (with errors)", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use")],
-                ["Space char in mistakes",SettingsEdit('label_space_replacement',data_type=unicode), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
+                ["Position (with mistakes)", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use")],
+                ["Space char",SettingsEdit('label_space_replacement',data_type=unicode), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
                 ["Return char",SettingsEdit('label_return_symbol',data_type=unicode)],
+                ["WIDGETS"],                
+                ["Background",SettingsColor('widgets_background_color', "Background")],
+                ["Foreground", SettingsColor('widgets_text_color', "Foreground")],
+                ["TEXT AREAS"],
+                ["Background",SettingsColor('main_text_area_color', "Background")],
+                ["GENERAL"],                
+                ["Background",SettingsColor('main_background_color', "Background")],
+                ["Text Color", SettingsColor('main_text_color', "Foreground")],
+                ["Borders", SettingsColor("main_borders_color", "Foreground")],
+                
                 [1+1j,1+2j,2+1j,2+2j]
             ]), None],
             None,

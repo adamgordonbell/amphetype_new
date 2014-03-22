@@ -30,6 +30,11 @@
 #       2. The option for finishing despite mistakes
 #       3. Space and return character replacements
 #   * Added invisible mode, integrated with settings [lalop]
+# March 22 2014:
+#  * Added and integrated with settings [lalop]:
+#       1. Typer border color
+#       2. Inactive palette highlight foreground & background
+#       3. Option not to use "wrong" palette
 
 
 from __future__ import with_statement, division
@@ -41,7 +46,7 @@ import time
 import re
 
 from Data import Statistic, DB
-from Config import Settings
+from Config import Settings, unicode_to_html
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -139,18 +144,29 @@ returns whether or there's a new error at position'''
     #considers adjacent errors to be part of the same error
     return position in errors and position - 1 not in errors
 
-def set_typer_html(typer,html):
-    '''Given a Typer, sets its html content to html.'''
+def set_typer_text(typer,text = None,func = None):
+    '''Given a Typer, sets its text content to text, matching old cursor position.
+    
+If text not specified, the plain text (to unicode) from the typer is used.  This can, e.g. clear html.
+
+If func specified, uses that function for the text setting.  Otherwise, uses typer.setText'''
+    if text == None:
+        text = unicode(typer.toPlainText()) 
+
     #edits the html string into the text area, corrects cursor position
     old_cursor = typer.textCursor()
     old_position = old_cursor.position()
 
     typer.editflag = True
-    typer.setHtml(html)
+    func(text) if func else typer.setHtml(unicode_to_html(text.replace(u"\n",u"<BR>"))) 
     old_cursor.setPosition(old_position)
     typer.setTextCursor(old_cursor)
     typer.editflag = False
 
+def set_typer_html(typer,html):
+    '''Given a Typer, sets its html content to html, matching old cursor position.'''
+    set_typer_text(typer,html,func = typer.setHtml)
+    
 def update_typer_html(typer,errors):
     '''Organizational function.
 
@@ -186,11 +202,14 @@ class Typer(QTextEdit):
 
         self.connect(self, SIGNAL("textChanged()"), lambda: self.emit(SIGNAL("textChanged")))
         #self.setLineWrapMode(QTextEdit.NoWrap)
-        self.connect(Settings, SIGNAL("change_quiz_wrong_fg"), self.setPalettes)
-        self.connect(Settings, SIGNAL("change_quiz_wrong_bg"), self.setPalettes)
-        self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
-        self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
-        self.connect(Settings, SIGNAL("change_quiz_invisible_color"), self.setPalettes)
+        set_palette_change_signals = [ "quiz_wrong_fg", "quiz_wrong_bg","quiz_wrong_bd", "quiz_right_fg",
+                                       "quiz_right_bg","quiz_right_bd", "quiz_invisible_color", "quiz_invisible_bd",
+                                       "quiz_inactive_fg", "quiz_inactive_bg","quiz_inactive_bd", "quiz_inactive_hl",
+                                       "quiz_inactive_hl_text", 'quiz_use_wrong_palette']
+        
+        for change_signal in set_palette_change_signals:
+            self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.setPalettes)
+
         self.target = None
 
     def keyPressEvent(self, e):
@@ -204,26 +223,24 @@ class Typer(QTextEdit):
         return QTextEdit.keyPressEvent(self, e)
 
     def setPalettes(self):
-        inactive_palette = QPalette(Qt.black, Qt.lightGray, Qt.lightGray, Qt.darkGray,
-                                 Qt.gray, QColor(120,120,120), # QColor(20,20,20)
-                                    QColor(0,0,0)
-        )
-        # inactive_palette.setColor(QPalette.Highlight, QColor(15,25,20))
-        # inactive_palette.setColor(QPalette.HighlightedText, QColor(55,60,60))
-        inactive_palette.setColor(QPalette.Highlight, QColor(5,15,10))
-        inactive_palette.setColor(QPalette.HighlightedText, QColor(45,50,51))
+        inactive_palette = QPalette(Qt.black,
+                Settings.getColor("quiz_inactive_bd"), Qt.lightGray, Qt.darkGray, Qt.gray,
+                Settings.getColor("quiz_inactive_fg"), Qt.yellow, Settings.getColor("quiz_inactive_bg"), Qt.yellow)
+
+        inactive_palette.setColor(QPalette.Highlight, Settings.getColor("quiz_inactive_hl"))
+        inactive_palette.setColor(QPalette.HighlightedText, Settings.getColor("quiz_inactive_hl_text"))
         self.palettes = {
             'wrong': QPalette(Qt.black,
-                Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
+                Settings.getColor("quiz_wrong_bd"), Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_wrong_fg"), Qt.white, Settings.getColor("quiz_wrong_bg"), Qt.yellow),
             'right': QPalette(Qt.black,
-                Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
+                Settings.getColor("quiz_right_bd"), Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_right_fg"), Qt.yellow, Settings.getColor("quiz_right_bg"), Qt.yellow),
             'invisible': QPalette(Qt.black,
-                Qt.lightGray, Qt.lightGray, Qt.darkGray, Qt.gray,
+                Settings.getColor("quiz_invisible_bd"), Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_invisible_color"), Qt.yellow, Settings.getColor("quiz_invisible_color"), Qt.yellow),
             'inactive':inactive_palette }
-        self.setPalette(self.palettes['inactive'])
+        self.setPalette(self.palettes['inactive']) 
 
     def setTarget(self,  text):
         self.editflag = True
@@ -380,9 +397,9 @@ class Quizzer(QWidget):
 
         if Settings.get('quiz_invisible'):
             self.typer.setPalette(self.typer.palettes['invisible'])
-            set_typer_html(self.typer,v.replace(u"\n", u"<BR>"))
+            set_typer_text(self.typer) 
         else:
-            if errors:
+            if Settings.get("quiz_use_wrong_palette") and errors:
                 self.typer.setPalette(self.typer.palettes['wrong'])
             else:
                 self.typer.setPalette(self.typer.palettes['right'])

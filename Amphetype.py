@@ -14,6 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
 
+# Changelog
+# March 22 2014:
+#  * Added and integrated various GUI color settings [lalop]:
+
+
 from __future__ import with_statement, division
 
 import os
@@ -52,15 +57,14 @@ class TyperWindow(QMainWindow):
         super(TyperWindow, self).__init__(*args)
 
         self.setWindowTitle("Amphetype")
-        self.setPalette(QPalette(QColor(130,130,135), #color of typing text
-                                 QColor(50,50,50),    #background color
-                                 Qt.lightGray,
-                                 Qt.darkGray,
-                                 Qt.gray,
-                                 QColor(0,0,0), #color of label text
-                                 Qt.white,
-                                 Qt.darkGray,
-                                 Qt.black)) 
+        self.updatePalette()
+
+        update_palette_change_signals = ["main_text_color", "widgets_background_color",
+                                         "widgets_text_color" ,"main_background_color",
+                                         'main_text_area_color',"main_borders_color"]
+        
+        for change_signal in update_palette_change_signals:
+            self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.updatePalette) 
 
         tabs = QTabWidget()
 
@@ -109,6 +113,19 @@ class TyperWindow(QMainWindow):
 
     def sizeHint(self):
         return QSize(650, 400)
+    
+    def updatePalette(self):
+        self.setPalette(QPalette(Settings.getColor("main_text_color"), #color of typing text
+                                 Settings.getColor("widgets_background_color"),    #label tab gets part of it color from here
+                                 Settings.getColor("main_borders_color"), #borders
+                                 Settings.getColor("widgets_text_color"),  #rectangles in sources
+                                 Qt.gray,      #tab arrow
+                                 Settings.getColor("widgets_text_color"), #color of widgets text
+                                 Qt.white,
+                                 Settings.getColor("main_text_area_color"),  #most text areas' backgrounds
+                                 Settings.getColor("main_background_color")      #most backgrounds.  label tab gets part of its color from here. 
+)) 
+
 
 class AboutWidget(QTextBrowser):
     def __init__(self, *args):
