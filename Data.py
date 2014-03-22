@@ -93,6 +93,16 @@ class FirstAggregate(object):
         return self.val
 
 class AmphDatabase(sqlite3.Connection):
+    def CreateNewDBIfMissingTables(self):
+        try:
+            self.fetchall("select * from result limit 1")
+            self.fetchall("select * from source limit 1")
+            self.fetchall("select * from statistic limit 1")
+            self.fetchall("select * from mistake limit 1")
+            self.fetchall("select * from text limit 1")
+        except:
+            self.newDB()
+
     def __init__(self, *args):
         sqlite3.Connection.__init__(self, *args)
 
@@ -112,10 +122,7 @@ class AmphDatabase(sqlite3.Connection):
         self.regex_ = None
         self.lasttime_ = None
 
-        try:
-            self.fetchall("select * from result, source, statistic, text, mistake limit 1")
-        except:
-            self.newDB()
+        self.CreateNewDBIfMissingTables()
 
     def resetTimeGroup(self):
         self.lasttime_ = 0.0
