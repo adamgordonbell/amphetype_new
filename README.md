@@ -8,13 +8,12 @@ Differences include:
 These include:
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
- * Experimental: Individual letter coloring, both in input and displayed text, based on current positions and errors
+ * Individual letter coloring, both in input and displayed text, based on current positions and errors
  * improved lesson splitter
  * permissive mode
  * Invisible Mode: Makes input text invisible (goes well with #2)
+ * Allows continuation even with typing errors
  * Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
- * Experimental: Individual letter coloring based on current positions and error 
- * Experimental: Allows continuation even with typing errors 
  * Dark Theme
  * etc
 

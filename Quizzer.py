@@ -202,6 +202,7 @@ class Typer(QTextEdit):
         self.connect(Settings, SIGNAL("change_quiz_wrong_bg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_fg"), self.setPalettes)
         self.connect(Settings, SIGNAL("change_quiz_right_bg"), self.setPalettes)
+        self.connect(Settings, SIGNAL("change_quiz_invisible_color"), self.setPalettes)
         if Settings.get("invisible_mode"):
             self.setTextColor(QColor(Qt.white))
             self.setTextBackgroundColor(QColor(Qt.white))
