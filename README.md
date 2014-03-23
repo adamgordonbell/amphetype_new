@@ -1,9 +1,8 @@
-Fork
-========
+# Fork
 
 This is my personal fork of https://code.google.com/p/amphetype/
 
-Differences include:
+### Differences include:
 
 1. Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
 
@@ -11,17 +10,24 @@ Differences include:
 
 3. Invisible Mode: Makes input text invisible (goes well with #2)
 
-4. Allows continuation even with typing errors
+4. Allows for continuation even with typing mistakes
 
-5. Dark Theme
+5. Extensive GUI Color Settings
 
-Todo:
+6. Allows for smaller resizing than vanilla Amphetype
+
+### Todo:
 
 1. Refactor so that data analysis is separate from GUI classes
 
+2. Multiplayer?!
 
-License and Disclaimers
-========
+# Screenshots
+
+### Typer
+![Typer](https://raw.githubusercontent.com/lalopmak/amphetype/master/screenshots/typer.png)
+
+# License and Disclaimers
 
 Amphetype is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -38,8 +44,7 @@ along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
 
 THIS SOFTWARE, ANY ASSOCIATED FILES, AND ANY ASSOCIATED DOCUMENTATION ARE PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, ANY ASSOCIATED FILES, OR ANY ASSOCIATED DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Original
-========
+# Original
 
 Proper install is coming. I apologize for the current
 mess. It was developed on a Windows machine with few
