@@ -4,11 +4,11 @@ This is my personal fork of https://code.google.com/p/amphetype/
 
 ### Differences include:
 
-1. Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
+1. Unicode -> Ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
 
-2. Individual letter coloring, both in input and displayed text, based on current positions and errors
+2. Letter coloring, both in input and displayed text, based on current positions and errors
 
-3. Invisible Mode: Makes input text invisible (goes well with #2)
+3. Invisible Mode: Makes input text invisible (for use with #2)
 
 4. Allows for continuation even with typing mistakes
 
