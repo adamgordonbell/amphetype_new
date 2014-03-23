@@ -22,6 +22,7 @@ Todo:
 
 1. Refactor so that data analysis is separate from GUI classes
 
+![Typer](screenshots/typer.png)
 
 License and Disclaimers
 
