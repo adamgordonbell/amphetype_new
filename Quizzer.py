@@ -35,6 +35,8 @@
 #       1. Typer border color
 #       2. Inactive palette highlight foreground & background
 #       3. Option not to use "wrong" palette
+# March 23 2014:
+#  * (Hopefully) can now use multiple adjacent spaces in typer and label [lalop]
 
 
 from __future__ import with_statement, division
@@ -158,7 +160,10 @@ If func specified, uses that function for the text setting.  Otherwise, uses typ
     old_position = old_cursor.position()
 
     typer.editflag = True
-    func(text) if func else typer.setHtml(unicode_to_html(text.replace(u"\n",u"<BR>"))) 
+    
+    #note: using typer.setText or setPlainText does not reset, e.g. color
+    func(text) if func else typer.setHtml(unicode_to_html(text.replace("\n","<BR>"))) 
+
     old_cursor.setPosition(old_position)
     typer.setTextCursor(old_cursor)
     typer.editflag = False
@@ -167,6 +172,38 @@ def set_typer_html(typer,html):
     '''Given a Typer, sets its html content to html, matching old cursor position.'''
     set_typer_text(typer,html,func = typer.setHtml)
     
+def replace_html_list_double_space(li,breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
+    '''Given a list li of (to be) html character strings, replaces adjacent spaces, e.g. "     ", 
+
+with breaking and non-breaking spaces, e.g. " &nbsp; &nbsp; ".  The last space in any such sequence is
+
+breaking (to avoid it being word-wrapped into the first char).
+
+default breaking_replacement is " ", non_breaking replacement is "&nbsp;"'''
+    #None if not in sequence, True if current space in sequence should be breaking,
+    #False if current space in sequence should be non-breaking
+    breaking = None 
+    result = list(li)
+    for i in range(len(li)-1,0,-1): 
+        #loops backward to ensure last space in any sequence is non-breaking
+        if breaking == None:
+            #check if we're at the start (i.e. the highest index of) of a sequence
+            if result[i] == result[i-1] == " ":
+                result[i] = breaking_replacement
+                breaking = False
+        elif result[i] == " ":
+            #we're in a sequence, make the appropriate replacement
+            result[i] = breaking_replacement if breaking else non_breaking_replacement
+            breaking = not breaking  
+        else:
+            #exited a sequence
+            breaking = None
+    return result
+
+def space_replacement_dict(replacement):
+    '''Returns a dict that assigns to html spaces the value replacement'''
+    return {" ":replacement,"&nbsp;":replacement}
+
 def update_typer_html(typer,errors):
     '''Organizational function.
 
@@ -176,7 +213,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     v_err_replacements = {}
     if Settings.get('text_area_replace_spaces'):
         #if want to make replacements change spaces in text area as well (risky!)
-        v_err_replacements[" "] = Settings.getHtml('text_area_space_replacement')
+        v_err_replacements.update(space_replacement_dict(Settings.getHtml('text_area_space_replacement')))
         
     if Settings.get('text_area_replace_return'):
         #want to make replacements change returns in text area as well (a little less risky since there's usually fewer)
@@ -185,6 +222,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
 
     error_colors = {} #dict : int -> str, mapping errors to color
     v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
+    v_replaced_list = replace_html_list_double_space(v_replaced_list)
 
     if Settings.get("show_text_area_mistakes"):
         error_colors = dict(map(lambda d : (d,Settings.get('text_area_mistakes_color')),errors))
@@ -315,15 +353,19 @@ class Quizzer(QWidget):
         err_replacements = {"\n":"{0}<BR>".format(Settings.getHtml('label_return_symbol'))}
 
         colors = {}  #dict : int -> str, mapping errors to color
+        
+        #generic dict containing space replacements
+        space_replacements = space_replacement_dict(Settings.getHtml('label_space_replacement'))
 
         if Settings.get('show_label_mistakes'):
             #showing mistakes; need to populate color
             colors = dict([(i,Settings.get('label_mistakes_color')) for i in errors])
 
             if Settings.get('label_replace_spaces_in_mistakes'):
-                err_replacements[" "] = Settings.getHtml('label_space_replacement')
+                err_replacements.update(space_replacements)
 
         text_strs = list(self.text[2]) #list of strs, initially one char each, to operate on
+        text_strs = replace_html_list_double_space(text_strs)
         text_strs = replace_at_locs(text_strs,err_replacements,errors)
 
         #designates colors and replacements of position
@@ -331,12 +373,12 @@ class Quizzer(QWidget):
             colors[position] = Settings.get('label_position_with_mistakes_color')
 
             if Settings.get('label_replace_spaces_in_position'):
-                text_strs = replace_at_locs(text_strs,{" ":Settings.getHtml('label_space_replacement')},[position])
+                text_strs = replace_at_locs(text_strs,space_replacements,[position])
         elif Settings.get('show_label_position'): 
             colors[position] = Settings.get('label_position_color') 
 
             if Settings.get('label_replace_spaces_in_position'):
-                text_strs = replace_at_locs(text_strs,{" ":Settings.getHtml('label_space_replacement')},[position])
+                text_strs = replace_at_locs(text_strs,space_replacements,[position])
 
         htmlized = "".join(html_color_letters(text_strs,colors))
         htmlized = htmlized.replace(u"\n", u"{0}<BR>".format(Settings.getHtml('label_return_symbol')))

@@ -191,7 +191,8 @@ class LessonMiner(QObject):
                             ascii_line += ""
 
             #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
-            ascii_line = re.sub("\s+"," ",ascii_line)               
+            if Settings.get('single_space_only'): 
+                ascii_line = re.sub("\s+"," ",ascii_line)               
 
             #designated replacements for ascii text
             for orig, repl in ascii_replacements:

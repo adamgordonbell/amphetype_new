@@ -29,6 +29,7 @@
 #       3. Option not to use "wrong" palette
 #       4. Various GUI color settings
 
+
 from __future__ import with_statement
 
 import cPickle
@@ -53,7 +54,7 @@ class AmphSettings(QSettings):
     defaults = {
             "main_background_color":"#000000",
             'main_text_color':"#737375",          #old: "#777777",
-            "main_text_area_color":"#5d5b59",
+            "main_text_area_color":"#626263",
             "main_borders_color":"#151515",
             "widgets_background_color":"#323232",
             "widgets_text_color":"#000000",
@@ -63,6 +64,7 @@ class AmphSettings(QSettings):
             "quiz_invisible_bd": "#282828", 
             "text_area_mistakes_color":"#a43434",
             "show_text_area_mistakes":True,
+            "single_space_only":True,
             "text_area_space_replacement":u"∙", #in html, "&#8729;", 
             "text_area_replace_spaces":False,
             'text_area_return_replacement':u"↵",
@@ -86,7 +88,7 @@ class AmphSettings(QSettings):
             "perf_items": 100,
             "text_regex": r"",
             "db_name": _dbname,
-            "select_method": 0,
+            "select_method": 1,
             "num_rand": 50,
             "graph_what": 3,
             "req_space": False, 
@@ -258,7 +260,7 @@ class PreferenceWidget(QWidget):
             SettingsCheckBox('use_lesson_stats', "Save key/trigram/word statistics from generated lessons."),
             [SettingsCheckBox('req_space', "Make SPACE mandatory before each session"),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
-            None,
+            # SettingsCheckBox('single_space_only', "Convert double(+) spaces to single space"),   #doesn't work between sentences
             SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
             None,
             [AmphGridLayout([ 
