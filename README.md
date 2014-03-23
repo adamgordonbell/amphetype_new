@@ -6,14 +6,15 @@ This is my personal fork of https://code.google.com/p/amphetype/
 Differences include:
 
 These include:
+ * Unicode -> Ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
  * Phrase based lesson
  * Forced addition of capitals and symbols to words ( to strength training of these if so desired)
+ * Letter coloring, both in input and displayed text, based on current positions and errors
  * Individual letter coloring, both in input and displayed text, based on current positions and errors
  * improved lesson splitter
  * permissive mode
  * Invisible Mode: Makes input text invisible (goes well with #2)
  * Allows continuation even with typing errors
- * Unicode -> ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
  * Dark Theme
  * etc
 
