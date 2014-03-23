@@ -25,7 +25,7 @@ This is my personal fork of https://code.google.com/p/amphetype/
 # Screenshots
 
 ### Typer
-![Typer](https://raw.githubusercontent.com/lalopmak/amphetype/master/screenshots/typer.png)
+![Typer](screenshots/typer.png)
 
 # License and Disclaimers
 
