@@ -13,13 +13,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
 
+# Changelog
+# March 24 2014:
+#  * Added transliteration options, integrated with settings [lalop] 
+
 from __future__ import division, with_statement
 
 #import psyco
 import re
 import codecs
 import random
-from Config import Settings
+from Config import Settings, INDEX_TRANSLITERATION_UNIDECODE, INDEX_TRANSLITERATION_DELETE
 from itertools import *
 from PyQt4.QtCore import *
 
@@ -75,7 +79,6 @@ try:
     unidecode_imported = True
 except ImportError:
     unidecode_imported = False
-    print("Warning: unidecode (for unicode to ascii transliteration) not available.  Transliterations may be limited.")
 
 class SentenceSplitter(object):
 
@@ -145,16 +148,18 @@ class LessonMiner(QObject):
         previous_line_empty = True
         for l in f:
             #designated replacements for unicode text
-            for orig, repl in unicode_replacements:
-                l = l.replace(orig, repl)
-
-            if unidecode_imported:
+            if Settings.get('transliteration_manual_unicode'):
+                for orig, repl in unicode_replacements:
+                    l = l.replace(orig, repl)
+                    
+            ascii_line = l
+            if unidecode_imported and Settings.get('transliteration_method') == INDEX_TRANSLITERATION_UNIDECODE:
                 #tries to use unidecode if it exists
-                ascii_line = unidecode.unidecode(l)
-            else: 
-                #othewise just deletes all remaining non-ascii chars
+                ascii_line = unidecode.unidecode(ascii_line)
+            elif Settings.get('transliteration_method') == INDEX_TRANSLITERATION_DELETE:
+                #deletes all remaining non-ascii chars
                 try:
-                    ascii_line = l.decode('ascii')
+                    ascii_line = ascii_line.decode('ascii')
                 except UnicodeEncodeError:
                     ascii_line = ''
                     for c in l:
@@ -168,8 +173,9 @@ class LessonMiner(QObject):
                 ascii_line = re.sub("\s+"," ",ascii_line)               
 
             #designated replacements for ascii text
-            for orig, repl in ascii_replacements:
-                ascii_line = ascii_line.replace(orig, repl) 
+            if Settings.get('transliteration_manual_ascii'):
+                for orig, repl in ascii_replacements:
+                    ascii_line = ascii_line.replace(orig, repl) 
 
             l = ascii_line.strip()
             current_line_empty = not l
