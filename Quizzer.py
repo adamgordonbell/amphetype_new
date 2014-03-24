@@ -37,6 +37,9 @@
 #       3. Option not to use "wrong" palette
 # March 23 2014:
 #  * (Hopefully) can now use multiple adjacent spaces in typer and label [lalop]
+# March 24 2014:
+#  * Refactored, fixed some bugs with invisible text and double spaces [lalop]
+
 
 
 from __future__ import with_statement, division
@@ -48,7 +51,7 @@ import time
 import re
 
 from Data import Statistic, DB
-from Config import Settings, unicode_to_html
+from Config import Settings
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -145,32 +148,40 @@ def new_error(position,errors):
 returns whether or there's a new error at position'''
     #considers adjacent errors to be part of the same error
     return position in errors and position - 1 not in errors
-
+    
 def set_typer_text(typer,text = None,func = None):
     '''Given a Typer, sets its text content to text, matching old cursor position.
     
 If text not specified, the plain text (to unicode) from the typer is used.  This can, e.g. clear html.
 
-If func specified, uses that function for the text setting.  Otherwise, uses typer.setText'''
+If func specified, uses that function for the text setting.  Otherwise, uses typer.setPlainText'''
     if text == None:
         text = unicode(typer.toPlainText()) 
+        
+    if func == None:
+        func = typer.setPlainText
 
     #edits the html string into the text area, corrects cursor position
     old_cursor = typer.textCursor()
     old_position = old_cursor.position()
 
     typer.editflag = True
-    
-    #note: using typer.setText or setPlainText does not reset, e.g. color
-    func(text) if func else typer.setHtml(unicode_to_html(text.replace("\n","<BR>"))) 
-
+    func(text)
     old_cursor.setPosition(old_position)
     typer.setTextCursor(old_cursor)
     typer.editflag = False
 
+def set_invisible_typer_text(typer,text = None): 
+    '''Given text to be set in invisible mode, sets it'''
+    def text_setter(t):
+        '''Makes the text color invisible, sets the plain text'''
+        typer.setHtml('<font color="{0}">a</font>'.format(Settings.get('quiz_invisible_color')))
+        typer.setPlainText(t)
+    set_typer_text(typer, text, func = text_setter)
+    
 def set_typer_html(typer,html):
     '''Given a Typer, sets its html content to html, matching old cursor position.'''
-    set_typer_text(typer,html,func = typer.setHtml)
+    set_typer_text(typer, html, func = typer.setHtml)
     
 def replace_html_list_double_space(li,breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
     '''Given a list li of (to be) html character strings, replaces adjacent spaces, e.g. "     ", 
@@ -184,11 +195,11 @@ default breaking_replacement is " ", non_breaking replacement is "&nbsp;"'''
     #False if current space in sequence should be non-breaking
     breaking = None 
     result = list(li)
-    for i in range(len(li)-1,0,-1): 
+    for i in range(len(li)-1,-1,-1): 
         #loops backward to ensure last space in any sequence is non-breaking
         if breaking == None:
             #check if we're at the start (i.e. the highest index of) of a sequence
-            if result[i] == result[i-1] == " ":
+            if i > 0 and result[i] == result[i-1] == " ":
                 result[i] = breaking_replacement
                 breaking = False
         elif result[i] == " ":
@@ -219,7 +230,6 @@ Given a Typer, updates its html based on settings (not including invisible mode)
         #want to make replacements change returns in text area as well (a little less risky since there's usually fewer)
         v_err_replacements["\n"] = Settings.getHtml('text_area_return_replacement')
     
-
     error_colors = {} #dict : int -> str, mapping errors to color
     v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
     v_replaced_list = replace_html_list_double_space(v_replaced_list)
@@ -318,6 +328,11 @@ class Typer(QTextEdit):
             for i in range(1,len(self.times)):
                 self.times[i] = self.when[i] - self.when[i-1]
         return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
+
+    def activate_invisibility(self):
+        '''Turns on invisible mode'''
+        self.setPalette(self.palettes['invisible'])
+        set_invisible_typer_text(self)  #flushes out html with plaintext
 
 class Quizzer(QWidget):
     def __init__(self, *args):
@@ -438,8 +453,7 @@ class Quizzer(QWidget):
             self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
 
         if Settings.get('quiz_invisible'):
-            self.typer.setPalette(self.typer.palettes['invisible'])
-            set_typer_text(self.typer) 
+            self.typer.activate_invisibility()
         else:
             if Settings.get("quiz_use_wrong_palette") and errors:
                 self.typer.setPalette(self.typer.palettes['wrong'])
