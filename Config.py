@@ -28,6 +28,8 @@
 #       2. Inactive palette highlight foreground & background
 #       3. Option not to use "wrong" palette
 #       4. Various GUI color settings
+# March 24 2014:
+#  * Integrated transliteration options with settings [lalop]
 
 
 from __future__ import with_statement
@@ -37,6 +39,18 @@ from QtUtil import *
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import getpass
+
+INDEX_TRANSLITERATION_DELETE = 1
+INDEX_TRANSLITERATION_UNIDECODE = 2
+
+transliteration_methods = ['No automatic method','Delete Non-Ascii'] 
+
+#checks if unidecode available
+try:
+    import unidecode
+    transliteration_methods.append('Unidecode')
+except ImportError:
+    print("Warning: unidecode (for unicode to ascii transliteration) not available.  Transliterations may be limited.")
 
 try:
     _dbname = getpass.getuser() or "typer"
@@ -75,7 +89,7 @@ class AmphSettings(QSettings):
             "label_replace_spaces_in_position":False,
             'label_mistakes_color':"#a43434",
             'show_label_mistakes':True,
-            'label_position_color':"#008000",
+            'label_position_color':"#949475", #formerly 008000, aaaa74
             'show_label_position':True, 
             'label_position_with_mistakes_color':"#a0a000",
             'show_label_position_with_mistakes':False,
@@ -122,6 +136,9 @@ class AmphSettings(QSettings):
             "quiz_wrong_bg": "#1a0000",
             "quiz_wrong_bd": "#282828", 
 
+            'transliteration_manual_unicode':True,
+            'transliteration_method':len(transliteration_methods) - 1,
+            'transliteration_manual_ascii':True,
 
             "group_month": 365.0,
             "group_week": 30.0,
@@ -289,6 +306,14 @@ class PreferenceWidget(QWidget):
                 ["Text Color", SettingsColor('main_text_color', "Foreground")],
                 ["Borders", SettingsColor("main_borders_color", "Foreground")],
                 
+                [1+1j,1+2j,2+1j,2+2j]
+            ]), None],
+            [AmphGridLayout([ 
+                ["UNICODE -> ASCII TRANSLITERATION"],
+                [SettingsCheckBox('transliteration_manual_unicode', "Initial manual transliteration (see Text.py)")],
+                [SettingsCombo('transliteration_method', transliteration_methods)],
+                [SettingsCheckBox('transliteration_manual_ascii', "Manual ascii -> ascii replacements (see Text.py)")],
+
                 [1+1j,1+2j,2+1j,2+2j]
             ]), None],
             None,
