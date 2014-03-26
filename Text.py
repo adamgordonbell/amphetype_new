@@ -56,7 +56,7 @@ unicode_replacements = [
     (u"ø",u"o"),
     (u"ö",u"o"),
     (u"ü",u"u"),
-    (u"é",u"e") 
+    (u"é",u"e"),
 ]
 
 # strings in the ascii-converted input to be replaced, and their replacement
@@ -73,7 +73,7 @@ ascii_replacements = [
     ("... ","..."),(" ...","..."),
     
     #trimming of dashes; put after dash transformations
-    (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-') 
+    (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-'),
 ]
 
 #imports unidecode, if available
