@@ -30,7 +30,10 @@
 #       4. Various GUI color settings
 # March 24 2014:
 #  * Integrated transliteration options with settings [lalop]
-
+# March 26 2014:
+#  * Integrated with settings [lalop]:
+#        1. label position color with adjacent prior mistake
+#        2. independent options for space char on the different position colors
 
 from __future__ import with_statement
 
@@ -79,20 +82,27 @@ class AmphSettings(QSettings):
             "text_area_mistakes_color":"#a43434",
             "show_text_area_mistakes":True,
             "single_space_only":True,
-            "text_area_space_replacement":u"∙", #in html, "&#8729;", 
+            "text_area_mistakes_space_char":u"∙", #in html, "&#8729;", 
             "text_area_replace_spaces":False,
             'text_area_return_replacement':u"↵",
             'text_area_replace_return':True,
             "label_return_symbol":u"↵",
-            "label_space_replacement":u"∙", #in html, "&#8729;", 
+            "label_mistakes_space_char":u"∙", 
+            "label_position_space_char":u"∙", 
+            "label_position_with_mistakes_space_char":u"∙", 
+            "label_position_with_prior_mistake_space_char":u"∙", 
             "label_replace_spaces_in_mistakes":True,
             "label_replace_spaces_in_position":False,
+            "label_replace_spaces_in_position_with_mistakes":False,
+            "label_replace_spaces_in_position_with_prior_mistake":True,
             'label_mistakes_color':"#a43434",
             'show_label_mistakes':True,
             'label_position_color':"#949475", #formerly 008000, aaaa74
             'show_label_position':True, 
             'label_position_with_mistakes_color':"#a0a000",
             'show_label_position_with_mistakes':False,
+            'label_position_with_prior_mistake_color':"#00aa00",
+            'show_label_position_with_prior_mistake':True,
             "typer_font": str(QFont("Arial", 14).toString()),
             "history": 30.0,
             "min_chars": 220,
@@ -288,13 +298,13 @@ class PreferenceWidget(QWidget):
                 ["INVISIBLE MODE", SettingsColor('quiz_invisible_color', "Foreground"), SettingsColor('quiz_invisible_bd', "Foreground"), SettingsCheckBox('quiz_invisible', "Enabled")],
                 ["INPUT MISTAKES"],
                 ["Color", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
-                ["Space char",SettingsEdit('text_area_space_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_spaces', "Use")],
+                ["Space char",SettingsEdit('text_area_mistakes_space_char',data_type=unicode), SettingsCheckBox('text_area_replace_spaces', "Use")],
                 ["Return char",SettingsEdit('text_area_return_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_return', "Use")],
-                ["TEXT DISPLAY"],
-                ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show")],
-                ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show")],
-                ["Position (with mistakes)", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use")],
-                ["Space char",SettingsEdit('label_space_replacement',data_type=unicode), SettingsCheckBox('label_replace_spaces_in_mistakes', "Use for mistakes"), SettingsCheckBox('label_replace_spaces_in_position', "Use for position")],
+                ["TEXT DISPLAY"," "," ","Space char"], 
+                ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show"), SettingsEdit('label_mistakes_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_mistakes", "Use")],
+                ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show"), SettingsEdit('label_position_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position", "Use")],
+                ["  - with mistakes", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use"), SettingsEdit('label_position_with_mistakes_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position_with_mistakes", "Use")],
+                ["  - next to mistake", SettingsColor('label_position_with_prior_mistake_color','Foreground'),SettingsCheckBox('show_label_position_with_prior_mistake', "Use"), SettingsEdit('label_position_with_prior_mistake_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position_with_prior_mistake", "Use")],
                 ["Return char",SettingsEdit('label_return_symbol',data_type=unicode)],
                 ["WIDGETS"],                
                 ["Background",SettingsColor('widgets_background_color', "Background")],
@@ -306,7 +316,7 @@ class PreferenceWidget(QWidget):
                 ["Text Color", SettingsColor('main_text_color', "Foreground")],
                 ["Borders", SettingsColor("main_borders_color", "Foreground")],
                 
-                [1+1j,1+2j,2+1j,2+2j]
+                [1+1j,1+2j,2+1j,2+2j],
             ]), None],
             [AmphGridLayout([ 
                 ["UNICODE -> ASCII TRANSLITERATION"],
