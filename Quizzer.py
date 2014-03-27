@@ -104,7 +104,7 @@ replaces it.  Otherwise, leaves it.'''
     return map(replace_at_locs_a,range(len(strs)))
     
 def disagreements(s,t,full_length=False):
-    '''List of all disagreement positions between strings/lists s and t
+    '''List (in ascending order) of all disagreement positions between strings/lists s and t
 
     Only checks up to the shorter of the two'''
     dlist = []
@@ -261,7 +261,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     v_colored_list = html_color_strs(v_replaced_list,error_colors)
     htmlized = "".join(v_colored_list).replace("\n","<BR>")
     set_typer_html(typer,htmlized)
-
+    
 class Typer(QTextEdit):
     def __init__(self, *args):
         super(Typer, self).__init__(*args)
@@ -436,18 +436,18 @@ class Typer(QTextEdit):
         return self.when[self.where]-self.when[0]
 
     def getStats(self):
+        #TODO: redo when, times to avoid guessing time taken to hit zeroth char from old stat
         if self.when[0] == -1:
             # my refactoring mean this may never get hit, I'm not sure what when and times are for, so i'm not sure if I'm breaking some edge case here??
             t = self.times[1:]
             t.sort(reverse=True)
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
-            self.times[0] = v[0]
-            self.when[0] = self.when[1] - self.times[0]
+            self.when[0] = self.when[1] - v[0]
 
         self.when = list(interpolate_zeroes(self.when))
 
-        for i in range(1,len(self.times)):
-            self.times[i] = self.when[i] - self.when[i-1]
+        for i in range(len(self.times)):
+            self.times[i] = self.when[i+1] - self.when[i]
         return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
 
     def getAccuracy(self):
@@ -564,6 +564,14 @@ Returns the new text_strs list (for assignment).'''
         if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
 
+        old_cursor = self.typer.textCursor()
+        old_position = old_cursor.position()
+        old_str_position = old_position - 1  #the position that has (presumably) just been typed
+     
+        #colors text in typer depending on errors
+        errors = disagreements(v,self.typer.target)
+        first_error = errors[0] if errors else None
+
         if self.typer.when[0] == 0:
             space = len(v) > 0 and v[-1] == u" "
             req = Settings.get('req_space')
@@ -582,28 +590,20 @@ Returns the new text_strs list (for assignment).'''
                 return
             else:
                 self.typer.when[0] = -1
+                self.typer.when[1] = timer()  #have to set starting time regardless of correctness
+        
+        #length of initial matching substring (or 1 + index of last matching letter)
+        lcd_len = first_error if errors else min(len(v),len(self.typer.target)) 
 
-        y = 0
-        for y in xrange(min(len(v), len(self.typer.target)), -1, -1):
-            if v[0:y] == self.typer.target[0:y]:
-                break
-        lcd = v[0:y]
-        self.typer.where = y
+        self.typer.where = lcd_len
+        
+        if self.typer.when[lcd_len] == 0 and lcd_len == len(v):
+            self.typer.when[lcd_len] = timer()
 
-        if self.typer.when[y] == 0 and y == len(v):
-            self.typer.when[y] = timer()
-
-        if lcd == self.typer.target:
+        if len(v) >= len(self.typer.target) and (not first_error or first_error >= len(self.typer.target)):
             self.done()
             return
        
-        old_cursor = self.typer.textCursor()
-        old_position = old_cursor.position()
-        old_str_position = old_position - 1  #the position that has (presumably) just been typed
-     
-        #colors text in typer depending on errors
-        errors = disagreements(v,self.typer.target)
-        
         if new_error(old_str_position,errors): 
             self.typer.mistake[old_str_position] = True
             self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
@@ -704,7 +704,7 @@ Returns the new text_strs list (for assignment).'''
         now = time.time()
         assert self.typer.where == len(self.text[2])
 
-
+        
         self.insertResults(now)
 
         self.updateResultLabel()
