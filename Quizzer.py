@@ -43,7 +43,9 @@
 #  * Added and integrated with settings [lalop]:
 #        1. label position color with adjacent prior mistake
 #        2. independent options for space char on the different position colors
-
+# March 27 2014:
+#  * Added and integrated with settings template for continuing to the next word
+#    only when space correctly pressed [lalop]
 
 
 from __future__ import with_statement, division
@@ -69,22 +71,24 @@ if platform.system() == "Windows":
 else:
     timer = time.time
     
-    
+def html_font_color(color,string):
+    '''Returns html unicode string representing string with font color color'''
+    return u'<font color="{0}">{1}</font>'.format(color,string)
+
 def html_color_strs(strs,new_colors,default_color=None):
     '''strs is list of typically 1 character strings from doing list(string) 
 
 new_colors is a dict : positions (int) -> colors as accepted by html
 
 Non-destructively returns strs with the positions of new_colors changed to the new colors in html'''
-    def colorize(i):
-        s = strs[i]
-        color_s = lambda c : s if c == None else u'<font color="{0}">{1}</font>'.format(c,s)
-        if i not in new_colors:
-            return color_s(default_color)
-        else:
+    def colorize(i,s):
+        color_s = lambda c : s if c == None else html_font_color(c,s)
+        if i in new_colors:
             return color_s(new_colors[i])
+        else:
+            return color_s(default_color)
 
-    return map(colorize,range(len(strs)))
+    return [colorize(i,s) for i,s in enumerate(strs)]
 
 def replace_at_locs(strs,replacements,locations = None):
     '''strs is list of typically 1 character strings from doing list(string) 
@@ -95,14 +99,13 @@ locations is a list of ints.  If location is None (not to be confused with []), 
 
 Non-destructively: in each index of locations, if the string at that index is in replacements,
 replaces it.  Otherwise, leaves it.'''
-    def replace_at_locs_a(i):
-        s = strs[i]
+    def replace_at_locs_a(i,s):
         if locations != None and i not in locations or s not in replacements:
             return s
         else:
             return replacements[s]
 
-    return map(replace_at_locs_a,range(len(strs)))
+    return [replace_at_locs_a(i,s) for i,s in enumerate(strs)]
     
 def disagreements(s,t,full_length=False):
     '''List (in ascending order) of all disagreement positions between strings/lists s and t
@@ -153,7 +156,7 @@ returns whether or there's a new error at position'''
     #considers adjacent errors to be part of the same error
     return position in errors and position - 1 not in errors
     
-def set_typer_text(typer,text = None,func = None):
+def set_typer_text(typer, text = None, func = None, cursor_position = None):
     '''Given a Typer, sets its text content to text, matching old cursor position.
     
 If text not specified, the plain text (to unicode) from the typer is used.  This can, e.g. clear html.
@@ -167,7 +170,7 @@ If func specified, uses that function for the text setting.  Otherwise, uses typ
 
     #edits the html string into the text area, corrects cursor position
     old_cursor = typer.textCursor()
-    old_position = old_cursor.position()
+    old_position = cursor_position if cursor_position else old_cursor.position()
 
     typer.editflag = True
     func(text)
@@ -178,21 +181,22 @@ If func specified, uses that function for the text setting.  Otherwise, uses typ
 def set_colored_typer_text(typer,color,text = None): 
     '''Given text to be set with color color (in RGB format, e.g. #112233), sets it'''
     def text_setter(t):
-        '''Makes the text color invisible, sets the plain text'''
-        typer.setHtml('<font color="{0}">a</font>'.format(color))
-        typer.setPlainText(t)
+        '''Sets unicode text t as html with color color'''
+        t_list = list(t)
+        t_list = replace_html_list_double_space(t_list)
+        typer.setHtml(html_font_color(color,"".join(t_list)))
     set_typer_text(typer, text, func = text_setter)
 
 def set_typer_html(typer,html):
     '''Given a Typer, sets its html content to html, matching old cursor position.'''
     set_typer_text(typer, html, func = typer.setHtml)
     
-def replace_html_list_double_space(li,breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
+def replace_html_list_double_space(li, breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
     '''Given a list li of (to be) html character strings, replaces adjacent spaces, e.g. "     ", 
 
 with breaking and non-breaking spaces, e.g. " &nbsp; &nbsp; ".  The last space in any such sequence is
 
-breaking (to avoid it being word-wrapped into the first char).
+breaking (to avoid it being word-wrapped as the first char on a line).
 
 default breaking_replacement is " ", non_breaking replacement is "&nbsp;"'''
     #None if not in sequence, True if current space in sequence should be breaking,
@@ -243,7 +247,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     v_replaced_list = replace_html_list_double_space(v_replaced_list)
 
     if Settings.get("show_text_area_mistakes"):
-        error_colors = dict(map(lambda d : (d,Settings.get('text_area_mistakes_color')),errors))
+        error_colors = dict(map(lambda i : (i,Settings.get('text_area_mistakes_color')),errors))
         v_replaced_list = replace_at_locs(v_replaced_list,v_err_replacements,errors)
 
     v_colored_list = html_color_strs(v_replaced_list,error_colors)
@@ -440,6 +444,14 @@ Returns the new text_strs list (for assignment).'''
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target)
         first_error = errors[0] if errors else None
+        
+        #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
+        #Prevent advancement until user correctly types space
+        if Settings.get('ignore_until_correct_space') and self.typer.target[old_str_position] == u" " and old_str_position in errors:
+            #gets rid of new character (sets as plaintext)
+            set_typer_text(self.typer,v[:old_str_position] + v[old_str_position+1:],cursor_position = old_position - 1) 
+            self.checkText()    #recovers the formatting 
+            return
 
         if self.typer.when[0] == 0:
             space = len(v) > 0 and v[-1] == u" "
@@ -492,8 +504,8 @@ Returns the new text_strs list (for assignment).'''
     def readjust(self):
         f = Settings.getFont("typer_font")
         f.setKerning(False)
-        #todo: get rid of "vertical kerning"
-        # not f.setFixedPitch(True)
+        #TODO: get rid of "vertical kerning"
+        #  f.setFixedPitch(True) didn't work
         self.label.setFont(f)
         self.typer.setFont(f)
 

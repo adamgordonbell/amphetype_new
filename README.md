@@ -10,11 +10,15 @@ This is my personal fork of https://code.google.com/p/amphetype/
 
 3. Invisible Mode: Makes input text invisible (for use with #2)
 
-4. Allows for continuation even with typing mistakes
+4. Option for continuing to the next passage even with typing mistakes
 
-5. Extensive GUI Color Settings
+5. Option for preventing continuing to the next word until space correctly pressed
 
-6. Allows for smaller resizing than vanilla Amphetype
+6. Extensive GUI Color Settings
+
+7. Can change return and space characters
+
+8. Allows for smaller resizing than vanilla Amphetype
 
 ### Todo:
 

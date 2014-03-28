@@ -34,6 +34,9 @@
 #  * Integrated with settings [lalop]:
 #        1. label position color with adjacent prior mistake
 #        2. independent options for space char on the different position colors
+# March 27 2014:
+#  * Integrated with settings template for continuing to the next word
+#    only when space correctly pressed [lalop]
 
 from __future__ import with_statement
 
@@ -86,6 +89,7 @@ class AmphSettings(QSettings):
             "text_area_replace_spaces":False,
             'text_area_return_replacement':u"↵",
             'text_area_replace_return':True,
+            'ignore_until_correct_space':False,
             "label_return_symbol":u"↵",
             "label_mistakes_space_char":u"∙", 
             "label_position_space_char":u"∙", 
@@ -281,6 +285,7 @@ class PreferenceWidget(QWidget):
 
         self.setLayout(AmphBoxLayout([
             ["Typer font is", self.font_lbl, AmphButton("Change...", self.setFont), None],
+            SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
             [SettingsCheckBox('auto_review', "Automatically review slow and mistyped words after texts."),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             SettingsCheckBox('show_last', "Show last result(s) above text in the Typer."),
@@ -288,7 +293,7 @@ class PreferenceWidget(QWidget):
             [SettingsCheckBox('req_space', "Make SPACE mandatory before each session"),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             # SettingsCheckBox('single_space_only', "Convert double(+) spaces to single space"),   #doesn't work between sentences
-            SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
+            SettingsCheckBox('ignore_until_correct_space', "Prevent continuing to next word until space is correctly pressed"), 
             None,
             [AmphGridLayout([ 
                 ["INPUT PALETTE", "Text Color", "Border", "Background","Highlight","Highlight Text"],
