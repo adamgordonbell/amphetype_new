@@ -12,11 +12,16 @@ These include:
  * Letter coloring, both in input and displayed text, based on current positions and errors
  * Individual letter coloring, both in input and displayed text, based on current positions and errors
  * improved lesson splitter
+ * Option for continuing to the next passage even with typing mistakes
  * permissive mode
  * Invisible Mode: Makes input text invisible (goes well with #2)
+ * Option for preventing continuing to the next word until space correctly pressed
  * Allows continuation even with typing errors
  * Dark Theme
  * etc
+ * Extensive GUI Color Settings
+ * Can change return and space characters
+ * Allows for smaller resizing than vanilla Amphetype
 
 Todo:
 
