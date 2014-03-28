@@ -44,8 +44,12 @@
 #        1. label position color with adjacent prior mistake
 #        2. independent options for space char on the different position colors
 # March 27 2014:
-#  * Added and integrated with settings template for continuing to the next word
+#  * Added and integrated with settings: template for continuing to the next word
 #    only when space correctly pressed [lalop]
+# March 28 2014:
+#  * Added and integrated with settings [lalop]:
+#        1. Case sensitivity
+#        2. Template for automatically inserting certain chars in the text area
 
 
 from __future__ import with_statement, division
@@ -63,6 +67,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from QtUtil import *
 
+#minimum time we assume to take to count char (to prevent division by zero)
+MINIMUM_CHAR_TYPING_TIME = 0.000001     #equivalent to 3333.33wpm 
 
 if platform.system() == "Windows":
     # hack hack, hackity hack
@@ -107,11 +113,18 @@ replaces it.  Otherwise, leaves it.'''
 
     return [replace_at_locs_a(i,s) for i,s in enumerate(strs)]
     
-def disagreements(s,t,full_length=False):
-    '''List (in ascending order) of all disagreement positions between strings/lists s and t
+def disagreements(s,t,case_sensitive=True,full_length=False):
+    '''List (in ascending order) of all disagreement positions between strings s and t
+    
+    (s and t can also be lists as long as case_sensitive==True)
+    
+    case_sensitive: whether or not this check is case sensitive
 
-    Only checks up to the shorter of the two'''
+    full_length: whether or not to check the full length, or stop at the shorter of the two'''
     dlist = []
+    if not case_sensitive:
+        s = s.lower()
+        t = t.lower()
     for i in range(min(len(s),len(t))):
         if s[i] != t[i]:
             dlist.append(i)
@@ -340,7 +353,9 @@ class Typer(QTextEdit):
         self.when = list(interpolate_zeroes(self.when))
 
         for i in range(len(self.times)):
-            self.times[i] = self.when[i+1] - self.when[i]
+            #prevent division by zero when 0 time 
+            time = self.when[i+1] - self.when[i]
+            self.times[i] = MINIMUM_CHAR_TYPING_TIME if time == 0 else time   
 
         return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
 
@@ -442,9 +457,24 @@ Returns the new text_strs list (for assignment).'''
         old_str_position = old_position - 1  #the position that has (presumably) just been typed
      
         #colors text in typer depending on errors
-        errors = disagreements(v,self.typer.target)
+        errors = disagreements(v,self.typer.target,case_sensitive=Settings.get('case_sensitive'))
         first_error = errors[0] if errors else None
         
+        #characters to automatically insert in the text area
+        automatically_inserted_chars = []
+        if Settings.get('use_automatic_other_insertion'):
+            automatically_inserted_chars.extend(list(Settings.get('automatic_other_insertion')))
+        for s,c in [('automatic_space_insertion',u" "),('automatic_return_insertion',u"\n")]:
+            if Settings.get(s):
+                automatically_inserted_chars.append(c)
+        
+        #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
+        #Automatically insert characters into the text area
+        if old_position < len(self.typer.target) and self.typer.target[old_position] in automatically_inserted_chars:
+            set_typer_text(self.typer,v + self.typer.target[old_position], cursor_position = old_position + 1)
+            self.checkText()
+            return
+
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
         #Prevent advancement until user correctly types space
         if Settings.get('ignore_until_correct_space') and self.typer.target[old_str_position] == u" " and old_str_position in errors:

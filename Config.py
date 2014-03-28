@@ -35,8 +35,13 @@
 #        1. label position color with adjacent prior mistake
 #        2. independent options for space char on the different position colors
 # March 27 2014:
-#  * Integrated with settings template for continuing to the next word
+#  * Integrated with settings: template for continuing to the next word
 #    only when space correctly pressed [lalop]
+# March 28 2014:
+#  * Added and integrated with settings [lalop]:
+#        1. Case sensitivity
+#        2. Template for automatically inserting certain chars in the text area
+#  * Changed default database name
 
 from __future__ import with_statement
 
@@ -45,6 +50,7 @@ from QtUtil import *
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import getpass
+import string
 
 INDEX_TRANSLITERATION_DELETE = 1
 INDEX_TRANSLITERATION_UNIDECODE = 2
@@ -59,11 +65,11 @@ except ImportError:
     print("Warning: unidecode (for unicode to ascii transliteration) not available.  Transliterations may be limited.")
 
 try:
-    _dbname = getpass.getuser() or "typer"
+    _dbname = getpass.getuser() or "typer" 
     if '.' not in _dbname:
-        _dbname += '.db'
+        _dbname += '-L.db'
 except:
-    _dbname = "typer.db"
+    _dbname = "typer-L.db"
 
 def unicode_to_html(s):
     '''Takes a unicode string and encodes it as HTML'''
@@ -90,6 +96,11 @@ class AmphSettings(QSettings):
             'text_area_return_replacement':u"↵",
             'text_area_replace_return':True,
             'ignore_until_correct_space':False,
+            'automatic_space_insertion':False,
+            'automatic_return_insertion':False,
+            'automatic_other_insertion':string.punctuation, 
+            'use_automatic_other_insertion':False,
+            'case_sensitive':True,
             "label_return_symbol":u"↵",
             "label_mistakes_space_char":u"∙", 
             "label_position_space_char":u"∙", 
@@ -294,6 +305,12 @@ class PreferenceWidget(QWidget):
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             # SettingsCheckBox('single_space_only', "Convert double(+) spaces to single space"),   #doesn't work between sentences
             SettingsCheckBox('ignore_until_correct_space', "Prevent continuing to next word until space is correctly pressed"), 
+            SettingsCheckBox('case_sensitive', "Case sensitive"), 
+            [AmphGridLayout([["AUTOMATICALLY INSERT:", SettingsCheckBox('automatic_space_insertion', "spaces"),SettingsCheckBox('automatic_return_insertion', "newlines")],
+                             ["  - Other characters:", SettingsEdit('automatic_other_insertion',data_type=unicode),SettingsCheckBox('use_automatic_other_insertion', "Use")], 
+                [1+1j,1+2j,2+1j,2+2j], 
+            ]), None],
+
             None,
             [AmphGridLayout([ 
                 ["INPUT PALETTE", "Text Color", "Border", "Background","Highlight","Highlight Text"],

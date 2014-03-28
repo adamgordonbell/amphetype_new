@@ -10,15 +10,19 @@ This is my personal fork of https://code.google.com/p/amphetype/
 
 3. Invisible Mode: Makes input text invisible (for use with #2)
 
-4. Option for continuing to the next passage even with typing mistakes
+4. Toggle case sensitivity
 
-5. Option for preventing continuing to the next word until space correctly pressed
+5. Option for continuing to the next passage even with typing mistakes
 
-6. Extensive GUI Color Settings
+4. Option for automatically inserting space (so only letters need to be typed)
 
-7. Can change return and space characters
+6. Option for preventing continuing to the next word until space correctly pressed
 
-8. Allows for smaller resizing than vanilla Amphetype
+7. Extensive GUI Color Settings
+
+8. Can change return and space characters
+
+9. Allows for smaller resizing than vanilla Amphetype
 
 ### Todo:
 
@@ -30,6 +34,12 @@ This is my personal fork of https://code.google.com/p/amphetype/
 
 ### Typer
 ![Typer](screenshots/typer.png)
+
+# Warning about databases/statistics: 
+
+The database/statistics of this fork should be considered unstable.  In addition, some of the options here (e.g. automatically inserting space) can significantly change the resulting statistics. 
+
+It is therefore recommended to use a different database for this fork than with other versions of amphetype, and to make regular backups of any important data.
 
 # License and Disclaimers
 
@@ -46,7 +56,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
 
-THIS SOFTWARE, ANY ASSOCIATED FILES, AND ANY ASSOCIATED DOCUMENTATION ARE PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, ANY ASSOCIATED FILES, OR ANY ASSOCIATED DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE, ANY ASSOCIATED FILES, AND ANY ASSOCIATED DOCUMENTATION
+ARE PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS", WITHOUT
+WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, ANY ASSOCIATED FILES,
+OR ANY ASSOCIATED DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
 
 # Original
 
