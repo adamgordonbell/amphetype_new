@@ -12,16 +12,25 @@ These include:
  * Letter coloring, both in input and displayed text, based on current positions and errors
  * Individual letter coloring, both in input and displayed text, based on current positions and errors
  * improved lesson splitter
+4. Toggle case sensitivity
  * Option for continuing to the next passage even with typing mistakes
  * permissive mode
+5. Option for continuing to the next passage even with typing mistakes
  * Invisible Mode: Makes input text invisible (goes well with #2)
  * Option for preventing continuing to the next word until space correctly pressed
+4. Option for automatically inserting space (so only letters need to be typed)
  * Allows continuation even with typing errors
  * Dark Theme
+6. Option for preventing continuing to the next word until space correctly pressed
  * etc
  * Extensive GUI Color Settings
  * Can change return and space characters
  * Allows for smaller resizing than vanilla Amphetype
+7. Extensive GUI Color Settings
+
+8. Can change return and space characters
+
+9. Allows for smaller resizing than vanilla Amphetype
 
 Todo:
 
@@ -30,6 +39,12 @@ Todo:
 ![Typer](screenshots/typer.png)
 
 License and Disclaimers
+# Warning about databases/statistics: 
+
+The database/statistics of this fork should be considered unstable.  In addition, some of the options here (e.g. automatically inserting space) can significantly change the resulting statistics. 
+
+It is therefore recommended to use a different database for this fork than with other versions of amphetype, and to make regular backups of any important data.
+
 
 Amphetype is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -48,6 +63,19 @@ Sample text included:
  * Selections from project gutenberg
  * All the typing tests from TyperRacer.com
  * QWERTY right hand / Left Hand and alternating hand words
+THIS SOFTWARE, ANY ASSOCIATED FILES, AND ANY ASSOCIATED DOCUMENTATION
+ARE PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS", WITHOUT
+WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, ANY ASSOCIATED FILES,
+OR ANY ASSOCIATED DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
 
 
 To run, type:
