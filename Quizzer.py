@@ -464,7 +464,7 @@ Returns the new text_strs list (for assignment).'''
         automatically_inserted_chars = []
         if Settings.get('use_automatic_other_insertion'):
             automatically_inserted_chars.extend(list(Settings.get('automatic_other_insertion')))
-        for s,c in [('automatic_space_insertion',u" "),('automatic_return_insertion',u"\n")]:
+        for s,c in ('automatic_space_insertion',u" "),('automatic_return_insertion',u"\n"):
             if Settings.get(s):
                 automatically_inserted_chars.append(c)
         
