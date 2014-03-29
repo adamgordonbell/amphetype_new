@@ -76,7 +76,21 @@ if platform.system() == "Windows":
     timer()
 else:
     timer = time.time
-    
+
+def generate_automatic_insertion_regex():
+    '''From settings info, returns the regex for which to re.match the automatically inserted chars
+
+Or None if no chars are to be automatically inserted.'''
+    #the str of characters (in regex-escaped form, but not regex) to automatically insert
+    automatically_inserted_chars = ""
+    if Settings.get('use_automatic_other_insertion'):
+        automatically_inserted_chars += re.escape(Settings.get('automatic_other_insertion'))
+    for s,c in ('automatic_space_insertion',u" "),('automatic_return_insertion',u"\n"):
+        if Settings.get(s):
+            automatically_inserted_chars += re.escape(c)
+
+    return "[{0}]+".format(automatically_inserted_chars) if automatically_inserted_chars else None
+
 def html_font_color(color,string):
     '''Returns html unicode string representing string with font color color'''
     return u'<font color="{0}">{1}</font>'.format(color,string)
@@ -130,39 +144,45 @@ def disagreements(s,t,case_sensitive=True,full_length=False):
             dlist.append(i)
 
     return dlist
-    
-def interpolate_zeroes(iterable):
-    '''l is a iterable of numbers with first value nonzero and either:
-1. Last value nonzero (if terminating)
-2. No upper bound on nonzeroes (if non-terminating)
 
-Nondestructively: replaces any sequences of zeroes in nums with
-averaged values interpolated from the nonzeroes immediately before
+def linearly_interpolate(iterable,interpolate_element = lambda i,e : e is None):
+    '''iterable is a iterable of numbers, some of which we want to interpolate. 
+Its first value must be non-interpolating and either:
+1. Last value non-interpolating (if terminating)
+2. No upper bound on non-interpolatings (if non-terminating)
+
+Nondestructively: replaces any sequences of interpolatables in nums with
+averaged values interpolated from the non-interpolated immediately before
 and after it
+    
+interpolate_element : Ints x Numbers -> Boolean is a function used to determine which ones to interpolate.
+It will de called via interpolate_element(index of element e,element e)
 
-e.g. interpolate_zeroes([3,5,7,0,0,0,0,8,9,0,0,5,0,0,0,0,10,0,12,18,-5]) = 
+The numbers that should be interpolated are those numbers e, at index i for which interpolate_element(i,e) == True
+
+e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,None,None,10,None,12,18,-5]) = 
         iterator generating: 3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9,
                              7.666666666666667, 6.333333333333334,
                              5, 6.0, 7.0, 8.0, 9.0, 10, 11.0, 12, 18, -5'''
-    nonzero_dist = 0      #dist since last nonzero
-    last_nonzero = None   #what that last nonzero was
-    for e in iterable:
-        if e == 0:
-            nonzero_dist += 1
+    non_interpolation_dist = 0      #dist since last non_interpolation
+    last_non_interpolation = None   #what that last non_interpolation was
+    for i,e in enumerate(iterable):
+        if interpolate_element(i,e):
+            non_interpolation_dist += 1
             continue
-        elif nonzero_dist == 0:
-            #no previous zeroes to interpolate over, return value
+        elif non_interpolation_dist == 0:
+            #no previous elements to interpolate over, return value
             yield e
         else:
-            nonzero_dist += 1
-            average_change = 1.0*(e-last_nonzero)/nonzero_dist
-            for i in range(1,nonzero_dist):
+            non_interpolation_dist += 1
+            average_change = 1.0*(e-last_non_interpolation)/non_interpolation_dist
+            for i in range(1,non_interpolation_dist):
                 #interpolates over previous zeroes
-                yield last_nonzero + i*average_change
+                yield last_non_interpolation + i*average_change
             yield e
-        nonzero_dist = 0
-        last_nonzero = e
-
+        non_interpolation_dist = 0
+        last_non_interpolation = e
+   
 def new_error(position,errors):
     '''Given list of error positions and current position, 
 returns whether or there's a new error at position'''
@@ -183,7 +203,7 @@ If func specified, uses that function for the text setting.  Otherwise, uses typ
 
     #edits the html string into the text area, corrects cursor position
     old_cursor = typer.textCursor()
-    old_position = cursor_position if cursor_position else old_cursor.position()
+    old_position = old_cursor.position() if cursor_position is None else cursor_position
 
     typer.editflag = True
     func(text)
@@ -197,7 +217,7 @@ def set_colored_typer_text(typer,color,text = None):
         '''Sets unicode text t as html with color color'''
         t_list = list(t)
         t_list = replace_html_list_double_space(t_list)
-        typer.setHtml(html_font_color(color,"".join(t_list)))
+        typer.setHtml(html_font_color(color,"".join(t_list).replace("\n","<BR>")))
     set_typer_text(typer, text, func = text_setter)
 
 def set_typer_html(typer,html):
@@ -284,6 +304,7 @@ class Typer(QTextEdit):
             self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.setPalettes)
 
         self.target = None
+        self.started = False
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
@@ -318,7 +339,7 @@ class Typer(QTextEdit):
     def setTarget(self,  text):
         self.editflag = True
         self.target = text
-        self.when = [0] * (len(self.target)+1)
+        self.when = [None] * (len(self.target)+1)
         self.times = [0] * len(self.target)
         self.mistake = [False] * len(self.target)
         self.mistakes = {} #collections.defaultdict(lambda: [])
@@ -350,7 +371,7 @@ class Typer(QTextEdit):
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
             self.when[0] = self.when[1] - v[0]
 
-        self.when = list(interpolate_zeroes(self.when))
+        self.when = list(linearly_interpolate(self.when))
 
         for i in range(len(self.times)):
             #prevent division by zero when 0 time 
@@ -452,6 +473,27 @@ Returns the new text_strs list (for assignment).'''
         if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
 
+        if not self.typer.started:
+            space_typed = v == u" "                     #whether the first typed char was space
+            space_required = Settings.get('req_space')  #whether this was required
+
+            if space_required:
+                if space_typed:
+                    #the first space only starts the session; clear the typer
+                    set_typer_text(self.typer,"",cursor_position=0)
+                    self.typer.when[0] = timer()
+                    self.typer.started = True
+                    return
+                else:
+                    #reset the wait text
+                    set_typer_text(self.typer,self.typer.getWaitText())
+                    self.typer.selectAll()
+                    return
+            else:
+                self.typer.when[0] = -1
+                self.typer.when[1] = timer()  #have to set starting time regardless of correctness
+                self.typer.started = True
+
         old_cursor = self.typer.textCursor()
         old_position = old_cursor.position()
         old_str_position = old_position - 1  #the position that has (presumably) just been typed
@@ -459,21 +501,18 @@ Returns the new text_strs list (for assignment).'''
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target,case_sensitive=Settings.get('case_sensitive'))
         first_error = errors[0] if errors else None
-        
-        #characters to automatically insert in the text area
-        automatically_inserted_chars = []
-        if Settings.get('use_automatic_other_insertion'):
-            automatically_inserted_chars.extend(list(Settings.get('automatic_other_insertion')))
-        for s,c in ('automatic_space_insertion',u" "),('automatic_return_insertion',u"\n"):
-            if Settings.get(s):
-                automatically_inserted_chars.append(c)
-        
+
+        automatic_insertion_regex = generate_automatic_insertion_regex()
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
+        #TODO: change statistics to account for this
         #Automatically insert characters into the text area
-        if old_position < len(self.typer.target) and self.typer.target[old_position] in automatically_inserted_chars:
-            set_typer_text(self.typer,v + self.typer.target[old_position], cursor_position = old_position + 1)
-            self.checkText()
-            return
+        if automatic_insertion_regex and old_position == len(v): #only works if cursor is at the end
+            automatic_insertion = re.match(automatic_insertion_regex,self.typer.target[old_position:])
+            if automatic_insertion:
+                new_end = old_position + automatic_insertion.end()
+                set_typer_text(self.typer, v[:old_position] + self.typer.target[old_position:new_end], cursor_position = new_end)
+                self.checkText()  #recovers the formatting
+                return
 
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
         #Prevent advancement until user correctly types space
@@ -483,35 +522,16 @@ Returns the new text_strs list (for assignment).'''
             self.checkText()    #recovers the formatting 
             return
 
-        if self.typer.when[0] == 0:
-            space = len(v) > 0 and v[-1] == u" "
-            req = Settings.get('req_space')
-
-            self.typer.editflag = True
-            if space:
-                self.typer.when[0] = timer()
-                self.typer.clear()
-                self.typer.setPalette(self.typer.palettes['right'])
-            elif req:
-                self.typer.setText(self.typer.getWaitText())
-                self.typer.selectAll()
-            self.typer.editflag = False
-
-            if req or space:
-                return
-            else:
-                self.typer.when[0] = -1
-                self.typer.when[1] = timer()  #have to set starting time regardless of correctness
-        
         #length of initial matching substring (or 1 + index of last matching letter)
         lcd_len = first_error if errors else min(len(v),len(self.typer.target)) 
 
         self.typer.where = lcd_len
         
-        if self.typer.when[lcd_len] == 0 and lcd_len == len(v):
+        if self.typer.when[lcd_len] == None and lcd_len == len(v):
             self.typer.when[lcd_len] = timer()
 
         if len(v) >= len(self.typer.target) and (not first_error or first_error >= len(self.typer.target)):
+            self.typer.started = False
             self.done()
             return
        
