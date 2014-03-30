@@ -216,7 +216,7 @@ def set_colored_typer_text(typer,color,text = None):
     def text_setter(t):
         '''Sets unicode text t as html with color color'''
         t_list = list(t)
-        t_list = replace_html_list_double_space(t_list)
+        t_list = html_list_process_spaces(t_list)
         typer.setHtml(html_font_color(color,"".join(t_list).replace("\n","<BR>")))
     set_typer_text(typer, text, func = text_setter)
 
@@ -224,14 +224,19 @@ def set_typer_html(typer,html):
     '''Given a Typer, sets its html content to html, matching old cursor position.'''
     set_typer_text(typer, html, func = typer.setHtml)
     
-def replace_html_list_double_space(li, breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
-    '''Given a list li of (to be) html character strings, replaces adjacent spaces, e.g. "     ", 
+def html_list_process_spaces(li, breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
+    '''Given a list li of (to be) html character strings, process the spaces.
+
+default breaking_replacement is " ", non_breaking replacement is "&nbsp;
+
+    
+First, adjacent spaces, e.g. "     " are replaced 
 
 with breaking and non-breaking spaces, e.g. " &nbsp; &nbsp; ".  The last space in any such sequence is
-
 breaking (to avoid it being word-wrapped as the first char on a line).
 
-default breaking_replacement is " ", non_breaking replacement is "&nbsp;"'''
+
+If the first char is a breaking space, replaces it with non-breaking space."'''
     #None if not in sequence, True if current space in sequence should be breaking,
     #False if current space in sequence should be non-breaking
     breaking = None 
@@ -250,6 +255,9 @@ default breaking_replacement is " ", non_breaking replacement is "&nbsp;"'''
         else:
             #exited a sequence
             breaking = None
+    
+    if len(result) > 0 and result[0] == breaking_replacement:
+        result[0] = non_breaking_replacement
     return result
 
 def space_replacement_dict(replacement):
@@ -277,7 +285,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     
     error_colors = {} #dict : int -> str, mapping errors to color
     v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
-    v_replaced_list = replace_html_list_double_space(v_replaced_list)
+    v_replaced_list = html_list_process_spaces(v_replaced_list)
 
     if Settings.get("show_text_area_mistakes"):
         error_colors = dict(map(lambda i : (i,Settings.get('text_area_mistakes_color')),errors))
@@ -343,7 +351,7 @@ class Typer(QTextEdit):
         self.times = [0] * len(self.target)
         self.mistake = [False] * len(self.target)
         self.mistakes = {} #collections.defaultdict(lambda: [])
-        self.where = 0
+        self.farthest_correct = 0
         self.clear()
         self.setPalette(self.palettes['inactive'])
         self.setText(self.getWaitText())
@@ -371,14 +379,17 @@ class Typer(QTextEdit):
             v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
             self.when[0] = self.when[1] - v[0]
 
-        self.when = list(linearly_interpolate(self.when))
+        if not self.when[-1]:
+            self.when[-1] = timer()
 
+        self.when = list(linearly_interpolate(self.when))
+        
         for i in range(len(self.times)):
             #prevent division by zero when 0 time 
             time = self.when[i+1] - self.when[i]
             self.times[i] = MINIMUM_CHAR_TYPING_TIME if time == 0 else time   
 
-        return self.when[self.where]-self.when[0], self.where, self.times, self.mistake, self.getMistakes()
+        return self.when[-1]-self.when[0], len(self.target), self.times, self.mistake, self.getMistakes()
 
     def activate_invisibility(self):
         '''Turns on invisible mode'''
@@ -428,7 +439,7 @@ class Quizzer(QWidget):
                 err_replacements.update(space_replacement_dict_from_setting('label_mistakes_space_char'))
 
         text_strs = list(self.text[2]) #list of strs, initially one char each, to operate on
-        text_strs = replace_html_list_double_space(text_strs)
+        text_strs = html_list_process_spaces(text_strs)
         text_strs = replace_at_locs(text_strs,err_replacements,errors)
 
         def color_position(settings_color_var, use_space_var, space_var):
@@ -502,6 +513,12 @@ Returns the new text_strs list (for assignment).'''
         errors = disagreements(v,self.typer.target,case_sensitive=Settings.get('case_sensitive'))
         first_error = errors[0] if errors else None
 
+        #records time that any char was correctly hit
+        #except that if we've already been correct farther, we don't record
+        if self.typer.farthest_correct < old_str_position < len(self.typer.target) and not old_str_position in errors:
+            self.typer.when[old_str_position+1] = timer() #zeroth position is original space
+            self.typer.farthest_correct = old_str_position
+
         automatic_insertion_regex = generate_automatic_insertion_regex()
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
         #TODO: change statistics to account for this
@@ -521,14 +538,6 @@ Returns the new text_strs list (for assignment).'''
             set_typer_text(self.typer,v[:old_str_position] + v[old_str_position+1:],cursor_position = old_position - 1) 
             self.checkText()    #recovers the formatting 
             return
-
-        #length of initial matching substring (or 1 + index of last matching letter)
-        lcd_len = first_error if errors else min(len(v),len(self.typer.target)) 
-
-        self.typer.where = lcd_len
-        
-        if self.typer.when[lcd_len] == None and lcd_len == len(v):
-            self.typer.when[lcd_len] = timer()
 
         if len(v) >= len(self.typer.target) and (not first_error or first_error >= len(self.typer.target)):
             self.typer.started = False
