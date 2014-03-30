@@ -357,6 +357,7 @@ class Typer(QTextEdit):
         self.setText(self.getWaitText())
         self.selectAll()
         self.editflag = False
+        self.started = False
 
     def getWaitText(self):
         if Settings.get('req_space'):
@@ -485,11 +486,10 @@ Returns the new text_strs list (for assignment).'''
             v = self.typer.target
 
         if not self.typer.started:
-            space_typed = v == u" "                     #whether the first typed char was space
-            space_required = Settings.get('req_space')  #whether this was required
-
-            if space_required:
-                if space_typed:
+            if Settings.get('req_space'):
+            #space is required before beginning the passage proper
+                if v == u" ":
+                    #the first char typed was space
                     #the first space only starts the session; clear the typer
                     set_typer_text(self.typer,"",cursor_position=0)
                     self.typer.when[0] = timer()
@@ -540,7 +540,6 @@ Returns the new text_strs list (for assignment).'''
             return
 
         if len(v) >= len(self.typer.target) and (not first_error or first_error >= len(self.typer.target)):
-            self.typer.started = False
             self.done()
             return
        
