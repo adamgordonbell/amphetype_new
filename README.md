@@ -38,7 +38,6 @@ It is therefore recommended to use a different database for this fork than with 
 
 # Screenshots
 
-### Typer
 ![Typer](screenshots/typer.png)
 
 # License and Disclaimers

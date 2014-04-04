@@ -50,6 +50,12 @@
 #  * Added and integrated with settings [lalop]:
 #        1. Case sensitivity
 #        2. Template for automatically inserting certain chars in the text area
+# April 4 2014:
+#  * Redid stats [lalop]:
+#        1. Starting space is now ignored (rather than fudged if not existing)
+#        2. Automatically completed chars are now ignored. An optimistic 
+#           stat estimate (one that assumes the user completed them correctly
+#           and instantaneously) is also shown
 
 
 from __future__ import with_statement, division
@@ -69,6 +75,7 @@ from QtUtil import *
 
 #minimum time we assume to take to count char (to prevent division by zero)
 MINIMUM_CHAR_TYPING_TIME = 0.000001     #equivalent to 3333.33wpm 
+MINIMUM_ELAPSED_TIME = 0.0001 
 
 if platform.system() == "Windows":
     # hack hack, hackity hack
@@ -76,6 +83,13 @@ if platform.system() == "Windows":
     timer()
 else:
     timer = time.time
+
+class Letter(object):
+    "Letter data"
+    def __init__(self, char, when = None, automatically_inserted = False):
+        self.char = char
+        self.when = when
+        self.automatically_inserted = automatically_inserted
 
 def generate_automatic_insertion_regex():
     '''From settings info, returns the regex for which to re.match the automatically inserted chars
@@ -312,7 +326,7 @@ class Typer(QTextEdit):
             self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.setPalettes)
 
         self.target = None
-        self.started = False
+        self.start_time = None  #start time; None (if not started), 0 (if started but unset) or float
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
@@ -347,17 +361,17 @@ class Typer(QTextEdit):
     def setTarget(self,  text):
         self.editflag = True
         self.target = text
-        self.when = [None] * (len(self.target)+1)
-        self.times = [0] * len(self.target)
+        self.data = [None]* (len(self.target))
         self.mistake = [False] * len(self.target)
         self.mistakes = {} #collections.defaultdict(lambda: [])
-        self.farthest_correct = 0
+        self.farthest_correct = -1
+        self.farthest_data = -1
         self.clear()
         self.setPalette(self.palettes['inactive'])
         self.setText(self.getWaitText())
         self.selectAll()
         self.editflag = False
-        self.started = False
+        self.start_time = None
 
     def getWaitText(self):
         if Settings.get('req_space'):
@@ -373,24 +387,21 @@ class Typer(QTextEdit):
         return inv
 
     def getStats(self):
-        #TODO: redo when, times to avoid guessing time taken to hit zeroth char from old stat
-        if self.when[0] == -1:
-            t = self.times[1:]
-            t.sort(reverse=True)
-            v = DB.fetchone('select time from statistic where type = 0 and data = ? order by rowid desc limit 1', (t[len(t)//5], ), (self.target[0], ))
-            self.when[0] = self.when[1] - v[0]
-
-        if not self.when[-1]:
-            self.when[-1] = timer()
-
-        self.when = list(linearly_interpolate(self.when))
+        user_entered_data = filter(lambda letter : letter and not letter.automatically_inserted, self.data)
+        when = list(linearly_interpolate(letter.when for letter in user_entered_data)) 
         
-        for i in range(len(self.times)):
+        times = []
+        for i in range(len(when)-1):
             #prevent division by zero when 0 time 
-            time = self.when[i+1] - self.when[i]
-            self.times[i] = MINIMUM_CHAR_TYPING_TIME if time == 0 else time   
+            time = when[i+1] - when[i]
+            times.append(max(time, MINIMUM_CHAR_TYPING_TIME))
+     
+        typed_text = "".join([l.char for l in user_entered_data])
 
-        return self.when[-1]-self.when[0], len(self.target), self.times, self.mistake, self.getMistakes()
+        end_time = when[-1]
+        time_elapsed = max(end_time - self.start_time, MINIMUM_ELAPSED_TIME)
+            
+        return time_elapsed, typed_text, len(typed_text), times, self.mistake, self.getMistakes()
 
     def activate_invisibility(self):
         '''Turns on invisible mode'''
@@ -402,6 +413,7 @@ class Quizzer(QWidget):
         super(Quizzer, self).__init__(*args)
 
         self.result = QLabel()
+        self.result.setAlignment(Qt.AlignRight)
         self.typer = Typer()
         self.label = WWLabel()
         self.result.setVisible(Settings.get("show_last"))
@@ -476,7 +488,7 @@ Returns the new text_strs list (for assignment).'''
         
         self.label.setText(htmlized) 
 
-    def checkText(self):
+    def checkText(self, automatically_inserted = False):
         if self.typer.target is None or self.typer.editflag:
             return
 
@@ -485,39 +497,46 @@ Returns the new text_strs list (for assignment).'''
         if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
 
-        if not self.typer.started:
-            if Settings.get('req_space'):
+        if self.typer.start_time == None and Settings.get('req_space'):
             #space is required before beginning the passage proper
-                if v == u" ":
-                    #the first char typed was space
-                    #the first space only starts the session; clear the typer
-                    set_typer_text(self.typer,"",cursor_position=0)
-                    self.typer.when[0] = timer()
-                    self.typer.started = True
-                    return
-                else:
-                    #reset the wait text
-                    set_typer_text(self.typer,self.typer.getWaitText())
-                    self.typer.selectAll()
-                    return
+            if v == u" ":
+                #the first char typed was space
+                #the first space only starts the session; clear the typer
+                set_typer_text(self.typer,"",cursor_position=0)
+                self.typer.start_time = 0
+                return
             else:
-                self.typer.when[0] = -1
-                self.typer.when[1] = timer()  #have to set starting time regardless of correctness
-                self.typer.started = True
+                #reset the wait text
+                set_typer_text(self.typer,self.typer.getWaitText())
+                self.typer.selectAll()
+                return
+                
+        if not self.typer.start_time:
+            self.typer.start_time = timer()
 
         old_cursor = self.typer.textCursor()
         old_position = old_cursor.position()
-        old_str_position = old_position - 1  #the position that has (presumably) just been typed
+        old_str_position = old_position - 1  #the position that has (presumably, unless delete was used) just been typed
      
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target,case_sensitive=Settings.get('case_sensitive'))
         first_error = errors[0] if errors else None
 
-        #records time that any char was correctly hit
+        #records time that any char was hit
         #except that if we've already been correct farther, we don't record
-        if self.typer.farthest_correct < old_str_position < len(self.typer.target) and not old_str_position in errors:
-            self.typer.when[old_str_position+1] = timer() #zeroth position is original space
-            self.typer.farthest_correct = old_str_position
+        if self.typer.farthest_correct < old_str_position < len(self.typer.target):
+            if old_str_position not in errors:
+                self.typer.farthest_correct = old_str_position
+
+            #invalidates all farther-out times that might have previously been written
+            if old_str_position < self.typer.farthest_data:
+                for i in range(old_str_position+1, self.typer.farthest_data + 1):
+                    self.typer.data[i].when = None
+
+            self.typer.farthest_data = old_str_position
+            self.typer.data[old_str_position] = Letter(char=self.typer.target[old_str_position],
+                                                       when=timer(),
+                                                       automatically_inserted=automatically_inserted)
 
         automatic_insertion_regex = generate_automatic_insertion_regex()
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
@@ -528,7 +547,7 @@ Returns the new text_strs list (for assignment).'''
             if automatic_insertion:
                 new_end = old_position + automatic_insertion.end()
                 set_typer_text(self.typer, v[:old_position] + self.typer.target[old_position:new_end], cursor_position = new_end)
-                self.checkText()  #recovers the formatting
+                self.checkText(automatically_inserted=True)  #recovers the formatting
                 return
 
         #TODO: refactor so this doesn't rely on text setting then re-calling gimmick
@@ -575,13 +594,26 @@ Returns the new text_strs list (for assignment).'''
 
     def done(self):
         now = time.time()
-        elapsed, chars, times, mis, mistakes = self.typer.getStats()
+        elapsed, text, chars, times, mis, mistakes = self.typer.getStats()
 
-        assert chars == len(self.text[2])
-
-        accuracy = 1.0 - len(filter(None, mis)) / chars
+        num_mistake_positions = len(filter(None, mis))
+        accuracy = 1.0 - num_mistake_positions / chars
         spc = elapsed / chars
+        wpm = 12.0/spc
         
+        #function to format wpm and accuracy as a str
+        results_str = lambda wpm, accuracy: "{0:.1f} wpm ({1:.1f}%)".format(wpm,accuracy)
+
+        text_len = len(self.text[2])
+        if chars == text_len:
+            optimistic_message = ""
+        else:
+            #some chars were automated; make optimistic estimate for if the user
+            #completed them all instantly and correctly
+            optimistic_accuracy = 1.0 - num_mistake_positions / text_len 
+            optimistic_wpm = 12.0*text_len/elapsed
+            optimistic_message = " ; Upper-Bound: {0}".format(results_str(optimistic_wpm,100*optimistic_accuracy))
+
         viscosity = sum(map(lambda x: ((x-spc)/spc)**2, times)) / chars
 
         DB.execute('insert into result (w,text_id,source,wpm,accuracy,viscosity) values (?,?,?,?,?,?)',
@@ -589,14 +621,13 @@ Returns the new text_strs list (for assignment).'''
 
         v2 = DB.fetchone("""select agg_median(wpm),agg_median(acc) from
             (select wpm,100.0*accuracy as acc from result order by w desc limit %d)""" % Settings.get('def_group_by'), (0.0, 100.0))
-        self.result.setText("Last: %.1fwpm (%.1f%%), last 10 average: %.1fwpm (%.1f%%)"
-            % ((12.0/spc, 100.0*accuracy) + v2))
+
+        self.result.setText("Last: {0}{1}\nLast 10 average: {2}".format(results_str(wpm,100.0*accuracy),optimistic_message,results_str(*v2)))
 
         self.emit(SIGNAL("statsChanged"))
 
         stats = collections.defaultdict(Statistic)
         visc = collections.defaultdict(Statistic)
-        text = self.text[2]
 
         for c, t, m in zip(text, times, mis):
             stats[c].append(t, m)
