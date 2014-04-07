@@ -42,6 +42,9 @@
 #        1. Case sensitivity
 #        2. Template for automatically inserting certain chars in the text area
 #  * Changed default database name
+# April 5 2014:
+#  * Added and integrated with settings option to count adjacent errors as part
+#    of the same error [lalop]
 
 from __future__ import with_statement
 
@@ -101,6 +104,7 @@ class AmphSettings(QSettings):
             'automatic_return_insertion':False,
             'automatic_other_insertion':string.punctuation, 
             'use_automatic_other_insertion':False,
+            'adjacent_errors_not_counted':True,
             'case_sensitive':True,
             "label_return_symbol":u"↵",
             "label_mistakes_space_char":u"∙", 
@@ -310,6 +314,7 @@ class PreferenceWidget(QWidget):
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             # SettingsCheckBox('single_space_only', "Convert double(+) spaces to single space"),   #doesn't work between sentences
             SettingsCheckBox('ignore_until_correct_space', "Prevent continuing to next word until space is correctly pressed"), 
+            SettingsCheckBox('adjacent_errors_not_counted', "Adjacent errors are counted as part of the same (i.e. only one) error"), 
             SettingsCheckBox('case_sensitive', "Case sensitive"), 
             [AmphGridLayout([["AUTOMATICALLY INSERT:", SettingsCheckBox('automatic_space_insertion', "spaces"),SettingsCheckBox('automatic_return_insertion', "newlines")],
                              ["  - Other characters:", SettingsEdit('automatic_other_insertion',data_type=unicode),SettingsCheckBox('use_automatic_other_insertion', "Use")], 

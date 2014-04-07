@@ -55,6 +55,9 @@
 #        2. Automatically completed chars are now ignored. An optimistic 
 #           stat estimate (one that assumes the user completed them correctly
 #           and instantaneously) is also shown
+# April 5 2014:
+#  * Added and integrated with settings option to count adjacent errors as part
+#    of the same error [lalop]
 
 
 from __future__ import with_statement, division
@@ -152,7 +155,7 @@ def disagreements(s,t,case_sensitive=True,full_length=False):
     if not case_sensitive:
         s = s.lower()
         t = t.lower()
-    for i in range(min(len(s),len(t))):
+    for i in xrange(min(len(s),len(t))):
         if s[i] != t[i]:
             dlist.append(i)
 
@@ -189,7 +192,7 @@ e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,N
         else:
             non_interpolation_dist += 1
             average_change = 1.0*(e-last_non_interpolation)/non_interpolation_dist
-            for i in range(1,non_interpolation_dist):
+            for i in xrange(1,non_interpolation_dist):
                 #interpolates over previous zeroes
                 yield last_non_interpolation + i*average_change
             yield e
@@ -199,8 +202,8 @@ e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,N
 def new_error(position,errors):
     '''Given list of error positions and current position, 
 returns whether or there's a new error at position'''
-    #considers adjacent errors to be part of the same error
-    return position in errors and position - 1 not in errors
+    #considers adjacent errors to be part of the same error if the setting is toggled
+    return position in errors and not (Settings.get('adjacent_errors_not_counted') and position - 1 in errors)
     
 try:
     import winsound
@@ -269,7 +272,7 @@ If the first char is a breaking space, replaces it with non-breaking space."'''
     #False if current space in sequence should be non-breaking
     breaking = None 
     result = list(li)
-    for i in range(len(li)-1,-1,-1): 
+    for i in xrange(len(li)-1,-1,-1): 
         #loops backward to ensure last space in any sequence is non-breaking
         if breaking == None:
             #check if we're at the start (i.e. the highest index of) of a sequence
@@ -506,7 +509,7 @@ class Typer(QTextEdit):
             # my refactoring mean this may never get hit, I'm not sure what when and times are for, so i'm not sure if I'm breaking some edge case here??
         
         times = []
-        for i in range(len(when)-1):
+        for i in xrange(len(when)-1):
             #prevent division by zero when 0 time 
             time = when[i+1] - when[i]
             times.append(max(time, MINIMUM_CHAR_TYPING_TIME))
@@ -668,7 +671,7 @@ Returns the new text_strs list (for assignment).'''
 
             #invalidates all farther-out times that might have previously been written
             if old_str_position < self.typer.farthest_data:
-                for i in range(old_str_position+1, self.typer.farthest_data + 1):
+                for i in xrange(old_str_position+1, self.typer.farthest_data + 1):
                     self.typer.data[i].when = None
 
             self.typer.farthest_data = old_str_position
