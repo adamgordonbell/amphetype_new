@@ -58,6 +58,8 @@
 # April 5 2014:
 #  * Added and integrated with settings option to count adjacent errors as part
 #    of the same error [lalop]
+# April 13 2014:
+#  * Added check for the user accidentally leaving in the wait text [lalop]
 
 
 from __future__ import with_statement, division
@@ -67,6 +69,7 @@ import collections
 import time
 import re
 import random
+import difflib
 
 import Globals
 from Data import Statistic, DB
@@ -516,12 +519,12 @@ class Typer(QTextEdit):
      
         typed_text = "".join([l.char for l in user_entered_data])
 
-        end_time = when[-1]
+        end_time = when[-1] if when else self.start_time
         time_elapsed = max(end_time - self.start_time, MINIMUM_ELAPSED_TIME)
         #from agbell
         #return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
             
-        return time_elapsed, typed_text, len(typed_text), times, self.mistake, self.getMistakes()
+        return time_elapsed, typed_text, max(len(typed_text),1), times, self.mistake, self.getMistakes()
         
     def getAccuracy(self):
         if self.where > 0:
@@ -637,7 +640,7 @@ Returns the new text_strs list (for assignment).'''
         
         if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
-
+ 
         if self.typer.start_time == None and Settings.get('req_space'):
             #space is required before beginning the passage proper
             if v == u" ":
@@ -654,6 +657,18 @@ Returns the new text_strs list (for assignment).'''
                 
         if not self.typer.start_time:
             self.typer.start_time = timer()
+            if 1 < len(v) < len(self.typer.target): 
+                #checks whether wait text was accidentally left in
+                diff = list(difflib.Differ().compare(list(self.typer.getWaitText()),list(v)))
+
+                #the vast majority of the wait text is still there
+                wait_text_present = len(filter(lambda line : line[0] == "-", diff)) <= 1
+
+                if wait_text_present:
+                    #leave only the additional typed text
+                    new_str = "".join(line[2:] for line in diff if line[0] == "+")
+                    set_typer_text(self.typer,new_str,cursor_position=len(new_str))
+                    v = new_str 
 
         old_cursor = self.typer.textCursor()
         old_position = old_cursor.position()
