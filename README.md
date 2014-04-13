@@ -1,7 +1,8 @@
 My Fork of Amphetype - A great typing program.
+# Amphetype (lalop edition)
 It contains a bunch of small improvements that I needed to use it.
 
-This is my personal fork of https://code.google.com/p/amphetype/
+This is my personal fork of [Amphetype](https://code.google.com/p/amphetype/).
 
 Differences include:
 
@@ -20,33 +21,28 @@ These include:
  * Option for preventing continuing to the next word until space correctly pressed
 6. Option to count adjacent errors as only one error
 
-4. Option for automatically inserting space, newline, and other custom letters
+7. Option for automatically inserting space, newline, and other custom letters
  * Allows continuation even with typing errors
  * Dark Theme
-6. Option for preventing continuing to the next word until space correctly pressed
  * etc
  * Extensive GUI Color Settings
  * Can change return and space characters
  * Allows for smaller resizing than vanilla Amphetype
-7. Extensive GUI Color Settings
 
-8. Can change return and space characters
+8. Option for preventing continuing to the next word until space correctly pressed
 
-9. Allows for smaller resizing than vanilla Amphetype
+9. Extensive GUI Color Settings
 
 Todo:
+10. Can change return and space characters
 
-1. Refactor so that data analysis is separate from GUI classes
+11. Allows for smaller resizing than vanilla Amphetype
 
 ### Warning about databases/statistics: 
 The database/statistics of this fork should be considered unstable.  In addition, some of the options here (e.g. counting or not counting adjacent errors) can significantly change the resulting statistics. 
 
 License and Disclaimers
 It is therefore recommended to use a different database for this fork than with other versions of amphetype, as well as to make regular backups of any important data.
-
-# Screenshots
-
-![Typer](screenshots/typer.png)
 
 
 Amphetype is free software: you can redistribute it and/or modify
