@@ -45,6 +45,8 @@
 # April 5 2014:
 #  * Added and integrated with settings option to count adjacent errors as part
 #    of the same error [lalop]
+# April 13 2014:
+#  * Changed QSettings name (to avoid conflict with vanilla amphetype) [lalop]
 
 from __future__ import with_statement
 
@@ -188,7 +190,7 @@ class AmphSettings(QSettings):
         }
 
     def __init__(self, *args):
-        super(AmphSettings, self).__init__(QSettings.IniFormat, QSettings.UserScope, "Amphetype", "Amphetype")
+        super(AmphSettings, self).__init__(QSettings.IniFormat, QSettings.UserScope, "Amphetype_L", "Amphetype_L") 
 
     def get(self, k):
         v = self.value(k)
