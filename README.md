@@ -1,6 +1,6 @@
-# Fork
+# Amphetype (lalop edition)
 
-This is my personal fork of https://code.google.com/p/amphetype/
+This is my personal fork of [Amphetype](https://code.google.com/p/amphetype/).
 
 ### Differences include:
 
@@ -16,31 +16,23 @@ This is my personal fork of https://code.google.com/p/amphetype/
 
 6. Option to count adjacent errors as only one error
 
-4. Option for automatically inserting space, newline, and other custom letters
+7. Option for automatically inserting space, newline, and other custom letters
 
-6. Option for preventing continuing to the next word until space correctly pressed
+8. Option for preventing continuing to the next word until space correctly pressed
 
-7. Extensive GUI Color Settings
+9. Extensive GUI Color Settings
 
-8. Can change return and space characters
+10. Can change return and space characters
 
-9. Allows for smaller resizing than vanilla Amphetype
+11. Allows for smaller resizing than vanilla Amphetype
 
-### Todo:
-
-1. Refactor so that data analysis is separate from GUI classes
-
-2. Multiplayer?!
+![Typer](screenshots/typer.png)
 
 ### Warning about databases/statistics: 
 
 The database/statistics of this fork should be considered unstable.  In addition, some of the options here (e.g. counting or not counting adjacent errors) can significantly change the resulting statistics. 
 
 It is therefore recommended to use a different database for this fork than with other versions of amphetype, as well as to make regular backups of any important data.
-
-# Screenshots
-
-![Typer](screenshots/typer.png)
 
 # License and Disclaimers
 
