@@ -14,9 +14,9 @@ This is my personal fork of [Amphetype](https://code.google.com/p/amphetype/).
 
 5. Option for continuing to the next passage even with typing mistakes
 
-6. Option to count adjacent errors as only one error
+6. Option for automatically inserting space, newline, and other custom keys (e.g. if you want to only practice letters)
 
-7. Option for automatically inserting space, newline, and other custom letters
+7. Option to count adjacent errors as only one error
 
 8. Option for preventing continuing to the next word until space correctly pressed
 
