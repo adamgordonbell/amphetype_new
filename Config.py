@@ -47,6 +47,10 @@
 #    of the same error [lalop]
 # April 13 2014:
 #  * Changed QSettings name (to avoid conflict with vanilla amphetype) [lalop]
+# April 19 2014:
+#  * Integrated with settings options for replacing multiple
+#    adjacent characters with a single one (including and not including
+#    spaces) [lalop]
 
 from __future__ import with_statement
 
@@ -185,6 +189,10 @@ class AmphSettings(QSettings):
             'transliteration_method':len(transliteration_methods) - 1,
             'transliteration_manual_ascii':True,
 
+            "multiple_replacement_enabled":True, 
+            "multiple_replacement_chars":"!@#$%^~*-_", 
+            "multiple_replacement_allow_spaces":True,
+            "multiple_replacement_allow_newlines":False,  #doesn't yet work
             "group_month": 365.0,
             "group_week": 30.0,
             "group_day": 7.0,
@@ -362,14 +370,14 @@ class PreferenceWidget(QWidget):
                 
                 [1+1j, 1+2j, 2+1j, 2+2j]
             ]), None],
-            [AmphGridLayout([ 
-                ["UNICODE -> ASCII TRANSLITERATION"],
-                [SettingsCheckBox('transliteration_manual_unicode', "Initial manual transliteration (see Text.py)")],
-                [SettingsCombo('transliteration_method', transliteration_methods)],
-                [SettingsCheckBox('transliteration_manual_ascii', "Manual ascii -> ascii replacements (see Text.py)")],
-
-                [1+1j,1+2j,2+1j,2+2j]
-            ]), None],
+            ["UNICODE -> ASCII TRANSLITERATION"],
+            [SettingsCheckBox('transliteration_manual_unicode', "Initial manual transliteration (see Text.py)")],
+            [SettingsCombo('transliteration_method', transliteration_methods), None],
+            ["Replace multiple adjacent instances of:",SettingsEdit('multiple_replacement_chars'), SettingsCheckBox('multiple_replacement_enabled', "Enabled"), None],
+            ["    ", SettingsCheckBox('multiple_replacement_allow_spaces',"Allow interleaving spaces (e.g. ! ! !!! ! to !)"), None],
+            # ["    ", SettingsCheckBox('multiple_replacement_allow_newlines',"Allow interleaving newlines"), None],  #doesn't yet work
+            [SettingsCheckBox('transliteration_manual_ascii', "Manual ascii -> ascii replacements (see Text.py)")],
+            [" "],
             None,
             ["Data is considered too old to be included in analysis after",
                 SettingsEdit("history"), "days.", None],
