@@ -18,6 +18,10 @@
 # Changelog
 # March 24 2014:
 #  * Added transliteration options, integrated with settings [lalop] 
+# April 19 2014:
+#  * Added and integrated with settings options for replacing multiple
+#    adjacent characters with a single one (including and not including
+#    spaces) [lalop]
 
 from __future__ import division, with_statement
 
@@ -198,6 +202,15 @@ class LessonMiner(QObject):
             #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
             if Settings.get('single_space_only'): 
                 ascii_line = re.sub("\s+"," ",ascii_line)               
+
+            #TODO: newlines doesn't work since all this is done line-by-line
+            #replaces multiple adjacent instances (possibly including spaces, newlines) of those characters 
+            #in list multiple_replacements (e.g. "start ! !!!!! ! ! !!\n !\nend" might get replaced with
+            #"start !\nend")
+            if Settings.get('multiple_replacement_enabled'): 
+                additional_chars = (" " if Settings.get('multiple_replacement_allow_spaces') else "") + ("\n" if Settings.get('multiple_replacement_allow_newlines') else "")
+                for m in Settings.get('multiple_replacement_chars'): 
+                    ascii_line = re.sub("{0}[{0}{1}]*{0}".format(re.escape(m),additional_chars), m, ascii_line)               
 
             #designated replacements for ascii text
             if Settings.get('transliteration_manual_ascii'):
