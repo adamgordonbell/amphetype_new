@@ -1,8 +1,12 @@
 # Amphetype (lalop edition)
 
-This is my personal fork of [Amphetype](https://code.google.com/p/amphetype/).
+[Amphetype](https://code.google.com/p/amphetype/) is a layout-agnostic typing program that lets you import your own texts. This allows you to "read" while practicing typing at the same time.
 
-### Differences include:
+However, though it is a generally solid tool, vanilla Amphetype lacks several interactivity options & important features. This fork aims to add some of them.
+
+![Typer](screenshots/typer.png)
+
+### Forked Features include:
 
 1. Unicode -> Ascii transliteration to avoid "untypable characters", as well as some replacements of bad formatting, either via unidecode and/or manually (see Text.py)
 
@@ -25,8 +29,6 @@ This is my personal fork of [Amphetype](https://code.google.com/p/amphetype/).
 10. Can change return and space characters
 
 11. Allows for smaller resizing than vanilla Amphetype
-
-![Typer](screenshots/typer.png)
 
 ### Warning about databases/statistics: 
 
