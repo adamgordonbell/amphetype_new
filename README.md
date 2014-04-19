@@ -18,7 +18,7 @@ However, though it is a generally solid tool, vanilla Amphetype lacks several in
 
 5. Option for continuing to the next passage even with typing mistakes
 
-6. Option for automatically inserting space, newline, and other custom keys (e.g. if you want to only practice letters)
+6. Option for automatically inserting space, newline, and other custom keys 
 
 7. Option to count adjacent errors as only one error
 
@@ -35,6 +35,31 @@ However, though it is a generally solid tool, vanilla Amphetype lacks several in
 The database/statistics of this fork should be considered unstable.  In addition, some of the options here (e.g. counting or not counting adjacent errors) can significantly change the resulting statistics. 
 
 It is therefore recommended to use a different database for this fork than with other versions of amphetype, as well as to make regular backups of any important data.
+
+# Example Usage
+
+* You don't want to see your own typing, only your position and any mistakes.  Turn on *Invisible Mode* and customize the *Text Display* settings as desired.
+
+ * You're doing a speed-run and don't even want to see mistakes either (lest they lead to even the slightest hesitation).  Uncheck the *Text Display* setting for showing mistakes as well.
+
+* You only want to type the letters of words.  Set the option to *Automatically Insert* spaces, newlines, and, if desired, other punctuation characters.
+
+* A text uses unusual punctuation that you want to skip, e.g.
+ 
+         ##Hi,## I said, ##How are you today?##
+
+ You can set preferences to *Automatically Insert* \#.
+
+* A text is written in a certain format, whose intricacies you wish to ignore, e.g.
+
+          DIRECTOR: But what can we do? [The DIRECTOR'S stares at the FACT SHEET.]
+          
+          [Around the room, groans.]
+          
+          ASSISTANT: I suppose we can [ASSISTANT looks around nervously, seeing 
+          the AUDIENCE as well as several CAST MEMBERS] hash it out?
+
+ In this particular case, you can uncheck *Case sensitive* and have [ and ] *Automatically Inserted*.
 
 # License and Disclaimers
 
