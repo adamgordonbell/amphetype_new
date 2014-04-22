@@ -192,12 +192,7 @@ class LessonMiner(QObject):
                 try:
                     ascii_line = ascii_line.decode('ascii')
                 except UnicodeEncodeError:
-                    ascii_line = ''
-                    for c in l:
-                        if ord(c) < 128:
-                            ascii_line += c
-                        else:
-                            ascii_line += ""
+                    ascii_line = filter(lambda c : ord(c) < 128, ascii_line) 
 
             #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
             if Settings.get('single_space_only'): 
