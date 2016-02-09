@@ -42,7 +42,7 @@ class AmphSettings(QSettings):
             "use_lesson_stats": False,
             "auto_review": True,
 
-            "repeat" :True,
+            "repeat" :False,
             "symbols" :False,
             "title_case" : False,
             "stop_symbols" : r""",.?!-'":""",
