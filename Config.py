@@ -47,7 +47,7 @@ class AmphSettings(QSettings):
             "title_case" : False,
             "stop_symbols" : r""",.?!-'":""",
             "include_symbols" : r"""<0> 0; "0" '0' 0 0 0 0;""",
-            "sentence_regex" :r"""[\.,;?!\)\(\-]""",
+            "sentence_regex" :r"""[\.,;?!\)\(\-\n\s]""",
             "sentence_strip" : '>',
             "phrase_lessons" : True,
             "permissive_errors" : False,
