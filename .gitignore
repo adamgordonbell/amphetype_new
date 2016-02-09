@@ -2,3 +2,4 @@
 *.suo
 *.db
 .idea
+*.db-journal
