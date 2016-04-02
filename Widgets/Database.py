@@ -26,7 +26,7 @@ class IncrementalProgress(QProgressBar):
     def inc(self, val=1):
         self.setValue(self.value() + val)
 
-class DatabaseWidget(QWidget):
+class DatabaseWidget(QScrollArea):
     def __init__(self, *args):
         super(DatabaseWidget, self).__init__(*args)
 

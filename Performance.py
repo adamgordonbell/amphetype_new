@@ -65,7 +65,7 @@ class ResultModel(AmphModel):
         d /= 52.0
         return "%.1fy" % d
 
-class PerformanceHistory(QWidget):
+class PerformanceHistory(QScrollArea):
     def __init__(self, *args):
         super(PerformanceHistory, self).__init__(*args)
 
