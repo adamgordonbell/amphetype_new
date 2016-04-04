@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # This file is part of Amphetype.
 
 # Amphetype is free software: you can redistribute it and/or modify
@@ -15,7 +16,7 @@
 
 # Changelog
 # March 24 2014:
-#  * Added transliteration options, integrated with settings [lalop] 
+#  * Added transliteration options, integrated with settings [lalop]
 # April 19 2014:
 #  * Added and integrated with settings options for replacing multiple
 #    adjacent characters with a single one (including and not including
@@ -34,14 +35,14 @@ from PyQt4.QtCore import *
 # strings in the original unicode input to be replaced, and their replacement
 # generally used for replacing non-typable unicode with typeable ascii
 #   NB: if unidecode not available, this might be the only method of
-#       unicode -> ascii transliteration available to the user 
+#       unicode -> ascii transliteration available to the user
 unicode_replacements = [
     # each element is a 2-tuple:
     #    (unicode str of text to replace, unicode str of replacement text)
-    # e.g. (u"…",u"...") 
+    # e.g. (u"…",u"...")
 
     #transformations to dots
-    (u"…",u"..."),   
+    (u"…",u"..."),
 
     #dash transformations
     (u"—",u"-"),
@@ -65,14 +66,14 @@ unicode_replacements = [
 ascii_replacements = [
     # each element is a 2-tuple:
     #    (ascii str of text to replace, ascii str of replacement text)
-    # e.g. (" ... ","...") 
+    # e.g. (" ... ","...")
 
     #transformations to dots
     (". . .","..."),
- 
+
     #trimming of dots; put after dot transformations
     ("... ","..."),(" ...","..."),
-    
+
     #trimming of dashes; put after dash transformations
     (" - '","-'"),("' - ","'-"),(' - "','-"'),('" - ','"-'),
 ]
@@ -155,7 +156,7 @@ class LessonMiner(QObject):
             if Settings.get('transliteration_manual_unicode'):
                 for orig, repl in unicode_replacements:
                     l = l.replace(orig, repl)
-                    
+
             ascii_line = l
             if unidecode_imported and Settings.get('transliteration_method') == INDEX_TRANSLITERATION_UNIDECODE:
                 #tries to use unidecode if it exists
@@ -165,30 +166,30 @@ class LessonMiner(QObject):
                 try:
                     ascii_line = ascii_line.decode('ascii')
                 except UnicodeEncodeError:
-                    ascii_line = filter(lambda c : ord(c) < 128, ascii_line) 
+                    ascii_line = filter(lambda c : ord(c) < 128, ascii_line)
 
             #replaces any 1+ adjacent whitespace chars (spaces, tabs, newlines, etc) with one ascii space
-            if Settings.get('single_space_only'): 
-                ascii_line = re.sub("\s+"," ",ascii_line)               
+            if Settings.get('single_space_only'):
+                ascii_line = re.sub("\s+"," ",ascii_line)
 
             #TODO: newlines doesn't work since all this is done line-by-line
-            #replaces multiple adjacent instances (possibly including spaces, newlines) of those characters 
+            #replaces multiple adjacent instances (possibly including spaces, newlines) of those characters
             #in list multiple_replacements (e.g. "start ! !!!!! ! ! !!\n !\nend" might get replaced with
             #"start !\nend")
-            if Settings.get('multiple_replacement_enabled'): 
+            if Settings.get('multiple_replacement_enabled'):
                 additional_chars = (" " if Settings.get('multiple_replacement_allow_spaces') else "") + ("\n" if Settings.get('multiple_replacement_allow_newlines') else "")
-                for m in Settings.get('multiple_replacement_chars'): 
-                    ascii_line = re.sub("{0}[{0}{1}]*{0}".format(re.escape(m),additional_chars), m, ascii_line)               
+                for m in Settings.get('multiple_replacement_chars'):
+                    ascii_line = re.sub("{0}[{0}{1}]*{0}".format(re.escape(m),additional_chars), m, ascii_line)
 
             #designated replacements for ascii text
             if Settings.get('transliteration_manual_ascii'):
                 for orig, repl in ascii_replacements:
-                    ascii_line = ascii_line.replace(orig, repl) 
+                    ascii_line = ascii_line.replace(orig, repl)
 
             l = ascii_line.strip()
             current_line_empty = not l
-           
-            #the current line is empty: insert empty line 
+
+            #the current line is empty: insert empty line
             #or the current line and previous line both nonempty: need to insert empty line between them
             if (current_line_empty or not previous_line_empty) and len(p) > 0:
                 ps.append(SentenceSplitter(u" ".join(p)))
@@ -196,7 +197,7 @@ class LessonMiner(QObject):
 
             if not current_line_empty:
                 p.append(l)
-                
+
             previous_line_empty = current_line_empty
         if len(p) > 0:
             ps.append(SentenceSplitter(u" ".join(p)))
