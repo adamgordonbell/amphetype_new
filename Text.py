@@ -1,26 +1,4 @@
 # -*- coding: UTF-8 -*-
-# This file is part of Amphetype.
-
-# Amphetype is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Amphetype is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
-
-# Changelog
-# March 24 2014:
-#  * Added transliteration options, integrated with settings [lalop]
-# April 19 2014:
-#  * Added and integrated with settings options for replacing multiple
-#    adjacent characters with a single one (including and not including
-#    spaces) [lalop]
 
 from __future__ import division, with_statement
 

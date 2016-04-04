@@ -1,66 +1,4 @@
 # -*- coding: UTF-8 -*-
-# This file is part of Amphetype.
-
-# Amphetype is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Amphetype is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
-
-# Changelog
-# March 19 2014: 
-#   * Added template for changing color of letters in typer and label
-#     depending on errors and position [lalop]
-# March 20 2014:
-#   * Fixed template for allowing one to finish despite mistakes. [lalop]
-#   * Interpolation between any missing times (hopefully solves gen_tup's
-#     division by zero) [lalop]
-# March 21 2014:
-#   * Integrated with settings [lalop]:
-#       1. Most of the special text color/usage options (not working: the
-#          "base" color)
-#       2. The option for finishing despite mistakes
-#       3. Space and return character replacements
-#   * Added invisible mode, integrated with settings [lalop]
-# March 22 2014:
-#  * Added and integrated with settings [lalop]:
-#       1. Typer border color
-#       2. Inactive palette highlight foreground & background
-#       3. Option not to use "wrong" palette
-# March 23 2014:
-#  * (Hopefully) can now use multiple adjacent spaces in typer and label [lalop]
-# March 24 2014:
-#  * Refactored, fixed some bugs with invisible text and double spaces [lalop]
-# March 26 2014:
-#  * Added and integrated with settings [lalop]:
-#        1. label position color with adjacent prior mistake
-#        2. independent options for space char on the different position colors
-# March 27 2014:
-#  * Added and integrated with settings: template for continuing to the next word
-#    only when space correctly pressed [lalop]
-# March 28 2014:
-#  * Added and integrated with settings [lalop]:
-#        1. Case sensitivity
-#        2. Template for automatically inserting certain chars in the text area
-# April 4 2014:
-#  * Redid stats [lalop]:
-#        1. Starting space is now ignored (rather than fudged if not existing)
-#        2. Automatically completed chars are now ignored. An optimistic 
-#           stat estimate (one that assumes the user completed them correctly
-#           and instantaneously) is also shown
-# April 5 2014:
-#  * Added and integrated with settings option to count adjacent errors as part
-#    of the same error [lalop]
-# April 13 2014:
-#  * Added check for the user accidentally leaving in the wait text [lalop]
-
 
 from __future__ import with_statement, division
 
@@ -80,8 +18,8 @@ from PyQt4.QtGui import *
 from QtUtil import *
 
 #minimum time we assume to take to count char (to prevent division by zero)
-MINIMUM_CHAR_TYPING_TIME = 0.000001     #equivalent to 3333.33wpm 
-MINIMUM_ELAPSED_TIME = 0.0001 
+MINIMUM_CHAR_TYPING_TIME = 0.000001     #equivalent to 3333.33wpm
+MINIMUM_ELAPSED_TIME = 0.0001
 if platform.system() == "Windows":
     # hack hack, hackity hack
     timer = time.clock
@@ -115,7 +53,7 @@ def html_font_color(color,string):
     return u'<font color="{0}">{1}</font>'.format(color,string)
 
 def html_color_strs(strs,new_colors,default_color=None):
-    '''strs is list of typically 1 character strings from doing list(string) 
+    '''strs is list of typically 1 character strings from doing list(string)
 
 new_colors is a dict : positions (int) -> colors as accepted by html
 
@@ -130,11 +68,11 @@ Non-destructively returns strs with the positions of new_colors changed to the n
     return [colorize(i,s) for i,s in enumerate(strs)]
 
 def replace_at_locs(strs,replacements,locations = None):
-    '''strs is list of typically 1 character strings from doing list(string) 
-    
+    '''strs is list of typically 1 character strings from doing list(string)
+
 replacements is a dict : str -> str, interpreted as source -> replacement
-    
-locations is a list of ints.  If location is None (not to be confused with []), assume allow all locations. 
+
+locations is a list of ints.  If location is None (not to be confused with []), assume allow all locations.
 
 Non-destructively: in each index of locations, if the string at that index is in replacements,
 replaces it.  Otherwise, leaves it.'''
@@ -145,12 +83,12 @@ replaces it.  Otherwise, leaves it.'''
             return replacements[s]
 
     return [replace_at_locs_a(i,s) for i,s in enumerate(strs)]
-    
+
 def disagreements(s,t,case_sensitive=True,full_length=False):
     '''List (in ascending order) of all disagreement positions between strings s and t
-    
+
     (s and t can also be lists as long as case_sensitive==True)
-    
+
     case_sensitive: whether or not this check is case sensitive
 
     full_length: whether or not to check the full length, or stop at the shorter of the two'''
@@ -165,7 +103,7 @@ def disagreements(s,t,case_sensitive=True,full_length=False):
     return dlist
 
 def linearly_interpolate(iterable,interpolate_element = lambda i,e : e is None):
-    '''iterable is a iterable of numbers, some of which we want to interpolate. 
+    '''iterable is a iterable of numbers, some of which we want to interpolate.
 Its first value must be non-interpolating and either:
 1. Last value non-interpolating (if terminating)
 2. No upper bound on non-interpolatings (if non-terminating)
@@ -173,13 +111,13 @@ Its first value must be non-interpolating and either:
 Nondestructively: replaces any sequences of interpolatables in nums with
 averaged values interpolated from the non-interpolated immediately before
 and after it
-    
+
 interpolate_element : Ints x Numbers -> Boolean is a function used to determine which ones to interpolate.
 It will de called via interpolate_element(index of element e,element e)
 
 The numbers that should be interpolated are those numbers e, at index i for which interpolate_element(i,e) == True
 
-e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,None,None,10,None,12,18,-5]) = 
+e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,None,None,10,None,12,18,-5]) =
         iterator generating: 3, 5, 7, 7.2, 7.4, 7.6, 7.8, 8, 9,
                              7.666666666666667, 6.333333333333334,
                              5, 6.0, 7.0, 8.0, 9.0, 10, 11.0, 12, 18, -5'''
@@ -201,13 +139,13 @@ e.g. linearly_interpolate([3,5,7,None,None,None,None,8,9,None,None,5,None,None,N
             yield e
         non_interpolation_dist = 0
         last_non_interpolation = e
-   
+
 def new_error(position,errors):
-    '''Given list of error positions and current position, 
+    '''Given list of error positions and current position,
 returns whether or there's a new error at position'''
     #considers adjacent errors to be part of the same error if the setting is toggled
     return position in errors and not (Settings.get('adjacent_errors_not_counted') and position - 1 in errors)
-    
+
 try:
     import winsound
 except ImportError:
@@ -222,16 +160,16 @@ else:
 
 wordCache = dict()
 
-def set_typer_text(typer, text = None, func = None, cursor_position = None):    
+def set_typer_text(typer, text = None, func = None, cursor_position = None):
 
     '''Given a Typer, sets its text content to text, matching old cursor position.
-    
+
 If text not specified, the plain text (to unicode) from the typer is used.  This can, e.g. clear html.
 
 If func specified, uses that function for the text setting.  Otherwise, uses typer.setPlainText'''
     if text == None:
-        text = unicode(typer.toPlainText()) 
-        
+        text = unicode(typer.toPlainText())
+
     if func == None:
         func = typer.setPlainText
 
@@ -245,7 +183,7 @@ If func specified, uses that function for the text setting.  Otherwise, uses typ
     typer.setTextCursor(old_cursor)
     typer.editflag = False
 
-def set_colored_typer_text(typer,color,text = None): 
+def set_colored_typer_text(typer,color,text = None):
     '''Given text to be set with color color (in RGB format, e.g. #112233), sets it'''
     def text_setter(t):
         '''Sets unicode text t as html with color color'''
@@ -257,14 +195,14 @@ def set_colored_typer_text(typer,color,text = None):
 def set_typer_html(typer,html):
     '''Given a Typer, sets its html content to html, matching old cursor position.'''
     set_typer_text(typer, html, func = typer.setHtml)
-    
+
 def html_list_process_spaces(li, breaking_replacement = " ", non_breaking_replacement = "&nbsp;"):
     '''Given a list li of (to be) html character strings, process the spaces.
 
 default breaking_replacement is " ", non_breaking replacement is "&nbsp;
 
-    
-First, adjacent spaces, e.g. "     " are replaced 
+
+First, adjacent spaces, e.g. "     " are replaced
 
 with breaking and non-breaking spaces, e.g. " &nbsp; &nbsp; ".  The last space in any such sequence is
 breaking (to avoid it being word-wrapped as the first char on a line).
@@ -273,9 +211,9 @@ breaking (to avoid it being word-wrapped as the first char on a line).
 If the first char is a breaking space, replaces it with non-breaking space."'''
     #None if not in sequence, True if current space in sequence should be breaking,
     #False if current space in sequence should be non-breaking
-    breaking = None 
+    breaking = None
     result = list(li)
-    for i in xrange(len(li)-1,-1,-1): 
+    for i in xrange(len(li)-1,-1,-1):
         #loops backward to ensure last space in any sequence is non-breaking
         if breaking == None:
             #check if we're at the start (i.e. the highest index of) of a sequence
@@ -285,11 +223,11 @@ If the first char is a breaking space, replaces it with non-breaking space."'''
         elif result[i] == " ":
             #we're in a sequence, make the appropriate replacement
             result[i] = breaking_replacement if breaking else non_breaking_replacement
-            breaking = not breaking  
+            breaking = not breaking
         else:
             #exited a sequence
             breaking = None
-    
+
     if len(result) > 0 and result[0] == breaking_replacement:
         result[0] = non_breaking_replacement
     return result
@@ -312,11 +250,11 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     if Settings.get('text_area_replace_spaces'):
         #if want to make replacements change spaces in text area as well (risky!)
         v_err_replacements.update(space_replacement_dict_from_setting('text_area_mistakes_space_char'))
-        
+
     if Settings.get('text_area_replace_return'):
         #want to make replacements change returns in text area as well (a little less risky since there's usually fewer)
         v_err_replacements["\n"] = Settings.get('text_area_return_replacement')
-    
+
     error_colors = {} #dict : int -> str, mapping errors to color
     v_replaced_list = list(v)  #list of strs, initially one char each, to operate on
     v_replaced_list = html_list_process_spaces(v_replaced_list)
@@ -328,7 +266,7 @@ Given a Typer, updates its html based on settings (not including invisible mode)
     v_colored_list = html_color_strs(v_replaced_list,error_colors)
     htmlized = "".join(v_colored_list).replace("\n","<BR>")
     set_typer_html(typer,htmlized)
-    
+
 class Typer(QTextEdit):
     def __init__(self, *args):
         super(Typer, self).__init__(*args)
@@ -341,7 +279,7 @@ class Typer(QTextEdit):
                                        "quiz_right_bg","quiz_right_bd", "quiz_invisible_color", "quiz_invisible_bd",
                                        "quiz_inactive_fg", "quiz_inactive_bg","quiz_inactive_bd", "quiz_inactive_hl",
                                        "quiz_inactive_hl_text", 'quiz_use_wrong_palette']
-        
+
         for change_signal in set_palette_change_signals:
             self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.setPalettes)
 
@@ -369,7 +307,7 @@ class Typer(QTextEdit):
             self.emit(SIGNAL("cancel"))
         elif e.key() == Qt.Key_Backspace and int(e.modifiers()) == 1073741824: #Altgr backspace
             e = QKeyEvent(QEvent.KeyPress, e.key(), Qt.KeyboardModifiers(0),e.text(),e.isAutoRepeat(),e.count())
-        elif e.key() == Qt.Key_Return and int(e.modifiers()) == 1073741824: #Altgr return 
+        elif e.key() == Qt.Key_Return and int(e.modifiers()) == 1073741824: #Altgr return
             e = QKeyEvent(QEvent.KeyPress, e.key(), Qt.KeyboardModifiers(0),e.text(),e.isAutoRepeat(),e.count())
 
         return QTextEdit.keyPressEvent(self, e)
@@ -392,7 +330,7 @@ class Typer(QTextEdit):
                 Settings.getColor("quiz_invisible_bd"), Qt.lightGray, Qt.darkGray, Qt.gray,
                 Settings.getColor("quiz_invisible_color"), Qt.yellow, Settings.getColor("quiz_invisible_color"), Qt.yellow),
             'inactive':inactive_palette }
-        self.setPalette(self.palettes['inactive']) 
+        self.setPalette(self.palettes['inactive'])
 
     def setTarget(self, text, guid):
         self.editflag = True
@@ -508,24 +446,24 @@ class Typer(QTextEdit):
 
     def getStats(self):
         user_entered_data = filter(lambda letter : letter and not letter.automatically_inserted, self.data)
-        when = list(linearly_interpolate(letter.when for letter in user_entered_data)) 
+        when = list(linearly_interpolate(letter.when for letter in user_entered_data))
             # my refactoring mean this may never get hit, I'm not sure what when and times are for, so i'm not sure if I'm breaking some edge case here??
-        
+
         times = []
         for i in xrange(len(when)-1):
-            #prevent division by zero when 0 time 
+            #prevent division by zero when 0 time
             time = when[i+1] - when[i]
             times.append(max(time, MINIMUM_CHAR_TYPING_TIME))
-     
+
         typed_text = "".join([l.char for l in user_entered_data])
 
         end_time = when[-1] if when else self.start_time
         time_elapsed = max(end_time - self.start_time, MINIMUM_ELAPSED_TIME)
         #from agbell
         #return self.getElapsed(), self.where, self.times, self.mistake, self.getMistakes()
-            
+
         return time_elapsed, typed_text, max(len(typed_text),1), times, self.mistake, self.getMistakes()
-        
+
     def getAccuracy(self):
         if self.where > 0:
             return 1.0 - len(filter(None, self.mistake)) / self.where
@@ -543,7 +481,7 @@ class Typer(QTextEdit):
 
     def getViscosity(self):
         return sum(map(lambda x: ((x-self.getRawSpeed())/self.getRawSpeed())**2, self.times)) / self.where
-        
+
     def activate_invisibility(self):
         '''Turns on invisible mode'''
         self.setPalette(self.palettes['invisible'])
@@ -587,7 +525,7 @@ class Quizzer(QWidget):
         err_replacements = {"\n":u"{0}<BR>".format(Settings.get('label_return_symbol'))}
 
         colors = {}  #dict : int -> str, mapping errors to color
-        
+
         if Settings.get('show_label_mistakes'):
             #showing mistakes; need to populate color
             colors = dict([(i,Settings.get('label_mistakes_color')) for i in errors])
@@ -601,7 +539,7 @@ class Quizzer(QWidget):
 
         def color_position(settings_color_var, use_space_var, space_var):
             '''Colors position with the color stored in settings_color_var.
-            
+
 strs use_space_var and space_var are settings variables to look up.
 If [setting] use_space_var, space at position is replaced with [setting] space_var
 
@@ -612,7 +550,7 @@ Returns the new text_strs list (for assignment).'''
                 return replace_at_locs(text_strs,space_replacement_dict_from_setting(space_var),[position])
             else:
                 return text_strs
-            
+
         #designates colors and replacements of position
         if Settings.get('show_label_position_with_prior_mistake') and position - 1 in errors:
             text_strs = color_position('label_position_with_prior_mistake_color',
@@ -622,25 +560,25 @@ Returns the new text_strs list (for assignment).'''
             text_strs = color_position('label_position_with_mistakes_color',
                                        'label_replace_spaces_in_position_with_mistakes',
                                        'label_position_with_mistakes_space_char')
-        elif Settings.get('show_label_position'): 
+        elif Settings.get('show_label_position'):
             text_strs = color_position('label_position_color',
                                        'label_replace_spaces_in_position',
-                                       'label_position_space_char') 
+                                       'label_position_space_char')
 
         htmlized = "".join(html_color_strs(text_strs,colors))
         htmlized = htmlized.replace(u"\n", u"{0}<BR>".format(Settings.get('label_return_symbol')))
-        
-        self.label.setText(htmlized) 
+
+        self.label.setText(htmlized)
 
     def checkText(self, automatically_inserted = False):
         if self.typer.target is None or self.typer.editflag:
             return
 
         v = unicode(self.typer.toPlainText())
-        
+
         if Settings.get('allow_mistakes') and len(v) >= len(self.typer.target):
             v = self.typer.target
- 
+
         if self.typer.start_time == None and Settings.get('req_space'):
             #space is required before beginning the passage proper
             if v == u" ":
@@ -654,10 +592,10 @@ Returns the new text_strs list (for assignment).'''
                 set_typer_text(self.typer,self.typer.getWaitText())
                 self.typer.selectAll()
                 return
-                
+
         if not self.typer.start_time:
             self.typer.start_time = timer()
-            if 1 < len(v) < len(self.typer.target): 
+            if 1 < len(v) < len(self.typer.target):
                 #checks whether wait text was accidentally left in
                 diff = list(difflib.Differ().compare(list(self.typer.getWaitText()),list(v)))
 
@@ -668,12 +606,12 @@ Returns the new text_strs list (for assignment).'''
                     #leave only the additional typed text
                     new_str = "".join(line[2:] for line in diff if line[0] == "+")
                     set_typer_text(self.typer,new_str,cursor_position=len(new_str))
-                    v = new_str 
+                    v = new_str
 
         old_cursor = self.typer.textCursor()
         old_position = old_cursor.position()
         old_str_position = old_position - 1  #the position that has (presumably, unless delete was used) just been typed
-     
+
         #colors text in typer depending on errors
         errors = disagreements(v,self.typer.target,case_sensitive=Settings.get('case_sensitive'))
         first_error = errors[0] if errors else None
@@ -710,15 +648,15 @@ Returns the new text_strs list (for assignment).'''
         #Prevent advancement until user correctly types space
         if Settings.get('ignore_until_correct_space') and self.typer.target[old_str_position] == u" " and old_str_position in errors:
             #gets rid of new character (sets as plaintext)
-            set_typer_text(self.typer,v[:old_str_position] + v[old_str_position+1:],cursor_position = old_position - 1) 
-            self.checkText()    #recovers the formatting 
+            set_typer_text(self.typer,v[:old_str_position] + v[old_str_position+1:],cursor_position = old_position - 1)
+            self.checkText()    #recovers the formatting
             return
 
         if len(v) >= len(self.typer.target) and (not first_error or first_error >= len(self.typer.target)):
             self.done()
             return
-       
-        if new_error(old_str_position,errors): 
+
+        if new_error(old_str_position,errors):
             self.typer.mistake[old_str_position] = True
             self.typer.mistakes[old_str_position] = self.typer.target[old_str_position] + v[old_str_position]
 
@@ -730,7 +668,7 @@ Returns the new text_strs list (for assignment).'''
             else:
                 self.typer.setPalette(self.typer.palettes['right'])
             update_typer_html(self.typer,errors)
-        
+
         #updates the label depending on errors
         self.updateLabel(old_position,errors)
 
@@ -743,8 +681,8 @@ Returns the new text_strs list (for assignment).'''
         self.typer.setFont(f)
 
     def setText(self, text):
-        self.text = text 
-        self.label.setText(self.text[2].replace(u"\n", u"{0}\n".format(Settings.get('label_return_symbol')))) 
+        self.text = text
+        self.label.setText(self.text[2].replace(u"\n", u"{0}\n".format(Settings.get('label_return_symbol'))))
         tempText = self.AddSymbols(text[2])
         tempText = tempText.replace('  ', ' ')
         self.text = (text[0], text[1], tempText)
@@ -765,7 +703,7 @@ Returns the new text_strs list (for assignment).'''
     def getStatsAndViscosity(self):
         accuracy = 1.0 - num_mistake_positions / chars
         wpm = 12.0/spc
-        
+
         #function to format wpm and accuracy as a str
         results_str = lambda wpm, accuracy: "{0:.1f} wpm ({1:.1f}%)".format(wpm,accuracy)
 
@@ -775,7 +713,7 @@ Returns the new text_strs list (for assignment).'''
         else:
             #some chars were automated; make optimistic estimate for if the user
             #completed them all instantly and correctly
-            optimistic_accuracy = 1.0 - num_mistake_positions / text_len 
+            optimistic_accuracy = 1.0 - num_mistake_positions / text_len
             optimistic_wpm = 12.0*text_len/elapsed
             optimistic_message = " ; Upper-Bound: {0}".format(results_str(optimistic_wpm,100*optimistic_accuracy))
         stats = collections.defaultdict(Statistic)
@@ -832,7 +770,7 @@ Returns the new text_strs list (for assignment).'''
         now = time.time()
         assert self.typer.where == len(self.text[2])
 
-        
+
         self.insertResults(now)
 
         self.updateResultLabel()
@@ -864,22 +802,22 @@ Returns the new text_strs list (for assignment).'''
         mis = self.typer.mistake
         times = self.typer.times
         chars = self.typer.where
-        
+
         for c, t, m in zip(text, times, mis):
             stats[c].append(t, m)
             visc[c].append(((t-spc)/spc)**2)
-        
+
         def gen_tup(s, e):
             perch = sum(times[s:e])/(e-s)
             visc = sum(map(lambda x: ((x-perch)/perch)**2, times[s:e]))/(e-s)
             return (text[s:e], perch, len(filter(None, mis[s:e])), visc)
-        
+
         for tri, t, m, v in [gen_tup(i, i+3) for i in xrange(0, chars-2)]:
             stats[tri].append(t, m > 0)
             visc[tri].append(v)
-        
+
         regex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
-        
+
         for w, t, m, v in [gen_tup(*x.span()) for x in regex.finditer(text) if x.end()-x.start() > 3]:
             stats[w].append(t, m > 0)
             visc[w].append(v)
@@ -893,7 +831,7 @@ Returns the new text_strs list (for assignment).'''
         accuracy = 1.0 - num_mistake_positions / chars
         spc = elapsed / chars
         wpm = 12.0/spc
-        
+
         #function to format wpm and accuracy as a str
         results_str = lambda wpm, accuracy: "{0:.1f} wpm ({1:.1f}%)".format(wpm,accuracy)
 
@@ -903,7 +841,7 @@ Returns the new text_strs list (for assignment).'''
         else:
             #some chars were automated; make optimistic estimate for if the user
             #completed them all instantly and correctly
-            optimistic_accuracy = 1.0 - num_mistake_positions / text_len 
+            optimistic_accuracy = 1.0 - num_mistake_positions / text_len
             optimistic_wpm = 12.0*text_len/elapsed
             optimistic_message = " ; Upper-Bound: {0}".format(results_str(optimistic_wpm,100*optimistic_accuracy))
 
@@ -963,8 +901,8 @@ Returns the new text_strs list (for assignment).'''
         # Fail cut-offs, redo
         if 12.0/spc < mins[0] or accuracy < mins[1]/100.0:
             self.setText(self.text)
-        elif is_lesson and globals.pendingLessons:            
-            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())        
+        elif is_lesson and globals.pendingLessons:
+            self.emit(SIGNAL("newReview"), globals.pendingLessons.pop())
         # create a lesson
         elif not is_lesson and Settings.get('auto_review'):
             self.createLessons(vals)

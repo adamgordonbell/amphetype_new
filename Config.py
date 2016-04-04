@@ -1,57 +1,5 @@
 # -*- coding: UTF-8 -*-
 
-# This file is part of Amphetype.
-
-# Amphetype is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Amphetype is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
-
-# Changelog
-# March 21 2014:
-#  * Integrated with settings [lalop]:
-#      1. Most of the special text color/usage options (not working: the
-#         "base" color)
-#      2. The option for finishing despite mistakes
-#      3. Space and return character replacements
-# March 22 2014:
-#  * Integrated with settings [lalop]:
-#       1. Typer border color
-#       2. Inactive palette highlight foreground & background
-#       3. Option not to use "wrong" palette
-#       4. Various GUI color settings
-# March 24 2014:
-#  * Integrated transliteration options with settings [lalop]
-# March 26 2014:
-#  * Integrated with settings [lalop]:
-#        1. label position color with adjacent prior mistake
-#        2. independent options for space char on the different position colors
-# March 27 2014:
-#  * Integrated with settings: template for continuing to the next word
-#    only when space correctly pressed [lalop]
-# March 28 2014:
-#  * Added and integrated with settings [lalop]:
-#        1. Case sensitivity
-#        2. Template for automatically inserting certain chars in the text area
-#  * Changed default database name
-# April 5 2014:
-#  * Added and integrated with settings option to count adjacent errors as part
-#    of the same error [lalop]
-# April 13 2014:
-#  * Changed QSettings name (to avoid conflict with vanilla amphetype) [lalop]
-# April 19 2014:
-#  * Integrated with settings options for replacing multiple
-#    adjacent characters with a single one (including and not including
-#    spaces) [lalop]
-
 from __future__ import with_statement
 
 import cPickle
@@ -64,7 +12,7 @@ import string
 INDEX_TRANSLITERATION_DELETE = 1
 INDEX_TRANSLITERATION_UNIDECODE = 2
 
-transliteration_methods = ['No automatic method','Delete Non-Ascii'] 
+transliteration_methods = ['No automatic method','Delete Non-Ascii']
 
 #checks if unidecode available
 try:
@@ -74,7 +22,7 @@ except ImportError:
     print("Warning: unidecode (for unicode to ascii transliteration) not available.  Transliterations may be limited.")
 
 try:
-    _dbname = getpass.getuser() or "typer" 
+    _dbname = getpass.getuser() or "typer"
     if '.' not in _dbname:
         _dbname += '-L.db'
 except:
@@ -97,26 +45,26 @@ class AmphSettings(QSettings):
             "allow_mistakes":True,
             'quiz_invisible':False,
             'quiz_invisible_color':"#000000",
-            "quiz_invisible_bd": "#282828", 
+            "quiz_invisible_bd": "#282828",
             "text_area_mistakes_color":"#a43434",
             "show_text_area_mistakes":True,
             "single_space_only":True,
-            "text_area_mistakes_space_char":u"∙", #in html, "&#8729;", 
+            "text_area_mistakes_space_char":u"∙", #in html, "&#8729;",
             "text_area_replace_spaces":False,
             'text_area_return_replacement':u"↵",
             'text_area_replace_return':True,
             'ignore_until_correct_space':False,
             'automatic_space_insertion':False,
             'automatic_return_insertion':False,
-            'automatic_other_insertion':string.punctuation, 
+            'automatic_other_insertion':string.punctuation,
             'use_automatic_other_insertion':False,
             'adjacent_errors_not_counted':True,
             'case_sensitive':True,
             "label_return_symbol":u"↵",
-            "label_mistakes_space_char":u"∙", 
-            "label_position_space_char":u"∙", 
-            "label_position_with_mistakes_space_char":u"∙", 
-            "label_position_with_prior_mistake_space_char":u"∙", 
+            "label_mistakes_space_char":u"∙",
+            "label_position_space_char":u"∙",
+            "label_position_with_mistakes_space_char":u"∙",
+            "label_position_with_prior_mistake_space_char":u"∙",
             "label_replace_spaces_in_mistakes":True,
             "label_replace_spaces_in_position":False,
             "label_replace_spaces_in_position_with_mistakes":False,
@@ -124,7 +72,7 @@ class AmphSettings(QSettings):
             'label_mistakes_color':"#a43434",
             'show_label_mistakes':True,
             'label_position_color':"#949475", #formerly 008000, aaaa74
-            'show_label_position':True, 
+            'show_label_position':True,
             'label_position_with_mistakes_color':"#a0a000",
             'show_label_position_with_mistakes':False,
             'label_position_with_prior_mistake_color':"#00aa00",
@@ -140,7 +88,7 @@ class AmphSettings(QSettings):
             "select_method": 1,
             "num_rand": 50,
             "graph_what": 3,
-            "req_space": False, 
+            "req_space": False,
             "show_last": True,
             "show_xaxis": False,
             "chrono_x": False,
@@ -173,24 +121,24 @@ class AmphSettings(QSettings):
             "min_lesson_acc": 100.0,
 
             "quiz_right_fg": "#646464",
-            "quiz_right_bg": "#000000", 
-            "quiz_right_bd": "#282828", 
+            "quiz_right_bg": "#000000",
+            "quiz_right_bd": "#282828",
             "quiz_inactive_fg": "#646464",
-            "quiz_inactive_bg": "#000000", 
-            "quiz_inactive_bd": "#282828", 
+            "quiz_inactive_bg": "#000000",
+            "quiz_inactive_bd": "#282828",
             "quiz_inactive_hl":"#050f0a",
             "quiz_inactive_hl_text":"#2d3233",
             "quiz_use_wrong_palette":False,
             "quiz_wrong_fg": "#646464",
             "quiz_wrong_bg": "#1a0000",
-            "quiz_wrong_bd": "#282828", 
+            "quiz_wrong_bd": "#282828",
 
             'transliteration_manual_unicode':True,
             'transliteration_method':len(transliteration_methods) - 1,
             'transliteration_manual_ascii':True,
 
-            "multiple_replacement_enabled":True, 
-            "multiple_replacement_chars":"!@#$%^~*-_", 
+            "multiple_replacement_enabled":True,
+            "multiple_replacement_chars":"!@#$%^~*-_",
             "multiple_replacement_allow_spaces":True,
             "multiple_replacement_allow_newlines":False,  #doesn't yet work
             "group_month": 365.0,
@@ -212,7 +160,7 @@ class AmphSettings(QSettings):
         }
 
     def __init__(self, *args):
-        super(AmphSettings, self).__init__(QSettings.IniFormat, QSettings.UserScope, "Amphetype_L", "Amphetype_L") 
+        super(AmphSettings, self).__init__(QSettings.IniFormat, QSettings.UserScope, "Amphetype_L", "Amphetype_L")
 
     def get(self, k):
         v = self.value(k)
@@ -227,7 +175,7 @@ class AmphSettings(QSettings):
 
     def getColor(self, k):
         return QColor(self.get(k))
-    
+
     def getHtml(self,k):
         return unicode_to_html(self.get(k))
 
@@ -315,7 +263,7 @@ class PreferenceWidget(QWidget):
 
         self.setLayout(AmphBoxLayout([
             ["Typer font is", self.font_lbl, AmphButton("Change...", self.setFont), None],
-            SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"), 
+            SettingsCheckBox('allow_mistakes', "Allow continuing to next passage even with mistakes"),
             [SettingsCheckBox('auto_review', "Automatically review slow and mistyped words after texts."),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             SettingsCheckBox('show_last', "Show last result(s) above text in the Typer."),
@@ -323,12 +271,12 @@ class PreferenceWidget(QWidget):
             [SettingsCheckBox('req_space', "Make SPACE mandatory before each session"),
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             # SettingsCheckBox('single_space_only', "Convert double(+) spaces to single space"),   #doesn't work between sentences
-            SettingsCheckBox('ignore_until_correct_space', "Prevent continuing to next word until space is correctly pressed"), 
-            SettingsCheckBox('adjacent_errors_not_counted', "Adjacent errors are counted as part of the same (i.e. only one) error"), 
-            SettingsCheckBox('case_sensitive', "Case sensitive"), 
+            SettingsCheckBox('ignore_until_correct_space', "Prevent continuing to next word until space is correctly pressed"),
+            SettingsCheckBox('adjacent_errors_not_counted', "Adjacent errors are counted as part of the same (i.e. only one) error"),
+            SettingsCheckBox('case_sensitive', "Case sensitive"),
             [AmphGridLayout([["AUTOMATICALLY INSERT:", SettingsCheckBox('automatic_space_insertion', "spaces"),SettingsCheckBox('automatic_return_insertion', "newlines")],
-                             ["  - Other characters:", SettingsEdit('automatic_other_insertion',data_type=unicode),SettingsCheckBox('use_automatic_other_insertion', "Use")], 
-                [1+1j,1+2j,2+1j,2+2j], 
+                             ["  - Other characters:", SettingsEdit('automatic_other_insertion',data_type=unicode),SettingsCheckBox('use_automatic_other_insertion', "Use")],
+                [1+1j,1+2j,2+1j,2+2j],
             ]), None],
 
             None,
@@ -342,7 +290,7 @@ class PreferenceWidget(QWidget):
              SettingsCheckBox('show_repeat', "Show Repeat Checkbox"),
              SettingsCheckBox('show_since_fail_counter', "Count Perfect Reps"),
             None,
-            [AmphGridLayout([ 
+            [AmphGridLayout([
                 ["INPUT PALETTE", "Text Color", "Border", "Background","Highlight","Highlight Text"],
                 ["Inactive", SettingsColor('quiz_inactive_fg', "Foreground"),SettingsColor('quiz_inactive_bd', "Foreground"), SettingsColor('quiz_inactive_bg', "Background"),SettingsColor('quiz_inactive_hl', "Highlight"),SettingsColor('quiz_inactive_hl_text', "Highlight Text")],
                 ["Correct",  SettingsColor('quiz_right_fg', "Foreground"),SettingsColor('quiz_right_bd', "Foreground"), SettingsColor('quiz_right_bg', "Background")],
@@ -352,22 +300,22 @@ class PreferenceWidget(QWidget):
                 ["Color", SettingsColor('text_area_mistakes_color','Foreground'),SettingsCheckBox('show_text_area_mistakes', "Show")],
                 ["Space char",SettingsEdit('text_area_mistakes_space_char',data_type=unicode), SettingsCheckBox('text_area_replace_spaces', "Use")],
                 ["Return char",SettingsEdit('text_area_return_replacement',data_type=unicode), SettingsCheckBox('text_area_replace_return', "Use")],
-                ["TEXT DISPLAY"," "," ","Space char"], 
+                ["TEXT DISPLAY"," "," ","Space char"],
                 ["Mistakes", SettingsColor('label_mistakes_color','Foreground'),SettingsCheckBox('show_label_mistakes', "Show"), SettingsEdit('label_mistakes_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_mistakes", "Use")],
                 ["Position", SettingsColor('label_position_color','Foreground'),SettingsCheckBox('show_label_position', "Show"), SettingsEdit('label_position_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position", "Use")],
                 ["  - with mistakes", SettingsColor('label_position_with_mistakes_color','Foreground'),SettingsCheckBox('show_label_position_with_mistakes', "Use"), SettingsEdit('label_position_with_mistakes_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position_with_mistakes", "Use")],
                 ["  - next to mistake", SettingsColor('label_position_with_prior_mistake_color','Foreground'),SettingsCheckBox('show_label_position_with_prior_mistake', "Use"), SettingsEdit('label_position_with_prior_mistake_space_char',data_type=unicode), SettingsCheckBox("label_replace_spaces_in_position_with_prior_mistake", "Use")],
                 ["Return char",SettingsEdit('label_return_symbol',data_type=unicode)],
-                ["WIDGETS"],                
+                ["WIDGETS"],
                 ["Background",SettingsColor('widgets_background_color', "Background")],
                 ["Foreground", SettingsColor('widgets_text_color', "Foreground")],
                 ["TEXT AREAS"],
                 ["Background",SettingsColor('main_text_area_color', "Background")],
-                ["GENERAL"],                
+                ["GENERAL"],
                 ["Background",SettingsColor('main_background_color', "Background")],
                 ["Text Color", SettingsColor('main_text_color', "Foreground")],
                 ["Borders", SettingsColor("main_borders_color", "Foreground")],
-                
+
                 [1+1j, 1+2j, 2+1j, 2+2j]
             ]), None],
             ["UNICODE -> ASCII TRANSLITERATION"],

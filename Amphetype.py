@@ -1,23 +1,3 @@
-# This file is part of Amphetype.
-
-# Amphetype is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Amphetype is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Amphetype.  If not, see <http://www.gnu.org/licenses/>.
-
-# Changelog
-# March 22 2014:
-#  * Added and integrated various GUI color settings [lalop]:
-
-
 from __future__ import with_statement, division
 
 import sys
@@ -58,9 +38,9 @@ class TyperWindow(QMainWindow):
         update_palette_change_signals = ["main_text_color", "widgets_background_color",
                                          "widgets_text_color" ,"main_background_color",
                                          'main_text_area_color',"main_borders_color"]
-        
+
         for change_signal in update_palette_change_signals:
-            self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.updatePalette) 
+            self.connect(Settings, SIGNAL("change_{0}".format(change_signal)), self.updatePalette)
         tabs = QTabWidget()
 
         quiz = Quizzer()
@@ -112,7 +92,7 @@ class TyperWindow(QMainWindow):
 
     def sizeHint(self):
         return QSize(650, 400)
-    
+
     def updatePalette(self):
         self.setPalette(QPalette(Settings.getColor("main_text_color"), #color of typing text
                                  Settings.getColor("widgets_background_color"),    #label tab gets part of it color from here
@@ -122,8 +102,8 @@ class TyperWindow(QMainWindow):
                                  Settings.getColor("widgets_text_color"), #color of widgets text
                                  Qt.white,
                                  Settings.getColor("main_text_area_color"),  #most text areas' backgrounds
-                                 Settings.getColor("main_background_color")      #most backgrounds.  label tab gets part of its color from here. 
-)) 
+                                 Settings.getColor("main_background_color")      #most backgrounds.  label tab gets part of its color from here.
+))
 
 
 class AboutWidget(QTextBrowser):
