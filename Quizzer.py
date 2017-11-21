@@ -12,8 +12,8 @@ import Globals
 from Data import Statistic, DB
 from Config import *
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 from QtUtil import *
 
 if platform.system() == "Windows":

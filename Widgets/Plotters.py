@@ -1,6 +1,6 @@
 from Config import Settings
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 import math
 
 class Plot(QGraphicsScene):

@@ -3,8 +3,8 @@ from __future__ import with_statement, division
 
 from QtUtil import *
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 from Config import *
 from Data import DB
 import time

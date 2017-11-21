@@ -6,7 +6,7 @@ import codecs
 import random
 from Config import Settings
 from itertools import *
-from PyQt4.QtCore import *
+from PyQT5.QtCore import *
 
 class SentenceSplitter(object):
 

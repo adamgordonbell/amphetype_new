@@ -3,8 +3,8 @@ from __future__ import with_statement
 
 import cPickle
 from QtUtil import *
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 import getpass
 
 try:

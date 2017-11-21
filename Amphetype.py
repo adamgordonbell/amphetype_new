@@ -23,8 +23,8 @@ from Config import PreferenceWidget
 from Lesson import LessonGenerator
 from Widgets.Database import DatabaseWidget
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 
 QApplication.setStyle('cleanlooks')
 

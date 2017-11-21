@@ -10,8 +10,8 @@ from QtUtil import *
 
 import Widgets.Plotters as Plotters
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 
 def dampen(x, n=10):
     ret = []

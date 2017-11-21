@@ -1,7 +1,7 @@
 from __future__ import with_statement, division
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 
 class WWLabel(QLabel):
     def __init__(self, *args):

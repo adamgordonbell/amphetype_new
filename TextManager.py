@@ -10,8 +10,8 @@ from Data import DB
 from QtUtil import *
 from Config import *
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQT5.QtCore import *
+from PyQT5.QtGui import *
 
 class SourceModel(AmphModel):
     def signature(self):
