@@ -102,5 +102,5 @@ w.show()
 
 app.exec_()
 
-print "exit"
+print("exit")
 DB.commit()
