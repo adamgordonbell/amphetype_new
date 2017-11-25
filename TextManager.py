@@ -158,7 +158,9 @@ A typing program that not only measures your speed and progress, but also gives 
 
         r = []
         for x in texts:
-            x = re.sub(Settings.get('sentence_strip'), ' ', x)
+            strip = Settings.get('sentence_strip')
+            if len(strip) != 0:
+               x = re.sub(Settings.get('sentence_strip'), ' ', x)
             h = hashlib.sha1()
             h.update(x.encode('utf-8'))
             txt_id = h.hexdigest()
