@@ -24,9 +24,9 @@ class AmphSettings(QSettings):
             "lesson_stats": 0, # show text/lesson in perf -- not used anymore
             "perf_group_by": 0,
             "perf_items": 100,
-            "text_regex": r"",
+            "text_regex": r".*",
             "db_name": _dbname,
-            "select_method": 0,
+            "select_method": 1,
             "num_rand": 50,
             "graph_what": 3,
             "req_space": True,
@@ -48,12 +48,12 @@ class AmphSettings(QSettings):
             "stop_symbols" : r""",.?!-'":""",
             "include_symbols" : r"""<0> 0; "0" '0' 0 0 0 0;""",
             "sentence_regex" :r"""\n""",
-            "sentence_strip" : r"(\n|\s\s+)",
+            "sentence_strip" : r"",
             "phrase_lessons" : True,
             "permissive_errors" : False,
             "invisible_mode" : False,
-            "show_repeat" : False,
-            "show_since_fail_counter" : False,
+            "show_repeat" : True,
+            "show_since_fail_counter" : True,
 
 
             "min_wpm": 0.0,

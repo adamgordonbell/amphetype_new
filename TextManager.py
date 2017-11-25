@@ -154,13 +154,12 @@ A typing program that not only measures your speed and progress, but also gives 
         DB.commit()
 
     def addTexts(self, source, texts, lesson=None, update=True):
+        source = source +' Length:' + str(Settings.get('min_chars'))
         id = DB.getSource(source, lesson)
 
         r = []
         for x in texts:
-            strip = Settings.get('sentence_strip')
-            if len(strip) != 0:
-               x = re.sub(Settings.get('sentence_strip'), ' ', x)
+            x = self.cleanText(x)
             h = hashlib.sha1()
             h.update(x.encode('utf-8'))
             txt_id = h.hexdigest()
@@ -175,6 +174,18 @@ A typing program that not only measures your speed and progress, but also gives 
         if lesson:
             DB.commit()
         return r
+
+    def cleanText(self, x):
+        strip = Settings.get('sentence_strip')
+        if len(strip) != 0:
+            x = re.sub(Settings.get('sentence_strip'), ' ', x)
+        # extra spaces
+        x = re.sub('[ ]{2,}', ' ', x, flags=re.MULTILINE)
+        # windows line endings
+        x = re.sub('\r', '', x, flags=re.MULTILINE)
+        # space on newline
+        x = re.sub('\n\s', '\n', x, flags=re.MULTILINE)
+        return x
 
     def newReview(self, review):
         q = self.addTexts("<Reviews>", [review], lesson=2, update=False)
