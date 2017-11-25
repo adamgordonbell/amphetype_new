@@ -24,9 +24,11 @@ class LessonMiner(QObject):
         if self.split_regex == r"\n":
             rejoin = "\n"
         elif self.split_regex == r"\s":
-            rejoin = "\s"
+            rejoin = " "
         elif len(self.split_regex) == 1:
             rejoin = self.split_regex
+        else:
+            rejoin = " "
         self.lessons = []
         backlog = []
         backlen = 0
