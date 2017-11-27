@@ -7,6 +7,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import getpass
 
+wordCache = dict()
+
 try:
     _dbname = getpass.getuser() or "typer"
     if '.' not in _dbname:
@@ -47,6 +49,7 @@ class AmphSettings(QSettings):
             "title_case" : False,
             "stop_symbols" : r""",.?!-'":""",
             "include_symbols" : r"""<0>||0;||"0"||'0'||0||0||0||0;""",
+            "symbol_clean" : True,
             "sentence_regex" :r"""\n""",
             "sentence_strip" : r"",
             "phrase_lessons" : True,
@@ -148,7 +151,12 @@ class SettingsEdit(AmphEdit):
                             self.fmt(val),
                             lambda: Settings.set(setting, typ(self.text())),
                             validator=validator)
-        self.connect(Settings, SIGNAL("change_" + setting), lambda x: self.setText(self.fmt(x)))
+        self.connect(Settings, SIGNAL("change_" + setting), self.setText1)
+
+    def setText1(self, x):
+        wordCache.clear() # This is dependant on settings which may have just changed
+        self.setText(self.fmt(x))
+
 
 class SettingsCombo(QComboBox):
     def __init__(self, setting, lst, *args):
@@ -193,8 +201,10 @@ class PreferenceWidget(QWidget):
                 ('<a href="http://code.google.com/p/amphetype/wiki/Settings">(help)</a>\n', 1)],
             None,
             SettingsCheckBox('title_case', "Practice Capitals by Capitlizing the first letter of each word"),
-            [SettingsCheckBox('symbols', "Practice Symbols by adding them to each word"),
-                "(Skip words containing these characters:", SettingsEdit('stop_symbols'), "Symbol patterns ( for example \"0\"||0 will cause half the words to be wrapped in double quotes )", SettingsEdit('include_symbols'), ")", None],
+            [SettingsCheckBox('symbols', "Practice Symbols by adding them to each word"), None],
+            ["(Skip words containing these characters:", SettingsEdit('stop_symbols'), None],
+            ["Symbol patterns ( for example \"0\"||0 will cause half the words to be wrapped in double quotes )", SettingsEdit('include_symbols'), ")", None],
+            [SettingsCheckBox('symbol_clean', "Clean then Symbol Replace"), None],
             None,
             ["( Import Lessons: Split lessons regex", SettingsEdit("sentence_regex"), "Strip lessons regex", SettingsEdit('sentence_strip'), " )", None],
              SettingsCheckBox('phrase_lessons', "Include 3 word phrases in lessons"),
