@@ -53,6 +53,11 @@ class StringStats(QWidget):
 
         wc = SettingsCombo('ana_what', ['keys', 'trigrams', 'words'])
         lim = SettingsEdit('ana_many')
+
+        s = DB.fetchall("select rowid, name from source")
+        source = SettingsCombo('ana_source', [
+            (-1, 'all')
+        ] + s)
         self.w_count = SettingsEdit('ana_count')
 
         self.connect(Settings, SIGNAL("change_ana_which"), self.update)
@@ -62,7 +67,7 @@ class StringStats(QWidget):
         self.connect(Settings, SIGNAL("history"), self.update)
 
         self.setLayout(AmphBoxLayout([
-                ["Display statistics about the", ob, wc, None, AmphButton("Update List", self.update)],
+                ["Display statistics about the", ob, wc, "from ", source, None, AmphButton("Update List", self.update)],
                 ["Limit list to", lim, "items and don't show items with a count less than", self.w_count,
                     None, AmphButton("Send List to Lesson Generator",
                          lambda: self.emit(SIGNAL("lessonStrings"), [x[0] for x in self.model.words]))],
@@ -70,13 +75,16 @@ class StringStats(QWidget):
             ]))
 
     def update(self):
-
         ord = Settings.get('ana_which')
         cat = Settings.get('ana_what')
         limit = Settings.get('ana_many')
         count = Settings.get('ana_count')
         hist = time.time() - Settings.get('history') * 86400.0
-
+        source = Settings.get('ana_source')
+        if source == -1:
+            sourceWhere = ""
+        else:
+            sourceWhere = " and source = " + str(source) + " "
         sql = """select data, 12.0/time as wpm,
             100.0-100.0*misses/cast(total as real) as accuracy,
             viscosity, total, misses,
@@ -84,8 +92,7 @@ class StringStats(QWidget):
                 from
                     (select data, agg_median(time) as time, agg_median(viscosity) as viscosity,
                     sum(count) as total, sum(mistakes) as misses
-                    from statistic where w >= ? and type = ? group by data)
+                    from statistic where w >= ? and type = ? """+ sourceWhere +""" group by data)
                 where total >= ?
                 order by %s limit %d""" % (ord, limit)
-
         self.model.setData(DB.fetchall(sql, (hist, cat, count)))

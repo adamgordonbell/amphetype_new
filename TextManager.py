@@ -267,7 +267,7 @@ A typing program that not only measures your speed and progress, but also gives 
         self.emit(SIGNAL("refreshSources"))
 
     def removeDisabled(self):
-        DB.execute('delete from text where disabled is not null')
+        DB.execute('delete from text where disabled = 1')
         self.removeUnused()
         self.update()
         DB.commit()

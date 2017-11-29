@@ -76,6 +76,7 @@ class AmphSettings(QSettings):
             "ana_which": "wpm asc",
             "ana_what": 0,
             "ana_many": 30,
+            "ana_source": -1,
             "ana_count": 1,
 
             "gen_copies": 3,

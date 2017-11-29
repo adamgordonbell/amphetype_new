@@ -158,7 +158,7 @@ class AmphDatabase(sqlite3.Connection):
 create table source (name text, disabled integer, discount integer);
 create table text (id text primary key, source integer, text text, disabled integer);
 create table result (w real, text_id text, source integer, wpm real, accuracy real, viscosity real);
-create table statistic (w real, data text, type integer, time real, count integer, mistakes integer, viscosity real);
+create table statistic (w real, data text, type integer, time real, count integer, mistakes integer, viscosity real, source integer);
 create table mistake (w real, target text, mistake text, count integer);
 create view text_source as
     select id, s.name, text, coalesce(t.disabled, s.disabled)

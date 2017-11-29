@@ -350,7 +350,7 @@ class Quizzer(QWidget):
 
         if Settings.get('use_lesson_stats') or not self.isLesson():
             stats, visc = self.getStatsAndViscosity()
-            vals = self.getVals(now, stats, visc)
+            vals = self.getVals(now, stats, visc, self.text[1])
             self.insertStats(now, vals)
 
         # if Fail cut-offs, redo
@@ -366,7 +366,7 @@ class Quizzer(QWidget):
         else:
             self.emit(SIGNAL("wantText"))
 
-    def getVals(self, now, stats, visc):
+    def getVals(self, now, stats, visc, source):
         def type(k):
             if len(k) == 1:
                 return 0
@@ -378,12 +378,12 @@ class Quizzer(QWidget):
         vals = []
         for k, s in stats.iteritems():
             v = visc[k].median()
-            vals.append((s.median(), v*100.0, now, len(s), s.flawed(), type(k), k))
+            vals.append((s.median(), v*100.0, now, len(s), s.flawed(), type(k), k, source))
         return vals
 
     def insertStats(self, now, vals):
         DB.executemany_('''insert into statistic
-            (time, viscosity, w, count, mistakes, type, data) values (?, ?, ?, ?, ?, ?, ?)''', vals)
+            (time, viscosity, w, count, mistakes, type, data, source) values (?, ?, ?, ?, ?, ?, ?, ?)''', vals)
         DB.executemany_('insert into mistake (w, target, mistake, count) values (?, ?, ?, ?)',
                 [(now, k[0], k[1], v) for k, v in self.typer.getMistakes().iteritems()])
 
