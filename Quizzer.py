@@ -439,7 +439,7 @@ class Quizzer(QWidget):
         global wordCache
         if not word in wordCache:
             if Settings.get("symbol_clean"):
-                word = filter(str.isalnum, str(word))
+                word = filter(str.isalnum, str(word)).lower()
             symbols = random.choice(Settings.get('include_symbols').split("||"));
             if (not any((c in Settings.get('stop_symbols')) for c in word)) and (len(word) > 1) and (Settings.get('title_case')) and (Settings.get('symbols')):
                 wordCache[word] = symbols.replace("0",(word[0].capitalize() + word[1:]))
