@@ -68,7 +68,7 @@ class StringStats(QWidget):
 
         self.setLayout(AmphBoxLayout([
                 ["Display statistics about the", ob, wc, "from ", source, None, AmphButton("Update List", self.update)],
-                ["Limit list to", lim, "items and don't show items with a count less than", self.w_count,
+                ["Limit list to", lim, "items of count ", self.w_count," and older than", SettingsEdit("history"), "hours",
                     None, AmphButton("Send List to Lesson Generator",
                          lambda: self.emit(SIGNAL("lessonStrings"), [x[0] for x in self.model.words]))],
                 (self.stats, 1)
@@ -79,7 +79,7 @@ class StringStats(QWidget):
         cat = Settings.get('ana_what')
         limit = Settings.get('ana_many')
         count = Settings.get('ana_count')
-        hist = time.time() - Settings.get('history') * 86400.0
+        hist = time.time() - Settings.get('history') * 3600.0
         source = Settings.get('ana_source')
         if source == -1:
             sourceWhere = ""

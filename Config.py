@@ -20,7 +20,7 @@ class AmphSettings(QSettings):
 
     defaults = {
             "typer_font": str(QFont("Arial", 22).toString()),
-            "history": 30.0,
+            "history": 30.0 * 24.0,
             "min_chars": 100,
             "max_chars": 200,
             "lesson_stats": 0, # show text/lesson in perf -- not used anymore
@@ -222,8 +222,6 @@ class PreferenceWidget(QWidget):
                 [1+1j, 1+2j, 2+1j, 2+2j]
             ]), None],
             None,
-            ["Data is considered too old to be included in analysis after",
-                SettingsEdit("history"), "days.", None],
             ["Try to limit texts and lessons to between", SettingsEdit("min_chars"),
                 "and", SettingsEdit("max_chars"), "characters.", None],
             ["When selecting easy/difficult texts, scan a sample of",

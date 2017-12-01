@@ -307,7 +307,7 @@ class Quizzer(QWidget):
             stats[tri].append(t, m > 0)
             visc[tri].append(v)
 
-        wordRegex = re.compile(r"(\w|'(?![A-Z]))+(-\w(\w|')*)*")
+        wordRegex = re.compile(r"[^\s]*")
         for w, t, m, v in [gen_tup(*x.span()) for x in wordRegex.finditer(text) if x.end()-x.start() > 3]:
             stats[w].append(t, m > 0)
             visc[w].append(v)
@@ -372,7 +372,7 @@ class Quizzer(QWidget):
                 return 0
             elif len(k) == 3:
                 return 1
-            elif len(k.split()) > 1:
+            elif len(k.split(" ")) > 1:
                 return 3
             return 2
         vals = []
