@@ -80,6 +80,7 @@ class StringStats(QWidget):
         limit = Settings.get('ana_many')
         count = Settings.get('ana_count')
         hist = time.time() - Settings.get('history') * 3600.0
+
         source = Settings.get('ana_source')
         if source == -1:
             sourceWhere = ""
